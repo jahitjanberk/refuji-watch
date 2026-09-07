@@ -2,6 +2,8 @@
 
 A global displacement dashboard built on open humanitarian data from UNHCR, OCHA FTS and IDMC.
 
+**Live at [refujiwatch.com](https://refujiwatch.com)**
+
 ![Refuji Watch dashboard](screenshots/dashboard.png)
 
 UNHCR publishes comprehensive displacement statistics. OCHA tracks every humanitarian dollar. IDMC counts people displaced by disasters. The data exists — but the tools to explore it are slow, dense and built for specialists. Refuji Watch turns those datasets into something a journalist, researcher, student or caseworker can actually read.
@@ -70,7 +72,7 @@ To refresh the data, run the pipeline from the repository root — it rewrites `
 python3 fetch_data.py
 ```
 
-One local-only quirk: the live news panel on the dashboard will show a fetch error, because ReliefWeb's CORS policy rejects `localhost`. It works once deployed.
+The live news panel on the dashboard currently shows a fetch error, locally and in production alike. The ReliefWeb API itself is healthy and returns `Access-Control-Allow-Origin: *` to server-side requests, but browser requests are answered without those headers, so the fetch is blocked. See [Known issues](#known-issues).
 
 ---
 
@@ -96,15 +98,21 @@ Third-party includes, all from CDNs: Leaflet (the maps), Google Fonts (DM Sans a
 
 ## Deployment
 
-Any static host will serve this as-is, provided the repository root is the web root.
+Hosted on Netlify at [refujiwatch.com](https://refujiwatch.com), deploying automatically on every push to `main`. There is no build step — Netlify publishes the repository root as-is, which is why the root-absolute asset paths work in production.
 
-The site previously ran on AWS (S3, CloudFront, Route53, Lambda). That infrastructure has been decommissioned and the Terraform stack removed, so there is currently no deployment target wired up.
+The site previously ran on AWS (S3, CloudFront, Route53, Lambda). That infrastructure has been decommissioned and the Terraform stack removed; DNS is served by Netlify.
 
 ### SitRep generator
 
 `sitrep.html` assembles a situation report from the dataset and sends it to an LLM for drafting. It needs a backend, since the API call cannot be made from the browser without exposing a key. Set `SITREP_API` near the top of the page's script to an endpoint that accepts `{prompt}` and returns `{content}`. Left empty, the page says so rather than failing obscurely. The AWS Lambda that used to serve this is gone.
 
 ---
+
+## Known issues
+
+**Live news panel fails.** The dashboard's ReliefWeb feed shows "Could not load live news" in the browser, in production as well as locally. The API is not at fault — a server-side request returns `200` with `Access-Control-Allow-Origin: *` — but the same request from a browser is answered without the CORS headers, most likely by bot protection reacting to browser-originated cross-site requests.
+
+The fix is to stop making it a cross-origin request: proxy it through Netlify, so `/api/reliefweb/*` is rewritten to `https://api.reliefweb.int/*` server-side and the page fetches a same-origin path. The panel's current error text still blames CORS on localhost, which is misleading.
 
 ## Contributing
 
