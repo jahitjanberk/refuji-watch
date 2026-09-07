@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Refuji Watch</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0d;--surface:#141414;--surface2:#1c1c1c;--border:#222;
+  --accent:#2dd4bf;--red:#ef4444;--amber:#f59e0b;--blue:#60a5fa;
+  --text:#f0ede6;--muted:#666;--muted2:#3a3a3a;
+  --serif:var(--sans);
+  --mono:'DM Mono',monospace;
+  --sans:'DM Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13px;line-height:1.6;min-height:100vh}
+
+/* ── TYPOGRAPHY ── */
+.label{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.panel-title{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* ── HEADER ── */
+.header{
+  padding:.9rem 1.5rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  background:rgba(20,20,20,0.95);position:sticky;top:0;z-index:200;flex-wrap:wrap;
+  transition:background .4s ease,border-color .4s ease,backdrop-filter .4s ease;
+  backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px)
+}
+.header.scrolled{
+  background:rgba(20,20,20,0.5);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom-color:rgba(255,255,255,0.06)
+}
+.logo{font-family:var(--sans);font-size:1.4rem;font-weight:900;letter-spacing:-.02em;flex-shrink:0}
+.logo span{color:var(--accent)}
+.nav{display:flex;gap:.7rem;font-family:var(--sans);font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap}
+.nav a{color:inherit;text-decoration:none;transition:color .15s;cursor:pointer}
+.nav a:hover{color:var(--accent)}
+.header-right{display:flex;align-items:center;gap:.8rem;flex-shrink:0}
+.live-badge{display:flex;align-items:center;gap:.4rem;font-family:var(--sans);font-size:10px;font-weight:600;color:var(--muted);white-space:nowrap}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--red);animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+
+/* ── TICKER ── */
+.ticker{background:var(--surface2);border-bottom:1px solid var(--border);overflow:hidden;padding:.35rem 0;white-space:nowrap}
+.ticker-inner{display:inline-block;animation:tick 50s linear infinite;color:var(--accent);font-size:11px;letter-spacing:.07em}
+@keyframes tick{0%{transform:translateX(100vw)}100%{transform:translateX(-100%)}}
+
+/* ── SEARCH (header) ── */
+.search-wrap{position:relative}
+.search-input{background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:11px;padding:.35rem .7rem .35rem 1.8rem;width:200px;outline:none;transition:border-color .2s}
+.search-input::placeholder{color:var(--muted)}
+.search-input:focus{border-color:var(--accent)}
+.search-icon{position:absolute;left:.6rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px;pointer-events:none}
+.search-results{position:absolute;top:calc(100% + 2px);left:0;right:0;background:var(--surface2);border:1px solid var(--border);z-index:300;display:none;max-height:200px;overflow-y:auto}
+.search-result-item{display:flex;justify-content:space-between;padding:.4rem .7rem;font-size:11px;color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);transition:background .1s}
+.search-result-item:hover{background:var(--border)}
+.search-result-item:last-child{border-bottom:none}
+
+/* ── GRID SYSTEM ── */
+.g1{display:grid;gap:1px;background:var(--border)}
+/* zone A: hero 2fr + 4 stats */
+.zone-a{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:1px;background:var(--border)}
+/* zone B: map 3fr + news 1.2fr */
+.zone-b{display:grid;grid-template-columns:3fr 1.2fr;gap:1px;background:var(--border)}
+/* zone B inner: map panel rows */
+.map-lower{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+/* zone C: 3 callouts + crisis */
+.zone-c{display:grid;grid-template-columns:1fr 1fr 1fr 1.3fr;gap:1px;background:var(--border)}
+/* zone D: trend + funding + tv */
+.zone-d{display:grid;grid-template-columns:1.6fr 1fr 1.2fr;gap:1px;background:var(--border)}
+
+/* ── MAP PLAYBACK SLIDER ── */
+.map-controls {
+  padding: .6rem 1.2rem;
+  border-top: 1px solid var(--border);
+  background: var(--surface2);
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+}
+.map-year-display {
+  font-family: var(--mono); font-size: 1.4rem; font-weight: 900;
+  color: var(--accent); line-height: 1; min-width: 3.5rem; flex-shrink: 0;
+}
+.map-slider-wrap { flex: 1; display: flex; flex-direction: column; gap: .3rem; min-width: 140px; }
+.map-slider {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 3px; border-radius: 2px;
+  background: linear-gradient(to right, var(--accent) 0%, var(--accent) 0%, var(--border) 0%);
+  outline: none; cursor: pointer;
+}
+.map-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 14px; height: 14px;
+  border-radius: 50%; background: var(--accent);
+  border: 2px solid var(--bg); cursor: pointer;
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.map-slider::-moz-range-thumb {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--accent); border: 2px solid var(--bg); cursor: pointer;
+}
+.map-slider-labels { display: flex; justify-content: space-between; font-family: var(--sans); font-size: 9px; font-weight: 600; color: var(--muted2); }
+.map-play-btn {
+  font-family: var(--sans); font-size: 9px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: .3rem .8rem; border: 1px solid var(--border);
+  background: none; color: var(--muted); cursor: pointer;
+  transition: all .15s; white-space: nowrap; flex-shrink: 0;
+}
+.map-play-btn:hover { border-color: var(--accent); color: var(--accent); }
+.map-play-btn.playing { border-color: var(--accent); color: var(--accent); }
+.map-stat-strip {
+  padding: .4rem 1.2rem;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  display: flex; gap: 1.5rem; flex-wrap: wrap;
+  font-family: var(--mono); font-size: 10px; color: var(--muted);
+}
+.map-stat { display: flex; gap: .4rem; align-items: center; }
+.map-stat-val { color: var(--accent); font-weight: 500; }
+
+/* ── MAP LAYER TOGGLE ── */
+.layer-toggle { display: flex; gap: 0; border: 1px solid var(--border); flex-shrink: 0; }
+.layer-btn {
+  font-family: var(--sans); font-size: 9px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: .3rem .7rem; border: none; background: none;
+  color: var(--muted); cursor: pointer; transition: all .15s; white-space: nowrap;
+}
+.layer-btn + .layer-btn { border-left: 1px solid var(--border); }
+.layer-btn:hover { color: var(--text); }
+.layer-btn.active { background: rgba(45,212,191,.1); color: var(--accent); }
+.layer-btn.active[data-layer="disaster"] { background: rgba(245,158,11,.12); color: var(--amber); }
+.layer-note {
+  padding: .5rem 1.2rem; border-top: 1px solid var(--border); background: var(--surface);
+  font-size: 10px; color: var(--muted); line-height: 1.5;
+}
+.layer-note strong { color: var(--text); font-weight: 500; }
+.layer-note a { color: var(--muted); }
+
+/* event ticks under the map year slider */
+.slider-events { position: relative; height: 9px; margin-top: 1px; }
+.slider-event-tick {
+  position: absolute; top: 0; width: 1px; height: 6px; background: var(--muted2);
+  transform: translateX(-50%); cursor: help;
+}
+.slider-event-tick::after {
+  content: ''; position: absolute; top: -2px; left: 50%; transform: translateX(-50%);
+  width: 4px; height: 4px; border-radius: 50%; background: currentColor;
+}
+.ev-escalation { color: var(--red); }
+.ev-ceasefire  { color: var(--accent); }
+.ev-policy     { color: var(--blue); }
+.ev-disaster   { color: var(--amber); }
+
+/* ── TREND CHART EVENT ANNOTATIONS ── */
+.trend-legend {
+  display: flex; gap: .9rem; flex-wrap: wrap; margin-top: .5rem;
+  font-family: var(--sans); font-size: 9px; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--muted);
+}
+.trend-legend span { display: flex; align-items: center; gap: .3rem; }
+.trend-legend i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; font-style: normal; }
+.event-rail { display: flex; flex-direction: column; gap: 1px; margin-top: .7rem; }
+.event-chip {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: .6rem;
+  padding: .35rem .5rem; background: var(--surface2); border-left: 2px solid currentColor;
+  cursor: pointer; transition: background .15s; text-align: left; width: 100%;
+  border-top: none; border-right: none; border-bottom: none; font: inherit;
+}
+.event-chip:hover, .event-chip.open { background: #232323; }
+.event-chip-year { font-family: var(--mono); font-size: 10px; font-weight: 500; }
+.event-chip-title { font-family: var(--sans); font-size: 11px; font-weight: 600; color: var(--text); line-height: 1.35; }
+.event-chip-kind {
+  font-family: var(--sans); font-size: 8px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; opacity: .75;
+}
+.event-detail {
+  padding: .45rem .5rem .6rem 1.1rem; background: var(--surface2);
+  font-size: 11px; color: var(--muted); line-height: 1.55; display: none;
+}
+.event-detail.open { display: block; }
+.event-detail strong { color: var(--text); font-weight: 500; }
+.t-event-line { stroke-dasharray: 2 3; stroke-width: 1; opacity: .45; }
+.t-event-dot { cursor: pointer; }
+
+/* ── DEMOGRAPHICS ── */
+.demo-empty { padding: 1rem 1.2rem; font-size: 11px; color: var(--muted); }
+.demo-row {
+  display: grid; grid-template-columns: 1fr auto; gap: .3rem .8rem;
+  align-items: baseline; padding: .45rem 0;
+}
+.demo-row + .demo-row { border-top: 1px solid var(--border); }
+.demo-name { font-family: var(--sans); font-size: 11px; font-weight: 600; color: var(--text); text-decoration: none; }
+.demo-name:hover { color: var(--accent); }
+.demo-vals { font-family: var(--mono); font-size: 10px; color: var(--muted); display: flex; gap: .7rem; }
+.demo-vals b { font-weight: 500; }
+.demo-child { color: var(--amber); }
+.demo-female { color: var(--blue); }
+.demo-track {
+  grid-column: 1 / -1; height: 6px; background: var(--muted2);
+  display: flex; overflow: hidden;
+}
+.demo-seg { height: 100%; transition: width .6s cubic-bezier(.4,0,.2,1); width: 0; }
+.demo-seg-child  { background: var(--amber); }
+.demo-seg-adult  { background: var(--accent); }
+.demo-seg-senior { background: var(--blue); }
+.demo-key {
+  display: flex; gap: .9rem; flex-wrap: wrap; padding: 0 0 .6rem;
+  font-family: var(--sans); font-size: 9px; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--muted);
+}
+.demo-key span { display: flex; align-items: center; gap: .3rem; }
+.demo-key i { width: 6px; height: 6px; font-style: normal; }
+
+/* ── DATA ERROR BANNER ── */
+.data-error-banner {
+  grid-column: 1 / -1; padding: .9rem 1.2rem; background: rgba(239,68,68,.08);
+  border: 1px solid rgba(239,68,68,.35); color: var(--text);
+  font-size: 12px; line-height: 1.6;
+}
+.data-error-banner code {
+  font-family: var(--mono); font-size: 11px; background: var(--surface2);
+  padding: .05rem .35rem; border-radius: 2px; color: var(--accent);
+}
+.data-error-banner a { color: var(--accent); }
+
+/* ── RETURNS (durable solutions) ── */
+.sol-hero { display: flex; gap: 0; border-bottom: 1px solid var(--border); }
+.sol-hero-cell { flex: 1; padding: .9rem 1.1rem; }
+.sol-hero-cell + .sol-hero-cell { border-left: 1px solid var(--border); }
+.sol-hero-num { font-family: var(--mono); font-size: 1.5rem; font-weight: 700; line-height: 1; color: var(--accent); }
+.sol-hero-lbl { font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: .4rem; }
+.sol-row { display: grid; grid-template-columns: 1fr auto; gap: .25rem .7rem; align-items: baseline; padding: .45rem 0; }
+.sol-row + .sol-row { border-top: 1px solid var(--border); }
+.sol-name { font-family: var(--sans); font-size: 11px; font-weight: 600; color: var(--text); text-decoration: none; }
+.sol-name:hover { color: var(--accent); }
+.sol-val { font-family: var(--mono); font-size: 10px; color: var(--muted); }
+.sol-val b { color: var(--accent); font-weight: 500; }
+.sol-track { grid-column: 1 / -1; height: 6px; background: var(--muted2); display: flex; overflow: hidden; }
+.sol-seg { height: 100%; width: 0; transition: width .6s cubic-bezier(.4,0,.2,1); }
+.sol-seg-ref { background: var(--accent); }
+.sol-seg-idp { background: var(--blue); }
+.sol-seg-res { background: var(--amber); }
+.mini-key { display: flex; gap: .9rem; flex-wrap: wrap; padding: 0 0 .6rem; font-family: var(--sans); font-size: 9px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.mini-key span { display: flex; align-items: center; gap: .3rem; }
+.mini-key i { width: 6px; height: 6px; font-style: normal; }
+
+/* ── HOST BURDEN (per capita) ── */
+.burden-row { display: grid; grid-template-columns: auto 1fr auto; gap: .6rem; align-items: center; padding: .5rem 0; }
+.burden-row + .burden-row { border-top: 1px solid var(--border); }
+.burden-rank { font-family: var(--mono); font-size: 10px; color: var(--muted2); width: 1.2rem; }
+.burden-name { font-family: var(--sans); font-size: 11px; font-weight: 600; color: var(--text); text-decoration: none; display: block; }
+.burden-name:hover { color: var(--accent); }
+.burden-sub { font-family: var(--mono); font-size: 9px; color: var(--muted); }
+.burden-track { height: 5px; background: var(--muted2); margin-top: .3rem; }
+.burden-fill { height: 100%; width: 0; background: var(--accent); transition: width .7s cubic-bezier(.4,0,.2,1); }
+.burden-val { text-align: right; }
+.burden-num { font-family: var(--mono); font-size: 1.05rem; font-weight: 700; color: var(--accent); line-height: 1; }
+.burden-unit { font-family: var(--sans); font-size: 8px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .zone-a{grid-template-columns:1fr 1fr}
+  .hero-cell{grid-column:1 / -1}
+  .zone-c{grid-template-columns:1fr 1fr}
+  .crisis-cell{grid-column:1 / -1}
+  .zone-d{grid-template-columns:1fr 1fr}
+}
+@media(max-width:700px){
+  .header{padding:.7rem 1rem}
+  .nav{display:none}
+  .search-input{width:160px}
+  /* hero */
+  .hero-cell{grid-column:1 / -1;padding:1.2rem}
+  .hero-headline{font-size:1.4rem}
+  /* zone A: hero full width + 2 col stats */
+  .zone-a{grid-template-columns:1fr 1fr}
+  /* zone B: map above news */
+  .zone-b{grid-template-columns:1fr}
+  .map-lower{grid-template-columns:1fr 1fr}
+  /* zone C: 2 col */
+  .zone-c{grid-template-columns:1fr 1fr}
+  .crisis-cell{grid-column:1 / -1}
+  /* zone D: stack */
+  .zone-d{grid-template-columns:1fr}
+  /* UN TV inline grid */
+  [style*="grid-template-columns:1.8fr"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:2fr 1fr"]{grid-template-columns:1fr!important}
+  /* map & feed */
+  #map{height:220px}
+  .feed-list{max-height:260px}
+  .chart-wrap{height:130px}
+}
+@media(max-width:480px){
+  .zone-a{grid-template-columns:1fr}
+  .hero-cell{grid-column:1 / -1}
+  .map-lower{grid-template-columns:1fr}
+  .zone-c{grid-template-columns:1fr}
+  .header-right{flex-wrap:wrap;gap:.4rem}
+  .search-input{width:120px}
+  .map-controls{flex-wrap:wrap}
+  .panel-body{padding:.8rem 1rem}
+  .stat-cell{padding:.9rem 1rem}
+}
+
+/* ── PANEL ── */
+.panel{background:var(--surface)}
+.panel-hd{padding:.75rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.panel-hint{font-size:10px;color:var(--muted2);font-family:var(--mono)}
+.panel-body{padding:1rem 1.2rem}
+.panel-action{font-family:var(--sans);font-size:10px;font-weight:700;color:var(--accent);cursor:pointer;background:none;border:none;transition:opacity .15s;letter-spacing:.04em}
+.panel-action:hover{opacity:.7}
+
+/* ── HERO CELL ── */
+.hero-cell{background:var(--surface);padding:1.6rem 1.8rem;position:relative;overflow:hidden}
+.hero-eyebrow{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem}
+.hero-headline{font-family:var(--sans);font-size:clamp(1.5rem,3vw,2.3rem);font-weight:900;line-height:1.1;max-width:520px}
+.hero-headline em{color:var(--accent);font-style:normal}
+.hero-sub{margin-top:.6rem;color:var(--muted);font-size:12px;max-width:440px;line-height:1.7}
+.hero-context{margin-top:.8rem;padding:.6rem .9rem;border-left:2px solid var(--accent);background:rgba(45,212,191,.05);font-size:11px;color:var(--muted);max-width:440px;line-height:1.6}
+.hero-context strong{color:var(--text)}
+/* sparkline */
+.sparkline{display:flex;align-items:flex-end;gap:3px;height:32px;margin-top:1rem}
+.spark-bar{background:var(--accent);border-radius:2px 2px 0 0;flex:1;opacity:.35;transition:opacity .2s}
+.spark-bar:last-child{opacity:1}
+.spark-label{font-family:var(--mono);font-size:9px;color:var(--muted2);margin-top:.3rem}
+
+/* ── STAT CELL ── */
+.stat-cell{background:var(--surface);padding:1.2rem 1.2rem;display:flex;flex-direction:column;justify-content:space-between}
+.stat-label{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
+.stat-num{font-family:var(--mono);font-size:clamp(1.3rem,2vw,2rem);font-weight:700;color:var(--accent);line-height:1}
+.stat-sub{font-size:10px;color:var(--muted2);margin-top:.2rem}
+.stat-ctx{font-size:9px;color:var(--muted2);font-family:var(--mono)}
+.stat-vis{margin-top:auto;padding-top:1rem}
+.stat-vis-label{display:flex;justify-content:space-between;font-size:9px;color:var(--muted2);font-family:var(--mono);margin-bottom:.4rem}
+.stat-vis-track{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.stat-vis-fill{height:100%;border-radius:2px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.stat-divider{flex:1}
+
+/* ── BARS ── */
+.bar-row{margin-bottom:.7rem}
+.bar-row:last-child{margin-bottom:0}
+.bar-meta{display:flex;justify-content:space-between;margin-bottom:.25rem;font-size:11px}
+.bar-link{color:var(--text);text-decoration:none;transition:color .15s}
+.bar-link:hover{color:var(--accent)}
+.bar-val{color:var(--accent);font-weight:500}
+.bar-val.host{color:var(--blue)}
+.bar-track{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;background:var(--accent);border-radius:2px;width:0;transition:width 1s cubic-bezier(.4,0,.2,1)}
+.bar-fill.host{background:var(--blue)}
+
+/* ── MAP ── */
+#map{height:300px;width:100%;background:var(--bg)}
+@media(max-width:700px){#map{height:240px}}
+.leaflet-popup-content-wrapper{background:#1a1a1a;border:1px solid var(--border);border-radius:0;box-shadow:0 4px 20px rgba(0,0,0,.6);color:var(--text);font-family:var(--mono);font-size:12px}
+.leaflet-popup-tip{background:#1a1a1a}
+.popup-country{font-family:var(--sans);font-size:.95rem;font-weight:700;color:var(--accent);margin-bottom:.3rem}
+.popup-row{display:flex;justify-content:space-between;gap:1rem;margin-top:.15rem;font-size:11px}
+.popup-label{color:var(--muted)}
+.popup-link{display:block;margin-top:.4rem;font-size:10px;color:var(--accent);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;font-family:var(--sans);font-weight:700}
+
+/* ── CALLOUT ── */
+.callout-cell{background:var(--surface);padding:1.1rem 1.2rem;border-left:2px solid var(--accent)}
+.callout-num{font-family:var(--sans);font-size:1.6rem;font-weight:900;color:var(--accent);line-height:1}
+.callout-text{font-size:11px;color:var(--muted);margin-top:.3rem;line-height:1.6}
+.callout-text strong{color:var(--text)}
+
+/* ── CRISIS ── */
+.crisis-item{display:grid;grid-template-columns:1.2rem 1fr minmax(40px,60px) auto;align-items:center;gap:.6rem;padding:.55rem 0;border-bottom:1px solid var(--border);text-decoration:none;color:var(--text);transition:background .15s}
+.crisis-item:last-child{border-bottom:none}
+.crisis-item:hover{background:rgba(255,255,255,.02)}
+.crisis-rank{font-size:10px;color:var(--muted2);text-align:center;font-family:var(--sans);font-weight:700}
+.crisis-name{font-size:11px;transition:color .15s}
+.crisis-item:hover .crisis-name{color:var(--accent)}
+.crisis-bar-wrap{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.crisis-bar{height:100%;border-radius:2px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.badge{font-family:var(--sans);font-size:8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:2px;white-space:nowrap}
+.badge-critical{background:rgba(239,68,68,.15);color:#ef4444}
+.badge-severe{background:rgba(251,146,60,.15);color:#fb923c}
+.badge-high{background:rgba(250,204,21,.15);color:#facc15}
+.badge-moderate{background:rgba(45,212,191,.15);color:#2dd4bf}
+.badge-low{background:rgba(74,222,128,.15);color:#4ade80}
+.bar-critical{background:#ef4444}.bar-severe{background:#fb923c}
+.bar-high{background:#facc15}.bar-moderate{background:#2dd4bf}.bar-low{background:#4ade80}
+
+/* ── NEWS FEED ── */
+.feed-panel{background:var(--surface);display:flex;flex-direction:column}
+.feed-filters{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;flex-shrink:0;scrollbar-width:none}
+.feed-filters::-webkit-scrollbar{display:none}
+.feed-filter{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.4rem .8rem;cursor:pointer;border:none;background:none;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s}
+.feed-filter.active,.feed-filter:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.feed-list{overflow-y:auto;flex:1;max-height:380px}
+@media(max-width:700px){.feed-list{max-height:300px}}
+.feed-item{padding:.65rem 1rem;border-bottom:1px solid var(--border);text-decoration:none;display:block;transition:background .15s}
+.feed-item:hover{background:rgba(255,255,255,.025)}
+.feed-item:last-child{border-bottom:none}
+.feed-item-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem;margin-bottom:.25rem}
+.feed-title{font-size:11px;color:var(--text);line-height:1.4;flex:1;transition:color .15s}
+.feed-item:hover .feed-title{color:var(--accent)}
+.feed-country-tag{font-family:var(--sans);font-size:8px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 5px;border-radius:2px;background:rgba(45,212,191,.1);color:var(--accent);white-space:nowrap;flex-shrink:0}
+.feed-meta{font-family:var(--sans);font-size:9px;color:var(--muted);display:flex;gap:.5rem;align-items:center}
+.feed-source{color:var(--muted2)}
+.feed-dot{width:3px;height:3px;border-radius:50%;background:var(--muted2);flex-shrink:0}
+.feed-loading{padding:1.2rem;text-align:center;color:var(--muted);font-size:11px;font-family:var(--sans)}
+.feed-error{padding:.8rem 1rem;font-size:10px;color:var(--muted);border:1px solid var(--border);margin:.6rem;background:var(--surface2)}
+.feed-spinner{display:inline-block;width:12px;height:12px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:.3rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.feed-refresh{font-family:var(--sans);font-size:9px;color:var(--muted);cursor:pointer;border:none;background:none;transition:color .15s}
+.feed-refresh:hover{color:var(--accent)}
+.feed-count{font-size:9px;color:var(--muted2);font-family:var(--sans)}
+
+/* ── TREND CHART ── */
+.chart-wrap{position:relative;height:140px;margin-top:.4rem;overflow:hidden}
+svg.trend{width:100%;height:100%;overflow:hidden}
+.t-line{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 1.5s ease .6s forwards}
+.t-area{fill:url(#areaG);opacity:0;animation:fadeIn .5s ease 2s forwards}
+.ax-label{fill:var(--muted);font-family:var(--sans);font-size:9px}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fadeIn{to{opacity:1}}
+
+/* ── FUNDING ── */
+.fund-row{margin-bottom:.8rem}
+.fund-row:last-child{margin-bottom:0}
+.fund-meta{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.3rem;gap:.4rem}
+.fund-name{font-size:11px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:52%;text-decoration:none;transition:color .15s}
+.fund-name:hover{color:var(--accent)}
+.fund-nums{display:flex;gap:.5rem;font-size:9px;flex-shrink:0;font-family:var(--mono)}
+.fund-ok{color:var(--accent)}.fund-gap{color:var(--red)}
+.fund-pct{font-family:var(--sans);font-size:9px;font-weight:700;padding:1px 5px;border-radius:2px}
+.pct-low{background:rgba(239,68,68,.18);color:var(--red)}
+.pct-mid{background:rgba(245,158,11,.18);color:var(--amber)}
+.pct-high{background:rgba(96,165,250,.18);color:var(--blue)}
+.fund-track{height:4px;background:rgba(239,68,68,.12);border-radius:2px;overflow:hidden}
+.fund-fill{height:100%;background:var(--accent);border-radius:2px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+
+/* ── UN TV ── */
+.tv-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:#000}
+.tv-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.tv-links{display:flex;flex-direction:column;gap:0}
+.tv-link{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:11px;color:var(--muted);text-decoration:none;transition:color .15s}
+.tv-link:last-child{border-bottom:none}
+.tv-link:hover{color:var(--accent)}
+.tv-link span:last-child{color:var(--accent);font-size:10px}
+
+/* ── DOWNLOAD BTN ── */
+.download-btn{display:inline-flex;align-items:center;gap:.3rem;background:none;border:1px solid var(--border);color:var(--muted);font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .7rem;cursor:pointer;transition:all .2s}
+.download-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:.8rem 1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.4rem;font-size:10px;color:var(--muted);letter-spacing:.06em;font-family:var(--sans)}
+footer a{color:var(--accent);text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+
+
+/* ── MOBILE SAFETY ── */
+html,body{overflow-x:hidden}
+.chart-wrap{overflow:hidden}
+svg.trend{overflow:hidden}
+img,video,iframe{max-width:100%}
+
+
+/* ── MOBILE HAMBURGER MENU ── */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;border:1px solid var(--border);background:none;cursor:pointer;padding:8px;flex-shrink:0;transition:border-color .2s}
+.hamburger:hover{border-color:var(--accent)}
+.hamburger span{display:block;height:1.5px;background:var(--text);border-radius:1px;transition:all .25s}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+.nav-drawer{
+  position:fixed;top:0;right:0;bottom:0;width:280px;max-width:85vw;
+  background:var(--surface);border-left:1px solid var(--border);
+  z-index:500;display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+}
+.nav-drawer.open{transform:translateX(0)}
+.nav-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);
+  z-index:499;opacity:0;pointer-events:none;
+  transition:opacity .3s;
+}
+.nav-overlay.open{opacity:1;pointer-events:all}
+
+.nav-drawer-header{
+  padding:1rem 1.2rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.nav-drawer-logo{font-family:var(--sans);font-size:1.1rem;font-weight:900;color:var(--text);text-decoration:none}
+.nav-drawer-logo span{color:var(--accent)}
+.nav-drawer-close{
+  width:32px;height:32px;border:1px solid var(--border);background:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:16px;transition:all .15s;flex-shrink:0;
+}
+.nav-drawer-close:hover{border-color:var(--accent);color:var(--accent)}
+
+.nav-drawer-links{
+  flex:1;padding:1rem 0;display:flex;flex-direction:column;
+}
+.nav-drawer-links a{
+  font-family:var(--sans);font-size:13px;font-weight:600;
+  color:var(--muted);text-decoration:none;
+  padding:.75rem 1.4rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .15s;
+}
+.nav-drawer-links a:last-child{border-bottom:none}
+.nav-drawer-links a:hover,.nav-drawer-links a.active{color:var(--accent);background:rgba(45,212,191,.04)}
+.nav-drawer-links a::after{content:'→';font-size:12px;color:var(--muted2)}
+.nav-drawer-links a:hover::after,.nav-drawer-links a.active::after{color:var(--accent)}
+
+.nav-drawer-footer{
+  padding:1rem 1.4rem;border-top:1px solid var(--border);
+  font-family:var(--sans);font-size:10px;color:var(--muted2);
+  flex-shrink:0;
+}
+
+@media(max-width:700px){
+  .nav{display:none!important}
+  .hamburger{display:flex}
+}
+
+</style>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7128f2b8b7014426a65f4112bfabfd2a"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">Refuji <span>Watch</span></div>
+  <button class="hamburger" id="hamburger-btn" aria-label="Open menu"><span></span><span></span><span></span></button>
+  <nav class="nav">
+    <a href="#zone-map">Map</a>
+    <a href="#zone-news">News</a>
+    <a href="countries.html">Countries</a><a href="regions.html">Regions</a>
+    <a href="compare.html">Compare</a><a href="funding.html">Funding</a>
+    <a href="help.html">How to Help</a>
+    <a href="about.html">About</a><a href="sitrep.html">SitRep</a>
+  </nav>
+  <div class="header-right">
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input class="search-input" type="text" id="country-search" placeholder="Search country..." autocomplete="off"/>
+      <div class="search-results" id="search-results"></div>
+    </div>
+    <div class="live-badge"><div class="live-dot"></div><span id="updated-label">Loading...</span></div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker"><div class="ticker-inner" id="ticker-text">Loading displacement data...</div></div>
+
+<!-- ═══ ZONE A: HERO + STATS ═══ -->
+<div class="zone-a g1">
+
+  <!-- Hero -->
+  <div class="hero-cell">
+    <div class="hero-eyebrow">Global Displacement Dashboard · UNHCR &amp; OCHA FTS</div>
+    <div class="hero-headline"><em id="hero-total">117 million</em> people are currently displaced worldwide.</div>
+    <div class="hero-sub">Live data tracking refugees, asylum seekers, and internally displaced people across 202 countries.</div>
+    <div class="hero-context"><strong>To understand the scale:</strong> larger than the UK and France combined. One in every 69 people on Earth has been forced from their home.</div>
+    <div class="sparkline" id="sparkline"></div>
+    <div class="spark-label" id="spark-label">2018 → 2024 &nbsp;·&nbsp; ↑65.5%</div>
+  </div>
+
+  <!-- 4 stat cells -->
+  <div class="stat-cell">
+    <div>
+      <div class="stat-label">Total Displaced</div>
+      <div class="stat-num" id="stat-total">—</div>
+      <div class="stat-sub">people worldwide</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-ctx">Highest ever recorded — surpassing all previous UNHCR figures since tracking began in 1950</div>
+    <div class="stat-vis">
+      <div class="stat-vis-label"><span>Share of global total</span><span>100%</span></div>
+      <div class="stat-vis-track"><div class="stat-vis-fill" id="vis-total" style="width:0%;background:#2dd4bf"></div></div>
+    </div>
+  </div>
+  <div class="stat-cell">
+    <div>
+      <div class="stat-label">Refugees</div>
+      <div class="stat-num" id="stat-refugees">—</div>
+      <div class="stat-sub">fled across borders</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-ctx">Recognised under international law and entitled to protection in host countries</div>
+    <div class="stat-vis">
+      <div class="stat-vis-label"><span>Share of total displaced</span><span id="vis-ref-pct">—</span></div>
+      <div class="stat-vis-track"><div class="stat-vis-fill" id="vis-ref" style="width:0%;background:#2dd4bf"></div></div>
+    </div>
+  </div>
+  <div class="stat-cell">
+    <div>
+      <div class="stat-label">Asylum Seekers</div>
+      <div class="stat-num" id="stat-asylum">—</div>
+      <div class="stat-sub">awaiting decisions</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-ctx">Applications pending in host countries — legal status not yet formally determined</div>
+    <div class="stat-vis">
+      <div class="stat-vis-label"><span>Share of total displaced</span><span id="vis-asy-pct">—</span></div>
+      <div class="stat-vis-track"><div class="stat-vis-fill" id="vis-asy" style="width:0%;background:#60a5fa"></div></div>
+    </div>
+  </div>
+  <div class="stat-cell">
+    <div>
+      <div class="stat-label">Internally Displaced</div>
+      <div class="stat-num" id="stat-idp">—</div>
+      <div class="stat-sub">within own country</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-ctx">Largest and fastest-growing group — displaced by conflict or disaster but unable to cross a border</div>
+    <div class="stat-vis">
+      <div class="stat-vis-label"><span>Share of total displaced</span><span id="vis-idp-pct">—</span></div>
+      <div class="stat-vis-track"><div class="stat-vis-fill" id="vis-idp" style="width:0%;background:#f59e0b"></div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ ZONE B: MAP + NEWS ═══ -->
+<div id="zone-map" class="zone-b g1">
+
+  <!-- Left: Map + bars below -->
+  <div class="panel" style="display:flex;flex-direction:column">
+    <div class="panel-hd">
+      <span class="panel-title" id="map-title">Origin countries — click any marker to explore</span>
+      <div class="layer-toggle" id="layer-toggle">
+        <button class="layer-btn active" data-layer="conflict">Conflict &amp; persecution</button>
+        <button class="layer-btn" data-layer="disaster">Climate &amp; disaster</button>
+      </div>
+    </div>
+    <div id="map"></div>
+    <!-- MAP PLAYBACK CONTROLS -->
+    <div class="map-controls" id="map-controls">
+      <div class="map-year-display" id="map-year-label">2024</div>
+      <div class="map-slider-wrap">
+        <input class="map-slider" id="map-slider" type="range" min="0" max="6" value="6" step="1"/>
+        <div class="map-slider-labels" id="map-slider-labels">
+          <span>2018</span><span>2019</span><span>2020</span><span>2021</span><span>2022</span><span>2023</span><span>2024</span>
+        </div>
+        <div class="slider-events" id="slider-events"></div>
+      </div>
+      <button class="map-play-btn" id="map-play-btn" onclick="togglePlayback()">▶ Play</button>
+    </div>
+    <div class="map-stat-strip" id="map-stat-strip">
+      <span class="map-stat">Total displaced: <span class="map-stat-val" id="mstat-total">—</span></span>
+      <span class="map-stat">Refugees: <span class="map-stat-val" id="mstat-ref">—</span></span>
+      <span class="map-stat">IDPs: <span class="map-stat-val" id="mstat-idp">—</span></span>
+    </div>
+    <div class="layer-note" id="layer-note"></div>
+
+    <div class="map-lower g1" style="border-top:1px solid var(--border)">
+      <div class="panel-body">
+        <div class="label" style="margin-bottom:.6rem">Top origin countries</div>
+        <div id="origins-list"></div>
+      </div>
+      <div class="panel-body" style="border-left:1px solid var(--border)">
+        <div class="label" style="margin-bottom:.6rem">Top host countries</div>
+        <div id="hosts-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: News feed -->
+  <div id="zone-news" class="feed-panel">
+    <div class="panel-hd">
+      <span class="panel-title">Live news — ReliefWeb</span>
+      <div style="display:flex;align-items:center;gap:.6rem">
+        <span class="feed-count" id="feed-count"></span>
+        <button class="feed-refresh" onclick="loadFeed(activeFilter)">↻</button>
+      </div>
+    </div>
+    <div class="feed-filters" id="feed-filters">
+      <button class="feed-filter active" data-tag="">All</button>
+      <button class="feed-filter" data-tag="Sudan">Sudan</button>
+      <button class="feed-filter" data-tag="Syria">Syria</button>
+      <button class="feed-filter" data-tag="Ukraine">Ukraine</button>
+      <button class="feed-filter" data-tag="Afghanistan">Afghanistan</button>
+      <button class="feed-filter" data-tag="Myanmar">Myanmar</button>
+      <button class="feed-filter" data-tag="Yemen">Yemen</button>
+      <button class="feed-filter" data-tag="Democratic Republic of the Congo">DRC</button>
+      <button class="feed-filter" data-tag="Somalia">Somalia</button>
+    </div>
+    <div class="feed-list" id="feed-list">
+      <div class="feed-loading"><span class="feed-spinner"></span>Loading live news...</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ ZONE C: UN TV + CRISIS ═══ -->
+<div style="display:grid;grid-template-columns:1.8fr 1.3fr;gap:1px;background:var(--border)" class="g1">
+  <div id="zone-tv" class="panel" style="display:flex;flex-direction:column">
+    <div class="panel-hd">
+      <span class="panel-title">UN Web TV — live broadcast</span>
+      <a href="https://webtv.un.org/en/schedule" target="_blank" rel="noopener" class="panel-action">Schedule ↗</a>
+    </div>
+    <div class="tv-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/vYRfQo6JMxc?autoplay=1&mute=1"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen title="UN Web TV Live Stream">
+      </iframe>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-hd">
+      <span class="panel-title">Crisis Severity Index</span>
+      <span class="panel-hint">score · scale · funding · trend</span>
+    </div>
+    <div class="panel-body" id="crisis-list"></div>
+  </div>
+</div>
+
+<!-- ═══ ZONE D: TREND + FUNDING + CALLOUTS ═══ -->
+<div class="zone-d g1">
+
+  <!-- Trend chart -->
+  <div class="panel">
+    <div class="panel-hd">
+      <span class="panel-title">Global displacement trend (millions) — key events marked</span>
+      <button class="download-btn" onclick="downloadDashboardCSV()">↓ CSV</button>
+    </div>
+    <div class="panel-body">
+      <div class="chart-wrap">
+        <svg class="trend" id="trend-svg" viewBox="0 0 800 130" style="overflow:visible" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="areaG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#2dd4bf" stop-opacity=".12"/>
+              <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="trend-legend">
+        <span class="ev-escalation"><i></i>Escalation</span>
+        <span class="ev-disaster"><i></i>Disaster</span>
+        <span class="ev-ceasefire"><i></i>Ceasefire / return</span>
+        <span class="ev-policy"><i></i>Policy</span>
+      </div>
+      <div class="event-rail" id="event-rail"></div>
+    </div>
+  </div>
+
+  <!-- Funding -->
+  <div id="zone-funding" class="panel">
+    <div class="panel-hd">
+      <span class="panel-title">Humanitarian funding gaps</span>
+      <span class="panel-hint">OCHA FTS</span>
+    </div>
+    <div class="panel-body" id="funding-list"></div>
+  </div>
+
+  <!-- All 3 callouts stacked -->
+  <div class="panel" style="display:flex;flex-direction:column">
+    <div class="callout-cell" style="flex:1">
+      <div class="callout-num">1 in 69</div>
+      <div class="callout-text"><strong>people on Earth</strong> forced from their home — the highest proportion since UNHCR began tracking in 1950.</div>
+    </div>
+    <div class="callout-cell" style="flex:1;border-top:1px solid var(--border)">
+      <div class="callout-num">+65.5%</div>
+      <div class="callout-text"><strong>increase since 2018</strong> — displacement has nearly doubled in six years, driven by climate, conflict and instability.</div>
+    </div>
+    <div class="callout-cell" style="flex:1;border-top:1px solid var(--border)">
+      <div class="callout-num">83%</div>
+      <div class="callout-text"><strong>hosted by developing nations</strong> — Iran, Turkey and Colombia absorb most refugees despite limited resources.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ ZONE E: WHO IS DISPLACED (DEMOGRAPHICS) ═══ -->
+<div class="g1">
+  <div class="panel">
+    <div class="panel-hd">
+      <span class="panel-title">Demographic breakdown by origin</span>
+      <span class="panel-hint" id="demo-vintage">% children · % female</span>
+    </div>
+    <div class="panel-body">
+      <div class="demo-key">
+        <span class="demo-child"><i style="background:var(--amber)"></i>Children (0–17)</span>
+        <span style="color:var(--accent)"><i style="background:var(--accent)"></i>Adults (18–59)</span>
+        <span class="demo-female"><i style="background:var(--blue)"></i>Older (60+)</span>
+      </div>
+      <div id="demo-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ZONE F: RETURNS + HOST BURDEN ═══ -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)" class="g1" id="zone-solutions">
+  <!-- Returns / durable solutions -->
+  <div class="panel">
+    <div class="panel-hd">
+      <span class="panel-title">Where displacement is reversing</span>
+      <span class="panel-hint" id="sol-hint">UNHCR</span>
+    </div>
+    <div class="sol-hero" id="sol-hero"></div>
+    <div class="panel-body">
+      <div class="mini-key">
+        <span style="color:var(--accent)"><i style="background:var(--accent)"></i>Refugees returned</span>
+        <span style="color:var(--blue)"><i style="background:var(--blue)"></i>IDPs returned</span>
+        <span style="color:var(--amber)"><i style="background:var(--amber)"></i>Resettled</span>
+      </div>
+      <div id="sol-list"></div>
+    </div>
+  </div>
+  <!-- Host burden per capita -->
+  <div class="panel">
+    <div class="panel-hd">
+      <span class="panel-title">Who carries the heaviest load</span>
+      <span class="panel-hint" id="burden-hint">refugees per 1,000 people</span>
+    </div>
+    <div class="layer-note" style="border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+      Raw totals favour big countries. Measured against national population, the strain falls hardest on small economies neighbouring conflict — a different map of responsibility.
+    </div>
+    <div class="panel-body" id="burden-list"></div>
+  </div>
+</div>
+
+<footer>
+  <span>Sources: <a href="https://www.unhcr.org/refugee-statistics" target="_blank">UNHCR</a> · <a href="https://fts.unocha.org" target="_blank">OCHA FTS</a> · <a href="https://reliefweb.int" target="_blank">ReliefWeb</a></span>
+  <span id="footer-date">—</span>
+  <span>Built with love by <a href="https://github.com/jahitjanberk" target="_blank">jahit</a></span>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/basemap.js"></script>
+<script>
+function fmt(n){if(n>=1e9)return(n/1e9).toFixed(1)+'B';if(n>=1e6)return(n/1e6).toFixed(1)+'M';if(n>=1e3)return(n/1e3).toFixed(0)+'K';return n}
+function fmtUSD(n){if(n>=1e9)return'$'+(n/1e9).toFixed(1)+'B';if(n>=1e6)return'$'+(n/1e6).toFixed(0)+'M';return'$'+n.toLocaleString()}
+function countryURL(name){return'country.html?country='+encodeURIComponent(name)}
+function timeAgo(dateStr){
+  const diff=Date.now()-new Date(dateStr).getTime();
+  const h=Math.floor(diff/36e5);
+  if(h<1)return'just now';if(h<24)return h+'h ago';
+  const d=Math.floor(h/24);if(d<7)return d+'d ago';
+  return new Date(dateStr).toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+}
+
+const COORDS={
+  "Afghanistan":[33.9,67.7],"Syria":[34.8,38.9],"DR Congo":[-4.0,21.7],
+  "Central African Republic":[6.6,20.9],"South Sudan":[6.9,31.3],
+  "Somalia":[5.1,46.2],"Myanmar":[17.1,96.8],"Sudan":[12.9,30.2],
+  "Ukraine":[48.4,31.2],"Iraq":[33.2,43.7],"Eritrea":[15.2,39.8],
+  "Nigeria":[9.1,8.7],"Ethiopia":[9.1,40.5],"Venezuela":[6.4,-66.6],
+  "Colombia":[4.6,-74.1],"Yemen":[15.5,48.5],"Haiti":[18.9,-72.3],
+  "Libya":[26.3,17.2],"Mali":[17.6,-3.9],"Burkina Faso":[12.4,-1.6]
+};
+
+// ── Sparkline ───────────────────────────────────────
+function renderSparkline(trend){
+  const max=Math.max(...trend.map(t=>t.total));
+  const el=document.getElementById('sparkline');
+  el.innerHTML=trend.map(t=>`<div class="spark-bar" style="height:${Math.round((t.total/max)*100)}%"></div>`).join('');
+}
+
+// ── Bars ────────────────────────────────────────────
+function renderBars(id,items,key,cssClass){
+  const max=Math.max(...items.map(i=>i[key]));
+  const el=document.getElementById(id);
+  el.innerHTML=items.map(item=>`
+    <div class="bar-row">
+      <div class="bar-meta">
+        <a class="bar-link" href="${countryURL(item.country)}">${item.country}</a>
+        <span class="bar-val ${cssClass||''}">${fmt(item[key])}</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill ${cssClass||''}" data-pct="${(item[key]/max*100).toFixed(1)}"></div></div>
+    </div>`).join('');
+  requestAnimationFrame(()=>{el.querySelectorAll('.bar-fill').forEach(b=>b.style.width=b.dataset.pct+'%')});
+}
+
+// ── Trend ───────────────────────────────────────────
+const EVENT_COLORS={escalation:'#ef4444',disaster:'#f59e0b',ceasefire:'#2dd4bf',policy:'#60a5fa'};
+
+function renderTrend(data,events){
+  const svg=document.getElementById('trend-svg');
+  const W=800,H=130,P={t:14,r:20,b:30,l:10};
+  const xs=data.map((_,i)=>P.l+i*(W-P.l-P.r)/(data.length-1));
+  const vals=data.map(d=>d.total/1e6);
+  const mn=Math.min(...vals),mx=Math.max(...vals);
+  const y=v=>P.t+(1-(v-mn)/(mx-mn))*(H-P.t-P.b);
+  const xForYear=yr=>{const i=data.findIndex(d=>d.year===yr);return i<0?null:xs[i];};
+  const pts=data.map((_,i)=>`${xs[i]},${y(vals[i])}`).join(' ');
+  const area=`M${xs[0]},${y(vals[0])}`+data.slice(1).map((_,i)=>`L${xs[i+1]},${y(vals[i+1])}`).join('')+` L${xs[xs.length-1]},${H-P.b} L${xs[0]},${H-P.b} Z`;
+
+  // one marker per year that has events; colour by the first event's type
+  const byYear={};
+  (events||[]).forEach(e=>{(byYear[e.year]=byYear[e.year]||[]).push(e)});
+  const marks=Object.entries(byYear).map(([yr,evs])=>{
+    const x=xForYear(parseInt(yr)); if(x==null)return'';
+    const col=EVENT_COLORS[evs[0].type]||'#666';
+    const yv=y(vals[data.findIndex(d=>d.year===parseInt(yr))]);
+    const label=evs.length>1?evs.length:'';
+    return`<line class="t-event-line" x1="${x}" y1="${P.t-6}" x2="${x}" y2="${H-P.b}" stroke="${col}"/>
+      <circle class="t-event-dot" cx="${x}" cy="${P.t-6}" r="3.5" fill="${col}" data-year="${yr}"><title>${evs.map(e=>e.title).join(' · ')}</title></circle>
+      ${label?`<text x="${x}" y="${P.t-4.5}" text-anchor="middle" font-size="5" font-weight="700" fill="#0d0d0d" style="pointer-events:none">${label}</text>`:''}`;
+  }).join('');
+
+  svg.innerHTML+=`
+    ${marks}
+    <path class="t-area" d="${area}"/>
+    <polyline class="t-line" points="${pts}"/>
+    ${data.map((d,i)=>`
+      <circle cx="${xs[i]}" cy="${y(vals[i])}" r="2.5" fill="#2dd4bf" opacity=".9"/>
+      <text class="ax-label" x="${xs[i]}" y="${H-P.b+14}" text-anchor="middle">${d.year}</text>
+    `).join('')}
+  `;
+  svg.querySelectorAll('.t-event-dot').forEach(dot=>{
+    dot.addEventListener('click',()=>openEvent(dot.dataset.year));
+  });
+}
+
+// ── Timeline event rail ─────────────────────────────
+let _events=[];
+function renderEventRail(events){
+  _events=events||[];
+  const rail=document.getElementById('event-rail');
+  if(!rail||!_events.length)return;
+  rail.innerHTML=_events.map((e,i)=>{
+    const col=EVENT_COLORS[e.type]||'#666';
+    return`<button class="event-chip" style="color:${col}" data-i="${i}">
+        <span class="event-chip-year">${e.year}</span>
+        <span class="event-chip-title">${e.country!=='Global'?`<span style="color:${col}">${e.country}</span> · `:''}${e.title}</span>
+        <span class="event-chip-kind">${e.type}</span>
+      </button>
+      <div class="event-detail" data-detail="${i}"><strong>${e.date}</strong> — ${e.detail}</div>`;
+  }).join('');
+  rail.querySelectorAll('.event-chip').forEach(chip=>{
+    chip.addEventListener('click',()=>toggleEvent(parseInt(chip.dataset.i)));
+  });
+}
+function toggleEvent(i){
+  const rail=document.getElementById('event-rail');
+  const chip=rail.querySelector(`.event-chip[data-i="${i}"]`);
+  const det=rail.querySelector(`.event-detail[data-detail="${i}"]`);
+  const open=det.classList.contains('open');
+  rail.querySelectorAll('.event-detail').forEach(d=>d.classList.remove('open'));
+  rail.querySelectorAll('.event-chip').forEach(c=>c.classList.remove('open'));
+  if(!open){det.classList.add('open');chip.classList.add('open');}
+}
+function openEvent(year){
+  const idx=_events.findIndex(e=>String(e.year)===String(year));
+  if(idx<0)return;
+  toggleEvent(idx);
+  document.querySelector(`.event-chip[data-i="${idx}"]`)?.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+// ── Funding ─────────────────────────────────────────
+function renderFunding(appeals){
+  const el=document.getElementById('funding-list');
+  el.innerHTML=appeals.map(a=>{
+    const cls=a.pct<40?'low':a.pct<70?'mid':'high';
+    const matched=Object.keys(COORDS).find(c=>a.name.toLowerCase().includes(c.toLowerCase()));
+    const nameEl=matched
+      ?`<a class="fund-name" href="${countryURL(matched)}">${a.name}</a>`
+      :`<span class="fund-name">${a.name}</span>`;
+    return`<div class="fund-row">
+      <div class="fund-meta">
+        ${nameEl}
+        <div class="fund-nums">
+          <span class="fund-ok">${fmtUSD(a.funded)}</span>
+          <span class="fund-gap">${fmtUSD(a.gap)} gap</span>
+          <span class="fund-pct pct-${cls}">${a.pct}%</span>
+        </div>
+      </div>
+      <div class="fund-track"><div class="fund-fill" data-pct="${a.pct}"></div></div>
+    </div>`;
+  }).join('');
+  requestAnimationFrame(()=>{el.querySelectorAll('.fund-fill').forEach(b=>b.style.width=b.dataset.pct+'%')});
+}
+
+// ── Map ─────────────────────────────────────────────
+let _map=null;
+let _mapCircles = [];
+let _trendByCountry = {};
+let _playbackInterval = null;
+let _coords = {};                 // country -> [lat,lng]
+let _activeLayer = 'conflict';
+let _disaster = null;             // disaster_displacement block
+let _layerYears = [2018,2019,2020,2021,2022,2023,2024];
+
+// per-layer visual + data config
+const LAYERS={
+  conflict:{color:'#2dd4bf',
+    title:'Origin countries — click any marker to explore',
+    valueFor:(country,year)=>{const yd=_trendByCountry[country];return yd?(yd[year]??yd[Object.keys(yd).sort().pop()]??0):0;},
+    countriesFor:(year)=>Object.keys(_coords).filter(c=>_trendByCountry[c]),
+    popupLabel:'Displaced',
+    note:'<strong>Conflict &amp; persecution.</strong> Total displaced people (refugees, asylum-seekers and IDPs) originating from each country, by year. Source: UNHCR.'},
+  disaster:{color:'#f59e0b',
+    title:'Disaster displacement — floods, storms, drought, quakes',
+    valueFor:(country,year)=>{const row=(_disaster?.by_year?.[year]||[]).find(r=>r.country===country);return row?row.disaster:0;},
+    countriesFor:(year)=>(_disaster?.by_year?.[year]||[]).map(r=>r.country),
+    popupLabel:'New displacements',
+    note:'<strong>Climate &amp; disaster.</strong> New internal displacements triggered by disasters in each year — a flow, not a stock, so figures reset annually. Source: <a href="https://www.internal-displacement.org" target="_blank" rel="noopener">IDMC</a>.'}
+};
+
+function initMap(origins, countryDetails, coords, disaster){
+  _coords = coords && Object.keys(coords).length ? coords : COORDS;
+  _disaster = disaster;
+  _map=L.map('map',{center:[20,20],zoom:2,attributionControl:false,maxZoom:8,minZoom:1});
+  addBasemap(_map);
+
+  // Build trend lookup: { countryName: { year: total } }
+  if(countryDetails){
+    Object.entries(countryDetails).forEach(([name,d])=>{
+      if(d.trend&&d.trend.length){
+        _trendByCountry[name]={};
+        d.trend.forEach(t=>{ _trendByCountry[name][t.year]=t.total; });
+      }
+    });
+  }
+
+  // Layer toggle
+  document.getElementById('layer-toggle').addEventListener('click',e=>{
+    const btn=e.target.closest('.layer-btn'); if(!btn)return;
+    setLayer(btn.dataset.layer);
+  });
+
+  // Slider
+  const slider=document.getElementById('map-slider');
+  slider.addEventListener('input',()=>{
+    stopPlayback();
+    updateMapYear(_layerYears[parseInt(slider.value)]);
+    updateSliderStyle(slider);
+  });
+
+  buildLayer();          // draw the default (conflict) layer
+}
+
+function setLayer(layer){
+  if(layer===_activeLayer)return;
+  if(layer==='disaster'&&!_disaster)return;
+  _activeLayer=layer;
+  stopPlayback();
+  document.querySelectorAll('.layer-btn').forEach(b=>b.classList.toggle('active',b.dataset.layer===layer));
+  buildLayer();
+}
+
+// (re)build markers, slider range, labels and event ticks for the active layer
+function buildLayer(){
+  const cfg=LAYERS[_activeLayer];
+  document.getElementById('map-title').textContent=cfg.title;
+  document.getElementById('layer-note').innerHTML=cfg.note;
+
+  _mapCircles.forEach(({circle})=>_map.removeLayer(circle));
+  _mapCircles=[];
+
+  _layerYears = _activeLayer==='disaster'
+    ? (_disaster.years||[]).slice()
+    : [2018,2019,2020,2021,2022,2023,2024];
+
+  // union of countries appearing in any year of this layer
+  const names=new Set();
+  _layerYears.forEach(y=>cfg.countriesFor(y).forEach(c=>{if(_coords[c])names.add(c);}));
+
+  // max across all years for stable radius scaling
+  let maxV=1;
+  names.forEach(c=>_layerYears.forEach(y=>{maxV=Math.max(maxV,cfg.valueFor(c,y));}));
+
+  names.forEach(country=>{
+    const c=_coords[country]; if(!c)return;
+    const circle=L.circleMarker(c,{radius:5,fillColor:cfg.color,color:cfg.color,weight:1,opacity:.8,fillOpacity:.2}).addTo(_map);
+    circle.on('mouseover',function(){this.setStyle({fillOpacity:.5,weight:2});this.openPopup()});
+    circle.on('mouseout',function(){this.setStyle({fillOpacity:.2,weight:1})});
+    circle.on('click',function(){window.location.href=countryURL(country)});
+    _mapCircles.push({circle,country,maxV});
+  });
+
+  // reconfigure slider to this layer's year span, snap to last year
+  const slider=document.getElementById('map-slider');
+  slider.max=_layerYears.length-1;
+  slider.value=_layerYears.length-1;
+  renderSliderLabels();
+  renderSliderTicks();
+  updateSliderStyle(slider);
+  updateMapYear(_layerYears[_layerYears.length-1]);
+}
+
+function renderSliderLabels(){
+  document.getElementById('map-slider-labels').innerHTML=
+    _layerYears.map(y=>`<span>${y}</span>`).join('');
+}
+
+// place timeline-event ticks under the slider, aligned to the year span
+function renderSliderTicks(){
+  const el=document.getElementById('slider-events'); if(!el)return;
+  const y0=_layerYears[0], y1=_layerYears[_layerYears.length-1], span=Math.max(y1-y0,1);
+  const byYear={};
+  (_events||[]).forEach(e=>{if(e.year>=y0&&e.year<=y1)(byYear[e.year]=byYear[e.year]||[]).push(e);});
+  el.innerHTML=Object.entries(byYear).map(([yr,evs])=>{
+    const pct=((parseInt(yr)-y0)/span*100).toFixed(2);
+    return`<span class="slider-event-tick ev-${evs[0].type}" style="left:${pct}%" title="${yr}: ${evs.map(e=>e.title).join(' · ')}"></span>`;
+  }).join('');
+}
+
+function calcRadius(v, maxV){ return v>0 ? 5+Math.sqrt(v/(maxV||1))*30 : 0; }
+
+function updateSliderStyle(slider){
+  const pct=(slider.value/slider.max*100).toFixed(1);
+  const col=_activeLayer==='disaster'?'#f59e0b':'#2dd4bf';
+  slider.style.background=`linear-gradient(to right, ${col} ${pct}%, var(--border) ${pct}%)`;
+}
+
+function updateMapYear(year){
+  const cfg=LAYERS[_activeLayer];
+  document.getElementById('map-year-label').textContent=year;
+  let total=0;
+
+  _mapCircles.forEach(({circle,country,maxV})=>{
+    const val=cfg.valueFor(country,year);
+    circle.setRadius(calcRadius(val,maxV));
+    const extra=_activeLayer==='disaster'
+      ?`<div class="popup-row"><span class="popup-label">Conflict (${year})</span><span>${fmt(((_disaster.by_year[year]||[]).find(r=>r.country===country)||{}).conflict||0)}</span></div>`:'';
+    circle.setPopupContent(`<div class="popup-country">${country}</div><div class="popup-row"><span class="popup-label">${cfg.popupLabel} (${year})</span><span>${fmt(val)}</span></div>${extra}<a class="popup-link" href="${countryURL(country)}">View profile →</a>`);
+    if(val>0)total+=val;
+  });
+
+  // stat strip
+  const t=document.getElementById('mstat-total'), r=document.getElementById('mstat-ref'), i=document.getElementById('mstat-idp');
+  if(_activeLayer==='disaster'){
+    const g=(_disaster.global||[]).find(x=>x.year===year)||{};
+    document.querySelectorAll('#map-stat-strip .map-stat')[0].firstChild.textContent='Disaster displacements: ';
+    document.querySelectorAll('#map-stat-strip .map-stat')[1].firstChild.textContent='Conflict displacements: ';
+    document.querySelectorAll('#map-stat-strip .map-stat')[2].firstChild.textContent='Countries shown: ';
+    t.textContent=fmt(g.disaster||total); r.textContent=fmt(g.conflict||0);
+    i.textContent=(_disaster.by_year[year]||[]).filter(x=>_coords[x.country]).length;
+  }else{
+    document.querySelectorAll('#map-stat-strip .map-stat')[0].firstChild.textContent='Total displaced: ';
+    document.querySelectorAll('#map-stat-strip .map-stat')[1].firstChild.textContent='Refugees: ';
+    document.querySelectorAll('#map-stat-strip .map-stat')[2].firstChild.textContent='IDPs: ';
+    const row=(window._yearlyTrend||[]).find(x=>x.year===year);
+    t.textContent=row?fmt(row.total):fmt(total); r.textContent='—'; i.textContent='—';
+  }
+}
+
+function stopPlayback(){
+  if(!_playbackInterval)return;
+  clearInterval(_playbackInterval); _playbackInterval=null;
+  const btn=document.getElementById('map-play-btn');
+  btn.textContent='▶ Play'; btn.classList.remove('playing');
+}
+
+function togglePlayback(){
+  const btn=document.getElementById('map-play-btn');
+  const slider=document.getElementById('map-slider');
+  if(_playbackInterval){ stopPlayback(); return; }
+  btn.textContent='⏸ Pause'; btn.classList.add('playing');
+  if(parseInt(slider.value)>=parseInt(slider.max)) slider.value=0;
+  _playbackInterval=setInterval(()=>{
+    const next=parseInt(slider.value)+1;
+    if(next>parseInt(slider.max)){ stopPlayback(); return; }
+    slider.value=next;
+    updateSliderStyle(slider);
+    updateMapYear(_layerYears[next]);
+  },900);
+}
+
+// ── Demographics ────────────────────────────────────
+function renderDemographics(demo){
+  const list=document.getElementById('demo-list');
+  if(!demo||!demo.countries)return;
+
+  const entries=Object.entries(demo.countries)
+    .filter(([,d])=>d.population_covered>50000)
+    .sort((a,b)=>b[1].population_covered-a[1].population_covered)
+    .slice(0,14);
+
+  list.innerHTML=entries.map(([name,d])=>{
+    const child=d.children_pct, senior=d.elderly_pct, adult=Math.max(0,100-child-senior);
+    return`<div class="demo-row">
+      <a class="demo-name" href="${countryURL(name)}">${name}</a>
+      <div class="demo-vals">
+        <span><b class="demo-child">${child}%</b> children</span>
+        <span><b class="demo-female">${d.female_pct}%</b> female</span>
+      </div>
+      <div class="demo-track">
+        <div class="demo-seg demo-seg-child" data-w="${child}"></div>
+        <div class="demo-seg demo-seg-adult" data-w="${adult.toFixed(1)}"></div>
+        <div class="demo-seg demo-seg-senior" data-w="${senior}"></div>
+      </div>
+    </div>`;
+  }).join('');
+  requestAnimationFrame(()=>{list.querySelectorAll('.demo-seg').forEach(s=>s.style.width=s.dataset.w+'%')});
+}
+
+// ── Data-vintage stamps ─────────────────────────────
+// The dashboard mixes reference years (2023 headline, IDMC through 2025,
+// demographics end-2021). Stamp each panel so the vintage is explicit.
+function stampVintages(d){
+  const v=d.data_vintages||{};
+  const set=(sel,txt)=>{const el=document.querySelector(sel);if(el&&txt)el.textContent=txt;};
+  if(v.demographics&&v.demographics.year)
+    set('#demo-vintage',`% children · % female · end-${v.demographics.year}`);
+}
+
+// ── Returns / durable solutions ─────────────────────
+function renderSolutions(sol){
+  const zone=document.getElementById('zone-solutions');
+  if(!sol||!sol.by_origin||!sol.by_origin.length){if(zone)zone.style.display='none';return;}
+  document.getElementById('sol-hint').textContent=`UNHCR · ${sol.year}`;
+  const g=sol.global||{};
+  document.getElementById('sol-hero').innerHTML=`
+    <div class="sol-hero-cell"><div class="sol-hero-num">${fmt(g.returned_refugees||0)}</div><div class="sol-hero-lbl">Refugees returned home</div></div>
+    <div class="sol-hero-cell"><div class="sol-hero-num" style="color:var(--blue)">${fmt(g.returned_idps||0)}</div><div class="sol-hero-lbl">IDPs returned home</div></div>
+    <div class="sol-hero-cell"><div class="sol-hero-num" style="color:var(--amber)">${fmt(g.resettlement||0)}</div><div class="sol-hero-lbl">Refugees resettled</div></div>`;
+
+  const rows=sol.by_origin.slice(0,10);
+  const max=Math.max(...rows.map(r=>r.total_solutions),1);
+  const list=document.getElementById('sol-list');
+  list.innerHTML=rows.map(r=>{
+    const w=v=>(v/max*100).toFixed(2);
+    return`<div class="sol-row">
+      <a class="sol-name" href="${countryURL(r.country)}">${r.country}</a>
+      <div class="sol-val"><b>${fmt(r.total_solutions)}</b> total</div>
+      <div class="sol-track">
+        <div class="sol-seg sol-seg-ref" data-w="${w(r.returned_refugees)}" title="Refugees returned: ${fmt(r.returned_refugees)}"></div>
+        <div class="sol-seg sol-seg-idp" data-w="${w(r.returned_idps)}" title="IDPs returned: ${fmt(r.returned_idps)}"></div>
+        <div class="sol-seg sol-seg-res" data-w="${w(r.resettlement)}" title="Resettled: ${fmt(r.resettlement)}"></div>
+      </div>
+    </div>`;
+  }).join('');
+  requestAnimationFrame(()=>{list.querySelectorAll('.sol-seg').forEach(s=>s.style.width=s.dataset.w+'%')});
+}
+
+// ── Host-country burden (per capita) ────────────────
+function renderHostBurden(hb){
+  const list=document.getElementById('burden-list');
+  if(!hb||!hb.by_country||!hb.by_country.length){if(list)list.innerHTML='';return;}
+  document.getElementById('burden-hint').textContent=`refugees per 1,000 people · ${hb.year}`;
+  const rows=hb.by_country.slice(0,12);
+  const max=Math.max(...rows.map(r=>r.per_1000),1);
+  list.innerHTML=rows.map((r,i)=>`
+    <div class="burden-row">
+      <span class="burden-rank">${i+1}</span>
+      <div>
+        <a class="burden-name" href="${countryURL(r.country)}">${r.country}</a>
+        <span class="burden-sub">${fmt(r.hosted)} hosted · ${r.pct_of_pop}% of population</span>
+        <div class="burden-track"><div class="burden-fill" data-w="${(r.per_1000/max*100).toFixed(1)}"></div></div>
+      </div>
+      <div class="burden-val"><div class="burden-num">${r.per_1000}</div><div class="burden-unit">per 1,000</div></div>
+    </div>`).join('');
+  requestAnimationFrame(()=>{list.querySelectorAll('.burden-fill').forEach(b=>b.style.width=b.dataset.w+'%')});
+}
+
+// ── Crisis ──────────────────────────────────────────
+function renderCrisis(scores){
+  const el=document.getElementById('crisis-list');
+  if(!el||!scores||!scores.length)return;
+  el.innerHTML=scores.map((s,i)=>{
+    const cls=s.label.toLowerCase();
+    return`<a class="crisis-item" href="${countryURL(s.country)}">
+      <span class="crisis-rank">${i+1}</span>
+      <span class="crisis-name">${s.country}</span>
+      <div class="crisis-bar-wrap"><div class="crisis-bar bar-${cls}" data-w="${(s.score/10*100).toFixed(1)}"></div></div>
+      <span class="badge badge-${cls}">${s.label}</span>
+    </a>`;
+  }).join('');
+  requestAnimationFrame(()=>{el.querySelectorAll('.crisis-bar').forEach(b=>b.style.width=b.dataset.w+'%')});
+}
+
+// ── News feed ───────────────────────────────────────
+let activeFilter='';
+let feedCache={};
+
+async function loadFeed(country=''){
+  activeFilter=country;
+  const listEl=document.getElementById('feed-list');
+  const countEl=document.getElementById('feed-count');
+  if(feedCache[country]){renderFeed(feedCache[country]);return}
+  listEl.innerHTML='<div class="feed-loading"><span class="feed-spinner"></span>Fetching live news...</div>';
+  countEl.textContent='';
+  try{
+    let url='https://api.reliefweb.int/v2/reports?appname=displacement-watchgdPWU0XzYyzaG50&limit=30&sort[]=date.created:desc&fields[include][]=title&fields[include][]=date.created&fields[include][]=source.name&fields[include][]=country.name&fields[include][]=url_alias';
+    if(country){
+      url+='&filter[field]=country.name&filter[value]='+encodeURIComponent(country);
+    }else{
+      url+='&query[value]=refugees%20displaced&query[fields][]=title&query[fields][]=body';
+    }
+    const res=await fetch(url);
+    if(!res.ok)throw new Error('API '+res.status);
+    const json=await res.json();
+    const items=(json.data||[]).map(d=>({
+      id:d.id,title:d.fields.title||'Untitled',
+      date:d.fields.date?.created||'',
+      source:(d.fields.source||[]).map(s=>s.name).join(', ')||'ReliefWeb',
+      countries:(d.fields.country||[]).map(c=>c.name),
+      url:d.fields.url_alias?'https://reliefweb.int'+d.fields.url_alias:'https://reliefweb.int/node/'+d.id
+    }));
+    feedCache[country]=items;
+    renderFeed(items);
+  }catch(e){
+    listEl.innerHTML=`<div class="feed-error">⚠ Could not load live news from ReliefWeb.<br>Works when deployed — ReliefWeb supports CORS.<br><small style="color:var(--muted2)">${e.message}</small></div>`;
+  }
+}
+
+function renderFeed(items){
+  const listEl=document.getElementById('feed-list');
+  const countEl=document.getElementById('feed-count');
+  if(!items||!items.length){listEl.innerHTML='<div class="feed-loading">No reports found.</div>';return}
+  countEl.textContent=items.length+' reports';
+  listEl.innerHTML=items.map(item=>{
+    const country=item.countries[0]||'';
+    const tag=country?`<span class="feed-country-tag">${country}</span>`:'';
+    return`<a class="feed-item" href="${item.url}" target="_blank" rel="noopener">
+      <div class="feed-item-top"><span class="feed-title">${item.title}</span>${tag}</div>
+      <div class="feed-meta"><span class="feed-source">${item.source}</span><span class="feed-dot"></span><span>${timeAgo(item.date)}</span></div>
+    </a>`;
+  }).join('');
+}
+
+document.getElementById('feed-filters').addEventListener('click',e=>{
+  const btn=e.target.closest('.feed-filter');
+  if(!btn)return;
+  document.querySelectorAll('.feed-filter').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  loadFeed(btn.dataset.tag);
+});
+
+// ── Search ──────────────────────────────────────────
+let allCountries=[];
+function initSearch(countryDetails){
+  allCountries=Object.entries(countryDetails).map(([name,d])=>({
+    name,total:d.latest?.total||0,is_origin:d.is_origin,is_host:d.is_host
+  })).sort((a,b)=>b.total-a.total);
+  const input=document.getElementById('country-search');
+  const results=document.getElementById('search-results');
+  input.addEventListener('input',()=>{
+    const q=input.value.trim().toLowerCase();
+    if(!q){results.style.display='none';return}
+    const matches=allCountries.filter(c=>c.name.toLowerCase().includes(q)).slice(0,8);
+    results.innerHTML=matches.length===0
+      ?'<div style="padding:.4rem .7rem;color:var(--muted);font-size:11px">No countries found</div>'
+      :matches.map(c=>`<a class="search-result-item" href="${countryURL(c.name)}">
+          <span>${c.name}</span>
+          <span style="color:var(--muted);font-size:10px">${c.total>0?fmt(c.total)+' displaced':c.is_host?'Host country':''}</span>
+        </a>`).join('');
+    results.style.display='block';
+  });
+  document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))results.style.display='none'});
+  input.addEventListener('keydown',e=>{
+    if(e.key==='Enter'){const first=results.querySelector('.search-result-item');if(first)window.location.href=first.href}
+  });
+}
+
+// ── CSV ─────────────────────────────────────────────
+let _dashboardData=null;
+function downloadDashboardCSV(){
+  if(!_dashboardData)return;
+  const d=_dashboardData;
+  const rows=[
+    ['Refuji Watch — Global Data Export'],['Generated',d.last_updated],[],
+    ['GLOBAL TOTALS'],['Metric','Count'],
+    ['Total Displaced',d.total_displaced],['Refugees',d.refugees],
+    ['Asylum Seekers',d.asylum_seekers],['Internally Displaced',d.internally_displaced],[],
+    ['TOP ORIGIN COUNTRIES'],['Country','Displaced'],
+    ...d.top_origin_countries.map(c=>[c.country,c.displaced]),[],
+    ['TOP HOST COUNTRIES'],['Country','Refugees Hosted'],
+    ...d.top_host_countries.map(c=>[c.country,c.hosted]),[],
+    ['YEARLY TREND'],['Year','Total Displaced'],
+    ...d.yearly_trend.map(t=>[t.year,t.total]),[],
+    ...(d.disaster_displacement?[
+      ['DISASTER vs CONFLICT DISPLACEMENT (new, per year) — IDMC'],['Year','Disaster','Conflict'],
+      ...d.disaster_displacement.global.map(g=>[g.year,g.disaster,g.conflict]),[],
+      ['DISASTER DISPLACEMENT BY COUNTRY ('+d.disaster_displacement.latest_year+')'],['Country','New Disaster Displacements'],
+      ...d.disaster_displacement.by_year[d.disaster_displacement.latest_year].map(c=>[c.country,c.disaster]),[]
+    ]:[]),
+    ...(d.demographics&&d.demographics.countries?[
+      ['DEMOGRAPHIC COMPOSITION BY ORIGIN — '+d.demographics.source],
+      ['Country','% Children','% Female','% Women & Children','% Under 5','Population covered'],
+      ...Object.entries(d.demographics.countries)
+        .sort((a,b)=>b[1].population_covered-a[1].population_covered)
+        .map(([n,x])=>[n,x.children_pct,x.female_pct,x.women_and_children_pct,x.under_5_pct,x.population_covered]),[]
+    ]:[]),
+    ...(d.solutions?[
+      ['DURABLE SOLUTIONS ('+d.solutions.year+') — '+d.solutions.source],
+      ['Country','Refugees Returned','IDPs Returned','Resettled','Naturalised','Total Solutions'],
+      ...d.solutions.by_origin.map(r=>[r.country,r.returned_refugees,r.returned_idps,r.resettlement,r.naturalisation,r.total_solutions]),[]
+    ]:[]),
+    ...(d.host_burden?[
+      ['HOST-COUNTRY BURDEN ('+d.host_burden.year+') — refugees per 1,000 inhabitants'],
+      ['Country','Refugees Hosted','Population','Per 1,000','% of Population'],
+      ...d.host_burden.by_country.map(r=>[r.country,r.hosted,r.population,r.per_1000,r.pct_of_pop])
+    ]:[])
+  ];
+  const a=document.createElement('a');
+  a.href='data:text/csv,'+encodeURIComponent(rows.map(r=>r.map(v=>'"'+v+'"').join(',')).join('\n'));
+  a.download='refuji-watch-'+d.last_updated+'.csv';
+  a.click();
+}
+
+// ── Nav scroll ──────────────────────────────────────
+document.querySelectorAll('.nav a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const el=document.querySelector(a.getAttribute('href'));
+    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+// ── Load data ───────────────────────────────────────
+async function loadData(){
+  try{
+    const res=await fetch('/sample.json');
+    const d=await res.json();
+    document.getElementById('stat-total').textContent=fmt(d.total_displaced);
+    document.getElementById('stat-refugees').textContent=fmt(d.refugees);
+    document.getElementById('stat-asylum').textContent=fmt(d.asylum_seekers);
+    document.getElementById('stat-idp').textContent=fmt(d.internally_displaced);
+    // proportion bars
+    requestAnimationFrame(()=>{
+      const t=d.total_displaced;
+      const refPct=Math.round(d.refugees/t*100);
+      const asyPct=Math.round(d.asylum_seekers/t*100);
+      const idpPct=Math.round(d.internally_displaced/t*100);
+      document.getElementById('vis-total').style.width='100%';
+      document.getElementById('vis-ref').style.width=refPct+'%';
+      document.getElementById('vis-asy').style.width=asyPct+'%';
+      document.getElementById('vis-idp').style.width=idpPct+'%';
+      document.getElementById('vis-ref-pct').textContent=refPct+'%';
+      document.getElementById('vis-asy-pct').textContent=asyPct+'%';
+      document.getElementById('vis-idp-pct').textContent=idpPct+'%';
+    });
+    document.getElementById('updated-label').textContent='UNHCR · '+d.last_updated;
+    document.getElementById('footer-date').textContent='Last updated: '+d.last_updated;
+    document.getElementById('hero-total').textContent=fmt(d.total_displaced);
+    document.getElementById('ticker-text').textContent=
+      'Total displaced: '+fmt(d.total_displaced)+'  ·  '+
+      d.top_origin_countries.map(c=>c.country+': '+fmt(c.displaced)).join('  ·  ')+
+      '  ·  Refugees: '+fmt(d.refugees)+
+      '  ·  Asylum seekers: '+fmt(d.asylum_seekers)+
+      '  ·  Internally displaced: '+fmt(d.internally_displaced);
+    renderSparkline(d.yearly_trend);
+    renderBars('origins-list',d.top_origin_countries,'displaced');
+    renderBars('hosts-list',d.top_host_countries,'hosted','host');
+    renderEventRail(d.timeline_events);
+    renderTrend(d.yearly_trend, d.timeline_events);
+    window._yearlyTrend=d.yearly_trend;
+    initMap(d.top_origin_countries, d.country_details, d.country_coords, d.disaster_displacement);
+    if(d.funding_gaps&&d.funding_gaps.length)renderFunding(d.funding_gaps);
+    if(d.crisis_scores&&d.crisis_scores.length)renderCrisis(d.crisis_scores);
+    if(d.demographics)renderDemographics(d.demographics);
+    renderSolutions(d.solutions);
+    renderHostBurden(d.host_burden);
+    stampVintages(d);
+    if(d.country_details)initSearch(d.country_details);
+    _dashboardData=d;
+  }catch(e){
+    console.error('Could not load data:',e);
+    document.getElementById('updated-label').textContent='Data unavailable';
+    showDataError(e);
+  }
+}
+
+function showDataError(e){
+  const isFile=location.protocol==='file:';
+  const banner=document.createElement('div');
+  banner.className='data-error-banner';
+  banner.innerHTML=isFile
+    ? `<strong>The dashboard can't load its data from a <code>file://</code> page.</strong>
+       Browsers block <code>fetch()</code> of local files. Serve the folder over HTTP instead — from this directory run
+       <code>python3 -m http.server 8000</code> and open <a href="http://localhost:8000/">http://localhost:8000/</a>.`
+    : `<strong>Couldn't load <code>sample.json</code>.</strong>
+       Make sure it sits next to this page and is reachable. <span style="color:var(--muted2)">${e.message||e}</span>`;
+  document.querySelector('.zone-a')?.prepend(banner);
+}
+
+loadData();
+loadFeed();
+// ── Header glassmorphism on scroll ──────────────────
+const header = document.querySelector('.header');
+const onScroll = () => {
+  header.classList.toggle('scrolled', window.scrollY > 10);
+};
+window.addEventListener('scroll', onScroll, {passive: true});
+
+</script>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="nav-overlay" id="nav-overlay" onclick="closeDrawer()"></div>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nav-drawer-header">
+    <a class="nav-drawer-logo" href="index.html">Refuji <span>Watch</span></a>
+    <button class="nav-drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="nav-drawer-links">
+    <a href="#zone-map">Map</a>
+    <a href="#zone-news">News</a>
+    <a href="countries.html">Countries</a>
+    <a href="regions.html">Regions</a>
+    <a href="compare.html">Compare</a>
+    <a href="funding.html">Funding</a>
+    <a href="help.html">How to Help</a>
+    <a href="about.html">About</a>
+    <a href="sitrep.html">SitRep</a>
+  </div>
+  <div class="nav-drawer-footer">Data: UNHCR · OCHA FTS · ReliefWeb</div>
+</div>
+
+<script>
+(function(){
+  function openDrawer(){
+    document.getElementById('nav-drawer').classList.add('open');
+    document.getElementById('nav-overlay').classList.add('open');
+    var btn=document.getElementById('hamburger-btn');
+    if(btn)btn.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  window.closeDrawer=function(){
+    document.getElementById('nav-drawer').classList.remove('open');
+    document.getElementById('nav-overlay').classList.remove('open');
+    var btn=document.getElementById('hamburger-btn');
+    if(btn)btn.classList.remove('open');
+    document.body.style.overflow='';
+  };
+  var btn=document.getElementById('hamburger-btn');
+  if(btn)btn.addEventListener('click',function(){
+    if(document.getElementById('nav-drawer').classList.contains('open'))closeDrawer();
+    else openDrawer();
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDrawer();});
+})();
+</script>
+</body>
+</html>

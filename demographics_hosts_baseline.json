@@ -1,0 +1,4234 @@
+{
+ "Afghanistan": {
+  "iso3": "AFG",
+  "population_covered": 4400047,
+  "children_pct": 57.4,
+  "adults_pct": 38.1,
+  "elderly_pct": 4.5,
+  "female_pct": 49.3,
+  "male_pct": 50.7,
+  "women_and_children_pct": 78.3,
+  "under_5_pct": 20.3,
+  "girls": 1245475,
+  "boys": 1280102,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 443087,
+    "male": 449022
+   },
+   {
+    "band": "5-11",
+    "female": 447963,
+    "male": 453515
+   },
+   {
+    "band": "12-17",
+    "female": 354425,
+    "male": 377565
+   },
+   {
+    "band": "18-59",
+    "female": 829943,
+    "male": 846137
+   },
+   {
+    "band": "60+",
+    "female": 91825,
+    "male": 106565
+   }
+  ],
+  "totals": {
+   "female": 2167243,
+   "male": 2232804,
+   "children": 2525577,
+   "known_age": 4400047
+  }
+ },
+ "Algeria": {
+  "iso3": "DZA",
+  "population_covered": 10020,
+  "children_pct": 32.7,
+  "adults_pct": 65.9,
+  "elderly_pct": 1.4,
+  "female_pct": 35.5,
+  "male_pct": 64.5,
+  "women_and_children_pct": 52.8,
+  "under_5_pct": 10.0,
+  "girls": 1546,
+  "boys": 1731,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 465,
+    "male": 535
+   },
+   {
+    "band": "5-11",
+    "female": 677,
+    "male": 723
+   },
+   {
+    "band": "12-17",
+    "female": 404,
+    "male": 473
+   },
+   {
+    "band": "18-59",
+    "female": 1952,
+    "male": 4648
+   },
+   {
+    "band": "60+",
+    "female": 63,
+    "male": 80
+   }
+  ],
+  "totals": {
+   "female": 3561,
+   "male": 6459,
+   "children": 3277,
+   "known_age": 10020
+  }
+ },
+ "Angola": {
+  "iso3": "AGO",
+  "population_covered": 9749,
+  "children_pct": 57.1,
+  "adults_pct": 40.3,
+  "elderly_pct": 2.6,
+  "female_pct": 50.9,
+  "male_pct": 49.1,
+  "women_and_children_pct": 79.1,
+  "under_5_pct": 17.1,
+  "girls": 2817,
+  "boys": 2747,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 823,
+    "male": 848
+   },
+   {
+    "band": "5-11",
+    "female": 1256,
+    "male": 1222
+   },
+   {
+    "band": "12-17",
+    "female": 738,
+    "male": 677
+   },
+   {
+    "band": "18-59",
+    "female": 2046,
+    "male": 1882
+   },
+   {
+    "band": "60+",
+    "female": 100,
+    "male": 157
+   }
+  ],
+  "totals": {
+   "female": 4963,
+   "male": 4786,
+   "children": 5564,
+   "known_age": 9749
+  }
+ },
+ "Argentina": {
+  "iso3": "ARG",
+  "population_covered": 176744,
+  "children_pct": 16.3,
+  "adults_pct": 77.3,
+  "elderly_pct": 6.4,
+  "female_pct": 50.0,
+  "male_pct": 50.0,
+  "women_and_children_pct": 51.6,
+  "under_5_pct": 3.4,
+  "girls": 923,
+  "boys": 1048,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 192,
+    "male": 217
+   },
+   {
+    "band": "5-11",
+    "female": 416,
+    "male": 510
+   },
+   {
+    "band": "12-17",
+    "female": 315,
+    "male": 321
+   },
+   {
+    "band": "18-59",
+    "female": 3907,
+    "male": 5464
+   },
+   {
+    "band": "60+",
+    "female": 383,
+    "male": 397
+   }
+  ],
+  "totals": {
+   "female": 88347,
+   "male": 88397,
+   "children": 1971,
+   "known_age": 12122
+  }
+ },
+ "Armenia": {
+  "iso3": "ARM",
+  "population_covered": 4335,
+  "children_pct": 13.9,
+  "adults_pct": 67.7,
+  "elderly_pct": 18.4,
+  "female_pct": 48.9,
+  "male_pct": 51.1,
+  "women_and_children_pct": 56.6,
+  "under_5_pct": 3.7,
+  "girls": 281,
+  "boys": 297,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 80,
+    "male": 76
+   },
+   {
+    "band": "5-11",
+    "female": 105,
+    "male": 97
+   },
+   {
+    "band": "12-17",
+    "female": 96,
+    "male": 124
+   },
+   {
+    "band": "18-59",
+    "female": 1346,
+    "male": 1475
+   },
+   {
+    "band": "60+",
+    "female": 433,
+    "male": 334
+   }
+  ],
+  "totals": {
+   "female": 2119,
+   "male": 2216,
+   "children": 578,
+   "known_age": 4166
+  }
+ },
+ "Azerbaijan": {
+  "iso3": "AZE",
+  "population_covered": 1710,
+  "children_pct": 31.6,
+  "adults_pct": 64.6,
+  "elderly_pct": 3.8,
+  "female_pct": 41.3,
+  "male_pct": 58.7,
+  "women_and_children_pct": 58.0,
+  "under_5_pct": 7.4,
+  "girls": 257,
+  "boys": 284,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 71,
+    "male": 56
+   },
+   {
+    "band": "5-11",
+    "female": 100,
+    "male": 134
+   },
+   {
+    "band": "12-17",
+    "female": 86,
+    "male": 94
+   },
+   {
+    "band": "18-59",
+    "female": 434,
+    "male": 670
+   },
+   {
+    "band": "60+",
+    "female": 16,
+    "male": 49
+   }
+  ],
+  "totals": {
+   "female": 707,
+   "male": 1003,
+   "children": 541,
+   "known_age": 1710
+  }
+ },
+ "Bangladesh": {
+  "iso3": "BGD",
+  "population_covered": 918955,
+  "children_pct": 52.4,
+  "adults_pct": 44.0,
+  "elderly_pct": 3.6,
+  "female_pct": 51.5,
+  "male_pct": 48.5,
+  "women_and_children_pct": 78.3,
+  "under_5_pct": 16.5,
+  "girls": 234745,
+  "boys": 247022,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 74275,
+    "male": 77459
+   },
+   {
+    "band": "5-11",
+    "female": 99810,
+    "male": 103520
+   },
+   {
+    "band": "12-17",
+    "female": 60660,
+    "male": 66043
+   },
+   {
+    "band": "18-59",
+    "female": 223673,
+    "male": 180638
+   },
+   {
+    "band": "60+",
+    "female": 14501,
+    "male": 18376
+   }
+  ],
+  "totals": {
+   "female": 472919,
+   "male": 446036,
+   "children": 481767,
+   "known_age": 918955
+  }
+ },
+ "Belarus": {
+  "iso3": "BLR",
+  "population_covered": 8814,
+  "children_pct": 31.8,
+  "adults_pct": 61.0,
+  "elderly_pct": 7.2,
+  "female_pct": 46.6,
+  "male_pct": 53.4,
+  "women_and_children_pct": 66.6,
+  "under_5_pct": 6.6,
+  "girls": 409,
+  "boys": 490,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 78,
+    "male": 108
+   },
+   {
+    "band": "5-11",
+    "female": 215,
+    "male": 252
+   },
+   {
+    "band": "12-17",
+    "female": 116,
+    "male": 130
+   },
+   {
+    "band": "18-59",
+    "female": 854,
+    "male": 873
+   },
+   {
+    "band": "60+",
+    "female": 131,
+    "male": 72
+   }
+  ],
+  "totals": {
+   "female": 4108,
+   "male": 4706,
+   "children": 899,
+   "known_age": 2829
+  }
+ },
+ "Benin": {
+  "iso3": "BEN",
+  "population_covered": 2242,
+  "children_pct": 28.9,
+  "adults_pct": 69.4,
+  "elderly_pct": 1.7,
+  "female_pct": 41.6,
+  "male_pct": 58.4,
+  "women_and_children_pct": 58.1,
+  "under_5_pct": 5.6,
+  "girls": 277,
+  "boys": 371,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 55,
+    "male": 70
+   },
+   {
+    "band": "5-11",
+    "female": 130,
+    "male": 172
+   },
+   {
+    "band": "12-17",
+    "female": 92,
+    "male": 129
+   },
+   {
+    "band": "18-59",
+    "female": 628,
+    "male": 929
+   },
+   {
+    "band": "60+",
+    "female": 27,
+    "male": 10
+   }
+  ],
+  "totals": {
+   "female": 932,
+   "male": 1310,
+   "children": 648,
+   "known_age": 2242
+  }
+ },
+ "Burkina Faso": {
+  "iso3": "BFA",
+  "population_covered": 1614399,
+  "children_pct": 61.5,
+  "adults_pct": 34.8,
+  "elderly_pct": 3.7,
+  "female_pct": 52.7,
+  "male_pct": 47.3,
+  "women_and_children_pct": 83.8,
+  "under_5_pct": 15.9,
+  "girls": 490716,
+  "boys": 501732,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 127603,
+    "male": 129500
+   },
+   {
+    "band": "5-11",
+    "female": 231029,
+    "male": 235986
+   },
+   {
+    "band": "12-17",
+    "female": 132084,
+    "male": 136246
+   },
+   {
+    "band": "18-59",
+    "female": 327734,
+    "male": 233707
+   },
+   {
+    "band": "60+",
+    "female": 32293,
+    "male": 28217
+   }
+  ],
+  "totals": {
+   "female": 850743,
+   "male": 763656,
+   "children": 992448,
+   "known_age": 1614399
+  }
+ },
+ "Burundi": {
+  "iso3": "BDI",
+  "population_covered": 172423,
+  "children_pct": 54.4,
+  "adults_pct": 43.4,
+  "elderly_pct": 2.3,
+  "female_pct": 51.5,
+  "male_pct": 48.5,
+  "women_and_children_pct": 78.7,
+  "under_5_pct": 18.5,
+  "girls": 46949,
+  "boys": 46731,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 15947,
+    "male": 16021
+   },
+   {
+    "band": "5-11",
+    "female": 17384,
+    "male": 17123
+   },
+   {
+    "band": "12-17",
+    "female": 13618,
+    "male": 13587
+   },
+   {
+    "band": "18-59",
+    "female": 39653,
+    "male": 35134
+   },
+   {
+    "band": "60+",
+    "female": 2253,
+    "male": 1643
+   }
+  ],
+  "totals": {
+   "female": 88880,
+   "male": 83543,
+   "children": 93680,
+   "known_age": 172363
+  }
+ },
+ "Cameroon": {
+  "iso3": "CMR",
+  "population_covered": 466470,
+  "children_pct": 55.2,
+  "adults_pct": 41.0,
+  "elderly_pct": 3.8,
+  "female_pct": 52.3,
+  "male_pct": 47.7,
+  "women_and_children_pct": 79.9,
+  "under_5_pct": 13.7,
+  "girls": 128666,
+  "boys": 128775,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 31540,
+    "male": 32575
+   },
+   {
+    "band": "5-11",
+    "female": 60958,
+    "male": 61053
+   },
+   {
+    "band": "12-17",
+    "female": 36168,
+    "male": 35147
+   },
+   {
+    "band": "18-59",
+    "female": 106891,
+    "male": 84561
+   },
+   {
+    "band": "60+",
+    "female": 8476,
+    "male": 9101
+   }
+  ],
+  "totals": {
+   "female": 244033,
+   "male": 222437,
+   "children": 257441,
+   "known_age": 466470
+  }
+ },
+ "Canada": {
+  "iso3": "CAN",
+  "population_covered": 114048,
+  "children_pct": 21.7,
+  "adults_pct": 74.6,
+  "elderly_pct": 3.7,
+  "female_pct": 44.2,
+  "male_pct": 55.8,
+  "women_and_children_pct": 55.2,
+  "under_5_pct": 5.2,
+  "girls": 11586,
+  "boys": 12451,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 2803,
+    "male": 2913
+   },
+   {
+    "band": "5-11",
+    "female": 5254,
+    "male": 5606
+   },
+   {
+    "band": "12-17",
+    "female": 3529,
+    "male": 3932
+   },
+   {
+    "band": "18-59",
+    "female": 34570,
+    "male": 47857
+   },
+   {
+    "band": "60+",
+    "female": 2423,
+    "male": 1647
+   }
+  ],
+  "totals": {
+   "female": 50439,
+   "male": 63609,
+   "children": 24037,
+   "known_age": 110534
+  }
+ },
+ "Central African Republic": {
+  "iso3": "CAF",
+  "population_covered": 707435,
+  "children_pct": 54.4,
+  "adults_pct": 42.5,
+  "elderly_pct": 3.1,
+  "female_pct": 59.8,
+  "male_pct": 40.2,
+  "women_and_children_pct": 79.2,
+  "under_5_pct": 12.9,
+  "girls": 4260,
+  "boys": 4253,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 1010,
+    "male": 1011
+   },
+   {
+    "band": "5-11",
+    "female": 2081,
+    "male": 2042
+   },
+   {
+    "band": "12-17",
+    "female": 1169,
+    "male": 1200
+   },
+   {
+    "band": "18-59",
+    "female": 3620,
+    "male": 3025
+   },
+   {
+    "band": "60+",
+    "female": 264,
+    "male": 222
+   }
+  ],
+  "totals": {
+   "female": 423218,
+   "male": 284217,
+   "children": 8513,
+   "known_age": 15644
+  }
+ },
+ "Chad": {
+  "iso3": "TCD",
+  "population_covered": 516201,
+  "children_pct": 53.6,
+  "adults_pct": 42.4,
+  "elderly_pct": 4.0,
+  "female_pct": 55.0,
+  "male_pct": 45.0,
+  "women_and_children_pct": 81.8,
+  "under_5_pct": 15.0,
+  "girls": 138394,
+  "boys": 138254,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 38462,
+    "male": 38926
+   },
+   {
+    "band": "5-11",
+    "female": 59240,
+    "male": 59863
+   },
+   {
+    "band": "12-17",
+    "female": 40692,
+    "male": 39465
+   },
+   {
+    "band": "18-59",
+    "female": 133123,
+    "male": 85544
+   },
+   {
+    "band": "60+",
+    "female": 12526,
+    "male": 8360
+   }
+  ],
+  "totals": {
+   "female": 284043,
+   "male": 232158,
+   "children": 276648,
+   "known_age": 516201
+  }
+ },
+ "Chile": {
+  "iso3": "CHL",
+  "population_covered": 514342,
+  "children_pct": 21.2,
+  "adults_pct": 75.8,
+  "elderly_pct": 2.9,
+  "female_pct": 49.6,
+  "male_pct": 50.4,
+  "women_and_children_pct": 62.2,
+  "under_5_pct": 3.7,
+  "girls": 1582,
+  "boys": 1406,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 265,
+    "male": 255
+   },
+   {
+    "band": "5-11",
+    "female": 860,
+    "male": 713
+   },
+   {
+    "band": "12-17",
+    "female": 457,
+    "male": 438
+   },
+   {
+    "band": "18-59",
+    "female": 5488,
+    "male": 5181
+   },
+   {
+    "band": "60+",
+    "female": 278,
+    "male": 136
+   }
+  ],
+  "totals": {
+   "female": 254983,
+   "male": 259359,
+   "children": 2988,
+   "known_age": 14071
+  }
+ },
+ "China": {
+  "iso3": "CHN",
+  "population_covered": 1114,
+  "children_pct": 18.6,
+  "adults_pct": 81.4,
+  "elderly_pct": 0.0,
+  "female_pct": 46.3,
+  "male_pct": 53.7,
+  "women_and_children_pct": 54.6,
+  "under_5_pct": 6.1,
+  "girls": 115,
+  "boys": 92,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 36,
+    "male": 32
+   },
+   {
+    "band": "5-11",
+    "female": 60,
+    "male": 26
+   },
+   {
+    "band": "12-17",
+    "female": 19,
+    "male": 34
+   },
+   {
+    "band": "18-59",
+    "female": 401,
+    "male": 506
+   },
+   {
+    "band": "60+",
+    "female": 0,
+    "male": 0
+   }
+  ],
+  "totals": {
+   "female": 516,
+   "male": 598,
+   "children": 207,
+   "known_age": 1114
+  }
+ },
+ "Colombia": {
+  "iso3": "COL",
+  "population_covered": 8709499,
+  "children_pct": 24.0,
+  "adults_pct": 65.7,
+  "elderly_pct": 10.4,
+  "female_pct": 49.1,
+  "male_pct": 50.9,
+  "women_and_children_pct": 61.5,
+  "under_5_pct": 3.4,
+  "girls": 981707,
+  "boys": 1041422,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 138820,
+    "male": 151055
+   },
+   {
+    "band": "5-11",
+    "female": 378327,
+    "male": 401226
+   },
+   {
+    "band": "12-17",
+    "female": 464560,
+    "male": 489141
+   },
+   {
+    "band": "18-59",
+    "female": 2736176,
+    "male": 2811315
+   },
+   {
+    "band": "60+",
+    "female": 433222,
+    "male": 443215
+   }
+  ],
+  "totals": {
+   "female": 4279242,
+   "male": 4430257,
+   "children": 2023129,
+   "known_age": 8447057
+  }
+ },
+ "Congo, Republic of": {
+  "iso3": "COG",
+  "population_covered": 64641,
+  "children_pct": 46.3,
+  "adults_pct": 50.7,
+  "elderly_pct": 3.0,
+  "female_pct": 49.2,
+  "male_pct": 50.8,
+  "women_and_children_pct": 72.2,
+  "under_5_pct": 9.1,
+  "girls": 15057,
+  "boys": 14877,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 2926,
+    "male": 2935
+   },
+   {
+    "band": "5-11",
+    "female": 7175,
+    "male": 6955
+   },
+   {
+    "band": "12-17",
+    "female": 4956,
+    "male": 4987
+   },
+   {
+    "band": "18-59",
+    "female": 15787,
+    "male": 16978
+   },
+   {
+    "band": "60+",
+    "female": 964,
+    "male": 978
+   }
+  ],
+  "totals": {
+   "female": 31808,
+   "male": 32833,
+   "children": 29934,
+   "known_age": 64641
+  }
+ },
+ "Costa Rica": {
+  "iso3": "CRI",
+  "population_covered": 141311,
+  "children_pct": 7.3,
+  "adults_pct": 81.2,
+  "elderly_pct": 11.5,
+  "female_pct": 56.1,
+  "male_pct": 43.9,
+  "women_and_children_pct": 59.6,
+  "under_5_pct": 0.6,
+  "girls": 5398,
+  "boys": 4897,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 520,
+    "male": 314
+   },
+   {
+    "band": "5-11",
+    "female": 2626,
+    "male": 1941
+   },
+   {
+    "band": "12-17",
+    "female": 2252,
+    "male": 2642
+   },
+   {
+    "band": "18-59",
+    "female": 64586,
+    "male": 50152
+   },
+   {
+    "band": "60+",
+    "female": 9299,
+    "male": 6979
+   }
+  ],
+  "totals": {
+   "female": 79283,
+   "male": 62028,
+   "children": 10295,
+   "known_age": 141311
+  }
+ },
+ "Croatia": {
+  "iso3": "HRV",
+  "population_covered": 5007,
+  "children_pct": 8.3,
+  "adults_pct": 72.6,
+  "elderly_pct": 19.0,
+  "female_pct": 45.2,
+  "male_pct": 54.8,
+  "women_and_children_pct": 49.8,
+  "under_5_pct": 1.6,
+  "girls": 158,
+  "boys": 198,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 29,
+    "male": 41
+   },
+   {
+    "band": "5-11",
+    "female": 69,
+    "male": 86
+   },
+   {
+    "band": "12-17",
+    "female": 60,
+    "male": 71
+   },
+   {
+    "band": "18-59",
+    "female": 1364,
+    "male": 1741
+   },
+   {
+    "band": "60+",
+    "female": 407,
+    "male": 407
+   }
+  ],
+  "totals": {
+   "female": 2265,
+   "male": 2742,
+   "children": 356,
+   "known_age": 4275
+  }
+ },
+ "DR Congo": {
+  "iso3": "COD",
+  "population_covered": 526668,
+  "children_pct": 61.7,
+  "adults_pct": 35.7,
+  "elderly_pct": 2.6,
+  "female_pct": 51.9,
+  "male_pct": 48.1,
+  "women_and_children_pct": 82.6,
+  "under_5_pct": 17.6,
+  "girls": 163734,
+  "boys": 161431,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 48301,
+    "male": 44194
+   },
+   {
+    "band": "5-11",
+    "female": 72038,
+    "male": 72869
+   },
+   {
+    "band": "12-17",
+    "female": 43395,
+    "male": 44368
+   },
+   {
+    "band": "18-59",
+    "female": 102764,
+    "male": 85292
+   },
+   {
+    "band": "60+",
+    "female": 7064,
+    "male": 6383
+   }
+  ],
+  "totals": {
+   "female": 273562,
+   "male": 253106,
+   "children": 325165,
+   "known_age": 526668
+  }
+ },
+ "Djibouti": {
+  "iso3": "DJI",
+  "population_covered": 34695,
+  "children_pct": 42.0,
+  "adults_pct": 54.2,
+  "elderly_pct": 3.8,
+  "female_pct": 46.9,
+  "male_pct": 53.1,
+  "women_and_children_pct": 68.4,
+  "under_5_pct": 9.6,
+  "girls": 7119,
+  "boys": 7438,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 1625,
+    "male": 1702
+   },
+   {
+    "band": "5-11",
+    "female": 3101,
+    "male": 3184
+   },
+   {
+    "band": "12-17",
+    "female": 2393,
+    "male": 2552
+   },
+   {
+    "band": "18-59",
+    "female": 8506,
+    "male": 10301
+   },
+   {
+    "band": "60+",
+    "female": 658,
+    "male": 673
+   }
+  ],
+  "totals": {
+   "female": 16283,
+   "male": 18412,
+   "children": 14557,
+   "known_age": 34695
+  }
+ },
+ "Ecuador": {
+  "iso3": "ECU",
+  "population_covered": 567622,
+  "children_pct": 12.9,
+  "adults_pct": 77.8,
+  "elderly_pct": 9.3,
+  "female_pct": 53.2,
+  "male_pct": 46.8,
+  "women_and_children_pct": 53.9,
+  "under_5_pct": 1.0,
+  "girls": 4037,
+  "boys": 4197,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 300,
+    "male": 334
+   },
+   {
+    "band": "5-11",
+    "female": 1122,
+    "male": 1235
+   },
+   {
+    "band": "12-17",
+    "female": 2615,
+    "male": 2628
+   },
+   {
+    "band": "18-59",
+    "female": 23601,
+    "male": 25970
+   },
+   {
+    "band": "60+",
+    "female": 2528,
+    "male": 3407
+   }
+  ],
+  "totals": {
+   "female": 301990,
+   "male": 265632,
+   "children": 8234,
+   "known_age": 63740
+  }
+ },
+ "Egypt": {
+  "iso3": "EGY",
+  "population_covered": 341083,
+  "children_pct": 37.6,
+  "adults_pct": 58.4,
+  "elderly_pct": 4.1,
+  "female_pct": 48.6,
+  "male_pct": 51.4,
+  "women_and_children_pct": 67.8,
+  "under_5_pct": 9.0,
+  "girls": 48939,
+  "boys": 52924,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 11822,
+    "male": 12442
+   },
+   {
+    "band": "5-11",
+    "female": 20368,
+    "male": 21530
+   },
+   {
+    "band": "12-17",
+    "female": 16749,
+    "male": 18952
+   },
+   {
+    "band": "18-59",
+    "female": 76199,
+    "male": 81981
+   },
+   {
+    "band": "60+",
+    "female": 5631,
+    "male": 5407
+   }
+  ],
+  "totals": {
+   "female": 165770,
+   "male": 175313,
+   "children": 101863,
+   "known_age": 271081
+  }
+ },
+ "Eswatini": {
+  "iso3": "SWZ",
+  "population_covered": 1551,
+  "children_pct": 31.8,
+  "adults_pct": 67.2,
+  "elderly_pct": 1.0,
+  "female_pct": 40.6,
+  "male_pct": 59.4,
+  "women_and_children_pct": 54.3,
+  "under_5_pct": 6.9,
+  "girls": 280,
+  "boys": 213,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 64,
+    "male": 43
+   },
+   {
+    "band": "5-11",
+    "female": 118,
+    "male": 87
+   },
+   {
+    "band": "12-17",
+    "female": 98,
+    "male": 83
+   },
+   {
+    "band": "18-59",
+    "female": 349,
+    "male": 694
+   },
+   {
+    "band": "60+",
+    "female": 0,
+    "male": 15
+   }
+  ],
+  "totals": {
+   "female": 629,
+   "male": 922,
+   "children": 493,
+   "known_age": 1551
+  }
+ },
+ "Ethiopia": {
+  "iso3": "ETH",
+  "population_covered": 823953,
+  "children_pct": 59.8,
+  "adults_pct": 38.0,
+  "elderly_pct": 2.2,
+  "female_pct": 52.8,
+  "male_pct": 47.2,
+  "women_and_children_pct": 83.5,
+  "under_5_pct": 15.6,
+  "girls": 240020,
+  "boys": 252577,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 62746,
+    "male": 65397
+   },
+   {
+    "band": "5-11",
+    "female": 104913,
+    "male": 106854
+   },
+   {
+    "band": "12-17",
+    "female": 72361,
+    "male": 80326
+   },
+   {
+    "band": "18-59",
+    "female": 184767,
+    "male": 128618
+   },
+   {
+    "band": "60+",
+    "female": 10293,
+    "male": 7618
+   }
+  ],
+  "totals": {
+   "female": 435140,
+   "male": 388813,
+   "children": 492597,
+   "known_age": 823893
+  }
+ },
+ "Gambia": {
+  "iso3": "GMB",
+  "population_covered": 4625,
+  "children_pct": 40.6,
+  "adults_pct": 51.4,
+  "elderly_pct": 8.0,
+  "female_pct": 51.1,
+  "male_pct": 48.9,
+  "women_and_children_pct": 72.1,
+  "under_5_pct": 3.5,
+  "girls": 907,
+  "boys": 970,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 76,
+    "male": 87
+   },
+   {
+    "band": "5-11",
+    "female": 410,
+    "male": 435
+   },
+   {
+    "band": "12-17",
+    "female": 421,
+    "male": 448
+   },
+   {
+    "band": "18-59",
+    "female": 1287,
+    "male": 1092
+   },
+   {
+    "band": "60+",
+    "female": 171,
+    "male": 198
+   }
+  ],
+  "totals": {
+   "female": 2365,
+   "male": 2260,
+   "children": 1877,
+   "known_age": 4625
+  }
+ },
+ "Georgia": {
+  "iso3": "GEO",
+  "population_covered": 293733,
+  "children_pct": 28.0,
+  "adults_pct": 51.9,
+  "elderly_pct": 20.2,
+  "female_pct": 52.9,
+  "male_pct": 47.1,
+  "women_and_children_pct": 67.3,
+  "under_5_pct": 6.5,
+  "girls": 39861,
+  "boys": 42270,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 9355,
+    "male": 9858
+   },
+   {
+    "band": "5-11",
+    "female": 18028,
+    "male": 18884
+   },
+   {
+    "band": "12-17",
+    "female": 12478,
+    "male": 13528
+   },
+   {
+    "band": "18-59",
+    "female": 79129,
+    "male": 73201
+   },
+   {
+    "band": "60+",
+    "female": 36480,
+    "male": 22792
+   }
+  ],
+  "totals": {
+   "female": 155470,
+   "male": 138263,
+   "children": 82131,
+   "known_age": 293733
+  }
+ },
+ "Germany": {
+  "iso3": "DEU",
+  "population_covered": 1505632,
+  "children_pct": 32.7,
+  "adults_pct": 63.8,
+  "elderly_pct": 3.6,
+  "female_pct": 39.2,
+  "male_pct": 60.8,
+  "women_and_children_pct": 56.3,
+  "under_5_pct": 9.4,
+  "girls": 233552,
+  "boys": 258106,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 69709,
+    "male": 72295
+   },
+   {
+    "band": "5-11",
+    "female": 100046,
+    "male": 108573
+   },
+   {
+    "band": "12-17",
+    "female": 63797,
+    "male": 77238
+   },
+   {
+    "band": "18-59",
+    "female": 330374,
+    "male": 630088
+   },
+   {
+    "band": "60+",
+    "female": 25598,
+    "male": 27878
+   }
+  ],
+  "totals": {
+   "female": 589534,
+   "male": 916098,
+   "children": 491658,
+   "known_age": 1505596
+  }
+ },
+ "Ghana": {
+  "iso3": "GHA",
+  "population_covered": 13773,
+  "children_pct": 31.5,
+  "adults_pct": 64.6,
+  "elderly_pct": 4.0,
+  "female_pct": 47.0,
+  "male_pct": 53.0,
+  "women_and_children_pct": 62.8,
+  "under_5_pct": 5.0,
+  "girls": 2157,
+  "boys": 2175,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 340,
+    "male": 354
+   },
+   {
+    "band": "5-11",
+    "female": 950,
+    "male": 976
+   },
+   {
+    "band": "12-17",
+    "female": 867,
+    "male": 845
+   },
+   {
+    "band": "18-59",
+    "female": 4003,
+    "male": 4890
+   },
+   {
+    "band": "60+",
+    "female": 312,
+    "male": 236
+   }
+  ],
+  "totals": {
+   "female": 6472,
+   "male": 7301,
+   "children": 4332,
+   "known_age": 13773
+  }
+ },
+ "Guatemala": {
+  "iso3": "GTM",
+  "population_covered": 150640,
+  "children_pct": 23.3,
+  "adults_pct": 75.3,
+  "elderly_pct": 1.3,
+  "female_pct": 24.5,
+  "male_pct": 75.5,
+  "women_and_children_pct": 40.6,
+  "under_5_pct": 2.9,
+  "girls": 10505,
+  "boys": 24306,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 1967,
+    "male": 2335
+   },
+   {
+    "band": "5-11",
+    "female": 3546,
+    "male": 4729
+   },
+   {
+    "band": "12-17",
+    "female": 4992,
+    "male": 17242
+   },
+   {
+    "band": "18-59",
+    "female": 25081,
+    "male": 87316
+   },
+   {
+    "band": "60+",
+    "female": 657,
+    "male": 1306
+   }
+  ],
+  "totals": {
+   "female": 36876,
+   "male": 113764,
+   "children": 34811,
+   "known_age": 149171
+  }
+ },
+ "Guinea": {
+  "iso3": "GIN",
+  "population_covered": 6214,
+  "children_pct": 36.2,
+  "adults_pct": 61.8,
+  "elderly_pct": 2.0,
+  "female_pct": 51.1,
+  "male_pct": 48.9,
+  "women_and_children_pct": 68.8,
+  "under_5_pct": 8.4,
+  "girls": 1150,
+  "boys": 1101,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 261,
+    "male": 258
+   },
+   {
+    "band": "5-11",
+    "female": 520,
+    "male": 430
+   },
+   {
+    "band": "12-17",
+    "female": 369,
+    "male": 413
+   },
+   {
+    "band": "18-59",
+    "female": 1953,
+    "male": 1886
+   },
+   {
+    "band": "60+",
+    "female": 74,
+    "male": 50
+   }
+  ],
+  "totals": {
+   "female": 3177,
+   "male": 3037,
+   "children": 2251,
+   "known_age": 6214
+  }
+ },
+ "Guinea-Bissau": {
+  "iso3": "GNB",
+  "population_covered": 1876,
+  "children_pct": 45.4,
+  "adults_pct": 41.3,
+  "elderly_pct": 13.4,
+  "female_pct": 54.5,
+  "male_pct": 45.5,
+  "women_and_children_pct": 76.7,
+  "under_5_pct": 0.0,
+  "girls": 435,
+  "boys": 416,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 0,
+    "male": 0
+   },
+   {
+    "band": "5-11",
+    "female": 266,
+    "male": 223
+   },
+   {
+    "band": "12-17",
+    "female": 169,
+    "male": 193
+   },
+   {
+    "band": "18-59",
+    "female": 431,
+    "male": 343
+   },
+   {
+    "band": "60+",
+    "female": 157,
+    "male": 94
+   }
+  ],
+  "totals": {
+   "female": 1023,
+   "male": 853,
+   "children": 851,
+   "known_age": 1876
+  }
+ },
+ "Honduras": {
+  "iso3": "HND",
+  "population_covered": 247090,
+  "children_pct": 42.8,
+  "adults_pct": 51.0,
+  "elderly_pct": 6.2,
+  "female_pct": 54.6,
+  "male_pct": 45.4,
+  "women_and_children_pct": 75.0,
+  "under_5_pct": 10.9,
+  "girls": 55140,
+  "boys": 50494,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 12746,
+    "male": 14195
+   },
+   {
+    "band": "5-11",
+    "female": 24111,
+    "male": 19506
+   },
+   {
+    "band": "12-17",
+    "female": 18283,
+    "male": 16793
+   },
+   {
+    "band": "18-59",
+    "female": 71502,
+    "male": 54417
+   },
+   {
+    "band": "60+",
+    "female": 8078,
+    "male": 7227
+   }
+  ],
+  "totals": {
+   "female": 134813,
+   "male": 112277,
+   "children": 105634,
+   "known_age": 246858
+  }
+ },
+ "India": {
+  "iso3": "IND",
+  "population_covered": 103518,
+  "children_pct": 37.7,
+  "adults_pct": 58.7,
+  "elderly_pct": 3.5,
+  "female_pct": 49.2,
+  "male_pct": 50.8,
+  "women_and_children_pct": 66.0,
+  "under_5_pct": 9.1,
+  "girls": 8162,
+  "boys": 8774,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 2018,
+    "male": 2070
+   },
+   {
+    "band": "5-11",
+    "female": 3492,
+    "male": 3783
+   },
+   {
+    "band": "12-17",
+    "female": 2652,
+    "male": 2921
+   },
+   {
+    "band": "18-59",
+    "female": 11904,
+    "male": 14440
+   },
+   {
+    "band": "60+",
+    "female": 772,
+    "male": 818
+   }
+  ],
+  "totals": {
+   "female": 50930,
+   "male": 52588,
+   "children": 16936,
+   "known_age": 44870
+  }
+ },
+ "Indonesia": {
+  "iso3": "IDN",
+  "population_covered": 13268,
+  "children_pct": 27.5,
+  "adults_pct": 71.1,
+  "elderly_pct": 1.4,
+  "female_pct": 32.7,
+  "male_pct": 67.3,
+  "women_and_children_pct": 47.1,
+  "under_5_pct": 8.0,
+  "girls": 1741,
+  "boys": 1904,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 508,
+    "male": 553
+   },
+   {
+    "band": "5-11",
+    "female": 708,
+    "male": 777
+   },
+   {
+    "band": "12-17",
+    "female": 525,
+    "male": 574
+   },
+   {
+    "band": "18-59",
+    "female": 2496,
+    "male": 6936
+   },
+   {
+    "band": "60+",
+    "female": 104,
+    "male": 87
+   }
+  ],
+  "totals": {
+   "female": 4341,
+   "male": 8927,
+   "children": 3645,
+   "known_age": 13268
+  }
+ },
+ "Iran": {
+  "iso3": "IRN",
+  "population_covered": 778113,
+  "children_pct": 38.7,
+  "adults_pct": 55.8,
+  "elderly_pct": 5.5,
+  "female_pct": 47.6,
+  "male_pct": 52.4,
+  "women_and_children_pct": 67.5,
+  "under_5_pct": 12.7,
+  "girls": 146807,
+  "boys": 154691,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 48430,
+    "male": 50707
+   },
+   {
+    "band": "5-11",
+    "female": 60438,
+    "male": 63521
+   },
+   {
+    "band": "12-17",
+    "female": 37939,
+    "male": 40463
+   },
+   {
+    "band": "18-59",
+    "female": 205469,
+    "male": 228495
+   },
+   {
+    "band": "60+",
+    "female": 18273,
+    "male": 24378
+   }
+  ],
+  "totals": {
+   "female": 370549,
+   "male": 407564,
+   "children": 301498,
+   "known_age": 778113
+  }
+ },
+ "Iraq": {
+  "iso3": "IRQ",
+  "population_covered": 292310,
+  "children_pct": 42.8,
+  "adults_pct": 53.1,
+  "elderly_pct": 4.0,
+  "female_pct": 47.8,
+  "male_pct": 52.2,
+  "women_and_children_pct": 69.8,
+  "under_5_pct": 14.1,
+  "girls": 60782,
+  "boys": 64396,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 20028,
+    "male": 21103
+   },
+   {
+    "band": "5-11",
+    "female": 26095,
+    "male": 27291
+   },
+   {
+    "band": "12-17",
+    "female": 14659,
+    "male": 16002
+   },
+   {
+    "band": "18-59",
+    "female": 72794,
+    "male": 82532
+   },
+   {
+    "band": "60+",
+    "female": 6086,
+    "male": 5720
+   }
+  ],
+  "totals": {
+   "female": 139662,
+   "male": 152648,
+   "children": 125178,
+   "known_age": 292310
+  }
+ },
+ "Ireland": {
+  "iso3": "IRL",
+  "population_covered": 14447,
+  "children_pct": 21.5,
+  "adults_pct": 76.7,
+  "elderly_pct": 1.8,
+  "female_pct": 39.6,
+  "male_pct": 60.4,
+  "women_and_children_pct": 50.8,
+  "under_5_pct": 5.3,
+  "girls": 1498,
+  "boys": 1610,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 362,
+    "male": 397
+   },
+   {
+    "band": "5-11",
+    "female": 671,
+    "male": 682
+   },
+   {
+    "band": "12-17",
+    "female": 465,
+    "male": 531
+   },
+   {
+    "band": "18-59",
+    "female": 4062,
+    "male": 6998
+   },
+   {
+    "band": "60+",
+    "female": 154,
+    "male": 103
+   }
+  ],
+  "totals": {
+   "female": 5714,
+   "male": 8733,
+   "children": 3108,
+   "known_age": 14425
+  }
+ },
+ "Ivory Coast": {
+  "iso3": "CIV",
+  "population_covered": 958230,
+  "children_pct": 54.4,
+  "adults_pct": 41.6,
+  "elderly_pct": 3.9,
+  "female_pct": 53.6,
+  "male_pct": 46.4,
+  "women_and_children_pct": 81.4,
+  "under_5_pct": 24.4,
+  "girls": 254339,
+  "boys": 267115,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 115682,
+    "male": 118296
+   },
+   {
+    "band": "5-11",
+    "female": 85976,
+    "male": 101679
+   },
+   {
+    "band": "12-17",
+    "female": 52681,
+    "male": 47140
+   },
+   {
+    "band": "18-59",
+    "female": 242544,
+    "male": 156392
+   },
+   {
+    "band": "60+",
+    "female": 16441,
+    "male": 21399
+   }
+  ],
+  "totals": {
+   "female": 513324,
+   "male": 444906,
+   "children": 521454,
+   "known_age": 958230
+  }
+ },
+ "Jordan": {
+  "iso3": "JOR",
+  "population_covered": 761051,
+  "children_pct": 46.8,
+  "adults_pct": 48.4,
+  "elderly_pct": 4.8,
+  "female_pct": 49.5,
+  "male_pct": 50.5,
+  "women_and_children_pct": 73.5,
+  "under_5_pct": 12.6,
+  "girls": 173311,
+  "boys": 182607,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 46737,
+    "male": 48859
+   },
+   {
+    "band": "5-11",
+    "female": 73444,
+    "male": 77720
+   },
+   {
+    "band": "12-17",
+    "female": 53130,
+    "male": 56028
+   },
+   {
+    "band": "18-59",
+    "female": 182196,
+    "male": 186128
+   },
+   {
+    "band": "60+",
+    "female": 20889,
+    "male": 15920
+   }
+  ],
+  "totals": {
+   "female": 376396,
+   "male": 384655,
+   "children": 355918,
+   "known_age": 761051
+  }
+ },
+ "Kenya": {
+  "iso3": "KEN",
+  "population_covered": 540049,
+  "children_pct": 53.3,
+  "adults_pct": 44.0,
+  "elderly_pct": 2.7,
+  "female_pct": 48.8,
+  "male_pct": 51.2,
+  "women_and_children_pct": 76.7,
+  "under_5_pct": 14.0,
+  "girls": 137513,
+  "boys": 150555,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 36839,
+    "male": 38732
+   },
+   {
+    "band": "5-11",
+    "female": 56657,
+    "male": 60429
+   },
+   {
+    "band": "12-17",
+    "female": 44017,
+    "male": 51394
+   },
+   {
+    "band": "18-59",
+    "female": 118288,
+    "male": 119164
+   },
+   {
+    "band": "60+",
+    "female": 7915,
+    "male": 6614
+   }
+  ],
+  "totals": {
+   "female": 263716,
+   "male": 276333,
+   "children": 288068,
+   "known_age": 540049
+  }
+ },
+ "Kuwait": {
+  "iso3": "KWT",
+  "population_covered": 93821,
+  "children_pct": 25.9,
+  "adults_pct": 65.9,
+  "elderly_pct": 8.2,
+  "female_pct": 50.0,
+  "male_pct": 50.0,
+  "women_and_children_pct": 64.0,
+  "under_5_pct": 2.9,
+  "girls": 223,
+  "boys": 248,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 33,
+    "male": 20
+   },
+   {
+    "band": "5-11",
+    "female": 76,
+    "male": 93
+   },
+   {
+    "band": "12-17",
+    "female": 114,
+    "male": 135
+   },
+   {
+    "band": "18-59",
+    "female": 617,
+    "male": 583
+   },
+   {
+    "band": "60+",
+    "female": 77,
+    "male": 73
+   }
+  ],
+  "totals": {
+   "female": 46917,
+   "male": 46904,
+   "children": 471,
+   "known_age": 1821
+  }
+ },
+ "Kyrgyzstan": {
+  "iso3": "KGZ",
+  "population_covered": 1003,
+  "children_pct": 36.4,
+  "adults_pct": 60.3,
+  "elderly_pct": 3.3,
+  "female_pct": 44.0,
+  "male_pct": 56.0,
+  "women_and_children_pct": 63.7,
+  "under_5_pct": 8.1,
+  "girls": 167,
+  "boys": 198,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 37,
+    "male": 44
+   },
+   {
+    "band": "5-11",
+    "female": 72,
+    "male": 92
+   },
+   {
+    "band": "12-17",
+    "female": 58,
+    "male": 62
+   },
+   {
+    "band": "18-59",
+    "female": 259,
+    "male": 346
+   },
+   {
+    "band": "60+",
+    "female": 15,
+    "male": 18
+   }
+  ],
+  "totals": {
+   "female": 441,
+   "male": 562,
+   "children": 365,
+   "known_age": 1003
+  }
+ },
+ "Lebanon": {
+  "iso3": "LBN",
+  "population_covered": 868919,
+  "children_pct": 53.7,
+  "adults_pct": 43.6,
+  "elderly_pct": 2.7,
+  "female_pct": 52.2,
+  "male_pct": 47.8,
+  "women_and_children_pct": 79.6,
+  "under_5_pct": 12.6,
+  "girls": 228677,
+  "boys": 238209,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 53591,
+    "male": 56211
+   },
+   {
+    "band": "5-11",
+    "female": 104373,
+    "male": 108305
+   },
+   {
+    "band": "12-17",
+    "female": 70713,
+    "male": 73693
+   },
+   {
+    "band": "18-59",
+    "female": 211641,
+    "male": 166906
+   },
+   {
+    "band": "60+",
+    "female": 13158,
+    "male": 10328
+   }
+  ],
+  "totals": {
+   "female": 453476,
+   "male": 415443,
+   "children": 466886,
+   "known_age": 868919
+  }
+ },
+ "Liberia": {
+  "iso3": "LBR",
+  "population_covered": 17987,
+  "children_pct": 49.9,
+  "adults_pct": 45.5,
+  "elderly_pct": 4.6,
+  "female_pct": 52.2,
+  "male_pct": 47.8,
+  "women_and_children_pct": 77.2,
+  "under_5_pct": 12.2,
+  "girls": 4500,
+  "boys": 4484,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 1086,
+    "male": 1103
+   },
+   {
+    "band": "5-11",
+    "female": 1968,
+    "male": 1967
+   },
+   {
+    "band": "12-17",
+    "female": 1446,
+    "male": 1414
+   },
+   {
+    "band": "18-59",
+    "female": 4375,
+    "male": 3801
+   },
+   {
+    "band": "60+",
+    "female": 523,
+    "male": 304
+   }
+  ],
+  "totals": {
+   "female": 9398,
+   "male": 8589,
+   "children": 8984,
+   "known_age": 17987
+  }
+ },
+ "Libya": {
+  "iso3": "LBY",
+  "population_covered": 39882,
+  "children_pct": 35.5,
+  "adults_pct": 61.1,
+  "elderly_pct": 3.4,
+  "female_pct": 35.3,
+  "male_pct": 64.7,
+  "women_and_children_pct": 55.1,
+  "under_5_pct": 9.6,
+  "girls": 6229,
+  "boys": 7910,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 1869,
+    "male": 1973
+   },
+   {
+    "band": "5-11",
+    "female": 2606,
+    "male": 2362
+   },
+   {
+    "band": "12-17",
+    "female": 1754,
+    "male": 3575
+   },
+   {
+    "band": "18-59",
+    "female": 7343,
+    "male": 17042
+   },
+   {
+    "band": "60+",
+    "female": 494,
+    "male": 864
+   }
+  ],
+  "totals": {
+   "female": 14066,
+   "male": 25816,
+   "children": 14139,
+   "known_age": 39882
+  }
+ },
+ "Malawi": {
+  "iso3": "MWI",
+  "population_covered": 52673,
+  "children_pct": 48.7,
+  "adults_pct": 49.9,
+  "elderly_pct": 1.4,
+  "female_pct": 45.3,
+  "male_pct": 54.7,
+  "women_and_children_pct": 70.0,
+  "under_5_pct": 16.0,
+  "girls": 12648,
+  "boys": 13010,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 4217,
+    "male": 4216
+   },
+   {
+    "band": "5-11",
+    "female": 5009,
+    "male": 5041
+   },
+   {
+    "band": "12-17",
+    "female": 3422,
+    "male": 3753
+   },
+   {
+    "band": "18-59",
+    "female": 10776,
+    "male": 15526
+   },
+   {
+    "band": "60+",
+    "female": 421,
+    "male": 292
+   }
+  ],
+  "totals": {
+   "female": 23845,
+   "male": 28828,
+   "children": 25658,
+   "known_age": 52673
+  }
+ },
+ "Malaysia": {
+  "iso3": "MYS",
+  "population_covered": 181458,
+  "children_pct": 25.5,
+  "adults_pct": 73.2,
+  "elderly_pct": 1.3,
+  "female_pct": 32.8,
+  "male_pct": 67.2,
+  "women_and_children_pct": 46.0,
+  "under_5_pct": 8.5,
+  "girls": 22185,
+  "boys": 24028,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 7371,
+    "male": 8000
+   },
+   {
+    "band": "5-11",
+    "female": 10612,
+    "male": 10905
+   },
+   {
+    "band": "12-17",
+    "female": 4202,
+    "male": 5123
+   },
+   {
+    "band": "18-59",
+    "female": 36324,
+    "male": 96524
+   },
+   {
+    "band": "60+",
+    "female": 965,
+    "male": 1432
+   }
+  ],
+  "totals": {
+   "female": 59474,
+   "male": 121984,
+   "children": 46213,
+   "known_age": 181458
+  }
+ },
+ "Mali": {
+  "iso3": "MLI",
+  "population_covered": 479605,
+  "children_pct": 57.1,
+  "adults_pct": 39.2,
+  "elderly_pct": 3.7,
+  "female_pct": 54.6,
+  "male_pct": 45.4,
+  "women_and_children_pct": 81.0,
+  "under_5_pct": 18.1,
+  "girls": 15510,
+  "boys": 14497,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 4832,
+    "male": 4709
+   },
+   {
+    "band": "5-11",
+    "female": 6783,
+    "male": 6340
+   },
+   {
+    "band": "12-17",
+    "female": 3895,
+    "male": 3448
+   },
+   {
+    "band": "18-59",
+    "female": 11621,
+    "male": 8992
+   },
+   {
+    "band": "60+",
+    "female": 950,
+    "male": 999
+   }
+  ],
+  "totals": {
+   "female": 261916,
+   "male": 217689,
+   "children": 30007,
+   "known_age": 52569
+  }
+ },
+ "Mauritania": {
+  "iso3": "MRT",
+  "population_covered": 79311,
+  "children_pct": 56.2,
+  "adults_pct": 40.0,
+  "elderly_pct": 3.8,
+  "female_pct": 52.5,
+  "male_pct": 47.5,
+  "women_and_children_pct": 80.0,
+  "under_5_pct": 17.4,
+  "girls": 22801,
+  "boys": 21763,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 7000,
+    "male": 6779
+   },
+   {
+    "band": "5-11",
+    "female": 9699,
+    "male": 9353
+   },
+   {
+    "band": "12-17",
+    "female": 6102,
+    "male": 5631
+   },
+   {
+    "band": "18-59",
+    "female": 17297,
+    "male": 14409
+   },
+   {
+    "band": "60+",
+    "female": 1566,
+    "male": 1475
+   }
+  ],
+  "totals": {
+   "female": 41664,
+   "male": 37647,
+   "children": 44564,
+   "known_age": 79311
+  }
+ },
+ "Mexico": {
+  "iso3": "MEX",
+  "population_covered": 230598,
+  "children_pct": 25.0,
+  "adults_pct": 73.9,
+  "elderly_pct": 1.2,
+  "female_pct": 42.3,
+  "male_pct": 57.7,
+  "women_and_children_pct": 55.2,
+  "under_5_pct": 10.0,
+  "girls": 27774,
+  "boys": 29849,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 11409,
+    "male": 11571
+   },
+   {
+    "band": "5-11",
+    "female": 10277,
+    "male": 10796
+   },
+   {
+    "band": "12-17",
+    "female": 6088,
+    "male": 7482
+   },
+   {
+    "band": "18-59",
+    "female": 68286,
+    "male": 102024
+   },
+   {
+    "band": "60+",
+    "female": 1390,
+    "male": 1275
+   }
+  ],
+  "totals": {
+   "female": 97450,
+   "male": 133148,
+   "children": 57623,
+   "known_age": 230598
+  }
+ },
+ "Moldova": {
+  "iso3": "MDA",
+  "population_covered": 2314,
+  "children_pct": 2.6,
+  "adults_pct": 74.1,
+  "elderly_pct": 23.3,
+  "female_pct": 54.1,
+  "male_pct": 45.9,
+  "women_and_children_pct": 55.4,
+  "under_5_pct": 0.0,
+  "girls": 29,
+  "boys": 31,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 0,
+    "male": 0
+   },
+   {
+    "band": "5-11",
+    "female": 19,
+    "male": 22
+   },
+   {
+    "band": "12-17",
+    "female": 10,
+    "male": 9
+   },
+   {
+    "band": "18-59",
+    "female": 914,
+    "male": 801
+   },
+   {
+    "band": "60+",
+    "female": 309,
+    "male": 230
+   }
+  ],
+  "totals": {
+   "female": 1252,
+   "male": 1062,
+   "children": 60,
+   "known_age": 2314
+  }
+ },
+ "Morocco": {
+  "iso3": "MAR",
+  "population_covered": 18228,
+  "children_pct": 27.8,
+  "adults_pct": 71.0,
+  "elderly_pct": 1.3,
+  "female_pct": 28.1,
+  "male_pct": 71.9,
+  "women_and_children_pct": 45.6,
+  "under_5_pct": 7.8,
+  "girls": 1859,
+  "boys": 3201,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 689,
+    "male": 729
+   },
+   {
+    "band": "5-11",
+    "female": 696,
+    "male": 674
+   },
+   {
+    "band": "12-17",
+    "female": 474,
+    "male": 1798
+   },
+   {
+    "band": "18-59",
+    "female": 3171,
+    "male": 9763
+   },
+   {
+    "band": "60+",
+    "female": 90,
+    "male": 144
+   }
+  ],
+  "totals": {
+   "female": 5120,
+   "male": 13108,
+   "children": 5060,
+   "known_age": 18228
+  }
+ },
+ "Mozambique": {
+  "iso3": "MOZ",
+  "population_covered": 29192,
+  "children_pct": 26.0,
+  "adults_pct": 72.5,
+  "elderly_pct": 1.5,
+  "female_pct": 36.2,
+  "male_pct": 63.8,
+  "women_and_children_pct": 49.4,
+  "under_5_pct": 5.3,
+  "girls": 3752,
+  "boys": 3842,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 763,
+    "male": 771
+   },
+   {
+    "band": "5-11",
+    "female": 1822,
+    "male": 1887
+   },
+   {
+    "band": "12-17",
+    "female": 1167,
+    "male": 1184
+   },
+   {
+    "band": "18-59",
+    "female": 6606,
+    "male": 14544
+   },
+   {
+    "band": "60+",
+    "female": 208,
+    "male": 240
+   }
+  ],
+  "totals": {
+   "female": 10566,
+   "male": 18626,
+   "children": 7594,
+   "known_age": 29192
+  }
+ },
+ "Myanmar": {
+  "iso3": "MMR",
+  "population_covered": 1250918,
+  "children_pct": 48.9,
+  "adults_pct": 46.0,
+  "elderly_pct": 5.1,
+  "female_pct": 51.0,
+  "male_pct": 49.0,
+  "women_and_children_pct": 76.4,
+  "under_5_pct": 17.2,
+  "girls": 92775,
+  "boys": 93780,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 33082,
+    "male": 32479
+   },
+   {
+    "band": "5-11",
+    "female": 31329,
+    "male": 31438
+   },
+   {
+    "band": "12-17",
+    "female": 28364,
+    "male": 29863
+   },
+   {
+    "band": "18-59",
+    "female": 93864,
+    "male": 81716
+   },
+   {
+    "band": "60+",
+    "female": 11124,
+    "male": 8278
+   }
+  ],
+  "totals": {
+   "female": 638258,
+   "male": 612660,
+   "children": 186555,
+   "known_age": 381537
+  }
+ },
+ "Namibia": {
+  "iso3": "NAM",
+  "population_covered": 6545,
+  "children_pct": 48.1,
+  "adults_pct": 50.5,
+  "elderly_pct": 1.3,
+  "female_pct": 46.2,
+  "male_pct": 53.8,
+  "women_and_children_pct": 70.1,
+  "under_5_pct": 15.0,
+  "girls": 1587,
+  "boys": 1564,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 503,
+    "male": 482
+   },
+   {
+    "band": "5-11",
+    "female": 661,
+    "male": 657
+   },
+   {
+    "band": "12-17",
+    "female": 423,
+    "male": 425
+   },
+   {
+    "band": "18-59",
+    "female": 1392,
+    "male": 1916
+   },
+   {
+    "band": "60+",
+    "female": 46,
+    "male": 40
+   }
+  ],
+  "totals": {
+   "female": 3025,
+   "male": 3520,
+   "children": 3151,
+   "known_age": 6545
+  }
+ },
+ "Nauru": {
+  "iso3": "NRU",
+  "population_covered": 1035,
+  "children_pct": 23.1,
+  "adults_pct": 75.4,
+  "elderly_pct": 1.5,
+  "female_pct": 39.9,
+  "male_pct": 60.1,
+  "women_and_children_pct": 51.6,
+  "under_5_pct": 5.8,
+  "girls": 118,
+  "boys": 121,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 32,
+    "male": 28
+   },
+   {
+    "band": "5-11",
+    "female": 45,
+    "male": 46
+   },
+   {
+    "band": "12-17",
+    "female": 41,
+    "male": 47
+   },
+   {
+    "band": "18-59",
+    "female": 284,
+    "male": 496
+   },
+   {
+    "band": "60+",
+    "female": 11,
+    "male": 5
+   }
+  ],
+  "totals": {
+   "female": 413,
+   "male": 622,
+   "children": 239,
+   "known_age": 1035
+  }
+ },
+ "Nepal": {
+  "iso3": "NPL",
+  "population_covered": 19711,
+  "children_pct": 29.1,
+  "adults_pct": 58.3,
+  "elderly_pct": 12.6,
+  "female_pct": 51.8,
+  "male_pct": 48.2,
+  "women_and_children_pct": 61.5,
+  "under_5_pct": 4.6,
+  "girls": 991,
+  "boys": 1096,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 166,
+    "male": 161
+   },
+   {
+    "band": "5-11",
+    "female": 437,
+    "male": 457
+   },
+   {
+    "band": "12-17",
+    "female": 388,
+    "male": 478
+   },
+   {
+    "band": "18-59",
+    "female": 1958,
+    "male": 2221
+   },
+   {
+    "band": "60+",
+    "female": 363,
+    "male": 542
+   }
+  ],
+  "totals": {
+   "female": 10209,
+   "male": 9502,
+   "children": 2087,
+   "known_age": 7171
+  }
+ },
+ "Niger": {
+  "iso3": "NER",
+  "population_covered": 540846,
+  "children_pct": 59.9,
+  "adults_pct": 36.5,
+  "elderly_pct": 3.5,
+  "female_pct": 55.2,
+  "male_pct": 44.8,
+  "women_and_children_pct": 83.0,
+  "under_5_pct": 14.3,
+  "girls": 173650,
+  "boys": 150475,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 41316,
+    "male": 35843
+   },
+   {
+    "band": "5-11",
+    "female": 86815,
+    "male": 75471
+   },
+   {
+    "band": "12-17",
+    "female": 45519,
+    "male": 39161
+   },
+   {
+    "band": "18-59",
+    "female": 114927,
+    "male": 82712
+   },
+   {
+    "band": "60+",
+    "female": 9771,
+    "male": 9311
+   }
+  ],
+  "totals": {
+   "female": 298348,
+   "male": 242498,
+   "children": 324125,
+   "known_age": 540846
+  }
+ },
+ "Nigeria": {
+  "iso3": "NGA",
+  "population_covered": 95741,
+  "children_pct": 49.7,
+  "adults_pct": 46.7,
+  "elderly_pct": 3.6,
+  "female_pct": 54.6,
+  "male_pct": 45.4,
+  "women_and_children_pct": 78.1,
+  "under_5_pct": 12.4,
+  "girls": 19835,
+  "boys": 19333,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 4828,
+    "male": 4912
+   },
+   {
+    "band": "5-11",
+    "female": 9484,
+    "male": 9318
+   },
+   {
+    "band": "12-17",
+    "female": 5523,
+    "male": 5103
+   },
+   {
+    "band": "18-59",
+    "female": 20623,
+    "male": 16152
+   },
+   {
+    "band": "60+",
+    "female": 1707,
+    "male": 1140
+   }
+  ],
+  "totals": {
+   "female": 52321,
+   "male": 43420,
+   "children": 39168,
+   "known_age": 78790
+  }
+ },
+ "Pakistan": {
+  "iso3": "PAK",
+  "population_covered": 1608755,
+  "children_pct": 53.7,
+  "adults_pct": 42.6,
+  "elderly_pct": 3.7,
+  "female_pct": 45.6,
+  "male_pct": 54.4,
+  "women_and_children_pct": 75.9,
+  "under_5_pct": 17.2,
+  "girls": 389093,
+  "boys": 416482,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 124458,
+    "male": 133122
+   },
+   {
+    "band": "5-11",
+    "female": 167041,
+    "male": 177769
+   },
+   {
+    "band": "12-17",
+    "female": 97594,
+    "male": 105591
+   },
+   {
+    "band": "18-59",
+    "female": 310194,
+    "male": 329473
+   },
+   {
+    "band": "60+",
+    "female": 22925,
+    "male": 32546
+   }
+  ],
+  "totals": {
+   "female": 732828,
+   "male": 875927,
+   "children": 805575,
+   "known_age": 1500713
+  }
+ },
+ "Paraguay": {
+  "iso3": "PRY",
+  "population_covered": 7054,
+  "children_pct": 18.3,
+  "adults_pct": 78.5,
+  "elderly_pct": 3.2,
+  "female_pct": 42.8,
+  "male_pct": 57.2,
+  "women_and_children_pct": 51.0,
+  "under_5_pct": 3.9,
+  "girls": 475,
+  "boys": 468,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 101,
+    "male": 100
+   },
+   {
+    "band": "5-11",
+    "female": 224,
+    "male": 223
+   },
+   {
+    "band": "12-17",
+    "female": 150,
+    "male": 145
+   },
+   {
+    "band": "18-59",
+    "female": 1581,
+    "male": 2455
+   },
+   {
+    "band": "60+",
+    "female": 98,
+    "male": 67
+   }
+  ],
+  "totals": {
+   "female": 3016,
+   "male": 4038,
+   "children": 943,
+   "known_age": 5144
+  }
+ },
+ "Peru": {
+  "iso3": "PER",
+  "population_covered": 535920,
+  "children_pct": 10.8,
+  "adults_pct": 87.6,
+  "elderly_pct": 1.7,
+  "female_pct": 43.7,
+  "male_pct": 56.3,
+  "women_and_children_pct": 49.2,
+  "under_5_pct": 2.0,
+  "girls": 28162,
+  "boys": 29477,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 5223,
+    "male": 5510
+   },
+   {
+    "band": "5-11",
+    "female": 15257,
+    "male": 15739
+   },
+   {
+    "band": "12-17",
+    "female": 7682,
+    "male": 8228
+   },
+   {
+    "band": "18-59",
+    "female": 200550,
+    "male": 268810
+   },
+   {
+    "band": "60+",
+    "female": 5340,
+    "male": 3581
+   }
+  ],
+  "totals": {
+   "female": 234052,
+   "male": 301868,
+   "children": 57639,
+   "known_age": 535920
+  }
+ },
+ "Philippines": {
+  "iso3": "PHL",
+  "population_covered": 288098,
+  "children_pct": 15.5,
+  "adults_pct": 77.8,
+  "elderly_pct": 6.7,
+  "female_pct": 50.9,
+  "male_pct": 49.1,
+  "women_and_children_pct": 38.2,
+  "under_5_pct": 2.4,
+  "girls": 136,
+  "boys": 107,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 38,
+    "male": 0
+   },
+   {
+    "band": "5-11",
+    "female": 59,
+    "male": 78
+   },
+   {
+    "band": "12-17",
+    "female": 39,
+    "male": 29
+   },
+   {
+    "band": "18-59",
+    "female": 320,
+    "male": 899
+   },
+   {
+    "band": "60+",
+    "female": 36,
+    "male": 69
+   }
+  ],
+  "totals": {
+   "female": 146618,
+   "male": 141480,
+   "children": 243,
+   "known_age": 1567
+  }
+ },
+ "Romania": {
+  "iso3": "ROU",
+  "population_covered": 5885,
+  "children_pct": 27.9,
+  "adults_pct": 68.0,
+  "elderly_pct": 4.0,
+  "female_pct": 30.6,
+  "male_pct": 69.4,
+  "women_and_children_pct": 51.9,
+  "under_5_pct": 7.3,
+  "girls": 559,
+  "boys": 614,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 156,
+    "male": 152
+   },
+   {
+    "band": "5-11",
+    "female": 218,
+    "male": 257
+   },
+   {
+    "band": "12-17",
+    "female": 185,
+    "male": 205
+   },
+   {
+    "band": "18-59",
+    "female": 941,
+    "male": 1917
+   },
+   {
+    "band": "60+",
+    "female": 64,
+    "male": 105
+   }
+  ],
+  "totals": {
+   "female": 1802,
+   "male": 4083,
+   "children": 1173,
+   "known_age": 4200
+  }
+ },
+ "Rwanda": {
+  "iso3": "RWA",
+  "population_covered": 128694,
+  "children_pct": 49.0,
+  "adults_pct": 47.2,
+  "elderly_pct": 3.8,
+  "female_pct": 51.2,
+  "male_pct": 48.8,
+  "women_and_children_pct": 75.7,
+  "under_5_pct": 15.2,
+  "girls": 30932,
+  "boys": 31338,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 9670,
+    "male": 9653
+   },
+   {
+    "band": "5-11",
+    "female": 12079,
+    "male": 12361
+   },
+   {
+    "band": "12-17",
+    "female": 9183,
+    "male": 9324
+   },
+   {
+    "band": "18-59",
+    "female": 31205,
+    "male": 28691
+   },
+   {
+    "band": "60+",
+    "female": 2685,
+    "male": 2117
+   }
+  ],
+  "totals": {
+   "female": 65867,
+   "male": 62827,
+   "children": 62270,
+   "known_age": 126968
+  }
+ },
+ "Saudi Arabia": {
+  "iso3": "SAU",
+  "population_covered": 4088,
+  "children_pct": 47.2,
+  "adults_pct": 49.0,
+  "elderly_pct": 3.8,
+  "female_pct": 48.0,
+  "male_pct": 52.0,
+  "women_and_children_pct": 73.4,
+  "under_5_pct": 7.5,
+  "girls": 894,
+  "boys": 1037,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 134,
+    "male": 174
+   },
+   {
+    "band": "5-11",
+    "female": 454,
+    "male": 520
+   },
+   {
+    "band": "12-17",
+    "female": 306,
+    "male": 343
+   },
+   {
+    "band": "18-59",
+    "female": 1003,
+    "male": 1000
+   },
+   {
+    "band": "60+",
+    "female": 66,
+    "male": 88
+   }
+  ],
+  "totals": {
+   "female": 1963,
+   "male": 2125,
+   "children": 1931,
+   "known_age": 4088
+  }
+ },
+ "Senegal": {
+  "iso3": "SEN",
+  "population_covered": 16524,
+  "children_pct": 42.3,
+  "adults_pct": 51.0,
+  "elderly_pct": 6.7,
+  "female_pct": 50.1,
+  "male_pct": 49.9,
+  "women_and_children_pct": 71.1,
+  "under_5_pct": 2.7,
+  "girls": 3526,
+  "boys": 3470,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 205,
+    "male": 238
+   },
+   {
+    "band": "5-11",
+    "female": 1771,
+    "male": 1815
+   },
+   {
+    "band": "12-17",
+    "female": 1550,
+    "male": 1417
+   },
+   {
+    "band": "18-59",
+    "female": 4175,
+    "male": 4244
+   },
+   {
+    "band": "60+",
+    "female": 579,
+    "male": 530
+   }
+  ],
+  "totals": {
+   "female": 8280,
+   "male": 8244,
+   "children": 6996,
+   "known_age": 16524
+  }
+ },
+ "Serbia/Kosovo": {
+  "iso3": "SRB",
+  "population_covered": 16740,
+  "children_pct": 40.5,
+  "adults_pct": 45.5,
+  "elderly_pct": 14.0,
+  "female_pct": 46.5,
+  "male_pct": 53.5,
+  "women_and_children_pct": 66.8,
+  "under_5_pct": 13.6,
+  "girls": 3368,
+  "boys": 3406,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 1118,
+    "male": 1157
+   },
+   {
+    "band": "5-11",
+    "female": 1098,
+    "male": 1075
+   },
+   {
+    "band": "12-17",
+    "female": 1152,
+    "male": 1174
+   },
+   {
+    "band": "18-59",
+    "female": 3245,
+    "male": 4378
+   },
+   {
+    "band": "60+",
+    "female": 1168,
+    "male": 1175
+   }
+  ],
+  "totals": {
+   "female": 7781,
+   "male": 8959,
+   "children": 6774,
+   "known_age": 16740
+  }
+ },
+ "Somalia": {
+  "iso3": "SOM",
+  "population_covered": 3543725,
+  "children_pct": 60.5,
+  "adults_pct": 38.4,
+  "elderly_pct": 1.2,
+  "female_pct": 50.6,
+  "male_pct": 49.4,
+  "women_and_children_pct": 81.4,
+  "under_5_pct": 26.4,
+  "girls": 1050174,
+  "boys": 1092694,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 456367,
+    "male": 480809
+   },
+   {
+    "band": "5-11",
+    "female": 391601,
+    "male": 409265
+   },
+   {
+    "band": "12-17",
+    "female": 202206,
+    "male": 202620
+   },
+   {
+    "band": "18-59",
+    "female": 723443,
+    "male": 636188
+   },
+   {
+    "band": "60+",
+    "female": 19637,
+    "male": 21589
+   }
+  ],
+  "totals": {
+   "female": 1793254,
+   "male": 1750471,
+   "children": 2142868,
+   "known_age": 3543725
+  }
+ },
+ "South Africa": {
+  "iso3": "ZAF",
+  "population_covered": 242923,
+  "children_pct": 7.1,
+  "adults_pct": 92.0,
+  "elderly_pct": 0.9,
+  "female_pct": 25.0,
+  "male_pct": 75.0,
+  "women_and_children_pct": 28.5,
+  "under_5_pct": 0.1,
+  "girls": 8642,
+  "boys": 8563,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 125,
+    "male": 131
+   },
+   {
+    "band": "5-11",
+    "female": 3866,
+    "male": 3929
+   },
+   {
+    "band": "12-17",
+    "female": 4651,
+    "male": 4503
+   },
+   {
+    "band": "18-59",
+    "female": 51217,
+    "male": 172274
+   },
+   {
+    "band": "60+",
+    "female": 775,
+    "male": 1452
+   }
+  ],
+  "totals": {
+   "female": 60634,
+   "male": 182289,
+   "children": 17205,
+   "known_age": 242923
+  }
+ },
+ "South Sudan": {
+  "iso3": "SSD",
+  "population_covered": 337987,
+  "children_pct": 59.6,
+  "adults_pct": 37.7,
+  "elderly_pct": 2.7,
+  "female_pct": 51.7,
+  "male_pct": 48.3,
+  "women_and_children_pct": 81.9,
+  "under_5_pct": 17.3,
+  "girls": 99480,
+  "boys": 102117,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 28460,
+    "male": 29885
+   },
+   {
+    "band": "5-11",
+    "female": 40691,
+    "male": 42229
+   },
+   {
+    "band": "12-17",
+    "female": 30329,
+    "male": 30003
+   },
+   {
+    "band": "18-59",
+    "female": 70503,
+    "male": 56789
+   },
+   {
+    "band": "60+",
+    "female": 4617,
+    "male": 4481
+   }
+  ],
+  "totals": {
+   "female": 174600,
+   "male": 163387,
+   "children": 201597,
+   "known_age": 337987
+  }
+ },
+ "Sri Lanka": {
+  "iso3": "LKA",
+  "population_covered": 1211,
+  "children_pct": 33.4,
+  "adults_pct": 64.2,
+  "elderly_pct": 2.4,
+  "female_pct": 41.0,
+  "male_pct": 59.0,
+  "women_and_children_pct": 58.5,
+  "under_5_pct": 7.4,
+  "girls": 192,
+  "boys": 213,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 37,
+    "male": 53
+   },
+   {
+    "band": "5-11",
+    "female": 75,
+    "male": 91
+   },
+   {
+    "band": "12-17",
+    "female": 80,
+    "male": 69
+   },
+   {
+    "band": "18-59",
+    "female": 293,
+    "male": 484
+   },
+   {
+    "band": "60+",
+    "female": 11,
+    "male": 18
+   }
+  ],
+  "totals": {
+   "female": 496,
+   "male": 715,
+   "children": 405,
+   "known_age": 1211
+  }
+ },
+ "Sudan": {
+  "iso3": "SDN",
+  "population_covered": 4170987,
+  "children_pct": 43.0,
+  "adults_pct": 50.8,
+  "elderly_pct": 6.2,
+  "female_pct": 47.0,
+  "male_pct": 53.0,
+  "women_and_children_pct": 69.8,
+  "under_5_pct": 7.8,
+  "girls": 842752,
+  "boys": 950755,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 156626,
+    "male": 169821
+   },
+   {
+    "band": "5-11",
+    "female": 399848,
+    "male": 490899
+   },
+   {
+    "band": "12-17",
+    "female": 286278,
+    "male": 290035
+   },
+   {
+    "band": "18-59",
+    "female": 998943,
+    "male": 1119979
+   },
+   {
+    "band": "60+",
+    "female": 118424,
+    "male": 140134
+   }
+  ],
+  "totals": {
+   "female": 1960119,
+   "male": 2210868,
+   "children": 1793507,
+   "known_age": 4170987
+  }
+ },
+ "Suriname": {
+  "iso3": "SUR",
+  "population_covered": 2162,
+  "children_pct": 8.9,
+  "adults_pct": 89.9,
+  "elderly_pct": 1.2,
+  "female_pct": 45.8,
+  "male_pct": 54.2,
+  "women_and_children_pct": 50.1,
+  "under_5_pct": 1.9,
+  "girls": 100,
+  "boys": 92,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 25,
+    "male": 17
+   },
+   {
+    "band": "5-11",
+    "female": 47,
+    "male": 48
+   },
+   {
+    "band": "12-17",
+    "female": 28,
+    "male": 27
+   },
+   {
+    "band": "18-59",
+    "female": 879,
+    "male": 1065
+   },
+   {
+    "band": "60+",
+    "female": 12,
+    "male": 14
+   }
+  ],
+  "totals": {
+   "female": 991,
+   "male": 1171,
+   "children": 192,
+   "known_age": 2162
+  }
+ },
+ "Switzerland": {
+  "iso3": "CHE",
+  "population_covered": 53720,
+  "children_pct": 30.7,
+  "adults_pct": 65.7,
+  "elderly_pct": 3.6,
+  "female_pct": 40.2,
+  "male_pct": 59.8,
+  "women_and_children_pct": 57.0,
+  "under_5_pct": 8.2,
+  "girls": 7479,
+  "boys": 9024,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 2191,
+    "male": 2216
+   },
+   {
+    "band": "5-11",
+    "female": 3096,
+    "male": 3401
+   },
+   {
+    "band": "12-17",
+    "female": 2192,
+    "male": 3407
+   },
+   {
+    "band": "18-59",
+    "female": 13080,
+    "male": 22227
+   },
+   {
+    "band": "60+",
+    "female": 1031,
+    "male": 879
+   }
+  ],
+  "totals": {
+   "female": 21590,
+   "male": 32130,
+   "children": 16503,
+   "known_age": 53720
+  }
+ },
+ "Syria": {
+  "iso3": "SYR",
+  "population_covered": 23073,
+  "children_pct": 44.9,
+  "adults_pct": 48.2,
+  "elderly_pct": 6.9,
+  "female_pct": 50.7,
+  "male_pct": 49.3,
+  "women_and_children_pct": 73.1,
+  "under_5_pct": 8.4,
+  "girls": 5194,
+  "boys": 5152,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 929,
+    "male": 1009
+   },
+   {
+    "band": "5-11",
+    "female": 2376,
+    "male": 2309
+   },
+   {
+    "band": "12-17",
+    "female": 1889,
+    "male": 1834
+   },
+   {
+    "band": "18-59",
+    "female": 5871,
+    "male": 5229
+   },
+   {
+    "band": "60+",
+    "female": 635,
+    "male": 957
+   }
+  ],
+  "totals": {
+   "female": 11705,
+   "male": 11368,
+   "children": 10346,
+   "known_age": 23038
+  }
+ },
+ "Tajikistan": {
+  "iso3": "TJK",
+  "population_covered": 5273,
+  "children_pct": 33.8,
+  "adults_pct": 62.5,
+  "elderly_pct": 3.7,
+  "female_pct": 61.0,
+  "male_pct": 39.0,
+  "women_and_children_pct": 78.3,
+  "under_5_pct": 1.6,
+  "girls": 875,
+  "boys": 909,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 20,
+    "male": 65
+   },
+   {
+    "band": "5-11",
+    "female": 372,
+    "male": 388
+   },
+   {
+    "band": "12-17",
+    "female": 483,
+    "male": 456
+   },
+   {
+    "band": "18-59",
+    "female": 2242,
+    "male": 1053
+   },
+   {
+    "band": "60+",
+    "female": 101,
+    "male": 93
+   }
+  ],
+  "totals": {
+   "female": 3218,
+   "male": 2055,
+   "children": 1784,
+   "known_age": 5273
+  }
+ },
+ "Tanzania": {
+  "iso3": "TZA",
+  "population_covered": 246694,
+  "children_pct": 55.4,
+  "adults_pct": 41.6,
+  "elderly_pct": 3.0,
+  "female_pct": 50.1,
+  "male_pct": 49.9,
+  "women_and_children_pct": 78.0,
+  "under_5_pct": 20.4,
+  "girls": 67932,
+  "boys": 68708,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 25079,
+    "male": 25155
+   },
+   {
+    "band": "5-11",
+    "female": 24791,
+    "male": 25270
+   },
+   {
+    "band": "12-17",
+    "female": 18062,
+    "male": 18283
+   },
+   {
+    "band": "18-59",
+    "female": 51875,
+    "male": 50725
+   },
+   {
+    "band": "60+",
+    "female": 3863,
+    "male": 3591
+   }
+  ],
+  "totals": {
+   "female": 123670,
+   "male": 123024,
+   "children": 136640,
+   "known_age": 246694
+  }
+ },
+ "Thailand": {
+  "iso3": "THA",
+  "population_covered": 658038,
+  "children_pct": 28.7,
+  "adults_pct": 63.5,
+  "elderly_pct": 7.8,
+  "female_pct": 50.0,
+  "male_pct": 50.0,
+  "women_and_children_pct": 64.8,
+  "under_5_pct": 8.8,
+  "girls": 91504,
+  "boys": 97390,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 28049,
+    "male": 30148
+   },
+   {
+    "band": "5-11",
+    "female": 40151,
+    "male": 42915
+   },
+   {
+    "band": "12-17",
+    "female": 23304,
+    "male": 24327
+   },
+   {
+    "band": "18-59",
+    "female": 210609,
+    "male": 207290
+   },
+   {
+    "band": "60+",
+    "female": 26619,
+    "male": 24626
+   }
+  ],
+  "totals": {
+   "female": 328732,
+   "male": 329306,
+   "children": 188894,
+   "known_age": 658038
+  }
+ },
+ "Togo": {
+  "iso3": "TGO",
+  "population_covered": 11499,
+  "children_pct": 46.4,
+  "adults_pct": 48.2,
+  "elderly_pct": 5.4,
+  "female_pct": 55.1,
+  "male_pct": 44.9,
+  "women_and_children_pct": 78.2,
+  "under_5_pct": 1.6,
+  "girls": 2671,
+  "boys": 2659,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 85,
+    "male": 95
+   },
+   {
+    "band": "5-11",
+    "female": 1107,
+    "male": 1131
+   },
+   {
+    "band": "12-17",
+    "female": 1479,
+    "male": 1433
+   },
+   {
+    "band": "18-59",
+    "female": 3241,
+    "male": 2306
+   },
+   {
+    "band": "60+",
+    "female": 424,
+    "male": 198
+   }
+  ],
+  "totals": {
+   "female": 6336,
+   "male": 5163,
+   "children": 5330,
+   "known_age": 11499
+  }
+ },
+ "Tunisia": {
+  "iso3": "TUN",
+  "population_covered": 9371,
+  "children_pct": 23.7,
+  "adults_pct": 74.3,
+  "elderly_pct": 2.0,
+  "female_pct": 38.3,
+  "male_pct": 61.7,
+  "women_and_children_pct": 52.0,
+  "under_5_pct": 7.9,
+  "girls": 940,
+  "boys": 1282,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 384,
+    "male": 356
+   },
+   {
+    "band": "5-11",
+    "female": 333,
+    "male": 309
+   },
+   {
+    "band": "12-17",
+    "female": 223,
+    "male": 617
+   },
+   {
+    "band": "18-59",
+    "female": 2557,
+    "male": 4408
+   },
+   {
+    "band": "60+",
+    "female": 94,
+    "male": 90
+   }
+  ],
+  "totals": {
+   "female": 3591,
+   "male": 5780,
+   "children": 2222,
+   "known_age": 9371
+  }
+ },
+ "Turkey": {
+  "iso3": "TUR",
+  "population_covered": 4033740,
+  "children_pct": 45.1,
+  "adults_pct": 51.7,
+  "elderly_pct": 3.1,
+  "female_pct": 46.1,
+  "male_pct": 53.9,
+  "women_and_children_pct": 69.5,
+  "under_5_pct": 13.4,
+  "girls": 876581,
+  "boys": 943313,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 260409,
+    "male": 278788
+   },
+   {
+    "band": "5-11",
+    "female": 399995,
+    "male": 426475
+   },
+   {
+    "band": "12-17",
+    "female": 216177,
+    "male": 238050
+   },
+   {
+    "band": "18-59",
+    "female": 915627,
+    "male": 1171733
+   },
+   {
+    "band": "60+",
+    "female": 66100,
+    "male": 60386
+   }
+  ],
+  "totals": {
+   "female": 1858308,
+   "male": 2175432,
+   "children": 1819894,
+   "known_age": 4033740
+  }
+ },
+ "Uganda": {
+  "iso3": "UGA",
+  "population_covered": 1573291,
+  "children_pct": 57.5,
+  "adults_pct": 39.7,
+  "elderly_pct": 2.7,
+  "female_pct": 51.5,
+  "male_pct": 48.5,
+  "women_and_children_pct": 80.6,
+  "under_5_pct": 14.7,
+  "girls": 446829,
+  "boys": 458213,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 115840,
+    "male": 116040
+   },
+   {
+    "band": "5-11",
+    "female": 197476,
+    "male": 199381
+   },
+   {
+    "band": "12-17",
+    "female": 133513,
+    "male": 142792
+   },
+   {
+    "band": "18-59",
+    "female": 335643,
+    "male": 289474
+   },
+   {
+    "band": "60+",
+    "female": 27532,
+    "male": 15600
+   }
+  ],
+  "totals": {
+   "female": 810004,
+   "male": 763287,
+   "children": 905042,
+   "known_age": 1573291
+  }
+ },
+ "United Arab Emirates": {
+  "iso3": "ARE",
+  "population_covered": 8681,
+  "children_pct": 40.8,
+  "adults_pct": 53.9,
+  "elderly_pct": 5.3,
+  "female_pct": 49.0,
+  "male_pct": 51.0,
+  "women_and_children_pct": 69.8,
+  "under_5_pct": 3.4,
+  "girls": 1708,
+  "boys": 1820,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 148,
+    "male": 148
+   },
+   {
+    "band": "5-11",
+    "female": 849,
+    "male": 904
+   },
+   {
+    "band": "12-17",
+    "female": 711,
+    "male": 768
+   },
+   {
+    "band": "18-59",
+    "female": 2305,
+    "male": 2352
+   },
+   {
+    "band": "60+",
+    "female": 205,
+    "male": 256
+   }
+  ],
+  "totals": {
+   "female": 4253,
+   "male": 4428,
+   "children": 3528,
+   "known_age": 8646
+  }
+ },
+ "Uruguay": {
+  "iso3": "URY",
+  "population_covered": 29391,
+  "children_pct": 10.4,
+  "adults_pct": 88.0,
+  "elderly_pct": 1.7,
+  "female_pct": 44.9,
+  "male_pct": 55.1,
+  "women_and_children_pct": 42.0,
+  "under_5_pct": 2.5,
+  "girls": 740,
+  "boys": 751,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 189,
+    "male": 169
+   },
+   {
+    "band": "5-11",
+    "female": 338,
+    "male": 357
+   },
+   {
+    "band": "12-17",
+    "female": 213,
+    "male": 225
+   },
+   {
+    "band": "18-59",
+    "female": 4435,
+    "male": 8230
+   },
+   {
+    "band": "60+",
+    "female": 122,
+    "male": 118
+   }
+  ],
+  "totals": {
+   "female": 13182,
+   "male": 16209,
+   "children": 1491,
+   "known_age": 14396
+  }
+ },
+ "Venezuela": {
+  "iso3": "VEN",
+  "population_covered": 1429824,
+  "children_pct": 26.2,
+  "adults_pct": 66.9,
+  "elderly_pct": 7.0,
+  "female_pct": 58.3,
+  "male_pct": 41.7,
+  "women_and_children_pct": 70.7,
+  "under_5_pct": 5.3,
+  "girls": 196167,
+  "boys": 177849,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 38565,
+    "male": 37067
+   },
+   {
+    "band": "5-11",
+    "female": 60543,
+    "male": 57329
+   },
+   {
+    "band": "12-17",
+    "female": 97059,
+    "male": 83453
+   },
+   {
+    "band": "18-59",
+    "female": 583527,
+    "male": 372724
+   },
+   {
+    "band": "60+",
+    "female": 54039,
+    "male": 45518
+   }
+  ],
+  "totals": {
+   "female": 833733,
+   "male": 596091,
+   "children": 374016,
+   "known_age": 1429824
+  }
+ },
+ "Yemen": {
+  "iso3": "YEM",
+  "population_covered": 4390814,
+  "children_pct": 54.2,
+  "adults_pct": 41.7,
+  "elderly_pct": 4.0,
+  "female_pct": 50.9,
+  "male_pct": 49.1,
+  "women_and_children_pct": 78.5,
+  "under_5_pct": 15.7,
+  "girls": 1169214,
+  "boys": 1212693,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 344736,
+    "male": 344806
+   },
+   {
+    "band": "5-11",
+    "female": 390323,
+    "male": 433490
+   },
+   {
+    "band": "12-17",
+    "female": 434155,
+    "male": 434397
+   },
+   {
+    "band": "18-59",
+    "female": 975688,
+    "male": 856267
+   },
+   {
+    "band": "60+",
+    "female": 88493,
+    "male": 88459
+   }
+  ],
+  "totals": {
+   "female": 2233395,
+   "male": 2157419,
+   "children": 2381907,
+   "known_age": 4390814
+  }
+ },
+ "Zambia": {
+  "iso3": "ZMB",
+  "population_covered": 104410,
+  "children_pct": 47.1,
+  "adults_pct": 49.4,
+  "elderly_pct": 3.6,
+  "female_pct": 46.0,
+  "male_pct": 54.0,
+  "women_and_children_pct": 69.5,
+  "under_5_pct": 12.0,
+  "girls": 24633,
+  "boys": 24506,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 6257,
+    "male": 6305
+   },
+   {
+    "band": "5-11",
+    "female": 10573,
+    "male": 10233
+   },
+   {
+    "band": "12-17",
+    "female": 7803,
+    "male": 7968
+   },
+   {
+    "band": "18-59",
+    "female": 21893,
+    "male": 29645
+   },
+   {
+    "band": "60+",
+    "female": 1536,
+    "male": 2197
+   }
+  ],
+  "totals": {
+   "female": 48062,
+   "male": 56348,
+   "children": 49139,
+   "known_age": 104410
+  }
+ },
+ "Zimbabwe": {
+  "iso3": "ZWE",
+  "population_covered": 15795,
+  "children_pct": 49.2,
+  "adults_pct": 49.2,
+  "elderly_pct": 1.6,
+  "female_pct": 46.6,
+  "male_pct": 53.4,
+  "women_and_children_pct": 71.5,
+  "under_5_pct": 13.3,
+  "girls": 3834,
+  "boys": 3941,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 1039,
+    "male": 1063
+   },
+   {
+    "band": "5-11",
+    "female": 1647,
+    "male": 1601
+   },
+   {
+    "band": "12-17",
+    "female": 1148,
+    "male": 1277
+   },
+   {
+    "band": "18-59",
+    "female": 3383,
+    "male": 4383
+   },
+   {
+    "band": "60+",
+    "female": 143,
+    "male": 111
+   }
+  ],
+  "totals": {
+   "female": 7360,
+   "male": 8435,
+   "children": 7775,
+   "known_age": 15795
+  }
+ }
+}

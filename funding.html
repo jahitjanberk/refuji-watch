@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Humanitarian Funding — Refuji Watch</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0d;--surface:#141414;--surface2:#1c1c1c;--border:#222;
+  --accent:#2dd4bf;--red:#ef4444;--amber:#f59e0b;--blue:#60a5fa;
+  --green:#4ade80;--orange:#fb923c;
+  --text:#f0ede6;--muted:#666;--muted2:#3a3a3a;
+  --mono:'DM Mono',monospace;
+  --sans:'DM Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13px;line-height:1.6;min-height:100vh;overflow-x:hidden}
+
+/* ── HEADER ── */
+.header{padding:.9rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;background:rgba(20,20,20,.95);position:sticky;top:0;z-index:200;backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);transition:background .4s,backdrop-filter .4s}
+.header.scrolled{background:rgba(20,20,20,.5);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom-color:rgba(255,255,255,.06)}
+.logo{font-family:var(--sans);font-size:1.4rem;font-weight:900;letter-spacing:-.02em;text-decoration:none;color:var(--text)}
+.logo span{color:var(--accent)}
+.nav{display:flex;gap:.7rem;font-family:var(--sans);font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap}
+.nav a{color:inherit;text-decoration:none;transition:color .15s}
+.nav a:hover,.nav a.active{color:var(--accent)}
+.back-link{font-family:var(--sans);font-size:11px;font-weight:600;color:var(--muted);text-decoration:none;transition:color .15s;flex-shrink:0}
+.back-link:hover{color:var(--accent)}
+@media(max-width:700px){.nav{display:none}}
+
+/* ── PAGE HERO ── */
+.page-hero{padding:2rem 1.5rem 1.5rem;border-bottom:1px solid var(--border)}
+.page-eyebrow{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.page-title{font-family:var(--sans);font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;line-height:1.1;margin-bottom:.5rem}
+.page-title span{color:var(--accent)}
+.page-intro{font-size:13px;color:var(--muted);line-height:1.7;max-width:600px}
+
+/* ── GLOBAL SUMMARY STRIP ── */
+.summary-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-bottom:1px solid var(--border)}
+.sc{background:var(--surface);padding:1.1rem 1.4rem}
+.sc-label{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
+.sc-val{font-family:var(--mono);font-size:1.5rem;font-weight:500;line-height:1}
+.sc-sub{font-size:10px;color:var(--muted2);margin-top:.2rem}
+@media(max-width:600px){.summary-strip{grid-template-columns:1fr 1fr}}
+
+/* ── OVERALL PROGRESS BAR ── */
+.overall-bar-section{padding:1.2rem 1.5rem;border-bottom:1px solid var(--border);background:var(--surface)}
+.overall-bar-label{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem;flex-wrap:wrap;gap:.4rem}
+.overall-bar-title{font-family:var(--sans);font-size:11px;font-weight:700;color:var(--text)}
+.overall-bar-meta{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.overall-bar-track{height:12px;background:rgba(239,68,68,.15);border-radius:3px;overflow:hidden;position:relative}
+.overall-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),rgba(45,212,191,.7));border-radius:3px;width:0;transition:width 1.5s cubic-bezier(.4,0,.2,1)}
+.overall-bar-marker{position:absolute;top:0;bottom:0;width:1px;background:var(--amber);opacity:.6}
+.overall-bar-note{margin-top:.5rem;font-size:11px;color:var(--muted);display:flex;gap:1.2rem;flex-wrap:wrap}
+.bar-note-item{display:flex;align-items:center;gap:.4rem}
+.bar-note-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* ── FILTER / SORT BAR ── */
+.filter-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:.65rem 1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.filter-label{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2);flex-shrink:0}
+.filter-btns{display:flex;gap:.3rem;flex-wrap:wrap}
+.filter-btn{font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .7rem;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;transition:all .15s;border-radius:2px}
+.filter-btn.active,.filter-btn:hover{border-color:var(--accent);color:var(--accent)}
+.sort-wrap{margin-left:auto;display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.sort-select{background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-family:var(--sans);font-size:10px;font-weight:600;padding:.3rem .6rem;outline:none;cursor:pointer}
+.sort-select:focus{border-color:var(--accent)}
+
+/* ── APPEALS GRID ── */
+.appeals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1px;background:var(--border);border-bottom:1px solid var(--border)}
+.appeal-card{background:var(--surface);padding:1.4rem;display:flex;flex-direction:column;gap:.9rem;transition:background .15s}
+.appeal-card:hover{background:var(--surface2)}
+.appeal-card[data-hidden="true"]{display:none}
+
+/* card header */
+.ac-header{display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem}
+.ac-name{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--text);text-decoration:none;transition:color .15s;line-height:1.2}
+.ac-name:hover{color:var(--accent)}
+.ac-cat{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 8px;border-radius:2px;flex-shrink:0;margin-top:2px}
+.cat-critical{background:rgba(239,68,68,.15);color:#ef4444}
+.cat-severe{background:rgba(251,146,60,.15);color:#fb923c}
+.cat-moderate{background:rgba(45,212,191,.15);color:var(--accent)}
+.cat-high{background:rgba(250,204,21,.15);color:#facc15}
+
+/* funding bar */
+.ac-bar-wrap{}
+.ac-bar-meta{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.4rem;gap:.5rem;flex-wrap:wrap}
+.ac-bar-pct{font-family:var(--mono);font-size:1.6rem;font-weight:500;line-height:1}
+.ac-bar-funded-label{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.1rem}
+.ac-bar-amounts{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:right}
+.ac-bar-track{height:8px;background:rgba(239,68,68,.12);border-radius:3px;overflow:hidden}
+.ac-bar-fill{height:100%;border-radius:3px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.fill-critical{background:linear-gradient(90deg,#ef4444,rgba(239,68,68,.6))}
+.fill-severe{background:linear-gradient(90deg,var(--orange),rgba(251,146,60,.6))}
+.fill-high{background:linear-gradient(90deg,#facc15,rgba(250,204,21,.6))}
+.fill-moderate{background:linear-gradient(90deg,var(--accent),rgba(45,212,191,.6))}
+
+/* gap callout */
+.ac-gap{display:flex;justify-content:space-between;align-items:center;padding:.55rem .8rem;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15)}
+.ac-gap-label{font-family:var(--sans);font-size:10px;font-weight:600;color:var(--muted)}
+.ac-gap-val{font-family:var(--mono);font-size:12px;color:var(--red);font-weight:500}
+
+/* displaced context */
+.ac-displaced{display:flex;align-items:center;gap:.5rem;font-size:11px;color:var(--muted)}
+.ac-displaced-val{color:var(--text);font-family:var(--mono);font-weight:500}
+
+/* what funded */
+.ac-what{font-size:11px;color:var(--muted);line-height:1.65;padding:.6rem .8rem;border-left:2px solid var(--border)}
+.ac-what-title{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);margin-bottom:.3rem}
+
+/* consequence */
+.ac-consequence{font-size:11px;color:var(--muted);line-height:1.65;padding:.5rem .8rem;background:rgba(239,68,68,.04);border-left:2px solid rgba(239,68,68,.3)}
+.ac-consequence-title{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(239,68,68,.7);margin-bottom:.3rem}
+
+/* agencies */
+.ac-agencies{display:flex;gap:.3rem;flex-wrap:wrap}
+.ac-agency{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.06em;padding:2px 7px;border:1px solid var(--border);color:var(--muted);border-radius:2px}
+
+/* actions */
+.ac-actions{display:flex;gap:.5rem;margin-top:auto;padding-top:.6rem;border-top:1px solid var(--border)}
+.ac-btn{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.35rem .8rem;text-decoration:none;cursor:pointer;border:1px solid;transition:all .2s;display:inline-flex;align-items:center;justify-content:center;gap:.3rem;background:none}
+.ac-btn-primary{color:var(--accent);border-color:rgba(45,212,191,.3)}
+.ac-btn-primary:hover{background:rgba(45,212,191,.08)}
+.ac-btn-secondary{color:var(--muted);border-color:var(--border)}
+.ac-btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── CONTEXT SECTION ── */
+.context-section{display:grid;grid-template-columns:2fr 1fr;gap:1px;background:var(--border);border-bottom:1px solid var(--border)}
+@media(max-width:700px){.context-section{grid-template-columns:1fr}}
+.context-panel{background:var(--surface);padding:1.4rem 1.5rem}
+.context-title{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
+.context-prose{font-size:13px;color:var(--muted);line-height:1.8}
+.context-prose p{margin-bottom:.8rem}
+.context-prose p:last-child{margin-bottom:0}
+.context-prose strong{color:var(--text);font-family:var(--sans);font-weight:600}
+.context-prose a{color:var(--accent);text-decoration:none}
+.context-prose a:hover{text-decoration:underline}
+
+/* ── OCHA LINK PANEL ── */
+.ocha-links{display:flex;flex-direction:column;gap:0}
+.ocha-link{display:flex;justify-content:space-between;align-items:center;padding:.65rem 0;border-bottom:1px solid var(--border);font-size:12px;text-decoration:none;color:var(--muted);transition:color .15s}
+.ocha-link:last-child{border-bottom:none}
+.ocha-link:hover{color:var(--accent)}
+.ocha-link span:last-child{color:var(--accent);font-size:11px;flex-shrink:0}
+
+/* ── MOBILE SAFETY ── */
+html,body{overflow-x:hidden}
+svg{max-width:100%}
+@media(max-width:700px){
+  .summary-strip{grid-template-columns:1fr 1fr}
+  .appeals-grid{grid-template-columns:1fr}
+  .context-section{grid-template-columns:1fr}
+  .filter-bar{flex-direction:column;align-items:flex-start}
+  .sort-wrap{margin-left:0}
+}
+@media(max-width:480px){
+  .summary-strip{grid-template-columns:1fr}
+  .page-hero{padding:1.4rem 1rem}
+  .ac-bar-pct{font-size:1.2rem}
+}
+
+footer{border-top:1px solid var(--border);padding:.8rem 1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.4rem;font-size:10px;color:var(--muted);letter-spacing:.06em;font-family:var(--sans)}
+footer a{color:var(--accent);text-decoration:none}
+
+/* ── MOBILE HAMBURGER MENU ── */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;border:1px solid var(--border);background:none;cursor:pointer;padding:8px;flex-shrink:0;transition:border-color .2s}
+.hamburger:hover{border-color:var(--accent)}
+.hamburger span{display:block;height:1.5px;background:var(--text);border-radius:1px;transition:all .25s}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+.nav-drawer{
+  position:fixed;top:0;right:0;bottom:0;width:280px;max-width:85vw;
+  background:var(--surface);border-left:1px solid var(--border);
+  z-index:500;display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+}
+.nav-drawer.open{transform:translateX(0)}
+.nav-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);
+  z-index:499;opacity:0;pointer-events:none;
+  transition:opacity .3s;
+}
+.nav-overlay.open{opacity:1;pointer-events:all}
+
+.nav-drawer-header{
+  padding:1rem 1.2rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.nav-drawer-logo{font-family:var(--sans);font-size:1.1rem;font-weight:900;color:var(--text);text-decoration:none}
+.nav-drawer-logo span{color:var(--accent)}
+.nav-drawer-close{
+  width:32px;height:32px;border:1px solid var(--border);background:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:16px;transition:all .15s;flex-shrink:0;
+}
+.nav-drawer-close:hover{border-color:var(--accent);color:var(--accent)}
+
+.nav-drawer-links{
+  flex:1;padding:1rem 0;display:flex;flex-direction:column;
+}
+.nav-drawer-links a{
+  font-family:var(--sans);font-size:13px;font-weight:600;
+  color:var(--muted);text-decoration:none;
+  padding:.75rem 1.4rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .15s;
+}
+.nav-drawer-links a:last-child{border-bottom:none}
+.nav-drawer-links a:hover,.nav-drawer-links a.active{color:var(--accent);background:rgba(45,212,191,.04)}
+.nav-drawer-links a::after{content:'→';font-size:12px;color:var(--muted2)}
+.nav-drawer-links a:hover::after,.nav-drawer-links a.active::after{color:var(--accent)}
+
+.nav-drawer-footer{
+  padding:1rem 1.4rem;border-top:1px solid var(--border);
+  font-family:var(--sans);font-size:10px;color:var(--muted2);
+  flex-shrink:0;
+}
+
+@media(max-width:700px){
+  .nav{display:none!important}
+  .hamburger{display:flex}
+}
+
+</style>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7128f2b8b7014426a65f4112bfabfd2a"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+
+<div class="header" id="header">
+  <a class="logo" href="index.html">Refuji <span>Watch</span></a>
+  <button class="hamburger" id="hamburger-btn" aria-label="Open menu"><span></span><span></span><span></span></button>
+  <nav class="nav">
+    <a href="index.html">Dashboard</a>
+    <a href="countries.html">Countries</a>
+    <a href="regions.html">Regions</a>
+    <a href="compare.html">Compare</a>
+    <a href="funding.html" class="active">Funding</a>
+    <a href="help.html">How to Help</a>
+    <a href="about.html">About</a>
+    <a href="sitrep.html">SitRep</a>
+  </nav>
+  <a class="back-link" href="index.html">← Dashboard</a>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-eyebrow">OCHA Financial Tracking Service</div>
+  <div class="page-title">Humanitarian <span>Funding Gaps</span></div>
+  <div class="page-intro">How much has been pledged versus what's actually needed. Every underfunded appeal represents real cuts to food, shelter, healthcare and protection for millions of displaced people.</div>
+</div>
+
+<!-- GLOBAL SUMMARY -->
+<div class="summary-strip">
+  <div class="sc">
+    <div class="sc-label">Total requested</div>
+    <div class="sc-val" id="s-requested" style="color:var(--text)">—</div>
+    <div class="sc-sub">across all appeals</div>
+  </div>
+  <div class="sc">
+    <div class="sc-label">Total funded</div>
+    <div class="sc-val" id="s-funded" style="color:var(--accent)">—</div>
+    <div class="sc-sub">received so far</div>
+  </div>
+  <div class="sc">
+    <div class="sc-label">Total funding gap</div>
+    <div class="sc-val" id="s-gap" style="color:var(--red)">—</div>
+    <div class="sc-sub">still needed</div>
+  </div>
+  <div class="sc">
+    <div class="sc-label">Overall funded</div>
+    <div class="sc-val" id="s-pct" style="color:var(--amber)">—</div>
+    <div class="sc-sub">of total requested</div>
+  </div>
+</div>
+
+<!-- OVERALL PROGRESS BAR -->
+<div class="overall-bar-section">
+  <div class="overall-bar-label">
+    <span class="overall-bar-title">Combined appeal funding — all tracked crises</span>
+    <span class="overall-bar-meta" id="overall-bar-meta">Loading...</span>
+  </div>
+  <div class="overall-bar-track">
+    <div class="overall-bar-fill" id="overall-bar-fill"></div>
+    <div class="overall-bar-marker" id="overall-bar-marker" style="left:40%"></div>
+  </div>
+  <div class="overall-bar-note">
+    <span class="bar-note-item"><span class="bar-note-dot" style="background:var(--accent)"></span>Funded</span>
+    <span class="bar-note-item"><span class="bar-note-dot" style="background:var(--red);opacity:.4"></span>Unfunded gap</span>
+    <span class="bar-note-item"><span class="bar-note-dot" style="background:var(--amber)"></span>40% — critical underfunding threshold</span>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <span class="filter-label">Filter</span>
+  <div class="filter-btns">
+    <button class="filter-btn active" data-filter="all">All appeals</button>
+    <button class="filter-btn" data-filter="Critical">Critical</button>
+    <button class="filter-btn" data-filter="Severe">Severe</button>
+    <button class="filter-btn" data-filter="Moderate">Moderate</button>
+  </div>
+  <div class="sort-wrap">
+    <span class="filter-label">Sort</span>
+    <select class="sort-select" id="sort-select">
+      <option value="gap-desc">Gap (largest first)</option>
+      <option value="pct-asc">% funded (lowest first)</option>
+      <option value="pct-desc">% funded (highest first)</option>
+      <option value="requested-desc">Appeal size (largest first)</option>
+      <option value="name-asc">Name A–Z</option>
+    </select>
+  </div>
+  <span id="appeal-count" style="font-family:var(--sans);font-size:10px;color:var(--muted2)"></span>
+</div>
+
+<!-- APPEALS GRID -->
+<div class="appeals-grid" id="appeals-grid">
+  <div style="padding:2rem;color:var(--muted);font-family:var(--sans);grid-column:1/-1">Loading appeals...</div>
+</div>
+
+<!-- CONTEXT -->
+<div class="context-section">
+  <div class="context-panel">
+    <div class="context-title">Understanding humanitarian funding</div>
+    <div class="context-prose">
+      <p>Each year, the UN and its partners publish <strong>Humanitarian Response Plans (HRPs)</strong> — detailed funding appeals setting out exactly what is needed to respond to each crisis. The amounts are not estimates; they represent the minimum required to meet the basic needs of affected populations.</p>
+      <p>When appeals go underfunded, aid organisations are forced to make painful choices: cutting food ration sizes, reducing the number of people they can reach, suspending medical programmes, or withdrawing from the most dangerous areas entirely.</p>
+      <p><strong>The 40% threshold matters.</strong> OCHA considers any appeal below 40% funded to be critically underfunded — at this level, basic humanitarian standards cannot be maintained. Sudan, Yemen, and DRC have been below this threshold for multiple consecutive years.</p>
+      <p>Funding does not follow need equally. Crises with higher geopolitical visibility — Ukraine, Syria — receive proportionally more funding than crises in sub-Saharan Africa, even when the scale of need is comparable or greater. <strong>This is called the forgotten crisis problem.</strong></p>
+      <p>Data sourced from the <a href="https://fts.unocha.org" target="_blank">OCHA Financial Tracking Service</a>, the most comprehensive real-time record of humanitarian funding flows globally.</p>
+    </div>
+  </div>
+  <div class="context-panel" style="border-left:1px solid var(--border)">
+    <div class="context-title">Key resources</div>
+    <div class="ocha-links">
+      <a class="ocha-link" href="https://fts.unocha.org" target="_blank" rel="noopener">
+        <span>OCHA Financial Tracking Service</span><span>↗</span>
+      </a>
+      <a class="ocha-link" href="https://www.unocha.org/global-humanitarian-overview" target="_blank" rel="noopener">
+        <span>Global Humanitarian Overview</span><span>↗</span>
+      </a>
+      <a class="ocha-link" href="https://reliefweb.int/topics/funding" target="_blank" rel="noopener">
+        <span>ReliefWeb — Funding news</span><span>↗</span>
+      </a>
+      <a class="ocha-link" href="help.html">
+        <span>How to contribute — verified NGOs</span><span>→</span>
+      </a>
+      <a class="ocha-link" href="sitrep.html">
+        <span>Generate a situation report</span><span>→</span>
+      </a>
+    </div>
+    <div style="margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--border)">
+      <div class="context-title" style="margin-bottom:.7rem">What the numbers mean</div>
+      <div style="display:flex;flex-direction:column;gap:.5rem">
+        <div style="display:flex;align-items:center;gap:.6rem;font-size:11px;color:var(--muted)">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;display:inline-block"></span>
+          <span><strong style="color:#ef4444;font-family:var(--sans)">&lt;40% funded</strong> — Critical. Basic needs cannot be met.</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:.6rem;font-size:11px;color:var(--muted)">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--orange);flex-shrink:0;display:inline-block"></span>
+          <span><strong style="color:var(--orange);font-family:var(--sans)">40–60% funded</strong> — Severe. Major service cuts required.</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:.6rem;font-size:11px;color:var(--muted)">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0;display:inline-block"></span>
+          <span><strong style="color:var(--amber);font-family:var(--sans)">60–79% funded</strong> — Partial. Significant gaps remain.</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:.6rem;font-size:11px;color:var(--muted)">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;display:inline-block"></span>
+          <span><strong style="color:var(--accent);font-family:var(--sans)">≥80% funded</strong> — Well funded. Near full response possible.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>Source: <a href="https://fts.unocha.org" target="_blank">OCHA Financial Tracking Service</a> · Data: 2024</span>
+  <span id="footer-date">—</span>
+  <span>Built with love by <a href="https://github.com/jahitjanberk" target="_blank">jahit</a></span>
+</footer>
+
+<script>
+function fmtUSD(n){
+  if(!n||n===0)return'—';
+  if(n>=1e9)return'$'+(n/1e9).toFixed(1)+'B';
+  if(n>=1e6)return'$'+(n/1e6).toFixed(0)+'M';
+  return'$'+n.toLocaleString();
+}
+function fmt(n){
+  if(!n||n===0)return'—';
+  if(n>=1e6)return(n/1e6).toFixed(1)+'M';
+  if(n>=1e3)return(n/1e3).toFixed(0)+'K';
+  return n.toLocaleString();
+}
+function countryURL(c){return'country.html?country='+encodeURIComponent(c)}
+function sitrepURL(c){return'sitrep.html?country='+encodeURIComponent(c)}
+
+function catClass(cat){
+  const map={critical:'cat-critical',severe:'cat-severe',high:'cat-high',moderate:'cat-moderate'};
+  return map[(cat||'').toLowerCase()]||'cat-moderate';
+}
+function fillClass(cat){
+  const map={critical:'fill-critical',severe:'fill-severe',high:'fill-high',moderate:'fill-moderate'};
+  return map[(cat||'').toLowerCase()]||'fill-moderate';
+}
+function pctColour(pct){
+  if(pct<40)return'var(--red)';
+  if(pct<60)return'var(--orange)';
+  if(pct<80)return'var(--amber)';
+  return'var(--accent)';
+}
+
+let allAppeals=[];
+let currentFilter='all';
+let currentSort='gap-desc';
+
+function renderAppeals(){
+  let appeals=[...allAppeals];
+
+  // filter
+  if(currentFilter!=='all'){
+    appeals=appeals.filter(a=>(a.category||'').toLowerCase()===currentFilter.toLowerCase());
+  }
+
+  // sort
+  appeals.sort((a,b)=>{
+    if(currentSort==='gap-desc')return(b.gap||0)-(a.gap||0);
+    if(currentSort==='pct-asc')return(a.pct||0)-(b.pct||0);
+    if(currentSort==='pct-desc')return(b.pct||0)-(a.pct||0);
+    if(currentSort==='requested-desc')return(b.requested||0)-(a.requested||0);
+    if(currentSort==='name-asc')return a.name.localeCompare(b.name);
+    return 0;
+  });
+
+  document.getElementById('appeal-count').textContent=appeals.length+' appeals';
+
+  const grid=document.getElementById('appeals-grid');
+  if(appeals.length===0){
+    grid.innerHTML='<div style="padding:2rem;color:var(--muted);font-family:var(--sans);grid-column:1/-1">No appeals match this filter.</div>';
+    return;
+  }
+
+  grid.innerHTML=appeals.map(a=>{
+    const colour=pctColour(a.pct);
+    const agencies=(a.lead_agencies||[]).map(ag=>`<span class="ac-agency">${ag}</span>`).join('');
+    return`<div class="appeal-card">
+      <div class="ac-header">
+        <a class="ac-name" href="${countryURL(a.country||a.name)}">${a.name}</a>
+        <span class="ac-cat ${catClass(a.category)}">${a.category||'—'}</span>
+      </div>
+
+      <div class="ac-bar-wrap">
+        <div class="ac-bar-meta">
+          <div>
+            <div class="ac-bar-pct" style="color:${colour}">${a.pct}%</div>
+            <div class="ac-bar-funded-label">funded</div>
+          </div>
+          <div class="ac-bar-amounts">
+            <div style="color:var(--accent)">${fmtUSD(a.funded)} received</div>
+            <div style="color:var(--muted2)">${fmtUSD(a.requested)} requested</div>
+          </div>
+        </div>
+        <div class="ac-bar-track">
+          <div class="ac-bar-fill ${fillClass(a.category)}" data-w="${a.pct}"></div>
+        </div>
+      </div>
+
+      <div class="ac-gap">
+        <span class="ac-gap-label">Funding gap</span>
+        <span class="ac-gap-val">${fmtUSD(a.gap)} shortfall</span>
+      </div>
+
+      ${a.displaced?`<div class="ac-displaced">
+        <span>People displaced:</span>
+        <span class="ac-displaced-val">${fmt(a.displaced)}</span>
+      </div>`:''}
+
+      ${a.what_funded?`<div class="ac-what">
+        <div class="ac-what-title">What this funds</div>
+        ${a.what_funded}
+      </div>`:''}
+
+      ${a.consequence?`<div class="ac-consequence">
+        <div class="ac-consequence-title">Impact of underfunding</div>
+        ${a.consequence}
+      </div>`:''}
+
+      ${agencies?`<div class="ac-agencies">${agencies}</div>`:''}
+
+      <div class="ac-actions">
+        <a class="ac-btn ac-btn-primary" href="${countryURL(a.country||a.name)}">Country profile</a>
+        <a class="ac-btn ac-btn-primary" href="${sitrepURL(a.country||a.name)}">SitRep</a>
+        <a class="ac-btn ac-btn-secondary" href="https://fts.unocha.org" target="_blank" rel="noopener">OCHA data ↗</a>
+      </div>
+    </div>`;
+  }).join('');
+
+  // animate bars
+  requestAnimationFrame(()=>{
+    document.querySelectorAll('.ac-bar-fill[data-w]').forEach(b=>{
+      b.style.width=b.dataset.w+'%';
+    });
+  });
+}
+
+// filters
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter=btn.dataset.filter;
+    renderAppeals();
+  });
+});
+
+// sort
+document.getElementById('sort-select').addEventListener('change',e=>{
+  currentSort=e.target.value;
+  renderAppeals();
+});
+
+// header scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('header').classList.toggle('scrolled',scrollY>10);
+},{passive:true});
+
+// load data
+async function init(){
+  try{
+    const res=await fetch('/sample.json');
+    const data=await res.json();
+    document.getElementById('footer-date').textContent='Last updated: '+data.last_updated;
+
+    allAppeals=data.funding_gaps||[];
+
+    // global summary
+    const totalReq=allAppeals.reduce((s,a)=>s+(a.requested||0),0);
+    const totalFund=allAppeals.reduce((s,a)=>s+(a.funded||0),0);
+    const totalGap=allAppeals.reduce((s,a)=>s+(a.gap||0),0);
+    const overallPct=Math.round(totalFund/totalReq*100);
+
+    document.getElementById('s-requested').textContent=fmtUSD(totalReq);
+    document.getElementById('s-funded').textContent=fmtUSD(totalFund);
+    document.getElementById('s-gap').textContent=fmtUSD(totalGap);
+    document.getElementById('s-pct').textContent=overallPct+'%';
+    document.getElementById('overall-bar-meta').textContent=
+      fmtUSD(totalFund)+' of '+fmtUSD(totalReq);
+
+    // animate overall bar
+    requestAnimationFrame(()=>{
+      document.getElementById('overall-bar-fill').style.width=overallPct+'%';
+    });
+
+    renderAppeals();
+  }catch(e){
+    console.error(e);
+    document.getElementById('appeals-grid').innerHTML=
+      '<div style="padding:2rem;color:var(--muted);font-family:var(--sans);grid-column:1/-1">Could not load data — run via a local server.</div>';
+  }
+}
+init();
+</script>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="nav-overlay" id="nav-overlay" onclick="closeDrawer()"></div>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nav-drawer-header">
+    <a class="nav-drawer-logo" href="index.html">Refuji <span>Watch</span></a>
+    <button class="nav-drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="nav-drawer-links">
+    <a href="index.html">Dashboard</a>
+    <a href="countries.html">Countries</a>
+    <a href="regions.html">Regions</a>
+    <a href="compare.html">Compare</a>
+    <a href="funding.html" class="active">Funding</a>
+    <a href="help.html">How to Help</a>
+    <a href="about.html">About</a>
+    <a href="sitrep.html">SitRep</a>
+  </div>
+  <div class="nav-drawer-footer">Data: UNHCR · OCHA FTS · ReliefWeb</div>
+</div>
+
+<script>
+(function(){
+  function openDrawer(){
+    document.getElementById('nav-drawer').classList.add('open');
+    document.getElementById('nav-overlay').classList.add('open');
+    var btn=document.getElementById('hamburger-btn');
+    if(btn)btn.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  window.closeDrawer=function(){
+    document.getElementById('nav-drawer').classList.remove('open');
+    document.getElementById('nav-overlay').classList.remove('open');
+    var btn=document.getElementById('hamburger-btn');
+    if(btn)btn.classList.remove('open');
+    document.body.style.overflow='';
+  };
+  var btn=document.getElementById('hamburger-btn');
+  if(btn)btn.addEventListener('click',function(){
+    if(document.getElementById('nav-drawer').classList.contains('open'))closeDrawer();
+    else openDrawer();
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDrawer();});
+})();
+</script>
+</body>
+</html>

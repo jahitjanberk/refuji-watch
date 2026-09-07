@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Refuji Watch — Country</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d0d0d; --surface: #141414; --border: #2a2a2a;
+      --accent: #2dd4bf; --accent2: #c0392b; --blue: #5b8dd9;
+      --text: #f0ede6; --muted: #888;
+      --serif: var(--sans);
+      --mono: 'DM Mono', monospace;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: var(--mono); font-size: 13px;
+      line-height: 1.6; min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 3rem;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    }
+    .back-link {
+      display: flex; align-items: center; gap: 0.5rem;
+      color: var(--muted); text-decoration: none;
+      font-family: var(--sans); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent); }
+    .back-arrow { font-size: 1rem; }
+    .site-name {
+      font-family: var(--mono); font-size: 1.2rem;
+      font-weight: 700; color: var(--text);
+    }
+    .site-name span { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      padding: 3rem 3rem 2rem;
+      border-bottom: 1px solid var(--border);
+      animation: fadeDown 0.5s ease both;
+    }
+    .hero-label {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 {
+      font-family: var(--sans);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 900; line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .hero-badges {
+      display: flex; gap: 0.6rem; flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .badge {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px;
+      border: 1px solid var(--border); color: var(--muted);
+    }
+    .badge.origin { border-color: var(--accent); color: var(--accent); }
+    .badge.host   { border-color: var(--blue);   color: var(--blue);   }
+
+    /* MAIN */
+    main {
+      padding: 2.5rem 3rem;
+      display: grid; gap: 1.5rem;
+    }
+
+    /* STAT CARDS */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1px; border: 1px solid var(--border); background: var(--border);
+    }
+    .stat-card {
+      background: var(--surface); padding: 1.5rem;
+      animation: fadeUp 0.4s ease both;
+    }
+    .stat-card:nth-child(1) { animation-delay: 0.05s; }
+    .stat-card:nth-child(2) { animation-delay: 0.10s; }
+    .stat-card:nth-child(3) { animation-delay: 0.15s; }
+    .stat-card:nth-child(4) { animation-delay: 0.20s; }
+    .stat-label {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;
+    }
+    .stat-number {
+      font-family: var(--mono);
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+      font-weight: 700; color: var(--accent); line-height: 1;
+    }
+    .stat-sub { margin-top: 0.3rem; font-size: 11px; color: var(--muted); }
+
+    /* PANEL */
+    .panel {
+      border: 1px solid var(--border); background: var(--surface);
+      animation: fadeUp 0.5s ease both; animation-delay: 0.3s;
+    }
+    .panel-header {
+      padding: 1rem 1.4rem; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .panel-title {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    }
+    .panel-body { padding: 1.2rem 1.4rem; }
+
+    /* DEMOGRAPHICS */
+    .demo-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      background: var(--border); border: 1px solid var(--border); margin-bottom: 1.4rem;
+    }
+    .demo-stat { background: var(--surface); padding: 0.9rem 1rem; }
+    .demo-stat-num { font-family: var(--mono); font-size: 1.6rem; font-weight: 700; line-height: 1; }
+    .demo-stat-lbl {
+      font-family: var(--sans); font-size: 9px; font-weight: 600; margin-top: 0.4rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+    }
+    .pyramid { display: flex; flex-direction: column; gap: 0.35rem; }
+    .pyr-row { display: grid; grid-template-columns: 1fr 3.2rem 1fr; align-items: center; gap: 0.4rem; }
+    .pyr-side { display: flex; height: 15px; }
+    .pyr-side.left  { justify-content: flex-end; }
+    .pyr-side.right { justify-content: flex-start; }
+    .pyr-bar { width: 0; height: 100%; transition: width 0.7s cubic-bezier(.4,0,.2,1); }
+    .pyr-bar.f { background: var(--blue); }
+    .pyr-bar.m { background: var(--accent); }
+    .pyr-band {
+      text-align: center; font-family: var(--mono); font-size: 10px; color: var(--muted);
+    }
+    .demo-note { font-size: 11px; color: var(--muted); line-height: 1.5; margin-top: 1rem; }
+    .demo-roletabs { display: flex; gap: 0; border: 1px solid var(--border); margin-bottom: 1.2rem; width: fit-content; }
+    .demo-roletab {
+      font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.04em;
+      padding: 0.4rem 0.9rem; border: none; background: none; color: var(--muted);
+      cursor: pointer; transition: all 0.15s;
+    }
+    .demo-roletab + .demo-roletab { border-left: 1px solid var(--border); }
+    .demo-roletab:hover { color: var(--text); }
+    .demo-roletab.active { background: rgba(45,212,191,0.1); color: var(--accent); }
+    .dz-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: var(--border); border: 1px solid var(--border); margin-bottom: 1.4rem;
+    }
+    @media(max-width:700px) { .demo-stats { grid-template-columns: repeat(2, 1fr); } }
+
+    /* TWO COL */
+    .two-col {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    }
+    @media(max-width:700px) {
+      .two-col { grid-template-columns: 1fr; }
+      main, header, .hero { padding-left: 1.2rem; padding-right: 1.2rem; }
+      /* stack all inline grids */
+      [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .compare-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-wrap: wrap; }
+      .chart-wrap { height: 160px; }
+    }
+    @media(max-width:480px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .hero-actions { flex-direction: column; }
+      .panel-body { padding: .8rem 1rem; }
+    }
+
+    /* TREND CHART */
+    .chart-wrap { position: relative; height: 200px; overflow: hidden; margin-top: 0.5rem; }
+    svg.trend { width: 100%; height: 100%; overflow: hidden; }
+    .line-refugees { fill: none; stroke: var(--accent); stroke-width: 2;
+      stroke-dasharray: 2000; stroke-dashoffset: 2000;
+      animation: drawLine 1.5s ease 0.5s forwards; }
+    .line-idps { fill: none; stroke: var(--blue); stroke-width: 2;
+      stroke-dasharray: 2000; stroke-dashoffset: 2000;
+      animation: drawLine 1.5s ease 0.7s forwards; }
+    .area-refugees { opacity: 0; animation: fadeIn 0.5s ease 2s forwards; }
+    .axis-label { fill: var(--muted); font-family: var(--sans); font-size: 10px; }
+
+    /* LEGEND */
+    .legend {
+      display: flex; gap: 1.2rem; margin-top: 0.8rem;
+      font-size: 11px; color: var(--muted);
+    }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* BAR LIST */
+    .bar-list { display: flex; flex-direction: column; gap: 0.9rem; }
+    .bar-meta {
+      display: flex; justify-content: space-between;
+      margin-bottom: 0.3rem; font-size: 12px;
+    }
+    .bar-country { color: var(--text); }
+    .bar-value   { color: var(--accent); font-weight: 500; }
+    .bar-value.blue { color: var(--blue); }
+    .bar-track {
+      height: 4px; background: var(--border);
+      border-radius: 2px; overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%; background: var(--accent);
+      border-radius: 2px; width: 0;
+      transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .bar-fill.blue { background: var(--blue); }
+
+    /* EMPTY STATE */
+    .empty {
+      color: var(--muted); font-size: 12px;
+      padding: 1rem 0; text-align: center;
+    }
+
+    /* CHART TOOLTIP */
+    .chart-tooltip {
+      position: absolute;
+      background: #1a1a1a;
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.9rem;
+      font-size: 11px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s;
+      white-space: nowrap;
+      z-index: 10;
+    }
+    .chart-tooltip.visible { opacity: 1; }
+    .tooltip-year {
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+    .tooltip-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1.2rem;
+      color: var(--muted);
+      font-size: 11px;
+    }
+    .tooltip-row span:last-child { color: var(--text); font-weight: 500; }
+    .chart-wrap { position: relative; }
+
+    /* YEAR COMPARISON */
+    .compare-panel { animation-delay: 0.7s; }
+
+    .slider-wrap {
+      display: flex; align-items: center; gap: 1.2rem;
+      margin-bottom: 1.5rem; flex-wrap: wrap;
+    }
+    .slider-label {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+      white-space: nowrap;
+    }
+    .year-range-wrap {
+      flex: 1; position: relative; height: 28px;
+      display: flex; align-items: center;
+    }
+    .year-track {
+      position: absolute; left: 0; right: 0; height: 2px;
+      background: var(--border); border-radius: 1px;
+    }
+    .year-track-fill {
+      position: absolute; height: 2px;
+      background: var(--accent); border-radius: 1px;
+    }
+    .year-slider {
+      position: absolute; width: 100%;
+      -webkit-appearance: none; appearance: none;
+      background: transparent; outline: none;
+      height: 28px; margin: 0; cursor: pointer;
+      pointer-events: none;
+    }
+    .year-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--bg);
+      pointer-events: all; cursor: grab; transition: transform 0.15s;
+    }
+    .year-slider::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.2); }
+    .year-slider.slider-b { pointer-events: none; }
+    .year-slider.slider-b::-webkit-slider-thumb { pointer-events: all; }
+
+    .year-badges {
+      display: flex; gap: 0.5rem;
+    }
+    .year-badge {
+      font-size: 11px; padding: 3px 10px;
+      border: 1px solid var(--accent); color: var(--accent);
+      font-family: var(--mono);
+    }
+    .year-badge.b { border-color: var(--blue); color: var(--blue); }
+
+    .compare-grid {
+      display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem;
+      align-items: start;
+    }
+    .compare-col { display: flex; flex-direction: column; gap: 0.6rem; }
+    .compare-col.b .c-stat-number { color: var(--blue); }
+    .compare-col.b .c-stat-bar { background: var(--blue); }
+
+    .c-stat { }
+    .c-stat-label {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem;
+    }
+    .c-stat-number {
+      font-family: var(--mono); font-size: 1.6rem;
+      font-weight: 700; color: var(--accent); line-height: 1;
+    }
+    .c-stat-track {
+      height: 3px; background: var(--border);
+      border-radius: 2px; margin-top: 0.3rem; overflow: hidden;
+    }
+    .c-stat-bar {
+      height: 100%; background: var(--accent);
+      border-radius: 2px; width: 0;
+      transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .compare-arrow {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 0.4rem; padding-top: 1.8rem;
+    }
+    .change-pct {
+      font-family: var(--mono); font-size: 1.1rem;
+      font-weight: 700; text-align: center;
+    }
+    .change-pct.up   { color: #ef4444; }
+    .change-pct.down { color: #4ade80; }
+    .change-pct.flat { color: var(--muted); }
+    .change-label {
+      font-family: var(--sans); font-size: 9px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-align: center;
+    }
+
+    /* CRISIS BADGE */
+    .crisis-score-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 4px 12px; font-size: 11px;
+      font-family: var(--sans); font-weight: 600; letter-spacing: 0.08em;
+    }
+    .crisis-score-num {
+      font-family: var(--mono); font-size: 1.1rem;
+      font-weight: 700; line-height: 1;
+    }
+    .badge-critical { background: rgba(239,68,68,0.15);  color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+    .badge-severe   { background: rgba(251,146,60,0.15); color: #fb923c; border: 1px solid rgba(251,146,60,0.3); }
+    .badge-high     { background: rgba(250,204,21,0.15); color: #facc15; border: 1px solid rgba(250,204,21,0.3); }
+    .badge-moderate { background: rgba(45,212,191,0.15); color: #2dd4bf; border: 1px solid rgba(45,212,191,0.3); }
+    .badge-low      { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+
+    /* NEWS FEED */
+    .news-list { display: flex; flex-direction: column; gap: 0; }
+    .news-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem;
+      align-items: start;
+    }
+    .news-item:last-child { border-bottom: none; }
+    .news-title {
+      font-size: 12px;
+      color: var(--text);
+      text-decoration: none;
+      line-height: 1.5;
+      transition: color 0.15s;
+    }
+    .news-title:hover { color: var(--accent); }
+    .news-meta {
+      font-family: var(--sans); font-size: 10px; font-weight: 500;
+      color: var(--muted); margin-top: 0.3rem; letter-spacing: 0.06em;
+    }
+    .news-date {
+      font-family: var(--sans); font-size: 10px;
+      color: var(--muted); white-space: nowrap; padding-top: 2px;
+    }
+    .news-empty {
+      font-size: 12px;
+      color: var(--muted);
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    /* DOWNLOAD */
+    .download-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: none; border: 1px solid var(--border);
+      color: var(--muted); font-family: var(--sans);
+      font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 0.35rem 0.8rem;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .download-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .download-btn svg { width: 11px; height: 11px; }
+    .hero-actions { margin-top: 1rem; display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border); padding: 1.2rem 3rem;
+      display: flex; justify-content: space-between;
+      flex-wrap: wrap; gap: 0.5rem;
+      font-family: var(--sans); font-size: 10px; font-weight: 500;
+      color: var(--muted); letter-spacing: 0.08em;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ANIMATIONS */
+    @keyframes drawLine { to { stroke-dashoffset: 0; } }
+    @keyframes fadeIn   { to { opacity: 1; } }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* NOT FOUND */
+    .not-found {
+      padding: 4rem 3rem; text-align: center;
+    }
+    .not-found h2 {
+      font-family: var(--sans); font-size: 2rem; font-weight: 900;
+      color: var(--muted); margin-bottom: 1rem;
+    }
+    .not-found a { color: var(--accent); text-decoration: none; }
+
+    /* ── STORIES LAYER ── */
+    .story-panel {
+      margin-bottom: 1.2rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      animation: fadeUp 0.5s ease both;
+      animation-delay: 0.1s;
+    }
+    .story-header {
+      padding: 0.8rem 1.4rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .story-title {
+      font-family: var(--sans); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+    }
+    .story-toggle {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      color: var(--muted); background: none; border: none; cursor: pointer;
+      transition: color 0.15s; letter-spacing: 0.06em;
+    }
+    .story-toggle:hover { color: var(--accent); }
+    .story-body { padding: 1.2rem 1.4rem; }
+    .story-body.collapsed { display: none; }
+    .story-summary {
+      font-size: 13px; color: var(--muted); line-height: 1.8;
+      border-left: 2px solid var(--accent);
+      padding-left: 1rem; margin-bottom: 1.2rem;
+    }
+    .story-summary strong { color: var(--text); font-family: var(--sans); font-weight: 600; }
+    .story-causes-title {
+      font-family: var(--sans); font-size: 9px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .story-causes {
+      display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem;
+    }
+    .story-cause {
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      padding: 3px 10px; border: 1px solid var(--border);
+      color: var(--muted); letter-spacing: 0.04em;
+    }
+    .story-timeline { display: flex; flex-direction: column; gap: 0; }
+    .story-event {
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 1rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border);
+      font-size: 12px;
+    }
+    .story-event:last-child { border-bottom: none; }
+    .story-event-year {
+      font-family: var(--mono); color: var(--accent); font-size: 11px;
+      padding-top: 0.05rem; flex-shrink: 0;
+    }
+    .story-event-text { color: var(--muted); line-height: 1.6; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+
+    @media(max-width:480px) {
+      .chart-wrap { height: 160px; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .crisis-row { grid-template-columns: 1fr auto; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+    }
+
+  
+
+
+/* ── MOBILE SAFETY ── */
+html,body{overflow-x:hidden}
+.chart-wrap{overflow:hidden}
+svg.trend{overflow:hidden}
+img,video,iframe{max-width:100%}
+
+
+/* ── MOBILE HAMBURGER MENU ── */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;border:1px solid var(--border);background:none;cursor:pointer;padding:8px;flex-shrink:0;transition:border-color .2s}
+.hamburger:hover{border-color:var(--accent)}
+.hamburger span{display:block;height:1.5px;background:var(--text);border-radius:1px;transition:all .25s}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+.nav-drawer{
+  position:fixed;top:0;right:0;bottom:0;width:280px;max-width:85vw;
+  background:var(--surface);border-left:1px solid var(--border);
+  z-index:500;display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+}
+.nav-drawer.open{transform:translateX(0)}
+.nav-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);
+  z-index:499;opacity:0;pointer-events:none;
+  transition:opacity .3s;
+}
+.nav-overlay.open{opacity:1;pointer-events:all}
+
+.nav-drawer-header{
+  padding:1rem 1.2rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.nav-drawer-logo{font-family:var(--sans);font-size:1.1rem;font-weight:900;color:var(--text);text-decoration:none}
+.nav-drawer-logo span{color:var(--accent)}
+.nav-drawer-close{
+  width:32px;height:32px;border:1px solid var(--border);background:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:16px;transition:all .15s;flex-shrink:0;
+}
+.nav-drawer-close:hover{border-color:var(--accent);color:var(--accent)}
+
+.nav-drawer-links{
+  flex:1;padding:1rem 0;display:flex;flex-direction:column;
+}
+.nav-drawer-links a{
+  font-family:var(--sans);font-size:13px;font-weight:600;
+  color:var(--muted);text-decoration:none;
+  padding:.75rem 1.4rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .15s;
+}
+.nav-drawer-links a:last-child{border-bottom:none}
+.nav-drawer-links a:hover,.nav-drawer-links a.active{color:var(--accent);background:rgba(45,212,191,.04)}
+.nav-drawer-links a::after{content:'→';font-size:12px;color:var(--muted2)}
+.nav-drawer-links a:hover::after,.nav-drawer-links a.active::after{color:var(--accent)}
+
+.nav-drawer-footer{
+  padding:1rem 1.4rem;border-top:1px solid var(--border);
+  font-family:var(--sans);font-size:10px;color:var(--muted2);
+  flex-shrink:0;
+}
+
+@media(max-width:700px){
+  .nav{display:none!important}
+  .hamburger{display:flex}
+}
+
+</style>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7128f2b8b7014426a65f4112bfabfd2a"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="back-link">
+    <span class="back-arrow">←</span> Back to Dashboard
+  </a>
+  <nav style="display:flex;gap:1.2rem;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:#666;margin-left:auto">
+    <a href="index.html" style="color:inherit;text-decoration:none">Dashboard</a>
+    <a href="countries.html" style="color:inherit;text-decoration:none">Countries</a>
+    <a href="regions.html" style="color:inherit;text-decoration:none">Regions</a>
+    <a href="compare.html" style="color:inherit;text-decoration:none">Compare</a>
+    <a href="funding.html" style="color:inherit;text-decoration:none">Funding</a>
+    <a href="help.html" style="color:inherit;text-decoration:none">How to Help</a>
+    <a href="about.html" style="color:inherit;text-decoration:none">About</a>
+    <a href="sitrep.html" style="color:inherit;text-decoration:none">SitRep</a>
+  </nav>
+  <div class="site-name">Refuji <span>Watch</span></div>
+</header>
+
+<div id="app">
+  <div style="padding: 3rem; color: var(--muted); text-align: center;">
+    Loading country data...
+  </div>
+</div>
+
+<footer>
+  <span>Source: <a href="https://www.unhcr.org/refugee-statistics" target="_blank">UNHCR Refugee Data Finder</a></span>
+  <span id="footer-date">—</span>
+  <span>
+    Built with love by <a href="https://github.com/jahitjanberk" target="_blank">jahit</a>
+  </span>
+</footer>
+
+<script>
+  // ── Helpers ──────────────────────────────────────────────
+  function fmt(n) {
+    if (n >= 1e6) return (n / 1e6).toFixed(1) + 'M';
+    if (n >= 1e3) return (n / 1e3).toFixed(0) + 'K';
+    return n || '0';
+  }
+
+  function getParam(key) {
+    return new URLSearchParams(window.location.search).get(key);
+  }
+
+  // ── Trend chart ──────────────────────────────────────────
+  function renderTrend(trend, svgId) {
+    const svg = document.getElementById(svgId);
+    if (!svg || !trend || trend.length === 0) return;
+
+    const W = 800, H = 160, PAD = { top: 10, right: 20, bottom: 30, left: 10 };
+    const xs    = trend.map((_, i) => PAD.left + i * (W - PAD.left - PAD.right) / (trend.length - 1));
+    const refs  = trend.map(d => d.refugees || 0);
+    const idps  = trend.map(d => d.idps || 0);
+    const total = trend.map(d => d.total || 0);
+    const allVals = [...refs, ...idps];
+    const minV = 0, maxV = Math.max(...allVals) * 1.1 || 1;
+    const y = v => PAD.top + (1 - (v - minV) / (maxV - minV)) * (H - PAD.top - PAD.bottom);
+
+    const refPts  = trend.map((d, i) => `${xs[i]},${y(refs[i])}`).join(' ');
+    const idpPts  = trend.map((d, i) => `${xs[i]},${y(idps[i])}`).join(' ');
+    const refArea = `M${xs[0]},${y(refs[0])} ` +
+      trend.slice(1).map((d, i) => `L${xs[i+1]},${y(refs[i+1])}`).join(' ') +
+      ` L${xs[xs.length-1]},${H - PAD.bottom} L${xs[0]},${H - PAD.bottom} Z`;
+
+    svg.innerHTML = `
+      <defs>
+        <linearGradient id="refGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#2dd4bf" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <path class="area-refugees" d="${refArea}" fill="url(#refGrad)"/>
+      <polyline class="line-refugees" points="${refPts}"/>
+      ${idps.some(v => v > 0) ? `<polyline class="line-idps" points="${idpPts}"/>` : ''}
+      ${trend.map((d, i) => `
+        <text class="axis-label" x="${xs[i]}" y="${H - PAD.bottom + 16}" text-anchor="middle">${d.year}</text>
+
+        <!-- Refugee dot hit target -->
+        <circle
+          class="trend-dot"
+          cx="${xs[i]}" cy="${y(refs[i])}" r="5"
+          fill="#2dd4bf" opacity="0"
+          data-year="${d.year}"
+          data-line="refugees"
+          data-refugees="${refs[i]}"
+          data-asylum="${d.asylum_seekers || 0}"
+          data-idps="${idps[i]}"
+          data-total="${total[i]}"
+          style="cursor:pointer"
+        />
+        <circle cx="${xs[i]}" cy="${y(refs[i])}" r="3" fill="#2dd4bf" opacity="0.9" style="pointer-events:none"/>
+
+        <!-- IDP dot hit target (only if IDPs exist) -->
+        ${idps[i] > 0 ? `
+        <circle
+          class="trend-dot idp-dot"
+          cx="${xs[i]}" cy="${y(idps[i])}" r="5"
+          fill="#5b8dd9" opacity="0"
+          data-year="${d.year}"
+          data-line="idps"
+          data-refugees="${refs[i]}"
+          data-asylum="${d.asylum_seekers || 0}"
+          data-idps="${idps[i]}"
+          data-total="${total[i]}"
+          style="cursor:pointer"
+        />
+        <circle cx="${xs[i]}" cy="${y(idps[i])}" r="3" fill="#5b8dd9" opacity="0.9" style="pointer-events:none"/>
+        ` : ''}
+      `).join('')}
+    `;
+
+    // Create tooltip
+    const wrap    = svg.closest('.chart-wrap');
+    let tooltip   = wrap.querySelector('.chart-tooltip');
+    if (!tooltip) {
+      tooltip = document.createElement('div');
+      tooltip.className = 'chart-tooltip';
+      wrap.appendChild(tooltip);
+    }
+
+    // Wire up hover on invisible larger hit targets
+    svg.querySelectorAll('.trend-dot').forEach(dot => {
+      dot.addEventListener('mouseenter', e => {
+        const year     = dot.dataset.year;
+        const refugees = parseInt(dot.dataset.refugees);
+        const asylum   = parseInt(dot.dataset.asylum);
+        const idpVal   = parseInt(dot.dataset.idps);
+        const tot      = parseInt(dot.dataset.total);
+        const hasIDPs  = idpVal > 0;
+
+        const line = dot.dataset.line;
+        const isIDPLine = line === 'idps';
+
+        tooltip.innerHTML = `
+          <div class="tooltip-year" style="color:${isIDPLine ? '#5b8dd9' : '#2dd4bf'}">${year}</div>
+          <div class="tooltip-row"><span>Total</span><span>${fmt(tot)}</span></div>
+          <div class="tooltip-row"><span>Refugees</span><span>${fmt(refugees)}</span></div>
+          <div class="tooltip-row"><span>Asylum Seekers</span><span>${fmt(asylum)}</span></div>
+          ${hasIDPs ? `<div class="tooltip-row" style="${isIDPLine ? 'color:#5b8dd9' : ''}"><span>Internally Displaced</span><span>${fmt(idpVal)}</span></div>` : ''}
+        `;
+
+        // Position tooltip — flip left if near right edge
+        const svgRect  = svg.getBoundingClientRect();
+        const dotRect  = dot.getBoundingClientRect();
+        const relX     = dotRect.left - svgRect.left + dotRect.width / 2;
+        const relY     = dotRect.top  - svgRect.top;
+        const flipLeft = relX > svgRect.width * 0.7;
+
+        tooltip.style.left    = flipLeft ? 'auto' : (relX + 10) + 'px';
+        tooltip.style.right   = flipLeft ? (svgRect.width - relX + 10) + 'px' : 'auto';
+        tooltip.style.top     = (relY - 10) + 'px';
+        tooltip.classList.add('visible');
+
+        // Highlight dot
+        const isIDP = dot.dataset.line === 'idps';
+        dot.setAttribute('fill', isIDP ? '#5b8dd9' : '#2dd4bf');
+        dot.setAttribute('opacity', '0.3');
+      });
+
+      dot.addEventListener('mouseleave', () => {
+        tooltip.classList.remove('visible');
+        dot.setAttribute('opacity', '0');
+      });
+    });
+  }
+
+  // ── Bar list ─────────────────────────────────────────────
+  function renderBars(containerId, items, valueKey, colorClass) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    if (!items || items.length === 0) {
+      el.innerHTML = '<div class="empty">No data available</div>';
+      return;
+    }
+    const max = Math.max(...items.map(i => i[valueKey]));
+    el.innerHTML = items.map(item => `
+      <div>
+        <div class="bar-meta">
+          <span class="bar-country">${item.country}</span>
+          <span class="bar-value ${colorClass || ''}">${fmt(item[valueKey])}</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill ${colorClass || ''}" data-pct="${(item[valueKey] / max * 100).toFixed(1)}"></div>
+        </div>
+      </div>
+    `).join('');
+    requestAnimationFrame(() => {
+      el.querySelectorAll('.bar-fill').forEach(b => b.style.width = b.dataset.pct + '%');
+    });
+  }
+
+  // ── Demographic content (stat cards + pyramid), origin or host ────
+  function renderDemoContent(demo, role, countryName, estimate, year) {
+    const host = document.getElementById('demo-content');
+    if (!host) return;
+    const who = role === 'origin' ? `people from ${countryName}` : `people ${countryName} hosts`;
+    host.innerHTML = `
+      <div class="demo-stats">
+        <div class="demo-stat"><div class="demo-stat-num" style="color:var(--amber)">${demo.children_pct}%</div><div class="demo-stat-lbl">Children (under 18)</div></div>
+        <div class="demo-stat"><div class="demo-stat-num" style="color:var(--blue)">${demo.female_pct}%</div><div class="demo-stat-lbl">Female</div></div>
+        <div class="demo-stat"><div class="demo-stat-num" style="color:var(--accent)">${demo.women_and_children_pct}%</div><div class="demo-stat-lbl">Women &amp; children</div></div>
+        <div class="demo-stat"><div class="demo-stat-num">${demo.under_5_pct}%</div><div class="demo-stat-lbl">Under age 5</div></div>
+      </div>
+      <div class="pyramid" id="pyramid"></div>
+      <div class="legend" style="margin-top:1rem">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>Female</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>Male</div>
+      </div>`;
+    const note = document.getElementById('demo-note');
+    if (note) note.textContent = `Age & sex split for the ${fmt(demo.population_covered)} ${who} for whom UNHCR holds demographic data.` +
+      (estimate ? ` Latest available composition (end-${year}).` : '');
+    renderPyramid(demo);
+  }
+
+  // ── Disaster vs conflict time-series for a country ────────
+  function buildDisasterSeries(countryName, dd) {
+    if (!dd || !dd.by_country) return null;
+    const series = dd.by_country[countryName];
+    if (!series || !series.length) return null;   // no IDMC footprint
+    const totD = series.reduce((s, r) => s + r.disaster, 0);
+    const totC = series.reduce((s, r) => s + r.conflict, 0);
+    if (totD + totC === 0) return null;
+    // hero = most recent year that actually has data (not a trailing zero)
+    let latest = series[series.length - 1];
+    for (let i = series.length - 1; i >= 0; i--) {
+      if (series[i].disaster + series[i].conflict > 0) { latest = series[i]; break; }
+    }
+    return {
+      series, latest, latestYear: latest.year,
+      disasterShare: Math.round(totD / (totD + totC) * 100),
+    };
+  }
+
+  // grouped bars: disaster (amber) vs conflict (red) per year
+  function renderDisasterChart(ds) {
+    const svg = document.getElementById('disaster-svg');
+    if (!svg) return;
+    const W = 800, H = 170, P = { t: 10, r: 10, b: 26, l: 10 };
+    const data = ds.series;
+    const max = Math.max(...data.map(r => Math.max(r.disaster, r.conflict)), 1);
+    const bw = (W - P.l - P.r) / data.length;
+    const barW = bw * 0.32;
+    const y = v => P.t + (1 - v / max) * (H - P.t - P.b);
+    let html = '';
+    data.forEach((r, i) => {
+      const cx = P.l + i * bw + bw / 2;
+      const yd = y(r.disaster), yc = y(r.conflict);
+      html += `<rect x="${cx - barW - 1}" y="${yd}" width="${barW}" height="${H - P.b - yd}" fill="#f59e0b" opacity="0.9"><title>Disaster ${r.year}: ${fmt(r.disaster)}</title></rect>
+               <rect x="${cx + 1}" y="${yc}" width="${barW}" height="${H - P.b - yc}" fill="#ef4444" opacity="0.9"><title>Conflict ${r.year}: ${fmt(r.conflict)}</title></rect>
+               <text x="${cx}" y="${H - P.b + 14}" text-anchor="middle" font-size="9" fill="#666" font-family="var(--mono)">${r.year}</text>`;
+    });
+    svg.innerHTML = html;
+  }
+
+  // ── Population pyramid (age bands × sex) ──────────────────
+  function renderPyramid(demo) {
+    const el = document.getElementById('pyramid');
+    if (!el || !demo.pyramid) return;
+    const bands = demo.pyramid;
+    const max = Math.max(...bands.map(b => Math.max(b.female, b.male)), 1);
+    const known = demo.totals ? demo.totals.known_age : 0;
+    const pctOf = v => known ? (v / known * 100).toFixed(1) + '%' : '';
+    el.innerHTML = bands.map(b => `
+      <div class="pyr-row">
+        <div class="pyr-side left">
+          <div class="pyr-bar f" data-w="${(b.female / max * 100).toFixed(1)}" title="Female ${b.band}: ${fmt(b.female)}"></div>
+        </div>
+        <div class="pyr-band">${b.band}</div>
+        <div class="pyr-side right">
+          <div class="pyr-bar m" data-w="${(b.male / max * 100).toFixed(1)}" title="Male ${b.band}: ${fmt(b.male)}"></div>
+        </div>
+      </div>`).join('');
+    requestAnimationFrame(() => {
+      el.querySelectorAll('.pyr-bar').forEach(b => b.style.width = b.dataset.w + '%');
+    });
+  }
+
+  // ── Render page ──────────────────────────────────────────
+  function renderPage(countryName, data) {
+    const d      = data.country_details[countryName];
+    const latest = d.latest || {};
+    const isBoth = d.is_origin && d.is_host;
+    const hasIDPs = (latest.idps || 0) > 0;
+
+    // For dual-role countries, compute hosted total from top_origins_hosted
+    const hostedTotal = (d.top_origins_hosted || []).reduce((sum, o) => sum + o.count, 0);
+
+    // Demographic composition (age & sex) — from the top-level demographics block.
+    // Origin = who has fled this country; Host = who this country shelters.
+    const demoBlock = data.demographics || {};
+    const demoOrigin = (demoBlock.countries || {})[countryName] || null;
+    const demoHost   = (demoBlock.host_countries || {})[countryName] || null;
+    const demoEstimate = !!demoBlock.is_estimate;
+    const demoSrc = demoBlock.source || '';
+    // primary pyramid: prefer origin when the country produces refugees
+    const demo = d.is_origin ? (demoOrigin || demoHost) : (demoHost || demoOrigin);
+    const demoRole = (demo === demoOrigin && demoOrigin) ? 'origin' : 'host';
+
+    // Disaster vs conflict displacement time-series for this country (IDMC)
+    const disasterSeries = buildDisasterSeries(countryName, data.disaster_displacement);
+
+    document.title = `${countryName} — Refuji Watch`;
+
+    // Build story panel HTML
+    const story = window.__stories && window.__stories[countryName];
+    let storyHTML = '';
+    if (story) {
+      const causes = (story.causes || []).map(c => `<span class="story-cause">${c}</span>`).join('');
+      const events = (story.timeline || []).map(e =>
+        `<div class="story-event">
+          <div class="story-event-year">${e.year}</div>
+          <div class="story-event-text">${e.event}</div>
+        </div>`
+      ).join('');
+      storyHTML = `
+        <div class="story-panel">
+          <div class="story-header">
+            <span class="story-title">Background &amp; Context</span>
+            <button class="story-toggle" onclick="this.closest('.story-panel').querySelector('.story-body').classList.toggle('collapsed');this.textContent=this.textContent==='Hide'?'Show':'Hide'">Hide</button>
+          </div>
+          <div class="story-body">
+            <div class="story-summary">${story.summary}</div>
+            <div class="story-causes-title">Key causes</div>
+            <div class="story-causes">${causes}</div>
+            <div class="story-causes-title">Timeline</div>
+            <div class="story-timeline">${events}</div>
+          </div>
+        </div>`;
+    }
+
+    document.getElementById('app').innerHTML = `
+      <!-- HERO -->
+      <div class="hero">
+        <div class="hero-label">Country Profile · ${data.last_updated}</div>
+        <h1>${countryName}</h1>
+        <div class="hero-badges">
+          ${d.is_origin ? '<span class="badge origin">Origin Country</span>' : ''}
+          ${d.is_host   ? '<span class="badge host">Host Country</span>'   : ''}
+          ${d.crisis ? `
+          <span class="crisis-score-badge badge-${d.crisis.label.toLowerCase()}">
+            <span class="crisis-score-num">${d.crisis.score}</span>
+            <span>/ 10 · ${d.crisis.label}</span>
+          </span>` : ''}
+        </div>
+        <div class="hero-actions" id="hero-actions">
+          <button class="download-btn" id="csv-btn">
+            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M6 1v7M3 5l3 3 3-3M1 10h10"/>
+            </svg>
+            Download CSV
+          </button>
+        </div>
+      </div>
+
+      <main>
+
+        <!-- ORIGIN STATS — shown if country produces refugees -->
+        ${d.is_origin ? `
+        <div style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); padding: 0 0 0.5rem;">
+          ${isBoth ? 'As an Origin Country' : ''}
+        </div>
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-label">Total Displaced</div>
+            <div class="stat-number">${fmt(latest.total || 0)}</div>
+            <div class="stat-sub">people have fled ${countryName}</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Refugees</div>
+            <div class="stat-number">${fmt(latest.refugees || 0)}</div>
+            <div class="stat-sub">fled across borders</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Asylum Seekers</div>
+            <div class="stat-number">${fmt(latest.asylum_seekers || 0)}</div>
+            <div class="stat-sub">awaiting decisions</div>
+          </div>
+          ${hasIDPs ? `
+          <div class="stat-card">
+            <div class="stat-label">Internally Displaced</div>
+            <div class="stat-number">${fmt(latest.idps || 0)}</div>
+            <div class="stat-sub">within own country</div>
+          </div>` : ''}
+        </div>` : ''}
+
+        <!-- HOST STATS — shown if country hosts refugees -->
+        ${d.is_host & hostedTotal > 0 ? `
+        <div style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); padding: ${d.is_origin ? '1.5rem' : '0'} 0 0.5rem;">
+          ${isBoth ? 'As a Host Country' : ''}
+        </div>
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-label">Refugees Hosted</div>
+            <div class="stat-number">${fmt(hostedTotal)}</div>
+            <div class="stat-sub">people welcomed</div>
+          </div>
+          ${(d.top_origins_hosted || []).slice(0, 3).map(o => `
+          <div class="stat-card">
+            <div class="stat-label">From ${o.country}</div>
+            <div class="stat-number">${fmt(o.count)}</div>
+            <div class="stat-sub">refugees hosted</div>
+          </div>`).join('')}
+        </div>` : ''}
+
+        <!-- STORY PANEL -->
+        \${storyHTML}
+
+        <!-- TREND CHART -->
+        ${d.trend && d.trend.length > 0 ? `
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-title">
+              ${d.is_origin ? 'People Displaced from ' + countryName : 'Refugees Hosted by ' + countryName}
+              · 2018–${data.last_updated.slice(0,4)}
+            </span>
+          </div>
+          <div class="panel-body">
+            <div class="chart-wrap">
+              <svg class="trend" id="trend-svg" viewBox="0 0 800 160" preserveAspectRatio="none" style="overflow:hidden"></svg>
+            </div>
+            <div class="legend">
+              <div class="legend-item">
+                <div class="legend-dot" style="background: var(--accent)"></div>
+                ${d.is_origin ? 'Refugees & Asylum Seekers' : 'Total Hosted'}
+              </div>
+              ${hasIDPs ? `
+              <div class="legend-item">
+                <div class="legend-dot" style="background: var(--blue)"></div>
+                Internally Displaced
+              </div>` : ''}
+            </div>
+          </div>
+        </div>` : ''}
+
+        <!-- DEMOGRAPHIC BREAKDOWN -->
+        ${demo ? `
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-title">${demoRole === 'origin' ? 'Who has fled ' + countryName : 'Who ' + countryName + ' hosts'} — age &amp; sex</span>
+            <span style="font-size:10px;color:var(--muted);letter-spacing:0.06em">${demoSrc}</span>
+          </div>
+          <div class="panel-body">
+            ${(demoOrigin && demoHost) ? `
+            <div class="demo-roletabs" id="demo-roletabs">
+              <button class="demo-roletab active" data-role="origin">People from ${countryName}</button>
+              <button class="demo-roletab" data-role="host">People ${countryName} hosts</button>
+            </div>` : ''}
+            <div id="demo-content"></div>
+            <p class="demo-note" id="demo-note"></p>
+          </div>
+        </div>` : ''}
+
+        <!-- DISASTER vs CONFLICT DISPLACEMENT -->
+        ${disasterSeries ? `
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-title">What drives displacement — disaster vs conflict</span>
+            <span style="font-size:10px;color:var(--muted);letter-spacing:0.06em">IDMC · new displacements / year</span>
+          </div>
+          <div class="panel-body">
+            <div class="dz-stats">
+              <div class="demo-stat"><div class="demo-stat-num" style="color:var(--amber)">${fmt(disasterSeries.latest.disaster)}</div><div class="demo-stat-lbl">Disaster (${disasterSeries.latestYear})</div></div>
+              <div class="demo-stat"><div class="demo-stat-num" style="color:var(--red)">${fmt(disasterSeries.latest.conflict)}</div><div class="demo-stat-lbl">Conflict (${disasterSeries.latestYear})</div></div>
+              <div class="demo-stat"><div class="demo-stat-num">${disasterSeries.disasterShare}%</div><div class="demo-stat-lbl">Disaster-driven since 2018</div></div>
+            </div>
+            <div class="chart-wrap"><svg id="disaster-svg" viewBox="0 0 800 170" preserveAspectRatio="none" style="overflow:visible"></svg></div>
+            <div class="legend" style="margin-top:0.7rem">
+              <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div>Disaster (floods, storms, drought, quakes)</div>
+              <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Conflict &amp; violence</div>
+            </div>
+            <p class="demo-note">New internal displacements recorded each year — a flow, not a running total. Source: IDMC Global Internal Displacement Database.</p>
+          </div>
+        </div>` : ''}
+
+        <!-- WHERE REFUGEES GO / WHO IS HOSTED -->
+        <div class="two-col">
+          ${d.top_hosts && d.top_hosts.length > 0 ? `
+          <div class="panel">
+            <div class="panel-header">
+              <span class="panel-title">Where refugees from ${countryName} go</span>
+            </div>
+            <div class="panel-body">
+              <div class="bar-list" id="hosts-bars"></div>
+            </div>
+          </div>` : '<div></div>'}
+
+          ${d.top_origins_hosted && d.top_origins_hosted.length > 0 ? `
+          <div class="panel">
+            <div class="panel-header">
+              <span class="panel-title">Refugees ${countryName} hosts</span>
+            </div>
+            <div class="panel-body">
+              <div class="bar-list" id="origins-bars"></div>
+            </div>
+          </div>` : '<div></div>'}
+        </div>
+
+        <!-- YEAR COMPARISON -->
+        ${d.trend && d.trend.length > 1 ? `
+        <div class="panel compare-panel">
+          <div class="panel-header">
+            <span class="panel-title">Compare Years</span>
+            <div class="year-badges">
+              <span class="year-badge" id="badge-a">—</span>
+              <span style="font-size:10px;color:var(--muted);align-self:center">vs</span>
+              <span class="year-badge b" id="badge-b">—</span>
+            </div>
+          </div>
+          <div class="panel-body">
+            <!-- Slider -->
+            <div class="slider-wrap">
+              <span class="slider-label">Drag to select years</span>
+              <div class="year-range-wrap" id="range-wrap">
+                <div class="year-track"></div>
+                <div class="year-track-fill" id="track-fill"></div>
+                <input type="range" class="year-slider slider-a" id="slider-a"/>
+                <input type="range" class="year-slider slider-b" id="slider-b"/>
+              </div>
+            </div>
+            <!-- Comparison chart -->
+            <div class="chart-wrap" style="margin-bottom:1.5rem">
+              <svg class="trend" id="compare-svg" viewBox="0 0 800 160" preserveAspectRatio="none" style="overflow:hidden">
+                <defs>
+                  <linearGradient id="compGradA" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.15"/>
+                    <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/>
+                  </linearGradient>
+                  <linearGradient id="compGradB" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#5b8dd9" stop-opacity="0.15"/>
+                    <stop offset="100%" stop-color="#5b8dd9" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="legend" style="margin-top:0.5rem">
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div><span id="legend-a">Year A</span></div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div><span id="legend-b">Year B</span></div>
+              </div>
+            </div>
+            <!-- Stat comparison -->
+            <div class="compare-grid" id="compare-grid"></div>
+          </div>
+        </div>` : ''}
+
+        <!-- NEWS FEED -->
+        ${d.news && d.news.length > 0 ? `
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-title">Latest Reports &amp; News</span>
+            <span style="font-size:10px;color:var(--muted);letter-spacing:0.06em">Source: ReliefWeb</span>
+          </div>
+          <div class="panel-body">
+            <div class="news-list" id="news-list"></div>
+          </div>
+        </div>` : ''}
+
+      </main>
+    `;
+
+    renderTrend(d.trend, 'trend-svg');
+    if (demo) {
+      renderDemoContent(demo, demoRole, countryName, demoEstimate, demoBlock.year);
+      if (demoOrigin && demoHost) {
+        document.getElementById('demo-roletabs').addEventListener('click', ev => {
+          const btn = ev.target.closest('.demo-roletab'); if (!btn) return;
+          document.querySelectorAll('.demo-roletab').forEach(b => b.classList.toggle('active', b === btn));
+          const role = btn.dataset.role;
+          renderDemoContent(role === 'origin' ? demoOrigin : demoHost, role, countryName, demoEstimate, demoBlock.year);
+        });
+      }
+    }
+    if (disasterSeries) renderDisasterChart(disasterSeries);
+    renderBars('hosts-bars',   d.top_hosts,           'hosted', '');
+    renderBars('origins-bars', d.top_origins_hosted,  'count',  'blue');
+
+    // ── Year comparison ──────────────────────────────────────
+    if (d.trend && d.trend.length > 1) {
+      const years  = d.trend.map(t => t.year);
+      const minY   = years[0];
+      const maxY   = years[years.length - 1];
+      const sliderA = document.getElementById('slider-a');
+      const sliderB = document.getElementById('slider-b');
+      const badgeA  = document.getElementById('badge-a');
+      const badgeB  = document.getElementById('badge-b');
+      const fill    = document.getElementById('track-fill');
+      const legendA = document.getElementById('legend-a');
+      const legendB = document.getElementById('legend-b');
+
+      // Init sliders
+      [sliderA, sliderB].forEach(s => {
+        s.min   = minY;
+        s.max   = maxY;
+        s.step  = 1;
+      });
+      sliderA.value = minY;
+      sliderB.value = maxY;
+
+      function getYearData(year) {
+        return d.trend.find(t => t.year === parseInt(year)) || {};
+      }
+
+      function updateFill() {
+        const a   = parseInt(sliderA.value);
+        const b   = parseInt(sliderB.value);
+        const lo  = Math.min(a, b);
+        const hi  = Math.max(a, b);
+        const pct = (yr) => ((yr - minY) / (maxY - minY)) * 100;
+        fill.style.left  = pct(lo) + '%';
+        fill.style.width = (pct(hi) - pct(lo)) + '%';
+      }
+
+      function pctChange(a, b) {
+        if (!a || a === 0) return null;
+        return Math.round(((b - a) / a) * 100);
+      }
+
+      function renderCompareSVG(yearA, yearB) {
+        const svg = document.getElementById('compare-svg');
+        if (!svg) return;
+        const W = 800, H = 140, PAD = { top: 10, right: 20, bottom: 30, left: 10 };
+        const allVals = d.trend.map(t => t.refugees || 0);
+        const maxV = Math.max(...allVals) * 1.1 || 1;
+        const xs = d.trend.map((_, i) => PAD.left + i * (W - PAD.left - PAD.right) / (d.trend.length - 1));
+        const y  = v => PAD.top + (1 - v / maxV) * (H - PAD.top - PAD.bottom);
+        const pts = d.trend.map((t, i) => `${xs[i]},${y(t.refugees || 0)}`).join(' ');
+
+        const idxA = d.trend.findIndex(t => t.year === yearA);
+        const idxB = d.trend.findIndex(t => t.year === yearB);
+
+        svg.innerHTML = `
+          <polyline points="${pts}" fill="none" stroke="#2a2a2a" stroke-width="1.5" stroke-dasharray="4,3"/>
+          ${idxA >= 0 ? `
+            <circle cx="${xs[idxA]}" cy="${y(d.trend[idxA].refugees||0)}" r="6" fill="#2dd4bf" opacity="0.9"/>
+            <line x1="${xs[idxA]}" y1="${PAD.top}" x2="${xs[idxA]}" y2="${H-PAD.bottom}" stroke="#2dd4bf" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+            <text x="${xs[idxA]}" y="${H-PAD.bottom+16}" font-family="monospace" font-size="10" fill="#2dd4bf" text-anchor="middle">${yearA}</text>
+          ` : ''}
+          ${idxB >= 0 ? `
+            <circle cx="${xs[idxB]}" cy="${y(d.trend[idxB].refugees||0)}" r="6" fill="#5b8dd9" opacity="0.9"/>
+            <line x1="${xs[idxB]}" y1="${PAD.top}" x2="${xs[idxB]}" y2="${H-PAD.bottom}" stroke="#5b8dd9" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+            <text x="${xs[idxB]}" y="${H-PAD.bottom+16}" font-family="monospace" font-size="10" fill="#5b8dd9" text-anchor="middle">${yearB}</text>
+          ` : ''}
+          ${d.trend.map((t, i) => i !== idxA & i !== idxB ? `
+            <text x="${xs[i]}" y="${H-PAD.bottom+16}" font-family="monospace" font-size="9" fill="#2a2a2a" text-anchor="middle">${t.year}</text>
+          ` : '').join('')}
+        `;
+      }
+
+      function renderCompare() {
+        const yearA = parseInt(sliderA.value);
+        const yearB = parseInt(sliderB.value);
+        const dA    = getYearData(yearA);
+        const dB    = getYearData(yearB);
+
+        badgeA.textContent  = yearA;
+        badgeB.textContent  = yearB;
+        legendA.textContent = yearA;
+        legendB.textContent = yearB;
+        updateFill();
+        renderCompareSVG(yearA, yearB);
+
+        const metrics = [
+          { label: 'Refugees',           key: 'refugees' },
+          { label: 'Asylum Seekers',     key: 'asylum_seekers' },
+          { label: 'Internally Displaced', key: 'idps' },
+          { label: 'Total',              key: 'total' },
+        ].filter(m => (dA[m.key] || 0) + (dB[m.key] || 0) > 0);
+
+        const maxVal = Math.max(...metrics.map(m => Math.max(dA[m.key]||0, dB[m.key]||0)));
+
+        const chg = pctChange(dA.total || dA.refugees, dB.total || dB.refugees);
+        const chgClass = chg === null ? 'flat' : chg > 0 ? 'up' : chg < 0 ? 'down' : 'flat';
+        const chgLabel = chg === null ? '—' : (chg > 0 ? '+' : '') + chg + '%';
+
+        document.getElementById('compare-grid').innerHTML = `
+          <div class="compare-col">
+            ${metrics.map(m => `
+              <div class="c-stat">
+                <div class="c-stat-label">${m.label}</div>
+                <div class="c-stat-number">${fmt(dA[m.key] || 0)}</div>
+                <div class="c-stat-track">
+                  <div class="c-stat-bar" style="width:${maxVal ? ((dA[m.key]||0)/maxVal*100).toFixed(1) : 0}%"></div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          <div class="compare-arrow">
+            <div class="change-pct ${chgClass}">${chgLabel}</div>
+            <div class="change-label">change</div>
+          </div>
+          <div class="compare-col b">
+            ${metrics.map(m => `
+              <div class="c-stat">
+                <div class="c-stat-label">${m.label}</div>
+                <div class="c-stat-number">${fmt(dB[m.key] || 0)}</div>
+                <div class="c-stat-track">
+                  <div class="c-stat-bar" style="width:${maxVal ? ((dB[m.key]||0)/maxVal*100).toFixed(1) : 0}%"></div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      sliderA.addEventListener('input', renderCompare);
+      sliderB.addEventListener('input', renderCompare);
+      renderCompare();
+    }
+
+    // Render news feed
+    const newsList = document.getElementById('news-list');
+    if (newsList && d.news && d.news.length > 0) {
+      newsList.innerHTML = d.news.map(article => `
+        <div class="news-item">
+          <div>
+            <a class="news-title" href="${article.url}" target="_blank">${article.title}</a>
+            <div class="news-meta">${article.source}</div>
+          </div>
+          <div class="news-date">${article.date}</div>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('footer-date').textContent = 'Last updated: ' + data.last_updated;
+    addCompareBtn(countryName);
+    // Add SitRep button
+    const sitrepBtn = document.createElement('a');
+    sitrepBtn.href = 'sitrep.html?country=' + encodeURIComponent(countryName);
+    sitrepBtn.className = 'download-btn';
+    sitrepBtn.textContent = '📋 Generate SitRep';
+    sitrepBtn.style.textDecoration = 'none';
+    const actionsEl = document.getElementById('hero-actions');
+    if(actionsEl) actionsEl.appendChild(sitrepBtn);
+
+    // Wire up download button
+    const csvBtn = document.getElementById('csv-btn');
+    if (csvBtn) {
+      csvBtn.addEventListener('click', () => downloadCountryCSV(countryName, d, data.last_updated));
+    }
+  }
+
+  // ── Not found ────────────────────────────────────────────
+  function renderNotFound(countryName) {
+    document.getElementById('app').innerHTML = `
+      <div class="not-found">
+        <h2>No data found for "${countryName}"</h2>
+        <p style="color: var(--muted); margin-bottom: 1rem;">
+          This country may not appear in the current dataset.
+        </p>
+        <a href="index.html">← Back to Dashboard</a>
+      </div>
+    `;
+  }
+
+  // ── CSV Download ─────────────────────────────────────────
+  function downloadCountryCSV(countryName, d, lastUpdated) {
+    const latest  = d.latest || {};
+    const rows = [
+      [`Refuji Watch — ${countryName} Country Profile`],
+      ['Generated', lastUpdated],
+      ['Source', 'UNHCR Refugee Data Finder'],
+      [],
+      ['LATEST FIGURES (2023)'],
+      ['Metric', 'Count'],
+      ['Total Displaced', latest.total || 0],
+      ['Refugees', latest.refugees || 0],
+      ['Asylum Seekers', latest.asylum_seekers || 0],
+      ['Internally Displaced', latest.idps || 0],
+    ];
+
+    if (d.trend && d.trend.length > 0) {
+      rows.push([]);
+      rows.push(['YEARLY TREND']);
+      rows.push(['Year', 'Refugees', 'Asylum Seekers', 'IDPs', 'Total']);
+      d.trend.forEach(t => rows.push([t.year, t.refugees || 0, t.asylum_seekers || 0, t.idps || 0, t.total || 0]));
+    }
+
+    if (d.top_hosts && d.top_hosts.length > 0) {
+      rows.push([]);
+      rows.push([`WHERE REFUGEES FROM ${countryName.toUpperCase()} GO`]);
+      rows.push(['Host Country', 'Refugees Hosted']);
+      d.top_hosts.forEach(h => rows.push([h.country, h.hosted]));
+    }
+
+    if (d.top_origins_hosted && d.top_origins_hosted.length > 0) {
+      rows.push([]);
+      rows.push([`REFUGEES ${countryName.toUpperCase()} HOSTS`]);
+      rows.push(['Origin Country', 'Count']);
+      d.top_origins_hosted.forEach(o => rows.push([o.country, o.count]));
+    }
+
+    const csv  = rows.map(r => r.map(v => '"' + v + '"').join(',')).join('\n');
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const a    = document.createElement('a');
+    a.href     = URL.createObjectURL(blob);
+    a.download = `${countryName.toLowerCase().replace(/\s+/g,'-')}-displacement-${lastUpdated}.csv`;
+    a.click();
+  }
+
+  // ── Init ─────────────────────────────────────────────────
+  async function init() {
+    const countryName = decodeURIComponent(getParam('country') || '');
+
+    if (!countryName) {
+      window.location.href = 'index.html';
+      return;
+    }
+
+    try {
+      const [res, storiesRes] = await Promise.all([
+        fetch('/sample.json'),
+        fetch('/stories.json').catch(() => null)
+      ]);
+      if (storiesRes && storiesRes.ok) {
+        window.__stories = await storiesRes.json();
+      }
+      const data = await res.json();
+
+      if (!data.country_details || !data.country_details[countryName]) {
+        renderNotFound(countryName);
+        return;
+      }
+
+      renderPage(countryName, data);
+
+    } catch(e) {
+      console.error('Could not load data:', e);
+      // Only show not-found if we have a country name — otherwise it's a network error
+      if (countryName) {
+        renderNotFound(countryName);
+      }
+    }
+  }
+
+  // Inject compare button into hero-actions once country name is known
+  function addCompareBtn(countryName){
+    const el=document.getElementById('hero-actions');
+    if(!el)return;
+    const btn=document.createElement('a');
+    btn.href='compare.html?a='+encodeURIComponent(countryName);
+    btn.className='download-btn';
+    btn.textContent='⇄ Compare with another country';
+    btn.style.textDecoration='none';
+    el.appendChild(btn);
+  }
+
+  init();
+</script>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="nav-overlay" id="nav-overlay" onclick="closeDrawer()"></div>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nav-drawer-header">
+    <a class="nav-drawer-logo" href="index.html">Refuji <span>Watch</span></a>
+    <button class="nav-drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="nav-drawer-links">
+    <a href="index.html">Dashboard</a>
+    <a href="countries.html">Countries</a>
+    <a href="regions.html">Regions</a>
+    <a href="compare.html">Compare</a>
+    <a href="funding.html">Funding</a>
+    <a href="help.html">How to Help</a>
+    <a href="about.html">About</a>
+    <a href="sitrep.html">SitRep</a>
+  </div>
+  <div class="nav-drawer-footer">Data: UNHCR · OCHA FTS · ReliefWeb</div>
+</div>
+
+<script>
+(function(){
+  function openDrawer(){
+    document.getElementById('nav-drawer').classList.add('open');
+    document.getElementById('nav-overlay').classList.add('open');
+    var btn=document.getElementById('hamburger-btn');
+    if(btn)btn.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  window.closeDrawer=function(){
+    document.getElementById('nav-drawer').classList.remove('open');
+    document.getElementById('nav-overlay').classList.remove('open');
+    var btn=document.getElementById('hamburger-btn');
+    if(btn)btn.classList.remove('open');
+    document.body.style.overflow='';
+  };
+  var btn=document.getElementById('hamburger-btn');
+  if(btn)btn.addEventListener('click',function(){
+    if(document.getElementById('nav-drawer').classList.contains('open'))closeDrawer();
+    else openDrawer();
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDrawer();});
+})();
+</script>
+</body>
+</html>

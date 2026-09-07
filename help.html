@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>How to Help — Refuji Watch</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0d;--surface:#141414;--surface2:#1c1c1c;--border:#222;
+  --accent:#2dd4bf;--red:#ef4444;--amber:#f59e0b;--blue:#60a5fa;
+  --text:#f0ede6;--muted:#666;--muted2:#3a3a3a;
+  --serif:var(--sans);
+  --mono:'DM Mono',monospace;
+  --sans:'DM Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13px;line-height:1.6;min-height:100vh}
+.header{padding:.9rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;background:rgba(20,20,20,.95);position:sticky;top:0;z-index:200;backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);transition:background .4s,backdrop-filter .4s;flex-wrap:wrap}
+.header.scrolled{background:rgba(20,20,20,.5);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom-color:rgba(255,255,255,.06)}
+.logo{font-family:var(--sans);font-size:1.4rem;font-weight:900;letter-spacing:-.02em;text-decoration:none;color:var(--text)}
+.logo span{color:var(--accent)}
+.nav{display:flex;gap:.7rem;font-family:var(--sans);font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap}
+.nav a{color:inherit;text-decoration:none;transition:color .15s}
+.nav a:hover,.nav a.active{color:var(--accent)}
+.back-link{font-family:var(--sans);font-size:11px;font-weight:600;color:var(--muted);text-decoration:none;transition:color .15s}
+.back-link:hover{color:var(--accent)}
+@media(max-width:700px){.nav{display:none}}
+
+/* HERO */
+.page-hero{padding:2.5rem 1.5rem 2rem;border-bottom:1px solid var(--border)}
+.page-eyebrow{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem}
+.page-title{font-family:var(--sans);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;margin-bottom:.8rem}
+.page-title span{color:var(--accent)}
+.page-intro{font-size:14px;color:var(--muted);line-height:1.8;max-width:600px}
+
+/* FILTER TABS */
+.filter-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.filter-bar::-webkit-scrollbar{display:none}
+.filter-btn{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.55rem 1rem;cursor:pointer;border:none;background:none;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s}
+.filter-btn.active,.filter-btn:hover{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* ORG GRID */
+.org-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--border);border-bottom:1px solid var(--border)}
+.org-card{background:var(--surface);padding:1.4rem;display:flex;flex-direction:column;gap:.8rem}
+.org-card[data-hidden="true"]{display:none}
+.org-header{display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem}
+.org-logo-wrap{width:44px;height:44px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:900;font-size:13px;flex-shrink:0}
+.org-name{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--text);margin-bottom:.15rem}
+.org-full{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.org-tags{display:flex;gap:.3rem;flex-wrap:wrap}
+.org-tag{font-family:var(--sans);font-size:8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:2px}
+.tag-refugees{background:rgba(45,212,191,.12);color:var(--accent)}
+.tag-emergency{background:rgba(239,68,68,.12);color:var(--red)}
+.tag-medical{background:rgba(251,146,60,.12);color:var(--amber)}
+.tag-children{background:rgba(96,165,250,.12);color:var(--blue)}
+.tag-shelter{background:rgba(167,139,250,.12);color:#a78bfa}
+.tag-food{background:rgba(74,222,128,.12);color:#4ade80}
+.org-desc{font-size:12px;color:var(--muted);line-height:1.7}
+.org-focus{font-size:11px;color:var(--muted2);font-family:var(--mono)}
+.org-focus span{color:var(--muted)}
+.org-actions{display:flex;gap:.5rem;margin-top:auto;padding-top:.8rem;border-top:1px solid var(--border)}
+.donate-btn{flex:1;padding:.45rem .8rem;background:none;border:1px solid var(--accent);color:var(--accent);font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;text-decoration:none;text-align:center;transition:all .2s;display:inline-flex;align-items:center;justify-content:center;gap:.3rem}
+.donate-btn:hover{background:var(--accent);color:var(--bg)}
+.learn-btn{padding:.45rem .8rem;background:none;border:1px solid var(--border);color:var(--muted);font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;text-decoration:none;text-align:center;transition:all .2s;display:inline-flex;align-items:center;justify-content:center}
+.learn-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* OTHER WAYS */
+.other-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--border)}
+.other-card{background:var(--surface);padding:1.4rem}
+.other-icon{font-size:1.4rem;margin-bottom:.6rem}
+.other-title{font-family:var(--sans);font-size:13px;font-weight:700;color:var(--text);margin-bottom:.4rem}
+.other-desc{font-size:12px;color:var(--muted);line-height:1.7}
+.other-link{display:inline-flex;align-items:center;gap:.3rem;margin-top:.8rem;font-family:var(--sans);font-size:10px;font-weight:700;color:var(--accent);text-decoration:none;border:1px solid rgba(45,212,191,.3);padding:.3rem .7rem;transition:all .15s}
+.other-link:hover{background:rgba(45,212,191,.08)}
+
+/* DISCLAIMER */
+.disclaimer{padding:1.2rem 1.5rem;background:var(--surface);border-bottom:1px solid var(--border);font-size:11px;color:var(--muted);line-height:1.7;font-family:var(--mono)}
+.disclaimer strong{color:var(--text);font-family:var(--sans)}
+
+/* SECTION LABEL */
+.section-label{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted2);padding:.65rem 1.5rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface)}
+
+footer{border-top:1px solid var(--border);padding:.8rem 1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.4rem;font-size:10px;color:var(--muted);letter-spacing:.06em;font-family:var(--sans)}
+footer a{color:var(--accent);text-decoration:none}
+
+
+
+/* ── MOBILE SAFETY ── */
+html,body{overflow-x:hidden}
+.chart-wrap{overflow:hidden}
+svg.trend{overflow:hidden}
+img,video,iframe{max-width:100%}
+
+
+/* ── MOBILE HAMBURGER MENU ── */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;border:1px solid var(--border);background:none;cursor:pointer;padding:8px;flex-shrink:0;transition:border-color .2s}
+.hamburger:hover{border-color:var(--accent)}
+.hamburger span{display:block;height:1.5px;background:var(--text);border-radius:1px;transition:all .25s}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+.nav-drawer{
+  position:fixed;top:0;right:0;bottom:0;width:280px;max-width:85vw;
+  background:var(--surface);border-left:1px solid var(--border);
+  z-index:500;display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+}
+.nav-drawer.open{transform:translateX(0)}
+.nav-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);
+  z-index:499;opacity:0;pointer-events:none;
+  transition:opacity .3s;
+}
+.nav-overlay.open{opacity:1;pointer-events:all}
+
+.nav-drawer-header{
+  padding:1rem 1.2rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.nav-drawer-logo{font-family:var(--sans);font-size:1.1rem;font-weight:900;color:var(--text);text-decoration:none}
+.nav-drawer-logo span{color:var(--accent)}
+.nav-drawer-close{
+  width:32px;height:32px;border:1px solid var(--border);background:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:16px;transition:all .15s;flex-shrink:0;
+}
+.nav-drawer-close:hover{border-color:var(--accent);color:var(--accent)}
+
+.nav-drawer-links{
+  flex:1;padding:1rem 0;display:flex;flex-direction:column;
+}
+.nav-drawer-links a{
+  font-family:var(--sans);font-size:13px;font-weight:600;
+  color:var(--muted);text-decoration:none;
+  padding:.75rem 1.4rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .15s;
+}
+.nav-drawer-links a:last-child{border-bottom:none}
+.nav-drawer-links a:hover,.nav-drawer-links a.active{color:var(--accent);background:rgba(45,212,191,.04)}
+.nav-drawer-links a::after{content:'→';font-size:12px;color:var(--muted2)}
+.nav-drawer-links a:hover::after,.nav-drawer-links a.active::after{color:var(--accent)}
+
+.nav-drawer-footer{
+  padding:1rem 1.4rem;border-top:1px solid var(--border);
+  font-family:var(--sans);font-size:10px;color:var(--muted2);
+  flex-shrink:0;
+}
+
+@media(max-width:700px){
+  .nav{display:none!important}
+  .hamburger{display:flex}
+}
+
+</style>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7128f2b8b7014426a65f4112bfabfd2a"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+
+<div class="header" id="header">
+  <a class="logo" href="index.html">Refuji <span>Watch</span></a>
+  <button class="hamburger" id="hamburger-btn" aria-label="Open menu"><span></span><span></span><span></span></button>
+  <nav class="nav">
+    <a href="index.html">Dashboard</a>
+    <a href="countries.html">Countries</a><a href="regions.html">Regions</a>
+    <a href="compare.html">Compare</a><a href="funding.html">Funding</a>
+    <a href="help.html" class="active">How to Help</a>
+    <a href="about.html">About</a><a href="sitrep.html">SitRep</a>
+  </nav>
+  <a class="back-link" href="index.html">← Dashboard</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-eyebrow">Take action</div>
+  <div class="page-title">Turn awareness into <span>action</span>.</div>
+  <div class="page-intro">The data shows the scale. These organisations are doing the work on the ground. Every one of them is verified, non-profit, and directly serving displaced people.</div>
+</div>
+
+<!-- FILTER -->
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">All organisations</button>
+  <button class="filter-btn" data-filter="refugees">Refugees</button>
+  <button class="filter-btn" data-filter="emergency">Emergency relief</button>
+  <button class="filter-btn" data-filter="medical">Medical</button>
+  <button class="filter-btn" data-filter="children">Children</button>
+  <button class="filter-btn" data-filter="shelter">Shelter</button>
+  <button class="filter-btn" data-filter="food">Food</button>
+</div>
+
+<!-- ORG CARDS -->
+<div class="org-grid" id="org-grid">
+
+  <div class="org-card" data-tags="refugees emergency">
+    <div class="org-header">
+      <div style="flex:1">
+        <div class="org-name">UNHCR</div>
+        <div class="org-full">UN Refugee Agency</div>
+      </div>
+      <div class="org-logo-wrap" style="background:rgba(45,212,191,.1);color:var(--accent)">UN</div>
+    </div>
+    <div class="org-tags">
+      <span class="org-tag tag-refugees">Refugees</span>
+      <span class="org-tag tag-emergency">Emergency</span>
+    </div>
+    <div class="org-desc">The world's largest refugee organisation — providing protection, shelter, food, water, and legal assistance to over 100 million forcibly displaced people in 135 countries.</div>
+    <div class="org-focus"><span>Focus regions: </span>Global · Syria · Sudan · Ukraine · Afghanistan · DRC</div>
+    <div class="org-actions">
+      <a class="donate-btn" href="https://donate.unhcr.org" target="_blank" rel="noopener">Donate ↗</a>
+      <a class="learn-btn" href="https://www.unhcr.org" target="_blank" rel="noopener">Learn more</a>
+    </div>
+  </div>
+
+  <div class="org-card" data-tags="emergency medical refugees">
+    <div class="org-header">
+      <div style="flex:1">
+        <div class="org-name">MSF</div>
+        <div class="org-full">Médecins Sans Frontières</div>
+      </div>
+      <div class="org-logo-wrap" style="background:rgba(239,68,68,.1);color:var(--red)">MSF</div>
+    </div>
+    <div class="org-tags">
+      <span class="org-tag tag-medical">Medical</span>
+      <span class="org-tag tag-emergency">Emergency</span>
+    </div>
+    <div class="org-desc">Delivers emergency medical care in conflict zones and displacement crises — treating war wounds, malnutrition, and disease outbreaks in places where no one else operates.</div>
+    <div class="org-focus"><span>Focus regions: </span>Gaza · Sudan · DRC · Myanmar · Yemen · Somalia</div>
+    <div class="org-actions">
+      <a class="donate-btn" href="https://www.msf.org/donate" target="_blank" rel="noopener">Donate ↗</a>
+      <a class="learn-btn" href="https://www.msf.org" target="_blank" rel="noopener">Learn more</a>
+    </div>
+  </div>
+
+  <div class="org-card" data-tags="refugees emergency shelter food">
+    <div class="org-header">
+      <div style="flex:1">
+        <div class="org-name">IRC</div>
+        <div class="org-full">International Rescue Committee</div>
+      </div>
+      <div class="org-logo-wrap" style="background:rgba(96,165,250,.1);color:var(--blue)">IRC</div>
+    </div>
+    <div class="org-tags">
+      <span class="org-tag tag-refugees">Refugees</span>
+      <span class="org-tag tag-shelter">Shelter</span>
+      <span class="org-tag tag-food">Food</span>
+    </div>
+    <div class="org-desc">Responds to humanitarian crises and helps people survive, recover, and rebuild their lives — from emergency relief to long-term resettlement support in 40+ countries.</div>
+    <div class="org-focus"><span>Focus regions: </span>Syria · Ukraine · Afghanistan · Ethiopia · South Sudan</div>
+    <div class="org-actions">
+      <a class="donate-btn" href="https://www.rescue.org/donate" target="_blank" rel="noopener">Donate ↗</a>
+      <a class="learn-btn" href="https://www.rescue.org" target="_blank" rel="noopener">Learn more</a>
+    </div>
+  </div>
+
+  <div class="org-card" data-tags="emergency food shelter refugees">
+    <div class="org-header">
+      <div style="flex:1">
+        <div class="org-name">Oxfam</div>
+        <div class="org-full">Oxfam International</div>
+      </div>
+      <div class="org-logo-wrap" style="background:rgba(245,158,11,.1);color:var(--amber)">OX</div>
+    </div>
+    <div class="org-tags">
+      <span class="org-tag tag-food">Food</span>
+      <span class="org-tag tag-shelter">Shelter</span>
+      <span class="org-tag tag-emergency">Emergency</span>
+    </div>
+    <div class="org-desc">Works in humanitarian crises and long-term development — focusing on food security, clean water, and advocacy for the rights of displaced and marginalised communities.</div>
+    <div class="org-focus"><span>Focus regions: </span>Yemen · Gaza · Sudan · Somalia · Haiti</div>
+    <div class="org-actions">
+      <a class="donate-btn" href="https://www.oxfam.org/en/donate" target="_blank" rel="noopener">Donate ↗</a>
+      <a class="learn-btn" href="https://www.oxfam.org" target="_blank" rel="noopener">Learn more</a>
+    </div>
+  </div>
+
+  <div class="org-card" data-tags="children emergency food">
+    <div class="org-header">
+      <div style="flex:1">
+        <div class="org-name">Save the Children</div>
+        <div class="org-full">Save the Children International</div>
+      </div>
+      <div class="org-logo-wrap" style="background:rgba(239,68,68,.1);color:var(--red)">SC</div>
+    </div>
+    <div class="org-tags">
+      <span class="org-tag tag-children">Children</span>
+      <span class="org-tag tag-food">Food</span>
+      <span class="org-tag tag-emergency">Emergency</span>
+    </div>
+    <div class="org-desc">Protects children affected by conflict and displacement — providing food, shelter, education, and psychosocial support to the most vulnerable young people in crisis zones.</div>
+    <div class="org-focus"><span>Focus regions: </span>Gaza · Ukraine · Sudan · Yemen · Afghanistan · DRC</div>
+    <div class="org-actions">
+      <a class="donate-btn" href="https://www.savethechildren.org/us/donate" target="_blank" rel="noopener">Donate ↗</a>
+      <a class="learn-btn" href="https://www.savethechildren.org" target="_blank" rel="noopener">Learn more</a>
+    </div>
+  </div>
+
+  <div class="org-card" data-tags="emergency shelter refugees">
+    <div class="org-header">
+      <div style="flex:1">
+        <div class="org-name">ICRC</div>
+        <div class="org-full">International Committee of the Red Cross</div>
+      </div>
+      <div class="org-logo-wrap" style="background:rgba(239,68,68,.1);color:var(--red)">✚</div>
+    </div>
+    <div class="org-tags">
+      <span class="org-tag tag-emergency">Emergency</span>
+      <span class="org-tag tag-shelter">Shelter</span>
+    </div>
+    <div class="org-desc">Operates in active conflict zones — protecting civilians, visiting detainees, restoring family contact, and delivering emergency aid where access is most dangerous and restricted.</div>
+    <div class="org-focus"><span>Focus regions: </span>Gaza · Sudan · Ukraine · Syria · Myanmar · Haiti</div>
+    <div class="org-actions">
+      <a class="donate-btn" href="https://www.icrc.org/en/donate" target="_blank" rel="noopener">Donate ↗</a>
+      <a class="learn-btn" href="https://www.icrc.org" target="_blank" rel="noopener">Learn more</a>
+    </div>
+  </div>
+
+  <div class="org-card" data-tags="refugees children shelter">
+    <div class="org-header">
+      <div style="flex:1">
+        <div class="org-name">UNICEF</div>
+        <div class="org-full">United Nations Children's Fund</div>
+      </div>
+      <div class="org-logo-wrap" style="background:rgba(96,165,250,.1);color:var(--blue)">UN</div>
+    </div>
+    <div class="org-tags">
+      <span class="org-tag tag-children">Children</span>
+      <span class="org-tag tag-refugees">Refugees</span>
+    </div>
+    <div class="org-desc">Delivers life-saving supplies and services to children caught in displacement crises — vaccines, clean water, nutrition, education, and protection from exploitation and abuse.</div>
+    <div class="org-focus"><span>Focus regions: </span>Global · Sudan · Gaza · DRC · Somalia · Yemen</div>
+    <div class="org-actions">
+      <a class="donate-btn" href="https://www.unicef.org/donate" target="_blank" rel="noopener">Donate ↗</a>
+      <a class="learn-btn" href="https://www.unicef.org" target="_blank" rel="noopener">Learn more</a>
+    </div>
+  </div>
+
+  <div class="org-card" data-tags="refugees emergency food">
+    <div class="org-header">
+      <div style="flex:1">
+        <div class="org-name">WFP</div>
+        <div class="org-full">World Food Programme</div>
+      </div>
+      <div class="org-logo-wrap" style="background:rgba(245,158,11,.1);color:var(--amber)">WFP</div>
+    </div>
+    <div class="org-tags">
+      <span class="org-tag tag-food">Food</span>
+      <span class="org-tag tag-emergency">Emergency</span>
+    </div>
+    <div class="org-desc">The world's largest humanitarian organisation addressing hunger — delivering food assistance to 160 million people in 80+ countries, with a focus on conflict-driven food insecurity.</div>
+    <div class="org-focus"><span>Focus regions: </span>Sudan · Yemen · Ethiopia · Syria · Afghanistan · DRC</div>
+    <div class="org-actions">
+      <a class="donate-btn" href="https://www.wfp.org/donate" target="_blank" rel="noopener">Donate ↗</a>
+      <a class="learn-btn" href="https://www.wfp.org" target="_blank" rel="noopener">Learn more</a>
+    </div>
+  </div>
+
+  <div class="org-card" data-tags="medical emergency children">
+    <div class="org-header">
+      <div style="flex:1">
+        <div class="org-name">IMC</div>
+        <div class="org-full">International Medical Corps</div>
+      </div>
+      <div class="org-logo-wrap" style="background:rgba(74,222,128,.1);color:#4ade80">IMC</div>
+    </div>
+    <div class="org-tags">
+      <span class="org-tag tag-medical">Medical</span>
+      <span class="org-tag tag-emergency">Emergency</span>
+    </div>
+    <div class="org-desc">Provides emergency medical relief and long-term training to local health systems in crisis zones — focusing on sustainable healthcare in the world's most underserved regions.</div>
+    <div class="org-focus"><span>Focus regions: </span>Gaza · Sudan · Ukraine · Syria · Somalia · Haiti</div>
+    <div class="org-actions">
+      <a class="donate-btn" href="https://internationalmedicalcorps.org/donate" target="_blank" rel="noopener">Donate ↗</a>
+      <a class="learn-btn" href="https://internationalmedicalcorps.org" target="_blank" rel="noopener">Learn more</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- OTHER WAYS -->
+<div class="section-label">Other ways to make a difference</div>
+<div class="other-grid">
+  <div class="other-card">
+    <div class="other-icon">📢</div>
+    <div class="other-title">Raise awareness</div>
+    <div class="other-desc">Share Refuji Watch with journalists, educators, and policy makers. The more people understand the scale of displacement, the more pressure there is for solutions.</div>
+    <a class="other-link" href="index.html">Share this dashboard ↗</a>
+  </div>
+  <div class="other-card">
+    <div class="other-icon">🔍</div>
+    <div class="other-title">Advocate locally</div>
+    <div class="other-desc">Contact your local representatives about refugee policy. UNHCR and Amnesty International both offer advocacy toolkits with letter templates and guidance.</div>
+    <a class="other-link" href="https://www.amnesty.org/en/get-involved/" target="_blank" rel="noopener">Amnesty toolkit ↗</a>
+  </div>
+  <div class="other-card">
+    <div class="other-icon">💻</div>
+    <div class="other-title">Contribute to this project</div>
+    <div class="other-desc">Refuji Watch is open source. If you work in data journalism, humanitarian tech, or web development — open an issue or pull request on GitHub.</div>
+    <a class="other-link" href="https://github.com/jahitjanberk/refuji-watch" target="_blank" rel="noopener">View on GitHub ↗</a>
+  </div>
+  <div class="other-card">
+    <div class="other-icon">🏠</div>
+    <div class="other-title">Sponsor a refugee</div>
+    <div class="other-desc">Many countries have community or private sponsorship programmes that allow individuals and groups to directly support a refugee family's resettlement.</div>
+    <a class="other-link" href="https://www.unhcr.org/what-we-do/solutions/durable-solutions/resettlement" target="_blank" rel="noopener">UNHCR resettlement ↗</a>
+  </div>
+</div>
+
+<div class="disclaimer">
+  <strong>Note:</strong> Refuji Watch is not affiliated with any of the organisations listed above and receives no payment or benefit for featuring them. All organisations are included because they are verified non-profits with direct humanitarian operations. Always do your own research before donating.
+</div>
+
+<footer>
+  <span>Data: <a href="https://www.unhcr.org/refugee-statistics" target="_blank">UNHCR</a> · <a href="https://fts.unocha.org" target="_blank">OCHA FTS</a></span>
+  <span>Built with love by <a href="https://github.com/jahitjanberk" target="_blank">jahit</a></span>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  document.getElementById('header').classList.toggle('scrolled',scrollY>10);
+},{passive:true});
+
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter=btn.dataset.filter;
+    document.querySelectorAll('.org-card').forEach(card=>{
+      if(filter==='all'){
+        card.removeAttribute('data-hidden');
+      }else{
+        const tags=(card.dataset.tags||'').split(' ');
+        card.setAttribute('data-hidden', tags.includes(filter)?'false':'true');
+      }
+    });
+  });
+});
+</script>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="nav-overlay" id="nav-overlay" onclick="closeDrawer()"></div>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nav-drawer-header">
+    <a class="nav-drawer-logo" href="index.html">Refuji <span>Watch</span></a>
+    <button class="nav-drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="nav-drawer-links">
+    <a href="index.html">Dashboard</a>
+    <a href="countries.html">Countries</a>
+    <a href="regions.html">Regions</a>
+    <a href="compare.html">Compare</a>
+    <a href="funding.html">Funding</a>
+    <a href="help.html" class="active">How to Help</a>
+    <a href="about.html">About</a>
+    <a href="sitrep.html">SitRep</a>
+  </div>
+  <div class="nav-drawer-footer">Data: UNHCR · OCHA FTS · ReliefWeb</div>
+</div>
+
+<script>
+(function(){
+  function openDrawer(){
+    document.getElementById('nav-drawer').classList.add('open');
+    document.getElementById('nav-overlay').classList.add('open');
+    var btn=document.getElementById('hamburger-btn');
+    if(btn)btn.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  window.closeDrawer=function(){
+    document.getElementById('nav-drawer').classList.remove('open');
+    document.getElementById('nav-overlay').classList.remove('open');
+    var btn=document.getElementById('hamburger-btn');
+    if(btn)btn.classList.remove('open');
+    document.body.style.overflow='';
+  };
+  var btn=document.getElementById('hamburger-btn');
+  if(btn)btn.addEventListener('click',function(){
+    if(document.getElementById('nav-drawer').classList.contains('open'))closeDrawer();
+    else openDrawer();
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDrawer();});
+})();
+</script>
+</body>
+</html>

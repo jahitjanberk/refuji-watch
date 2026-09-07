@@ -1,0 +1,3809 @@
+{
+ "Afghanistan": {
+  "iso3": "AFG",
+  "population_covered": 6951037,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 53.3,
+  "adults_pct": 42.3,
+  "elderly_pct": 4.4,
+  "female_pct": 47.4,
+  "male_pct": 52.6,
+  "women_and_children_pct": 75.4,
+  "under_5_pct": 18.1,
+  "girls": 1775225,
+  "boys": 1854885,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 606176,
+    "male": 622875
+   },
+   {
+    "band": "5-11",
+    "female": 676041,
+    "male": 699040
+   },
+   {
+    "band": "12-17",
+    "female": 493008,
+    "male": 532970
+   },
+   {
+    "band": "18-59",
+    "female": 1368226,
+    "male": 1509732
+   },
+   {
+    "band": "60+",
+    "female": 135323,
+    "male": 162842
+   }
+  ],
+  "totals": {
+   "female": 3296915,
+   "male": 3654122,
+   "children": 3630110,
+   "known_age": 6806233
+  }
+ },
+ "Albania": {
+  "iso3": "ALB",
+  "population_covered": 6011,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 35.8,
+  "adults_pct": 61.5,
+  "elderly_pct": 2.7,
+  "female_pct": 46.0,
+  "male_pct": 54.0,
+  "women_and_children_pct": 66.6,
+  "under_5_pct": 8.5,
+  "girls": 685,
+  "boys": 765,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 144,
+    "male": 199
+   },
+   {
+    "band": "5-11",
+    "female": 323,
+    "male": 346
+   },
+   {
+    "band": "12-17",
+    "female": 218,
+    "male": 220
+   },
+   {
+    "band": "18-59",
+    "female": 1201,
+    "male": 1294
+   },
+   {
+    "band": "60+",
+    "female": 49,
+    "male": 60
+   }
+  ],
+  "totals": {
+   "female": 2765,
+   "male": 3246,
+   "children": 1450,
+   "known_age": 4054
+  }
+ },
+ "Algeria": {
+  "iso3": "DZA",
+  "population_covered": 5339,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 18.5,
+  "adults_pct": 79.5,
+  "elderly_pct": 2.0,
+  "female_pct": 23.2,
+  "male_pct": 76.8,
+  "women_and_children_pct": 37.4,
+  "under_5_pct": 5.7,
+  "girls": 314,
+  "boys": 417,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 98,
+    "male": 126
+   },
+   {
+    "band": "5-11",
+    "female": 147,
+    "male": 161
+   },
+   {
+    "band": "12-17",
+    "female": 69,
+    "male": 130
+   },
+   {
+    "band": "18-59",
+    "female": 726,
+    "male": 2415
+   },
+   {
+    "band": "60+",
+    "female": 21,
+    "male": 59
+   }
+  ],
+  "totals": {
+   "female": 1241,
+   "male": 4098,
+   "children": 731,
+   "known_age": 3952
+  }
+ },
+ "Angola": {
+  "iso3": "AGO",
+  "population_covered": 4597,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 35.0,
+  "adults_pct": 59.7,
+  "elderly_pct": 5.2,
+  "female_pct": 49.4,
+  "male_pct": 50.6,
+  "women_and_children_pct": 67.6,
+  "under_5_pct": 6.9,
+  "girls": 714,
+  "boys": 750,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 130,
+    "male": 160
+   },
+   {
+    "band": "5-11",
+    "female": 313,
+    "male": 331
+   },
+   {
+    "band": "12-17",
+    "female": 271,
+    "male": 259
+   },
+   {
+    "band": "18-59",
+    "female": 1286,
+    "male": 1212
+   },
+   {
+    "band": "60+",
+    "female": 77,
+    "male": 142
+   }
+  ],
+  "totals": {
+   "female": 2272,
+   "male": 2325,
+   "children": 1464,
+   "known_age": 4181
+  }
+ },
+ "Armenia": {
+  "iso3": "ARM",
+  "population_covered": 5936,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 25.7,
+  "adults_pct": 61.1,
+  "elderly_pct": 13.2,
+  "female_pct": 47.9,
+  "male_pct": 52.1,
+  "women_and_children_pct": 62.5,
+  "under_5_pct": 6.2,
+  "girls": 584,
+  "boys": 723,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 143,
+    "male": 171
+   },
+   {
+    "band": "5-11",
+    "female": 261,
+    "male": 300
+   },
+   {
+    "band": "12-17",
+    "female": 180,
+    "male": 252
+   },
+   {
+    "band": "18-59",
+    "female": 1483,
+    "male": 1619
+   },
+   {
+    "band": "60+",
+    "female": 384,
+    "male": 287
+   }
+  ],
+  "totals": {
+   "female": 2844,
+   "male": 3092,
+   "children": 1307,
+   "known_age": 5080
+  }
+ },
+ "Azerbaijan": {
+  "iso3": "AZE",
+  "population_covered": 8559,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 27.7,
+  "adults_pct": 60.4,
+  "elderly_pct": 12.0,
+  "female_pct": 49.0,
+  "male_pct": 51.0,
+  "women_and_children_pct": 64.8,
+  "under_5_pct": 5.9,
+  "girls": 983,
+  "boys": 1202,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 224,
+    "male": 245
+   },
+   {
+    "band": "5-11",
+    "female": 451,
+    "male": 544
+   },
+   {
+    "band": "12-17",
+    "female": 308,
+    "male": 413
+   },
+   {
+    "band": "18-59",
+    "female": 2368,
+    "male": 2396
+   },
+   {
+    "band": "60+",
+    "female": 564,
+    "male": 380
+   }
+  ],
+  "totals": {
+   "female": 4193,
+   "male": 4366,
+   "children": 2185,
+   "known_age": 7893
+  }
+ },
+ "Bangladesh": {
+  "iso3": "BGD",
+  "population_covered": 38316,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 2.1,
+  "adults_pct": 97.3,
+  "elderly_pct": 0.6,
+  "female_pct": 3.6,
+  "male_pct": 96.4,
+  "women_and_children_pct": 5.4,
+  "under_5_pct": 0.4,
+  "girls": 285,
+  "boys": 322,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 67,
+    "male": 58
+   },
+   {
+    "band": "5-11",
+    "female": 138,
+    "male": 147
+   },
+   {
+    "band": "12-17",
+    "female": 80,
+    "male": 117
+   },
+   {
+    "band": "18-59",
+    "female": 892,
+    "male": 26905
+   },
+   {
+    "band": "60+",
+    "female": 38,
+    "male": 121
+   }
+  ],
+  "totals": {
+   "female": 1365,
+   "male": 36951,
+   "children": 607,
+   "known_age": 28563
+  }
+ },
+ "Bhutan": {
+  "iso3": "BTN",
+  "population_covered": 6396,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 27.7,
+  "adults_pct": 58.5,
+  "elderly_pct": 13.8,
+  "female_pct": 46.2,
+  "male_pct": 53.8,
+  "women_and_children_pct": 60.8,
+  "under_5_pct": 3.9,
+  "girls": 841,
+  "boys": 930,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 125,
+    "male": 126
+   },
+   {
+    "band": "5-11",
+    "female": 370,
+    "male": 387
+   },
+   {
+    "band": "12-17",
+    "female": 346,
+    "male": 417
+   },
+   {
+    "band": "18-59",
+    "female": 1764,
+    "male": 1976
+   },
+   {
+    "band": "60+",
+    "female": 352,
+    "male": 533
+   }
+  ],
+  "totals": {
+   "female": 2957,
+   "male": 3439,
+   "children": 1771,
+   "known_age": 6396
+  }
+ },
+ "Bosnia and Herzegovina": {
+  "iso3": "BIH",
+  "population_covered": 99170,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 27.7,
+  "adults_pct": 56.8,
+  "elderly_pct": 15.5,
+  "female_pct": 49.1,
+  "male_pct": 50.9,
+  "women_and_children_pct": 67.9,
+  "under_5_pct": 8.1,
+  "girls": 383,
+  "boys": 358,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 104,
+    "male": 112
+   },
+   {
+    "band": "5-11",
+    "female": 177,
+    "male": 144
+   },
+   {
+    "band": "12-17",
+    "female": 102,
+    "male": 102
+   },
+   {
+    "band": "18-59",
+    "female": 831,
+    "male": 685
+   },
+   {
+    "band": "60+",
+    "female": 241,
+    "male": 173
+   }
+  ],
+  "totals": {
+   "female": 48735,
+   "male": 50435,
+   "children": 741,
+   "known_age": 2671
+  }
+ },
+ "Brazil": {
+  "iso3": "BRA",
+  "population_covered": 5412,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 91.4,
+  "adults_pct": 8.5,
+  "elderly_pct": 0.1,
+  "female_pct": 48.0,
+  "male_pct": 52.0,
+  "women_and_children_pct": 95.2,
+  "under_5_pct": 78.6,
+  "girls": 2293,
+  "boys": 2421,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 1976,
+    "male": 2080
+   },
+   {
+    "band": "5-11",
+    "female": 281,
+    "male": 320
+   },
+   {
+    "band": "12-17",
+    "female": 36,
+    "male": 21
+   },
+   {
+    "band": "18-59",
+    "female": 192,
+    "male": 247
+   },
+   {
+    "band": "60+",
+    "female": 5,
+    "male": 0
+   }
+  ],
+  "totals": {
+   "female": 2600,
+   "male": 2812,
+   "children": 4714,
+   "known_age": 5158
+  }
+ },
+ "Burkina Faso": {
+  "iso3": "BFA",
+  "population_covered": 1598250,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 61.5,
+  "adults_pct": 34.8,
+  "elderly_pct": 3.8,
+  "female_pct": 52.7,
+  "male_pct": 47.3,
+  "women_and_children_pct": 83.8,
+  "under_5_pct": 16.1,
+  "girls": 485718,
+  "boys": 496780,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 127501,
+    "male": 129280
+   },
+   {
+    "band": "5-11",
+    "female": 228371,
+    "male": 233594
+   },
+   {
+    "band": "12-17",
+    "female": 129846,
+    "male": 133906
+   },
+   {
+    "band": "18-59",
+    "female": 324214,
+    "male": 231113
+   },
+   {
+    "band": "60+",
+    "female": 32050,
+    "male": 27998
+   }
+  ],
+  "totals": {
+   "female": 842044,
+   "male": 756206,
+   "children": 982498,
+   "known_age": 1597873
+  }
+ },
+ "Burundi": {
+  "iso3": "BDI",
+  "population_covered": 449807,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 51.0,
+  "adults_pct": 46.7,
+  "elderly_pct": 2.3,
+  "female_pct": 47.7,
+  "male_pct": 52.3,
+  "women_and_children_pct": 73.2,
+  "under_5_pct": 18.1,
+  "girls": 114159,
+  "boys": 114796,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 40878,
+    "male": 40477
+   },
+   {
+    "band": "5-11",
+    "female": 43851,
+    "male": 44334
+   },
+   {
+    "band": "12-17",
+    "female": 29430,
+    "male": 29985
+   },
+   {
+    "band": "18-59",
+    "female": 94594,
+    "male": 115229
+   },
+   {
+    "band": "60+",
+    "female": 5374,
+    "male": 5021
+   }
+  ],
+  "totals": {
+   "female": 214411,
+   "male": 235396,
+   "children": 228955,
+   "known_age": 449173
+  }
+ },
+ "Cameroon": {
+  "iso3": "CMR",
+  "population_covered": 86454,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 45.5,
+  "adults_pct": 51.1,
+  "elderly_pct": 3.4,
+  "female_pct": 51.9,
+  "male_pct": 48.1,
+  "women_and_children_pct": 74.8,
+  "under_5_pct": 11.7,
+  "girls": 19363,
+  "boys": 18991,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 4884,
+    "male": 4951
+   },
+   {
+    "band": "5-11",
+    "female": 9139,
+    "male": 8994
+   },
+   {
+    "band": "12-17",
+    "female": 5340,
+    "male": 5046
+   },
+   {
+    "band": "18-59",
+    "female": 22955,
+    "male": 20181
+   },
+   {
+    "band": "60+",
+    "female": 1774,
+    "male": 1117
+   }
+  ],
+  "totals": {
+   "female": 44881,
+   "male": 41573,
+   "children": 38354,
+   "known_age": 84381
+  }
+ },
+ "Central African Republic": {
+  "iso3": "CAF",
+  "population_covered": 1438074,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 55.2,
+  "adults_pct": 41.6,
+  "elderly_pct": 3.2,
+  "female_pct": 56.3,
+  "male_pct": 43.7,
+  "women_and_children_pct": 80.2,
+  "under_5_pct": 13.7,
+  "girls": 207239,
+  "boys": 204961,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 51002,
+    "male": 51252
+   },
+   {
+    "band": "5-11",
+    "female": 97902,
+    "male": 97109
+   },
+   {
+    "band": "12-17",
+    "female": 58335,
+    "male": 56600
+   },
+   {
+    "band": "18-59",
+    "female": 173883,
+    "male": 136321
+   },
+   {
+    "band": "60+",
+    "female": 12728,
+    "male": 11099
+   }
+  ],
+  "totals": {
+   "female": 808944,
+   "male": 629130,
+   "children": 412200,
+   "known_age": 746231
+  }
+ },
+ "Chad": {
+  "iso3": "TCD",
+  "population_covered": 12446,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 48.0,
+  "adults_pct": 48.2,
+  "elderly_pct": 3.9,
+  "female_pct": 48.1,
+  "male_pct": 51.9,
+  "women_and_children_pct": 72.1,
+  "under_5_pct": 12.4,
+  "girls": 2979,
+  "boys": 2907,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 768,
+    "male": 751
+   },
+   {
+    "band": "5-11",
+    "female": 1369,
+    "male": 1333
+   },
+   {
+    "band": "12-17",
+    "female": 842,
+    "male": 823
+   },
+   {
+    "band": "18-59",
+    "female": 2712,
+    "male": 3197
+   },
+   {
+    "band": "60+",
+    "female": 248,
+    "male": 226
+   }
+  ],
+  "totals": {
+   "female": 5990,
+   "male": 6456,
+   "children": 5886,
+   "known_age": 12269
+  }
+ },
+ "Chile": {
+  "iso3": "CHL",
+  "population_covered": 8207,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 94.0,
+  "adults_pct": 4.6,
+  "elderly_pct": 1.4,
+  "female_pct": 50.6,
+  "male_pct": 49.4,
+  "women_and_children_pct": 96.9,
+  "under_5_pct": 90.7,
+  "girls": 3883,
+  "boys": 3785,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 3736,
+    "male": 3665
+   },
+   {
+    "band": "5-11",
+    "female": 129,
+    "male": 108
+   },
+   {
+    "band": "12-17",
+    "female": 18,
+    "male": 12
+   },
+   {
+    "band": "18-59",
+    "female": 194,
+    "male": 183
+   },
+   {
+    "band": "60+",
+    "female": 43,
+    "male": 69
+   }
+  ],
+  "totals": {
+   "female": 4149,
+   "male": 4058,
+   "children": 7668,
+   "known_age": 8157
+  }
+ },
+ "China": {
+  "iso3": "CHN",
+  "population_covered": 8405,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 13.2,
+  "adults_pct": 81.8,
+  "elderly_pct": 5.0,
+  "female_pct": 44.0,
+  "male_pct": 56.0,
+  "women_and_children_pct": 50.9,
+  "under_5_pct": 4.6,
+  "girls": 458,
+  "boys": 547,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 165,
+    "male": 182
+   },
+   {
+    "band": "5-11",
+    "female": 182,
+    "male": 215
+   },
+   {
+    "band": "12-17",
+    "female": 111,
+    "male": 150
+   },
+   {
+    "band": "18-59",
+    "female": 2710,
+    "male": 3512
+   },
+   {
+    "band": "60+",
+    "female": 160,
+    "male": 224
+   }
+  ],
+  "totals": {
+   "female": 3702,
+   "male": 4703,
+   "children": 1005,
+   "known_age": 7611
+  }
+ },
+ "Colombia": {
+  "iso3": "COL",
+  "population_covered": 6879560,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 22.9,
+  "adults_pct": 64.6,
+  "elderly_pct": 12.5,
+  "female_pct": 48.9,
+  "male_pct": 51.1,
+  "women_and_children_pct": 60.6,
+  "under_5_pct": 2.4,
+  "girls": 750311,
+  "boys": 784223,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 78377,
+    "male": 83011
+   },
+   {
+    "band": "5-11",
+    "female": 286831,
+    "male": 299320
+   },
+   {
+    "band": "12-17",
+    "female": 385103,
+    "male": 401892
+   },
+   {
+    "band": "18-59",
+    "female": 2112814,
+    "male": 2208104
+   },
+   {
+    "band": "60+",
+    "female": 407383,
+    "male": 426202
+   }
+  ],
+  "totals": {
+   "female": 3363674,
+   "male": 3515886,
+   "children": 1534534,
+   "known_age": 6689037
+  }
+ },
+ "Congo, Republic of": {
+  "iso3": "COG",
+  "population_covered": 14962,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 11.6,
+  "adults_pct": 86.3,
+  "elderly_pct": 2.1,
+  "female_pct": 42.1,
+  "male_pct": 57.9,
+  "women_and_children_pct": 47.7,
+  "under_5_pct": 1.0,
+  "girls": 887,
+  "boys": 832,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 92,
+    "male": 56
+   },
+   {
+    "band": "5-11",
+    "female": 230,
+    "male": 272
+   },
+   {
+    "band": "12-17",
+    "female": 565,
+    "male": 504
+   },
+   {
+    "band": "18-59",
+    "female": 5193,
+    "male": 7542
+   },
+   {
+    "band": "60+",
+    "female": 130,
+    "male": 173
+   }
+  ],
+  "totals": {
+   "female": 6305,
+   "male": 8657,
+   "children": 1719,
+   "known_age": 14757
+  }
+ },
+ "Cuba": {
+  "iso3": "CUB",
+  "population_covered": 30491,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 6.9,
+  "adults_pct": 91.4,
+  "elderly_pct": 1.8,
+  "female_pct": 37.3,
+  "male_pct": 62.7,
+  "women_and_children_pct": 40.7,
+  "under_5_pct": 1.4,
+  "girls": 1045,
+  "boys": 1033,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 238,
+    "male": 185
+   },
+   {
+    "band": "5-11",
+    "female": 505,
+    "male": 490
+   },
+   {
+    "band": "12-17",
+    "female": 302,
+    "male": 358
+   },
+   {
+    "band": "18-59",
+    "female": 9933,
+    "male": 17605
+   },
+   {
+    "band": "60+",
+    "female": 247,
+    "male": 281
+   }
+  ],
+  "totals": {
+   "female": 11384,
+   "male": 19107,
+   "children": 2078,
+   "known_age": 30144
+  }
+ },
+ "DR Congo": {
+  "iso3": "COD",
+  "population_covered": 988793,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 51.0,
+  "adults_pct": 46.2,
+  "elderly_pct": 2.8,
+  "female_pct": 50.1,
+  "male_pct": 49.9,
+  "women_and_children_pct": 75.7,
+  "under_5_pct": 14.9,
+  "girls": 250350,
+  "boys": 252274,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 72755,
+    "male": 73652
+   },
+   {
+    "band": "5-11",
+    "female": 104153,
+    "male": 104386
+   },
+   {
+    "band": "12-17",
+    "female": 73442,
+    "male": 74236
+   },
+   {
+    "band": "18-59",
+    "female": 227886,
+    "male": 227461
+   },
+   {
+    "band": "60+",
+    "female": 15011,
+    "male": 12104
+   }
+  ],
+  "totals": {
+   "female": 495104,
+   "male": 493689,
+   "children": 502624,
+   "known_age": 985086
+  }
+ },
+ "Dominican Republic": {
+  "iso3": "DOM",
+  "population_covered": 1369,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 8.6,
+  "adults_pct": 90.7,
+  "elderly_pct": 0.7,
+  "female_pct": 53.0,
+  "male_pct": 47.0,
+  "women_and_children_pct": 57.0,
+  "under_5_pct": 0.4,
+  "girls": 60,
+  "boys": 56,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 5,
+    "male": 0
+   },
+   {
+    "band": "5-11",
+    "female": 34,
+    "male": 33
+   },
+   {
+    "band": "12-17",
+    "female": 21,
+    "male": 23
+   },
+   {
+    "band": "18-59",
+    "female": 649,
+    "male": 577
+   },
+   {
+    "band": "60+",
+    "female": 5,
+    "male": 5
+   }
+  ],
+  "totals": {
+   "female": 725,
+   "male": 644,
+   "children": 116,
+   "known_age": 1352
+  }
+ },
+ "Egypt": {
+  "iso3": "EGY",
+  "population_covered": 11617,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 34.0,
+  "adults_pct": 62.7,
+  "elderly_pct": 3.3,
+  "female_pct": 25.4,
+  "male_pct": 74.6,
+  "women_and_children_pct": 56.1,
+  "under_5_pct": 7.0,
+  "girls": 1170,
+  "boys": 1139,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 261,
+    "male": 217
+   },
+   {
+    "band": "5-11",
+    "female": 522,
+    "male": 535
+   },
+   {
+    "band": "12-17",
+    "female": 387,
+    "male": 387
+   },
+   {
+    "band": "18-59",
+    "female": 1385,
+    "male": 2877
+   },
+   {
+    "band": "60+",
+    "female": 120,
+    "male": 103
+   }
+  ],
+  "totals": {
+   "female": 2947,
+   "male": 8670,
+   "children": 2309,
+   "known_age": 6794
+  }
+ },
+ "El Salvador": {
+  "iso3": "SLV",
+  "population_covered": 98587,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 25.8,
+  "adults_pct": 72.7,
+  "elderly_pct": 1.5,
+  "female_pct": 50.9,
+  "male_pct": 49.1,
+  "women_and_children_pct": 56.4,
+  "under_5_pct": 5.9,
+  "girls": 3150,
+  "boys": 3498,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 751,
+    "male": 774
+   },
+   {
+    "band": "5-11",
+    "female": 1397,
+    "male": 1580
+   },
+   {
+    "band": "12-17",
+    "female": 1002,
+    "male": 1144
+   },
+   {
+    "band": "18-59",
+    "female": 7696,
+    "male": 11015
+   },
+   {
+    "band": "60+",
+    "female": 178,
+    "male": 196
+   }
+  ],
+  "totals": {
+   "female": 50180,
+   "male": 48407,
+   "children": 6648,
+   "known_age": 25733
+  }
+ },
+ "Eritrea": {
+  "iso3": "ERI",
+  "population_covered": 433264,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 34.4,
+  "adults_pct": 61.9,
+  "elderly_pct": 3.7,
+  "female_pct": 47.1,
+  "male_pct": 52.9,
+  "women_and_children_pct": 65.5,
+  "under_5_pct": 7.7,
+  "girls": 70029,
+  "boys": 74809,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 15663,
+    "male": 16650
+   },
+   {
+    "band": "5-11",
+    "female": 29741,
+    "male": 30622
+   },
+   {
+    "band": "12-17",
+    "female": 24625,
+    "male": 27537
+   },
+   {
+    "band": "18-59",
+    "female": 123420,
+    "male": 137095
+   },
+   {
+    "band": "60+",
+    "female": 7420,
+    "male": 8278
+   }
+  ],
+  "totals": {
+   "female": 204275,
+   "male": 228989,
+   "children": 144838,
+   "known_age": 421051
+  }
+ },
+ "Ethiopia": {
+  "iso3": "ETH",
+  "population_covered": 254873,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 27.7,
+  "adults_pct": 70.1,
+  "elderly_pct": 2.3,
+  "female_pct": 38.1,
+  "male_pct": 61.9,
+  "women_and_children_pct": 52.5,
+  "under_5_pct": 8.1,
+  "girls": 33672,
+  "boys": 36506,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 9961,
+    "male": 10691
+   },
+   {
+    "band": "5-11",
+    "female": 13850,
+    "male": 14869
+   },
+   {
+    "band": "12-17",
+    "female": 9861,
+    "male": 10946
+   },
+   {
+    "band": "18-59",
+    "female": 60470,
+    "male": 117318
+   },
+   {
+    "band": "60+",
+    "female": 2443,
+    "male": 3280
+   }
+  ],
+  "totals": {
+   "female": 97091,
+   "male": 157782,
+   "children": 70178,
+   "known_age": 253689
+  }
+ },
+ "Gambia": {
+  "iso3": "GMB",
+  "population_covered": 4564,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 17.2,
+  "adults_pct": 82.4,
+  "elderly_pct": 0.3,
+  "female_pct": 22.1,
+  "male_pct": 77.9,
+  "women_and_children_pct": 36.0,
+  "under_5_pct": 8.5,
+  "girls": 281,
+  "boys": 312,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 159,
+    "male": 133
+   },
+   {
+    "band": "5-11",
+    "female": 82,
+    "male": 75
+   },
+   {
+    "band": "12-17",
+    "female": 40,
+    "male": 104
+   },
+   {
+    "band": "18-59",
+    "female": 646,
+    "male": 2191
+   },
+   {
+    "band": "60+",
+    "female": 0,
+    "male": 11
+   }
+  ],
+  "totals": {
+   "female": 1008,
+   "male": 3556,
+   "children": 593,
+   "known_age": 3441
+  }
+ },
+ "Georgia": {
+  "iso3": "GEO",
+  "population_covered": 299730,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 28.1,
+  "adults_pct": 52.0,
+  "elderly_pct": 19.9,
+  "female_pct": 52.8,
+  "male_pct": 47.2,
+  "women_and_children_pct": 67.2,
+  "under_5_pct": 6.6,
+  "girls": 40412,
+  "boys": 42935,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 9611,
+    "male": 10122
+   },
+   {
+    "band": "5-11",
+    "female": 18259,
+    "male": 19152
+   },
+   {
+    "band": "12-17",
+    "female": 12542,
+    "male": 13661
+   },
+   {
+    "band": "18-59",
+    "female": 79859,
+    "male": 74527
+   },
+   {
+    "band": "60+",
+    "female": 36442,
+    "male": 22704
+   }
+  ],
+  "totals": {
+   "female": 158346,
+   "male": 141384,
+   "children": 83347,
+   "known_age": 296879
+  }
+ },
+ "Ghana": {
+  "iso3": "GHA",
+  "population_covered": 13510,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 38.7,
+  "adults_pct": 56.0,
+  "elderly_pct": 5.3,
+  "female_pct": 50.3,
+  "male_pct": 49.7,
+  "women_and_children_pct": 71.9,
+  "under_5_pct": 2.1,
+  "girls": 2444,
+  "boys": 2448,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 152,
+    "male": 111
+   },
+   {
+    "band": "5-11",
+    "female": 951,
+    "male": 988
+   },
+   {
+    "band": "12-17",
+    "female": 1341,
+    "male": 1349
+   },
+   {
+    "band": "18-59",
+    "female": 3761,
+    "male": 3317
+   },
+   {
+    "band": "60+",
+    "female": 438,
+    "male": 230
+   }
+  ],
+  "totals": {
+   "female": 6801,
+   "male": 6709,
+   "children": 4892,
+   "known_age": 12638
+  }
+ },
+ "Guatemala": {
+  "iso3": "GTM",
+  "population_covered": 9710,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 31.1,
+  "adults_pct": 67.7,
+  "elderly_pct": 1.2,
+  "female_pct": 43.3,
+  "male_pct": 56.7,
+  "women_and_children_pct": 59.0,
+  "under_5_pct": 8.5,
+  "girls": 1482,
+  "boys": 1511,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 442,
+    "male": 376
+   },
+   {
+    "band": "5-11",
+    "female": 603,
+    "male": 634
+   },
+   {
+    "band": "12-17",
+    "female": 437,
+    "male": 501
+   },
+   {
+    "band": "18-59",
+    "female": 2645,
+    "male": 3874
+   },
+   {
+    "band": "60+",
+    "female": 38,
+    "male": 74
+   }
+  ],
+  "totals": {
+   "female": 4205,
+   "male": 5505,
+   "children": 2993,
+   "known_age": 9624
+  }
+ },
+ "Guinea": {
+  "iso3": "GIN",
+  "population_covered": 14548,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 26.8,
+  "adults_pct": 73.0,
+  "elderly_pct": 0.3,
+  "female_pct": 32.0,
+  "male_pct": 68.0,
+  "women_and_children_pct": 48.4,
+  "under_5_pct": 12.1,
+  "girls": 1351,
+  "boys": 1998,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 766,
+    "male": 749
+   },
+   {
+    "band": "5-11",
+    "female": 407,
+    "male": 326
+   },
+   {
+    "band": "12-17",
+    "female": 178,
+    "male": 923
+   },
+   {
+    "band": "18-59",
+    "female": 2698,
+    "male": 6438
+   },
+   {
+    "band": "60+",
+    "female": 18,
+    "male": 16
+   }
+  ],
+  "totals": {
+   "female": 4658,
+   "male": 9890,
+   "children": 3349,
+   "known_age": 12519
+  }
+ },
+ "Haiti": {
+  "iso3": "HTI",
+  "population_covered": 61224,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 8.8,
+  "adults_pct": 90.8,
+  "elderly_pct": 0.4,
+  "female_pct": 42.4,
+  "male_pct": 57.6,
+  "women_and_children_pct": 46.7,
+  "under_5_pct": 1.3,
+  "girls": 2717,
+  "boys": 2651,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 394,
+    "male": 391
+   },
+   {
+    "band": "5-11",
+    "female": 1503,
+    "male": 1481
+   },
+   {
+    "band": "12-17",
+    "female": 820,
+    "male": 779
+   },
+   {
+    "band": "18-59",
+    "female": 22993,
+    "male": 32424
+   },
+   {
+    "band": "60+",
+    "female": 151,
+    "male": 101
+   }
+  ],
+  "totals": {
+   "female": 25941,
+   "male": 35283,
+   "children": 5368,
+   "known_age": 61037
+  }
+ },
+ "Honduras": {
+  "iso3": "HND",
+  "population_covered": 325550,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 39.9,
+  "adults_pct": 55.1,
+  "elderly_pct": 4.9,
+  "female_pct": 51.3,
+  "male_pct": 48.7,
+  "women_and_children_pct": 70.8,
+  "under_5_pct": 10.4,
+  "girls": 66517,
+  "boys": 63369,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 16176,
+    "male": 17702
+   },
+   {
+    "band": "5-11",
+    "female": 29080,
+    "male": 24892
+   },
+   {
+    "band": "12-17",
+    "female": 21261,
+    "male": 20775
+   },
+   {
+    "band": "18-59",
+    "female": 92009,
+    "male": 87300
+   },
+   {
+    "band": "60+",
+    "female": 8312,
+    "male": 7634
+   }
+  ],
+  "totals": {
+   "female": 167021,
+   "male": 158529,
+   "children": 129886,
+   "known_age": 325141
+  }
+ },
+ "Hungary": {
+  "iso3": "HUN",
+  "population_covered": 1240,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 26.7,
+  "adults_pct": 54.6,
+  "elderly_pct": 18.8,
+  "female_pct": 42.0,
+  "male_pct": 58.0,
+  "women_and_children_pct": 57.2,
+  "under_5_pct": 11.6,
+  "girls": 119,
+  "boys": 181,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 47,
+    "male": 83
+   },
+   {
+    "band": "5-11",
+    "female": 43,
+    "male": 72
+   },
+   {
+    "band": "12-17",
+    "female": 29,
+    "male": 26
+   },
+   {
+    "band": "18-59",
+    "female": 277,
+    "male": 337
+   },
+   {
+    "band": "60+",
+    "female": 67,
+    "male": 144
+   }
+  ],
+  "totals": {
+   "female": 521,
+   "male": 719,
+   "children": 300,
+   "known_age": 1125
+  }
+ },
+ "India": {
+  "iso3": "IND",
+  "population_covered": 18147,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 13.0,
+  "adults_pct": 85.1,
+  "elderly_pct": 1.9,
+  "female_pct": 29.9,
+  "male_pct": 70.1,
+  "women_and_children_pct": 38.9,
+  "under_5_pct": 3.5,
+  "girls": 910,
+  "boys": 1238,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 267,
+    "male": 310
+   },
+   {
+    "band": "5-11",
+    "female": 413,
+    "male": 531
+   },
+   {
+    "band": "12-17",
+    "female": 230,
+    "male": 397
+   },
+   {
+    "band": "18-59",
+    "female": 4163,
+    "male": 9885
+   },
+   {
+    "band": "60+",
+    "female": 105,
+    "male": 203
+   }
+  ],
+  "totals": {
+   "female": 5427,
+   "male": 12720,
+   "children": 2148,
+   "known_age": 16504
+  }
+ },
+ "Indonesia": {
+  "iso3": "IDN",
+  "population_covered": 1117,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 3.9,
+  "adults_pct": 95.2,
+  "elderly_pct": 0.9,
+  "female_pct": 92.9,
+  "male_pct": 7.1,
+  "women_and_children_pct": 95.1,
+  "under_5_pct": 0.5,
+  "girls": 26,
+  "boys": 17,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 5,
+    "male": 0
+   },
+   {
+    "band": "5-11",
+    "female": 16,
+    "male": 12
+   },
+   {
+    "band": "12-17",
+    "female": 5,
+    "male": 5
+   },
+   {
+    "band": "18-59",
+    "female": 998,
+    "male": 49
+   },
+   {
+    "band": "60+",
+    "female": 5,
+    "male": 5
+   }
+  ],
+  "totals": {
+   "female": 1038,
+   "male": 79,
+   "children": 43,
+   "known_age": 1100
+  }
+ },
+ "Iran": {
+  "iso3": "IRN",
+  "population_covered": 104219,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 17.7,
+  "adults_pct": 76.4,
+  "elderly_pct": 5.8,
+  "female_pct": 40.8,
+  "male_pct": 59.2,
+  "women_and_children_pct": 50.3,
+  "under_5_pct": 3.8,
+  "girls": 8505,
+  "boys": 9118,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 1930,
+    "male": 1850
+   },
+   {
+    "band": "5-11",
+    "female": 3573,
+    "male": 3830
+   },
+   {
+    "band": "12-17",
+    "female": 3002,
+    "male": 3438
+   },
+   {
+    "band": "18-59",
+    "female": 29837,
+    "male": 46078
+   },
+   {
+    "band": "60+",
+    "female": 2469,
+    "male": 3309
+   }
+  ],
+  "totals": {
+   "female": 42513,
+   "male": 61706,
+   "children": 17623,
+   "known_age": 99316
+  }
+ },
+ "Iraq": {
+  "iso3": "IRQ",
+  "population_covered": 448498,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 37.7,
+  "adults_pct": 56.9,
+  "elderly_pct": 5.4,
+  "female_pct": 45.9,
+  "male_pct": 54.1,
+  "women_and_children_pct": 65.8,
+  "under_5_pct": 7.1,
+  "girls": 79586,
+  "boys": 85948,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 15052,
+    "male": 15881
+   },
+   {
+    "band": "5-11",
+    "female": 36465,
+    "male": 39013
+   },
+   {
+    "band": "12-17",
+    "female": 28069,
+    "male": 31054
+   },
+   {
+    "band": "18-59",
+    "female": 110687,
+    "male": 138763
+   },
+   {
+    "band": "60+",
+    "female": 12574,
+    "male": 11144
+   }
+  ],
+  "totals": {
+   "female": 205865,
+   "male": 242633,
+   "children": 165534,
+   "known_age": 438702
+  }
+ },
+ "Ivory Coast": {
+  "iso3": "CIV",
+  "population_covered": 64269,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 47.1,
+  "adults_pct": 49.5,
+  "elderly_pct": 3.4,
+  "female_pct": 51.3,
+  "male_pct": 48.7,
+  "women_and_children_pct": 75.6,
+  "under_5_pct": 14.6,
+  "girls": 14606,
+  "boys": 14946,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 4618,
+    "male": 4535
+   },
+   {
+    "band": "5-11",
+    "female": 6376,
+    "male": 6567
+   },
+   {
+    "band": "12-17",
+    "female": 3612,
+    "male": 3844
+   },
+   {
+    "band": "18-59",
+    "female": 16467,
+    "male": 14618
+   },
+   {
+    "band": "60+",
+    "female": 1399,
+    "male": 705
+   }
+  ],
+  "totals": {
+   "female": 32994,
+   "male": 31275,
+   "children": 29552,
+   "known_age": 62741
+  }
+ },
+ "Jordan": {
+  "iso3": "JOR",
+  "population_covered": 2460,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 27.2,
+  "adults_pct": 70.1,
+  "elderly_pct": 2.7,
+  "female_pct": 43.6,
+  "male_pct": 56.4,
+  "women_and_children_pct": 59.6,
+  "under_5_pct": 6.1,
+  "girls": 254,
+  "boys": 311,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 53,
+    "male": 73
+   },
+   {
+    "band": "5-11",
+    "female": 132,
+    "male": 128
+   },
+   {
+    "band": "12-17",
+    "female": 69,
+    "male": 110
+   },
+   {
+    "band": "18-59",
+    "female": 631,
+    "male": 828
+   },
+   {
+    "band": "60+",
+    "female": 44,
+    "male": 12
+   }
+  ],
+  "totals": {
+   "female": 1072,
+   "male": 1388,
+   "children": 565,
+   "known_age": 2080
+  }
+ },
+ "Kenya": {
+  "iso3": "KEN",
+  "population_covered": 7021,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 35.7,
+  "adults_pct": 59.1,
+  "elderly_pct": 5.2,
+  "female_pct": 51.9,
+  "male_pct": 48.1,
+  "women_and_children_pct": 70.4,
+  "under_5_pct": 7.3,
+  "girls": 1181,
+  "boys": 1279,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 230,
+    "male": 275
+   },
+   {
+    "band": "5-11",
+    "female": 578,
+    "male": 598
+   },
+   {
+    "band": "12-17",
+    "female": 373,
+    "male": 406
+   },
+   {
+    "band": "18-59",
+    "female": 2205,
+    "male": 1865
+   },
+   {
+    "band": "60+",
+    "female": 184,
+    "male": 172
+   }
+  ],
+  "totals": {
+   "female": 3644,
+   "male": 3377,
+   "children": 2460,
+   "known_age": 6886
+  }
+ },
+ "Lebanon": {
+  "iso3": "LBN",
+  "population_covered": 6051,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 33.3,
+  "adults_pct": 60.7,
+  "elderly_pct": 5.9,
+  "female_pct": 45.1,
+  "male_pct": 54.9,
+  "women_and_children_pct": 63.6,
+  "under_5_pct": 8.0,
+  "girls": 840,
+  "boys": 925,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 202,
+    "male": 219
+   },
+   {
+    "band": "5-11",
+    "female": 358,
+    "male": 409
+   },
+   {
+    "band": "12-17",
+    "female": 280,
+    "male": 297
+   },
+   {
+    "band": "18-59",
+    "female": 1426,
+    "male": 1789
+   },
+   {
+    "band": "60+",
+    "female": 176,
+    "male": 138
+   }
+  ],
+  "totals": {
+   "female": 2728,
+   "male": 3323,
+   "children": 1765,
+   "known_age": 5294
+  }
+ },
+ "Liberia": {
+  "iso3": "LBR",
+  "population_covered": 3794,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 27.1,
+  "adults_pct": 69.3,
+  "elderly_pct": 3.6,
+  "female_pct": 45.6,
+  "male_pct": 54.4,
+  "women_and_children_pct": 59.1,
+  "under_5_pct": 5.8,
+  "girls": 518,
+  "boys": 486,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 122,
+    "male": 92
+   },
+   {
+    "band": "5-11",
+    "female": 201,
+    "male": 175
+   },
+   {
+    "band": "12-17",
+    "female": 195,
+    "male": 219
+   },
+   {
+    "band": "18-59",
+    "female": 1121,
+    "male": 1443
+   },
+   {
+    "band": "60+",
+    "female": 61,
+    "male": 72
+   }
+  ],
+  "totals": {
+   "female": 1730,
+   "male": 2064,
+   "children": 1004,
+   "known_age": 3701
+  }
+ },
+ "Libya": {
+  "iso3": "LBY",
+  "population_covered": 5967,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 34.4,
+  "adults_pct": 63.6,
+  "elderly_pct": 2.0,
+  "female_pct": 35.7,
+  "male_pct": 64.3,
+  "women_and_children_pct": 55.5,
+  "under_5_pct": 6.9,
+  "girls": 851,
+  "boys": 942,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 160,
+    "male": 198
+   },
+   {
+    "band": "5-11",
+    "female": 436,
+    "male": 479
+   },
+   {
+    "band": "12-17",
+    "female": 255,
+    "male": 265
+   },
+   {
+    "band": "18-59",
+    "female": 1066,
+    "male": 2242
+   },
+   {
+    "band": "60+",
+    "female": 28,
+    "male": 76
+   }
+  ],
+  "totals": {
+   "female": 2130,
+   "male": 3837,
+   "children": 1793,
+   "known_age": 5205
+  }
+ },
+ "Malawi": {
+  "iso3": "MWI",
+  "population_covered": 1878,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 5.9,
+  "adults_pct": 92.5,
+  "elderly_pct": 1.6,
+  "female_pct": 25.4,
+  "male_pct": 74.6,
+  "women_and_children_pct": 28.1,
+  "under_5_pct": 1.1,
+  "girls": 59,
+  "boys": 51,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 10,
+    "male": 11
+   },
+   {
+    "band": "5-11",
+    "female": 30,
+    "male": 20
+   },
+   {
+    "band": "12-17",
+    "female": 19,
+    "male": 20
+   },
+   {
+    "band": "18-59",
+    "female": 418,
+    "male": 1320
+   },
+   {
+    "band": "60+",
+    "female": 0,
+    "male": 30
+   }
+  ],
+  "totals": {
+   "female": 477,
+   "male": 1401,
+   "children": 110,
+   "known_age": 1878
+  }
+ },
+ "Mali": {
+  "iso3": "MLI",
+  "population_covered": 605147,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 57.0,
+  "adults_pct": 39.3,
+  "elderly_pct": 3.7,
+  "female_pct": 54.2,
+  "male_pct": 45.8,
+  "women_and_children_pct": 81.5,
+  "under_5_pct": 13.3,
+  "girls": 50905,
+  "boys": 49929,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 11869,
+    "male": 11720
+   },
+   {
+    "band": "5-11",
+    "female": 23377,
+    "male": 22989
+   },
+   {
+    "band": "12-17",
+    "female": 15659,
+    "male": 15220
+   },
+   {
+    "band": "18-59",
+    "female": 40042,
+    "male": 29413
+   },
+   {
+    "band": "60+",
+    "female": 3282,
+    "male": 3231
+   }
+  ],
+  "totals": {
+   "female": 328134,
+   "male": 277013,
+   "children": 100834,
+   "known_age": 176802
+  }
+ },
+ "Mauritania": {
+  "iso3": "MRT",
+  "population_covered": 29935,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 49.8,
+  "adults_pct": 44.4,
+  "elderly_pct": 5.8,
+  "female_pct": 50.0,
+  "male_pct": 50.0,
+  "women_and_children_pct": 75.1,
+  "under_5_pct": 8.5,
+  "girls": 7368,
+  "boys": 7435,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 1205,
+    "male": 1309
+   },
+   {
+    "band": "5-11",
+    "female": 3427,
+    "male": 3498
+   },
+   {
+    "band": "12-17",
+    "female": 2736,
+    "male": 2628
+   },
+   {
+    "band": "18-59",
+    "female": 6733,
+    "male": 6473
+   },
+   {
+    "band": "60+",
+    "female": 794,
+    "male": 917
+   }
+  ],
+  "totals": {
+   "female": 14980,
+   "male": 14955,
+   "children": 14803,
+   "known_age": 29720
+  }
+ },
+ "Mexico": {
+  "iso3": "MEX",
+  "population_covered": 8528,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 22.7,
+  "adults_pct": 76.6,
+  "elderly_pct": 0.7,
+  "female_pct": 42.7,
+  "male_pct": 57.3,
+  "women_and_children_pct": 54.3,
+  "under_5_pct": 5.9,
+  "girls": 938,
+  "boys": 976,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 229,
+    "male": 267
+   },
+   {
+    "band": "5-11",
+    "female": 426,
+    "male": 411
+   },
+   {
+    "band": "12-17",
+    "female": 283,
+    "male": 298
+   },
+   {
+    "band": "18-59",
+    "female": 2633,
+    "male": 3837
+   },
+   {
+    "band": "60+",
+    "female": 37,
+    "male": 23
+   }
+  ],
+  "totals": {
+   "female": 3641,
+   "male": 4887,
+   "children": 1914,
+   "known_age": 8444
+  }
+ },
+ "Moldova": {
+  "iso3": "MDA",
+  "population_covered": 3224,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 41.8,
+  "adults_pct": 54.2,
+  "elderly_pct": 4.1,
+  "female_pct": 51.5,
+  "male_pct": 48.5,
+  "women_and_children_pct": 72.6,
+  "under_5_pct": 12.1,
+  "girls": 510,
+  "boys": 562,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 143,
+    "male": 168
+   },
+   {
+    "band": "5-11",
+    "female": 212,
+    "male": 228
+   },
+   {
+    "band": "12-17",
+    "female": 155,
+    "male": 166
+   },
+   {
+    "band": "18-59",
+    "female": 738,
+    "male": 653
+   },
+   {
+    "band": "60+",
+    "female": 53,
+    "male": 51
+   }
+  ],
+  "totals": {
+   "female": 1659,
+   "male": 1565,
+   "children": 1072,
+   "known_age": 2567
+  }
+ },
+ "Morocco": {
+  "iso3": "MAR",
+  "population_covered": 5187,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 23.9,
+  "adults_pct": 74.4,
+  "elderly_pct": 1.7,
+  "female_pct": 27.0,
+  "male_pct": 73.0,
+  "women_and_children_pct": 53.0,
+  "under_5_pct": 10.0,
+  "girls": 290,
+  "boys": 335,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 124,
+    "male": 137
+   },
+   {
+    "band": "5-11",
+    "female": 124,
+    "male": 123
+   },
+   {
+    "band": "12-17",
+    "female": 42,
+    "male": 75
+   },
+   {
+    "band": "18-59",
+    "female": 736,
+    "male": 1210
+   },
+   {
+    "band": "60+",
+    "female": 26,
+    "male": 19
+   }
+  ],
+  "totals": {
+   "female": 1400,
+   "male": 3787,
+   "children": 625,
+   "known_age": 2616
+  }
+ },
+ "Mozambique": {
+  "iso3": "MOZ",
+  "population_covered": 2033,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 54.3,
+  "adults_pct": 41.5,
+  "elderly_pct": 4.2,
+  "female_pct": 53.7,
+  "male_pct": 46.3,
+  "women_and_children_pct": 80.8,
+  "under_5_pct": 14.2,
+  "girls": 550,
+  "boys": 548,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 140,
+    "male": 148
+   },
+   {
+    "band": "5-11",
+    "female": 253,
+    "male": 239
+   },
+   {
+    "band": "12-17",
+    "female": 157,
+    "male": 161
+   },
+   {
+    "band": "18-59",
+    "female": 481,
+    "male": 359
+   },
+   {
+    "band": "60+",
+    "female": 56,
+    "male": 29
+   }
+  ],
+  "totals": {
+   "female": 1092,
+   "male": 941,
+   "children": 1098,
+   "known_age": 2023
+  }
+ },
+ "Myanmar": {
+  "iso3": "MMR",
+  "population_covered": 1994752,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 47.8,
+  "adults_pct": 48.3,
+  "elderly_pct": 3.9,
+  "female_pct": 49.6,
+  "male_pct": 50.4,
+  "women_and_children_pct": 73.8,
+  "under_5_pct": 15.2,
+  "girls": 368385,
+  "boys": 384297,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 118267,
+    "male": 121522
+   },
+   {
+    "band": "5-11",
+    "female": 149789,
+    "male": 154486
+   },
+   {
+    "band": "12-17",
+    "female": 100329,
+    "male": 108289
+   },
+   {
+    "band": "18-59",
+    "female": 379462,
+    "male": 381376
+   },
+   {
+    "band": "60+",
+    "female": 29866,
+    "male": 31240
+   }
+  ],
+  "totals": {
+   "female": 989066,
+   "male": 1005686,
+   "children": 752682,
+   "known_age": 1574626
+  }
+ },
+ "Nicaragua": {
+  "iso3": "NIC",
+  "population_covered": 148249,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 7.9,
+  "adults_pct": 81.1,
+  "elderly_pct": 11.1,
+  "female_pct": 55.2,
+  "male_pct": 44.8,
+  "women_and_children_pct": 59.0,
+  "under_5_pct": 0.8,
+  "girls": 6047,
+  "boys": 5582,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 709,
+    "male": 523
+   },
+   {
+    "band": "5-11",
+    "female": 2928,
+    "male": 2210
+   },
+   {
+    "band": "12-17",
+    "female": 2410,
+    "male": 2849
+   },
+   {
+    "band": "18-59",
+    "female": 66429,
+    "male": 53650
+   },
+   {
+    "band": "60+",
+    "female": 9328,
+    "male": 7034
+   }
+  ],
+  "totals": {
+   "female": 81893,
+   "male": 66356,
+   "children": 11629,
+   "known_age": 148070
+  }
+ },
+ "Niger": {
+  "iso3": "NER",
+  "population_covered": 246814,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 61.8,
+  "adults_pct": 34.8,
+  "elderly_pct": 3.4,
+  "female_pct": 56.3,
+  "male_pct": 43.7,
+  "women_and_children_pct": 83.6,
+  "under_5_pct": 17.7,
+  "girls": 85168,
+  "boys": 67335,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 24236,
+    "male": 19500
+   },
+   {
+    "band": "5-11",
+    "female": 39506,
+    "male": 31127
+   },
+   {
+    "band": "12-17",
+    "female": 21426,
+    "male": 16708
+   },
+   {
+    "band": "18-59",
+    "female": 49605,
+    "male": 36223
+   },
+   {
+    "band": "60+",
+    "female": 4060,
+    "male": 4244
+   }
+  ],
+  "totals": {
+   "female": 138873,
+   "male": 107941,
+   "children": 152503,
+   "known_age": 246635
+  }
+ },
+ "Nigeria": {
+  "iso3": "NGA",
+  "population_covered": 401078,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 57.2,
+  "adults_pct": 39.4,
+  "elderly_pct": 3.4,
+  "female_pct": 53.1,
+  "male_pct": 46.9,
+  "women_and_children_pct": 80.8,
+  "under_5_pct": 14.9,
+  "girls": 111121,
+  "boys": 105209,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 28777,
+    "male": 27616
+   },
+   {
+    "band": "5-11",
+    "female": 56020,
+    "male": 53531
+   },
+   {
+    "band": "12-17",
+    "female": 26324,
+    "male": 24062
+   },
+   {
+    "band": "18-59",
+    "female": 82902,
+    "male": 66378
+   },
+   {
+    "band": "60+",
+    "female": 6573,
+    "male": 6299
+   }
+  ],
+  "totals": {
+   "female": 213077,
+   "male": 188001,
+   "children": 216330,
+   "known_age": 378482
+  }
+ },
+ "North Macedonia": {
+  "iso3": "MKD",
+  "population_covered": 4094,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 43.4,
+  "adults_pct": 53.2,
+  "elderly_pct": 3.4,
+  "female_pct": 47.8,
+  "male_pct": 52.2,
+  "women_and_children_pct": 72.1,
+  "under_5_pct": 12.3,
+  "girls": 746,
+  "boys": 904,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 214,
+    "male": 255
+   },
+   {
+    "band": "5-11",
+    "female": 330,
+    "male": 398
+   },
+   {
+    "band": "12-17",
+    "female": 202,
+    "male": 251
+   },
+   {
+    "band": "18-59",
+    "female": 1033,
+    "male": 988
+   },
+   {
+    "band": "60+",
+    "female": 56,
+    "male": 74
+   }
+  ],
+  "totals": {
+   "female": 1955,
+   "male": 2139,
+   "children": 1650,
+   "known_age": 3801
+  }
+ },
+ "Pakistan": {
+  "iso3": "PAK",
+  "population_covered": 218697,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 48.0,
+  "adults_pct": 47.3,
+  "elderly_pct": 4.8,
+  "female_pct": 42.3,
+  "male_pct": 57.7,
+  "women_and_children_pct": 70.6,
+  "under_5_pct": 16.1,
+  "girls": 45775,
+  "boys": 52096,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 15785,
+    "male": 17128
+   },
+   {
+    "band": "5-11",
+    "female": 19288,
+    "male": 22558
+   },
+   {
+    "band": "12-17",
+    "female": 10702,
+    "male": 12410
+   },
+   {
+    "band": "18-59",
+    "female": 42044,
+    "male": 54373
+   },
+   {
+    "band": "60+",
+    "female": 4134,
+    "male": 5609
+   }
+  ],
+  "totals": {
+   "female": 92409,
+   "male": 126288,
+   "children": 97871,
+   "known_age": 204031
+  }
+ },
+ "Palestine": {
+  "iso3": "PSE",
+  "population_covered": 91112,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 26.2,
+  "adults_pct": 63.0,
+  "elderly_pct": 10.8,
+  "female_pct": 47.8,
+  "male_pct": 52.2,
+  "women_and_children_pct": 56.6,
+  "under_5_pct": 4.7,
+  "girls": 2265,
+  "boys": 2425,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 425,
+    "male": 420
+   },
+   {
+    "band": "5-11",
+    "female": 1019,
+    "male": 1062
+   },
+   {
+    "band": "12-17",
+    "female": 821,
+    "male": 943
+   },
+   {
+    "band": "18-59",
+    "female": 4516,
+    "male": 6743
+   },
+   {
+    "band": "60+",
+    "female": 917,
+    "male": 1008
+   }
+  ],
+  "totals": {
+   "female": 43538,
+   "male": 47574,
+   "children": 4690,
+   "known_age": 17874
+  }
+ },
+ "Peru": {
+  "iso3": "PER",
+  "population_covered": 2134,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 22.3,
+  "adults_pct": 64.2,
+  "elderly_pct": 13.5,
+  "female_pct": 49.0,
+  "male_pct": 51.0,
+  "women_and_children_pct": 61.2,
+  "under_5_pct": 11.3,
+  "girls": 163,
+  "boys": 183,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 87,
+    "male": 88
+   },
+   {
+    "band": "5-11",
+    "female": 43,
+    "male": 47
+   },
+   {
+    "band": "12-17",
+    "female": 33,
+    "male": 48
+   },
+   {
+    "band": "18-59",
+    "female": 503,
+    "male": 493
+   },
+   {
+    "band": "60+",
+    "female": 100,
+    "male": 109
+   }
+  ],
+  "totals": {
+   "female": 1045,
+   "male": 1089,
+   "children": 346,
+   "known_age": 1551
+  }
+ },
+ "Russia": {
+  "iso3": "RUS",
+  "population_covered": 24632,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 41.7,
+  "adults_pct": 53.4,
+  "elderly_pct": 4.9,
+  "female_pct": 50.2,
+  "male_pct": 49.8,
+  "women_and_children_pct": 72.4,
+  "under_5_pct": 7.3,
+  "girls": 4325,
+  "boys": 4722,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 779,
+    "male": 815
+   },
+   {
+    "band": "5-11",
+    "female": 2009,
+    "male": 2264
+   },
+   {
+    "band": "12-17",
+    "female": 1537,
+    "male": 1643
+   },
+   {
+    "band": "18-59",
+    "female": 6041,
+    "male": 5554
+   },
+   {
+    "band": "60+",
+    "female": 638,
+    "male": 431
+   }
+  ],
+  "totals": {
+   "female": 12353,
+   "male": 12279,
+   "children": 9047,
+   "known_age": 21711
+  }
+ },
+ "Rwanda": {
+  "iso3": "RWA",
+  "population_covered": 263293,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 61.0,
+  "adults_pct": 36.5,
+  "elderly_pct": 2.5,
+  "female_pct": 50.2,
+  "male_pct": 49.8,
+  "women_and_children_pct": 80.5,
+  "under_5_pct": 18.0,
+  "girls": 79892,
+  "boys": 79253,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 25026,
+    "male": 21916
+   },
+   {
+    "band": "5-11",
+    "female": 32144,
+    "male": 33419
+   },
+   {
+    "band": "12-17",
+    "female": 22722,
+    "male": 23918
+   },
+   {
+    "band": "18-59",
+    "female": 48071,
+    "male": 47359
+   },
+   {
+    "band": "60+",
+    "female": 2857,
+    "male": 3672
+   }
+  ],
+  "totals": {
+   "female": 132099,
+   "male": 131194,
+   "children": 159145,
+   "known_age": 261104
+  }
+ },
+ "Senegal": {
+  "iso3": "SEN",
+  "population_covered": 11287,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 27.7,
+  "adults_pct": 66.1,
+  "elderly_pct": 6.2,
+  "female_pct": 33.8,
+  "male_pct": 66.2,
+  "women_and_children_pct": 50.2,
+  "under_5_pct": 2.4,
+  "girls": 1363,
+  "boys": 1496,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 118,
+    "male": 125
+   },
+   {
+    "band": "5-11",
+    "female": 664,
+    "male": 660
+   },
+   {
+    "band": "12-17",
+    "female": 581,
+    "male": 711
+   },
+   {
+    "band": "18-59",
+    "female": 2000,
+    "male": 4817
+   },
+   {
+    "band": "60+",
+    "female": 323,
+    "male": 321
+   }
+  ],
+  "totals": {
+   "female": 3816,
+   "male": 7471,
+   "children": 2859,
+   "known_age": 10320
+  }
+ },
+ "Serbia/Kosovo": {
+  "iso3": "SRB",
+  "population_covered": 27809,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 31.8,
+  "adults_pct": 52.8,
+  "elderly_pct": 15.4,
+  "female_pct": 47.8,
+  "male_pct": 52.2,
+  "women_and_children_pct": 64.4,
+  "under_5_pct": 9.1,
+  "girls": 4166,
+  "boys": 4362,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 1187,
+    "male": 1250
+   },
+   {
+    "band": "5-11",
+    "female": 1480,
+    "male": 1533
+   },
+   {
+    "band": "12-17",
+    "female": 1499,
+    "male": 1579
+   },
+   {
+    "band": "18-59",
+    "female": 6603,
+    "male": 7533
+   },
+   {
+    "band": "60+",
+    "female": 2123,
+    "male": 2002
+   }
+  ],
+  "totals": {
+   "female": 13296,
+   "male": 14513,
+   "children": 8528,
+   "known_age": 26789
+  }
+ },
+ "Sierra Leone": {
+  "iso3": "SLE",
+  "population_covered": 4724,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 26.6,
+  "adults_pct": 72.5,
+  "elderly_pct": 0.8,
+  "female_pct": 40.7,
+  "male_pct": 59.3,
+  "women_and_children_pct": 55.6,
+  "under_5_pct": 7.2,
+  "girls": 586,
+  "boys": 575,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 142,
+    "male": 174
+   },
+   {
+    "band": "5-11",
+    "female": 240,
+    "male": 173
+   },
+   {
+    "band": "12-17",
+    "female": 204,
+    "male": 228
+   },
+   {
+    "band": "18-59",
+    "female": 1245,
+    "male": 1918
+   },
+   {
+    "band": "60+",
+    "female": 16,
+    "male": 20
+   }
+  ],
+  "totals": {
+   "female": 1922,
+   "male": 2802,
+   "children": 1161,
+   "known_age": 4360
+  }
+ },
+ "Somalia": {
+  "iso3": "SOM",
+  "population_covered": 4270750,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 58.4,
+  "adults_pct": 40.1,
+  "elderly_pct": 1.5,
+  "female_pct": 50.3,
+  "male_pct": 49.7,
+  "women_and_children_pct": 80.1,
+  "under_5_pct": 24.2,
+  "girls": 1220340,
+  "boys": 1269640,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 502798,
+    "male": 529098
+   },
+   {
+    "band": "5-11",
+    "female": 458905,
+    "male": 478518
+   },
+   {
+    "band": "12-17",
+    "female": 258637,
+    "male": 262024
+   },
+   {
+    "band": "18-59",
+    "female": 893571,
+    "male": 816524
+   },
+   {
+    "band": "60+",
+    "female": 31082,
+    "male": 32420
+   }
+  ],
+  "totals": {
+   "female": 2147716,
+   "male": 2123034,
+   "children": 2489980,
+   "known_age": 4263577
+  }
+ },
+ "South Sudan": {
+  "iso3": "SSD",
+  "population_covered": 2366521,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 58.3,
+  "adults_pct": 38.3,
+  "elderly_pct": 3.4,
+  "female_pct": 52.0,
+  "male_pct": 48.0,
+  "women_and_children_pct": 81.7,
+  "under_5_pct": 13.2,
+  "girls": 675661,
+  "boys": 703115,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 155456,
+    "male": 158038
+   },
+   {
+    "band": "5-11",
+    "female": 311958,
+    "male": 317666
+   },
+   {
+    "band": "12-17",
+    "female": 208247,
+    "male": 227411
+   },
+   {
+    "band": "18-59",
+    "female": 506956,
+    "male": 399825
+   },
+   {
+    "band": "60+",
+    "female": 48550,
+    "male": 32362
+   }
+  ],
+  "totals": {
+   "female": 1231181,
+   "male": 1135340,
+   "children": 1378776,
+   "known_age": 2366469
+  }
+ },
+ "Sri Lanka": {
+  "iso3": "LKA",
+  "population_covered": 69382,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 14.5,
+  "adults_pct": 76.2,
+  "elderly_pct": 9.3,
+  "female_pct": 48.2,
+  "male_pct": 51.8,
+  "women_and_children_pct": 38.5,
+  "under_5_pct": 3.3,
+  "girls": 739,
+  "boys": 739,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 162,
+    "male": 170
+   },
+   {
+    "band": "5-11",
+    "female": 324,
+    "male": 317
+   },
+   {
+    "band": "12-17",
+    "female": 253,
+    "male": 252
+   },
+   {
+    "band": "18-59",
+    "female": 1991,
+    "male": 5796
+   },
+   {
+    "band": "60+",
+    "female": 464,
+    "male": 484
+   }
+  ],
+  "totals": {
+   "female": 33426,
+   "male": 35956,
+   "children": 1478,
+   "known_age": 10213
+  }
+ },
+ "Sudan": {
+  "iso3": "SDN",
+  "population_covered": 3873545,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 44.1,
+  "adults_pct": 50.1,
+  "elderly_pct": 5.8,
+  "female_pct": 46.9,
+  "male_pct": 53.1,
+  "women_and_children_pct": 70.4,
+  "under_5_pct": 9.2,
+  "girls": 799075,
+  "boys": 908878,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 170175,
+    "male": 184271
+   },
+   {
+    "band": "5-11",
+    "female": 364780,
+    "male": 455617
+   },
+   {
+    "band": "12-17",
+    "female": 264120,
+    "male": 268990
+   },
+   {
+    "band": "18-59",
+    "female": 915094,
+    "male": 1023388
+   },
+   {
+    "band": "60+",
+    "female": 103412,
+    "male": 122586
+   }
+  ],
+  "totals": {
+   "female": 1817887,
+   "male": 2055658,
+   "children": 1707953,
+   "known_age": 3872433
+  }
+ },
+ "Syria": {
+  "iso3": "SYR",
+  "population_covered": 6503556,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 45.6,
+  "adults_pct": 51.2,
+  "elderly_pct": 3.2,
+  "female_pct": 46.4,
+  "male_pct": 53.6,
+  "women_and_children_pct": 70.1,
+  "under_5_pct": 13.0,
+  "girls": 1427255,
+  "boys": 1525630,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 407545,
+    "male": 432952
+   },
+   {
+    "band": "5-11",
+    "female": 641783,
+    "male": 681023
+   },
+   {
+    "band": "12-17",
+    "female": 377927,
+    "male": 411655
+   },
+   {
+    "band": "18-59",
+    "female": 1476402,
+    "male": 1838029
+   },
+   {
+    "band": "60+",
+    "female": 108935,
+    "male": 97747
+   }
+  ],
+  "totals": {
+   "female": 3018696,
+   "male": 3484860,
+   "children": 2952885,
+   "known_age": 6473998
+  }
+ },
+ "Tajikistan": {
+  "iso3": "TJK",
+  "population_covered": 2455,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 42.1,
+  "adults_pct": 56.2,
+  "elderly_pct": 1.7,
+  "female_pct": 44.3,
+  "male_pct": 55.7,
+  "women_and_children_pct": 65.5,
+  "under_5_pct": 12.6,
+  "girls": 441,
+  "boys": 442,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 133,
+    "male": 131
+   },
+   {
+    "band": "5-11",
+    "female": 198,
+    "male": 208
+   },
+   {
+    "band": "12-17",
+    "female": 110,
+    "male": 103
+   },
+   {
+    "band": "18-59",
+    "female": 475,
+    "male": 705
+   },
+   {
+    "band": "60+",
+    "female": 17,
+    "male": 18
+   }
+  ],
+  "totals": {
+   "female": 1088,
+   "male": 1367,
+   "children": 883,
+   "known_age": 2098
+  }
+ },
+ "Tanzania": {
+  "iso3": "TZA",
+  "population_covered": 1525,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 23.6,
+  "adults_pct": 75.7,
+  "elderly_pct": 0.7,
+  "female_pct": 36.2,
+  "male_pct": 63.8,
+  "women_and_children_pct": 48.1,
+  "under_5_pct": 7.6,
+  "girls": 159,
+  "boys": 180,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 60,
+    "male": 49
+   },
+   {
+    "band": "5-11",
+    "female": 73,
+    "male": 91
+   },
+   {
+    "band": "12-17",
+    "female": 26,
+    "male": 40
+   },
+   {
+    "band": "18-59",
+    "female": 348,
+    "male": 742
+   },
+   {
+    "band": "60+",
+    "female": 5,
+    "male": 5
+   }
+  ],
+  "totals": {
+   "female": 552,
+   "male": 973,
+   "children": 339,
+   "known_age": 1439
+  }
+ },
+ "Togo": {
+  "iso3": "TGO",
+  "population_covered": 5992,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 23.4,
+  "adults_pct": 70.2,
+  "elderly_pct": 6.4,
+  "female_pct": 39.7,
+  "male_pct": 60.3,
+  "women_and_children_pct": 52.4,
+  "under_5_pct": 3.8,
+  "girls": 681,
+  "boys": 653,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 108,
+    "male": 109
+   },
+   {
+    "band": "5-11",
+    "female": 275,
+    "male": 260
+   },
+   {
+    "band": "12-17",
+    "female": 298,
+    "male": 284
+   },
+   {
+    "band": "18-59",
+    "female": 1511,
+    "male": 2486
+   },
+   {
+    "band": "60+",
+    "female": 138,
+    "male": 227
+   }
+  ],
+  "totals": {
+   "female": 2381,
+   "male": 3611,
+   "children": 1334,
+   "known_age": 5696
+  }
+ },
+ "Tunisia": {
+  "iso3": "TUN",
+  "population_covered": 3109,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 21.4,
+  "adults_pct": 76.8,
+  "elderly_pct": 1.8,
+  "female_pct": 23.2,
+  "male_pct": 76.8,
+  "women_and_children_pct": 44.7,
+  "under_5_pct": 6.9,
+  "girls": 133,
+  "boys": 159,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 40,
+    "male": 54
+   },
+   {
+    "band": "5-11",
+    "female": 52,
+    "male": 55
+   },
+   {
+    "band": "12-17",
+    "female": 41,
+    "male": 50
+   },
+   {
+    "band": "18-59",
+    "female": 308,
+    "male": 742
+   },
+   {
+    "band": "60+",
+    "female": 11,
+    "male": 14
+   }
+  ],
+  "totals": {
+   "female": 722,
+   "male": 2387,
+   "children": 292,
+   "known_age": 1367
+  }
+ },
+ "Turkey": {
+  "iso3": "TUR",
+  "population_covered": 83371,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 26.3,
+  "adults_pct": 67.1,
+  "elderly_pct": 6.6,
+  "female_pct": 38.6,
+  "male_pct": 61.4,
+  "women_and_children_pct": 53.1,
+  "under_5_pct": 5.4,
+  "girls": 9592,
+  "boys": 10284,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 1968,
+    "male": 2114
+   },
+   {
+    "band": "5-11",
+    "female": 4526,
+    "male": 4781
+   },
+   {
+    "band": "12-17",
+    "female": 3098,
+    "male": 3389
+   },
+   {
+    "band": "18-59",
+    "female": 17888,
+    "male": 32732
+   },
+   {
+    "band": "60+",
+    "female": 2266,
+    "male": 2685
+   }
+  ],
+  "totals": {
+   "female": 32189,
+   "male": 51182,
+   "children": 19876,
+   "known_age": 75447
+  }
+ },
+ "Uganda": {
+  "iso3": "UGA",
+  "population_covered": 10039,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 16.9,
+  "adults_pct": 81.6,
+  "elderly_pct": 1.5,
+  "female_pct": 37.4,
+  "male_pct": 62.6,
+  "women_and_children_pct": 45.0,
+  "under_5_pct": 4.8,
+  "girls": 853,
+  "boys": 796,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 230,
+    "male": 237
+   },
+   {
+    "band": "5-11",
+    "female": 363,
+    "male": 290
+   },
+   {
+    "band": "12-17",
+    "female": 260,
+    "male": 269
+   },
+   {
+    "band": "18-59",
+    "female": 2692,
+    "male": 5255
+   },
+   {
+    "band": "60+",
+    "female": 39,
+    "male": 104
+   }
+  ],
+  "totals": {
+   "female": 3754,
+   "male": 6285,
+   "children": 1649,
+   "known_age": 9739
+  }
+ },
+ "Ukraine": {
+  "iso3": "UKR",
+  "population_covered": 861834,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 32.7,
+  "adults_pct": 57.4,
+  "elderly_pct": 9.9,
+  "female_pct": 54.0,
+  "male_pct": 46.0,
+  "women_and_children_pct": 70.6,
+  "under_5_pct": 7.5,
+  "girls": 931,
+  "boys": 1031,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 212,
+    "male": 238
+   },
+   {
+    "band": "5-11",
+    "female": 459,
+    "male": 508
+   },
+   {
+    "band": "12-17",
+    "female": 260,
+    "male": 285
+   },
+   {
+    "band": "18-59",
+    "female": 1880,
+    "male": 1565
+   },
+   {
+    "band": "60+",
+    "female": 394,
+    "male": 198
+   }
+  ],
+  "totals": {
+   "female": 465286,
+   "male": 396548,
+   "children": 1962,
+   "known_age": 5999
+  }
+ },
+ "United States": {
+  "iso3": "USA",
+  "population_covered": 1506,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 81.3,
+  "adults_pct": 16.5,
+  "elderly_pct": 2.2,
+  "female_pct": 50.1,
+  "male_pct": 49.9,
+  "women_and_children_pct": 89.8,
+  "under_5_pct": 43.5,
+  "girls": 608,
+  "boys": 586,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 337,
+    "male": 302
+   },
+   {
+    "band": "5-11",
+    "female": 183,
+    "male": 196
+   },
+   {
+    "band": "12-17",
+    "female": 88,
+    "male": 88
+   },
+   {
+    "band": "18-59",
+    "female": 103,
+    "male": 139
+   },
+   {
+    "band": "60+",
+    "female": 21,
+    "male": 11
+   }
+  ],
+  "totals": {
+   "female": 754,
+   "male": 752,
+   "children": 1194,
+   "known_age": 1468
+  }
+ },
+ "Venezuela": {
+  "iso3": "VEN",
+  "population_covered": 3831099,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 24.0,
+  "adults_pct": 73.4,
+  "elderly_pct": 2.5,
+  "female_pct": 49.6,
+  "male_pct": 50.4,
+  "women_and_children_pct": 61.2,
+  "under_5_pct": 6.0,
+  "girls": 281702,
+  "boys": 308710,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 70132,
+    "male": 78093
+   },
+   {
+    "band": "5-11",
+    "female": 114984,
+    "male": 125744
+   },
+   {
+    "band": "12-17",
+    "female": 96586,
+    "male": 104873
+   },
+   {
+    "band": "18-59",
+    "female": 877340,
+    "male": 928300
+   },
+   {
+    "band": "60+",
+    "female": 36600,
+    "male": 25907
+   }
+  ],
+  "totals": {
+   "female": 1901291,
+   "male": 1929808,
+   "children": 590412,
+   "known_age": 2458559
+  }
+ },
+ "Vietnam": {
+  "iso3": "VNM",
+  "population_covered": 3139,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 19.6,
+  "adults_pct": 61.6,
+  "elderly_pct": 18.9,
+  "female_pct": 43.8,
+  "male_pct": 56.2,
+  "women_and_children_pct": 54.5,
+  "under_5_pct": 4.5,
+  "girls": 285,
+  "boys": 306,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 67,
+    "male": 68
+   },
+   {
+    "band": "5-11",
+    "female": 122,
+    "male": 131
+   },
+   {
+    "band": "12-17",
+    "female": 96,
+    "male": 107
+   },
+   {
+    "band": "18-59",
+    "female": 802,
+    "male": 1058
+   },
+   {
+    "band": "60+",
+    "female": 253,
+    "male": 317
+   }
+  ],
+  "totals": {
+   "female": 1374,
+   "male": 1765,
+   "children": 591,
+   "known_age": 3021
+  }
+ },
+ "Yemen": {
+  "iso3": "YEM",
+  "population_covered": 4346181,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 54.6,
+  "adults_pct": 41.4,
+  "elderly_pct": 4.0,
+  "female_pct": 50.8,
+  "male_pct": 49.2,
+  "women_and_children_pct": 78.6,
+  "under_5_pct": 15.9,
+  "girls": 1165364,
+  "boys": 1208762,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 344866,
+    "male": 344837
+   },
+   {
+    "band": "5-11",
+    "female": 389087,
+    "male": 432166
+   },
+   {
+    "band": "12-17",
+    "female": 431411,
+    "male": 431759
+   },
+   {
+    "band": "18-59",
+    "female": 955199,
+    "male": 841455
+   },
+   {
+    "band": "60+",
+    "female": 86697,
+    "male": 86984
+   }
+  ],
+  "totals": {
+   "female": 2207573,
+   "male": 2138608,
+   "children": 2374126,
+   "known_age": 4344461
+  }
+ },
+ "Zimbabwe": {
+  "iso3": "ZWE",
+  "population_covered": 17003,
+  "coverage_note": "share of this origin's displaced population for which UNHCR holds age/sex data",
+  "children_pct": 7.8,
+  "adults_pct": 90.2,
+  "elderly_pct": 2.0,
+  "female_pct": 49.8,
+  "male_pct": 50.2,
+  "women_and_children_pct": 53.5,
+  "under_5_pct": 0.9,
+  "girls": 700,
+  "boys": 625,
+  "pyramid": [
+   {
+    "band": "0-4",
+    "female": 69,
+    "male": 78
+   },
+   {
+    "band": "5-11",
+    "female": 209,
+    "male": 203
+   },
+   {
+    "band": "12-17",
+    "female": 422,
+    "male": 344
+   },
+   {
+    "band": "18-59",
+    "female": 7593,
+    "male": 7700
+   },
+   {
+    "band": "60+",
+    "female": 158,
+    "male": 186
+   }
+  ],
+  "totals": {
+   "female": 8472,
+   "male": 8531,
+   "children": 1325,
+   "known_age": 16962
+  }
+ }
+}

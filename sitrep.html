@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Situation Report Generator — Refuji Watch</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0d;--surface:#141414;--surface2:#1c1c1c;--border:#222;
+  --accent:#2dd4bf;--red:#ef4444;--amber:#f59e0b;--blue:#60a5fa;
+  --text:#f0ede6;--muted:#666;--muted2:#3a3a3a;
+  --serif:var(--sans);
+  --mono:'DM Mono',monospace;
+  --sans:'DM Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13px;line-height:1.6;min-height:100vh}
+
+/* ── HEADER ── */
+.header{padding:.9rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;background:rgba(20,20,20,.95);position:sticky;top:0;z-index:200;backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);transition:background .4s,backdrop-filter .4s;flex-wrap:wrap}
+.header.scrolled{background:rgba(20,20,20,.5);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom-color:rgba(255,255,255,.06)}
+.logo{font-family:var(--sans);font-size:1.4rem;font-weight:900;letter-spacing:-.02em;text-decoration:none;color:var(--text)}
+.logo span{color:var(--accent)}
+.nav{display:flex;gap:.7rem;font-family:var(--sans);font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap}
+.nav a{color:inherit;text-decoration:none;transition:color .15s}
+.nav a:hover,.nav a.active{color:var(--accent)}
+.back-link{font-family:var(--sans);font-size:11px;font-weight:600;color:var(--muted);text-decoration:none;transition:color .15s}
+.back-link:hover{color:var(--accent)}
+@media(max-width:700px){.nav{display:none}}
+
+/* ── PAGE HERO ── */
+.page-hero{padding:2rem 1.5rem 1.5rem;border-bottom:1px solid var(--border)}
+.page-eyebrow{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.page-title{font-family:var(--sans);font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;line-height:1.1;margin-bottom:.5rem}
+.page-title span{color:var(--accent)}
+.page-intro{font-size:13px;color:var(--muted);line-height:1.7;max-width:600px}
+
+/* ── LAYOUT ── */
+.layout{display:grid;grid-template-columns:340px 1fr;gap:1px;background:var(--border);min-height:70vh}
+@media(max-width:800px){
+  .layout{grid-template-columns:1fr}
+  .config-panel{border-right:none;border-bottom:1px solid var(--border)}
+  [style*="grid-template-columns"]{grid-template-columns:1fr!important}
+}
+@media(max-width:480px){
+  .sitrep-figures{grid-template-columns:1fr 1fr}
+  .toolbar-actions{flex-wrap:wrap;gap:.3rem}
+  .report-content{padding:1rem}
+  .page-hero{padding:1.2rem 1rem}
+}
+
+/* ── LEFT PANEL ── */
+.config-panel{background:var(--surface);display:flex;flex-direction:column}
+.config-section{padding:1.2rem;border-bottom:1px solid var(--border)}
+.config-title{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem}
+
+/* form elements */
+.field{margin-bottom:.9rem}
+.field:last-child{margin-bottom:0}
+.field label{display:block;font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
+.field select,.field input[type=text],.field input[type=date]{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:12px;padding:.45rem .7rem;outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none}
+.field select:focus,.field input:focus{border-color:var(--accent)}
+.field select option{background:var(--surface2)}
+.field-hint{font-size:10px;color:var(--muted2);margin-top:.3rem;line-height:1.5}
+
+/* audience toggles */
+.toggle-group{display:flex;flex-direction:column;gap:.4rem}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid var(--border)}
+.toggle-row:last-child{border-bottom:none}
+.toggle-label{font-family:var(--sans);font-size:12px;color:var(--text)}
+.toggle-sub{font-size:10px;color:var(--muted);margin-top:.1rem}
+.toggle{width:36px;height:20px;border-radius:10px;background:var(--border);position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;border:none}
+.toggle.on{background:var(--accent)}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:var(--text);transition:transform .2s}
+.toggle.on::after{transform:translateX(16px)}
+
+/* section checkboxes */
+.section-checks{display:flex;flex-direction:column;gap:.4rem}
+.check-row{display:flex;align-items:center;gap:.6rem;font-size:12px;color:var(--muted);cursor:pointer;padding:.2rem 0}
+.check-row input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;flex-shrink:0}
+.check-row:hover{color:var(--text)}
+
+/* generate button */
+.generate-btn{width:100%;padding:.75rem;background:var(--accent);color:var(--bg);font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;transition:opacity .2s;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.generate-btn:hover{opacity:.88}
+.generate-btn:disabled{opacity:.4;cursor:not-allowed}
+.generate-btn .spinner{width:14px;height:14px;border:2px solid rgba(0,0,0,.2);border-top-color:var(--bg);border-radius:50%;animation:spin .7s linear infinite;display:none}
+.generate-btn.loading .spinner{display:inline-block}
+.generate-btn.loading .btn-text{opacity:.6}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* data preview */
+.data-preview{padding:1rem 1.2rem}
+.data-preview-title{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2);margin-bottom:.6rem}
+.data-row{display:flex;justify-content:space-between;font-size:11px;padding:.3rem 0;border-bottom:1px solid var(--border)}
+.data-row:last-child{border-bottom:none}
+.data-key{color:var(--muted);font-family:var(--sans)}
+.data-val{color:var(--accent);font-family:var(--mono)}
+
+/* ── RIGHT PANEL — REPORT ── */
+.report-panel{background:var(--surface);display:flex;flex-direction:column}
+.report-toolbar{padding:.75rem 1.4rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:.8rem;flex-shrink:0;flex-wrap:wrap}
+.report-toolbar-title{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.toolbar-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+.toolbar-btn{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .8rem;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;transition:all .15s}
+.toolbar-btn:hover{border-color:var(--accent);color:var(--accent)}
+.toolbar-btn.primary{border-color:var(--accent);color:var(--accent)}
+.toolbar-btn.primary:hover{background:var(--accent);color:var(--bg)}
+
+/* report content area */
+.report-content{flex:1;padding:2rem;overflow-y:auto;min-height:500px}
+.report-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:400px;text-align:center;color:var(--muted);gap:.8rem}
+.report-empty-icon{font-size:2rem;opacity:.3}
+.report-empty strong{font-family:var(--sans);font-size:15px;font-weight:700;color:var(--muted);display:block}
+.report-empty p{font-size:12px;max-width:300px;line-height:1.7}
+
+/* ── RENDERED SITREP ── */
+.sitrep{max-width:720px;font-family:var(--sans)}
+.sitrep-header{border-bottom:2px solid var(--accent);padding-bottom:1rem;margin-bottom:1.5rem}
+.sitrep-classification{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.sitrep-org{font-family:var(--sans);font-size:11px;font-weight:600;color:var(--muted);margin-bottom:.5rem}
+.sitrep-title{font-family:var(--sans);font-size:1.6rem;font-weight:900;line-height:1.1;color:var(--text);margin-bottom:.4rem}
+.sitrep-meta{display:flex;gap:1.2rem;flex-wrap:wrap;font-family:var(--mono);font-size:10px;color:var(--muted)}
+.sitrep-meta-item{display:flex;gap:.4rem;align-items:center}
+.sitrep-meta-label{color:var(--muted2)}
+
+/* key figures strip */
+.sitrep-figures{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:var(--border);margin:1.2rem 0}
+.sitrep-figure{background:var(--surface2);padding:.75rem 1rem}
+.sitrep-figure-label{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
+.sitrep-figure-val{font-family:var(--mono);font-size:1.2rem;font-weight:900;color:var(--accent);line-height:1}
+.sitrep-figure-sub{font-size:10px;color:var(--muted2);margin-top:.2rem;font-family:var(--mono)}
+
+/* crisis badge */
+.sitrep-crisis{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .9rem;border-radius:2px;font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.2rem}
+.sc-critical{background:rgba(239,68,68,.15);color:#ef4444;border:1px solid rgba(239,68,68,.3)}
+.sc-severe{background:rgba(251,146,60,.15);color:#fb923c;border:1px solid rgba(251,146,60,.3)}
+.sc-high{background:rgba(250,204,21,.15);color:#facc15;border:1px solid rgba(250,204,21,.3)}
+.sc-moderate{background:rgba(45,212,191,.15);color:#2dd4bf;border:1px solid rgba(45,212,191,.3)}
+
+/* report sections */
+.sitrep-section{margin-bottom:1.6rem}
+.sitrep-section-title{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);border-bottom:1px solid var(--border);padding-bottom:.4rem;margin-bottom:.8rem}
+.sitrep-body{font-size:13px;color:var(--muted);line-height:1.85}
+.sitrep-body p{margin-bottom:.7rem}
+.sitrep-body p:last-child{margin-bottom:0}
+.sitrep-body strong{color:var(--text);font-weight:600}
+.sitrep-body ul{padding-left:1.2rem;margin:.4rem 0}
+.sitrep-body li{margin-bottom:.3rem;color:var(--muted)}
+
+/* streaming cursor */
+.cursor{display:inline-block;width:2px;height:1em;background:var(--accent);animation:blink .8s infinite;vertical-align:text-bottom;margin-left:2px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* funding bar */
+.fund-bar-wrap{margin:.6rem 0}
+.fund-bar-meta{display:flex;justify-content:space-between;font-size:10px;margin-bottom:.3rem}
+.fund-bar-track{height:6px;background:rgba(239,68,68,.12);border-radius:2px;overflow:hidden}
+.fund-bar-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 1s}
+
+/* sources */
+.sitrep-sources{font-size:10px;color:var(--muted2);border-top:1px solid var(--border);padding-top:.8rem;margin-top:1.2rem;font-family:var(--mono)}
+
+/* ── PRINT ── */
+@media print{
+  body{background:#fff;color:#111}
+  .header,.nav,.back-link,.config-panel,.report-toolbar,.page-hero{display:none!important}
+  .layout{grid-template-columns:1fr;background:none}
+  .report-panel{background:#fff}
+  .report-content{padding:0}
+  .sitrep{max-width:100%}
+  .sitrep-title,.sitrep-section-title{color:#111}
+  .sitrep-body,.sitrep-body p,.sitrep-body li{color:#333}
+  .sitrep-figures{border:1px solid #ddd}
+  .sitrep-figure{background:#f8f8f8;border:1px solid #eee}
+  .sitrep-figure-val{color:#059669}
+  .sitrep-header{border-bottom:2px solid #059669}
+  .sitrep-section-title{color:#059669;border-bottom:1px solid #ddd}
+  .sitrep-meta{color:#666}
+  .sitrep-sources{color:#888;border-top:1px solid #ddd}
+  .sitrep-classification{color:#666}
+  .fund-bar-track{border:1px solid #ddd}
+  .fund-bar-fill{background:#059669}
+}
+
+
+
+/* ── MOBILE SAFETY ── */
+html,body{overflow-x:hidden}
+.chart-wrap{overflow:hidden}
+svg.trend{overflow:hidden}
+img,video,iframe{max-width:100%}
+
+
+/* ── MOBILE HAMBURGER MENU ── */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;border:1px solid var(--border);background:none;cursor:pointer;padding:8px;flex-shrink:0;transition:border-color .2s}
+.hamburger:hover{border-color:var(--accent)}
+.hamburger span{display:block;height:1.5px;background:var(--text);border-radius:1px;transition:all .25s}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+.nav-drawer{
+  position:fixed;top:0;right:0;bottom:0;width:280px;max-width:85vw;
+  background:var(--surface);border-left:1px solid var(--border);
+  z-index:500;display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+}
+.nav-drawer.open{transform:translateX(0)}
+.nav-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);
+  z-index:499;opacity:0;pointer-events:none;
+  transition:opacity .3s;
+}
+.nav-overlay.open{opacity:1;pointer-events:all}
+
+.nav-drawer-header{
+  padding:1rem 1.2rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.nav-drawer-logo{font-family:var(--sans);font-size:1.1rem;font-weight:900;color:var(--text);text-decoration:none}
+.nav-drawer-logo span{color:var(--accent)}
+.nav-drawer-close{
+  width:32px;height:32px;border:1px solid var(--border);background:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:16px;transition:all .15s;flex-shrink:0;
+}
+.nav-drawer-close:hover{border-color:var(--accent);color:var(--accent)}
+
+.nav-drawer-links{
+  flex:1;padding:1rem 0;display:flex;flex-direction:column;
+}
+.nav-drawer-links a{
+  font-family:var(--sans);font-size:13px;font-weight:600;
+  color:var(--muted);text-decoration:none;
+  padding:.75rem 1.4rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .15s;
+}
+.nav-drawer-links a:last-child{border-bottom:none}
+.nav-drawer-links a:hover,.nav-drawer-links a.active{color:var(--accent);background:rgba(45,212,191,.04)}
+.nav-drawer-links a::after{content:'→';font-size:12px;color:var(--muted2)}
+.nav-drawer-links a:hover::after,.nav-drawer-links a.active::after{color:var(--accent)}
+
+.nav-drawer-footer{
+  padding:1rem 1.4rem;border-top:1px solid var(--border);
+  font-family:var(--sans);font-size:10px;color:var(--muted2);
+  flex-shrink:0;
+}
+
+@media(max-width:700px){
+  .nav{display:none!important}
+  .hamburger{display:flex}
+}
+
+</style>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7128f2b8b7014426a65f4112bfabfd2a"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+
+<div class="header" id="header">
+  <a class="logo" href="index.html">Refuji <span>Watch</span></a>
+  <button class="hamburger" id="hamburger-btn" aria-label="Open menu"><span></span><span></span><span></span></button>
+  <nav class="nav">
+    <a href="index.html">Dashboard</a>
+    <a href="countries.html">Countries</a><a href="regions.html">Regions</a>
+    <a href="compare.html">Compare</a><a href="funding.html">Funding</a>
+    <a href="help.html">How to Help</a>
+    <a href="about.html">About</a>
+  </nav>
+  <a class="back-link" href="index.html">← Dashboard</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-eyebrow">AI-powered humanitarian intelligence</div>
+  <div class="page-title">Situation <span>Report Generator</span></div>
+  <div class="page-intro">Select a country and configure your report. Claude synthesises live UNHCR data, funding intelligence, crisis scores, and recent ReliefWeb headlines into a structured SitRep — ready to share, print, or export.</div>
+</div>
+
+<div class="layout">
+
+  <!-- LEFT: Config -->
+  <div class="config-panel">
+
+    <div class="config-section">
+      <div class="config-title">Country &amp; Date</div>
+      <div class="field">
+        <label>Country</label>
+        <select id="country-select">
+          <option value="">Select a country...</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Report date</label>
+        <input type="date" id="report-date"/>
+        <div class="field-hint">Used in the report header. Defaults to today.</div>
+      </div>
+      <div class="field">
+        <label>Audience</label>
+        <select id="audience-select">
+          <option value="general">General / Public</option>
+          <option value="ngo" selected>NGO / Charity staff</option>
+          <option value="field">Field / Aid workers</option>
+          <option value="donor">Donor / Funder</option>
+          <option value="researcher">Researcher / Academic</option>
+          <option value="journalist">Journalist / Media</option>
+        </select>
+        <div class="field-hint">Adjusts language, depth, and emphasis of the report.</div>
+      </div>
+    </div>
+
+    <div class="config-section">
+      <div class="config-title">Report sections</div>
+      <div class="section-checks">
+        <label class="check-row"><input type="checkbox" id="sec-exec" checked/> Executive Summary</label>
+        <label class="check-row"><input type="checkbox" id="sec-situation" checked/> Situation Overview</label>
+        <label class="check-row"><input type="checkbox" id="sec-displaced" checked/> Displacement Figures</label>
+        <label class="check-row"><input type="checkbox" id="sec-funding" checked/> Humanitarian Funding</label>
+        <label class="check-row"><input type="checkbox" id="sec-needs" checked/> Key Needs &amp; Concerns</label>
+        <label class="check-row"><input type="checkbox" id="sec-context"/> Background &amp; Causes</label>
+        <label class="check-row"><input type="checkbox" id="sec-response"/> Response &amp; Operations</label>
+        <label class="check-row"><input type="checkbox" id="sec-recommend"/> Recommendations</label>
+      </div>
+    </div>
+
+    <div class="config-section" id="data-preview-section" style="display:none">
+      <div class="config-title">Data loaded</div>
+      <div id="data-preview"></div>
+    </div>
+
+    <div style="padding:1.2rem">
+      <button class="generate-btn" id="generate-btn" disabled onclick="generateSitRep()">
+        <span class="spinner"></span>
+        <span class="btn-text">Generate SitRep</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- RIGHT: Report output -->
+  <div class="report-panel">
+    <div class="report-toolbar">
+      <span class="report-toolbar-title" id="toolbar-title">Situation Report</span>
+      <div class="toolbar-actions">
+        <button class="toolbar-btn" id="copy-btn" onclick="copyReport()" style="display:none">Copy text</button>
+        <button class="toolbar-btn" id="print-btn" onclick="printReport()" style="display:none">Print / PDF</button>
+        <button class="toolbar-btn primary" id="new-btn" onclick="resetReport()" style="display:none">New report</button>
+      </div>
+    </div>
+    <div class="report-content" id="report-content">
+      <div class="report-empty">
+        <div class="report-empty-icon">📋</div>
+        <strong>No report generated yet</strong>
+        <p>Select a country on the left and click Generate SitRep to produce a structured humanitarian situation report.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer style="border-top:1px solid var(--border);padding:.8rem 1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.4rem;font-size:10px;color:var(--muted);letter-spacing:.06em;font-family:var(--sans)">
+  <span>Data: <a href="https://www.unhcr.org/refugee-statistics" target="_blank" style="color:var(--accent);text-decoration:none">UNHCR</a> · <a href="https://fts.unocha.org" target="_blank" style="color:var(--accent);text-decoration:none">OCHA FTS</a> · <a href="https://reliefweb.int" target="_blank" style="color:var(--accent);text-decoration:none">ReliefWeb</a> · AI: Claude</span>
+  <span>Built with love by <a href="https://github.com/jahitjanberk" target="_blank">jahit</a></span>
+</footer>
+
+<script>
+// ── State ────────────────────────────────────────────────────
+// ── SitRep generation backend ─────────────────────────────────────────────
+// Point this at an endpoint that accepts {prompt} and returns {content}.
+// The previous AWS Lambda + API Gateway backend was decommissioned; leave
+// this empty and the Generate button reports that it's unconfigured.
+const SITREP_API = '';
+
+let globalData = null;
+let storiesData = null;
+let selectedCountry = null;
+let selectedData = null;
+let lastReportText = '';
+
+// ── Helpers ──────────────────────────────────────────────────
+function fmt(n){if(!n||n===0)return'—';if(n>=1e9)return(n/1e9).toFixed(1)+'B';if(n>=1e6)return(n/1e6).toFixed(1)+'M';if(n>=1e3)return(n/1e3).toFixed(0)+'K';return n.toLocaleString()}
+function fmtUSD(n){if(!n||n===0)return'—';if(n>=1e9)return'$'+(n/1e9).toFixed(1)+'B';if(n>=1e6)return'$'+(n/1e6).toFixed(0)+'M';return'$'+n.toLocaleString()}
+function today(){return new Date().toISOString().split('T')[0]}
+function fmtDate(d){return new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}
+
+// ── Init ─────────────────────────────────────────────────────
+async function init(){
+  document.getElementById('report-date').value = today();
+
+  const [dataRes, storiesRes] = await Promise.all([
+    fetch('/sample.json'),
+    fetch('/stories.json').catch(()=>null)
+  ]);
+  globalData = await dataRes.json();
+  if(storiesRes && storiesRes.ok) storiesData = await storiesRes.json();
+
+  // Populate country dropdown — origin countries first, then hosts
+  const countries = Object.entries(globalData.country_details)
+    .map(([name,d])=>({name,total:d.latest?.total||0,is_origin:d.is_origin}))
+    .sort((a,b)=>b.total-a.total);
+
+  const sel = document.getElementById('country-select');
+  const origins = countries.filter(c=>c.is_origin);
+  const hosts = countries.filter(c=>!c.is_origin);
+
+  const og = document.createElement('optgroup');
+  og.label = 'Origin countries';
+  origins.forEach(c=>{const o=document.createElement('option');o.value=c.name;o.textContent=`${c.name} (${fmt(c.total)} displaced)`;og.appendChild(o)});
+  sel.appendChild(og);
+
+  const hg = document.createElement('optgroup');
+  hg.label = 'Host countries';
+  hosts.forEach(c=>{const o=document.createElement('option');o.value=c.name;o.textContent=c.name;hg.appendChild(o)});
+  sel.appendChild(hg);
+
+  sel.addEventListener('change', onCountryChange);
+
+  // Pre-select from URL param
+  const param = new URLSearchParams(location.search).get('country');
+  if(param && globalData.country_details[param]){
+    sel.value = param;
+    onCountryChange();
+  }
+}
+
+function onCountryChange(){
+  const name = document.getElementById('country-select').value;
+  if(!name){
+    document.getElementById('data-preview-section').style.display='none';
+    document.getElementById('generate-btn').disabled=true;
+    return;
+  }
+  selectedCountry = name;
+  selectedData = globalData.country_details[name];
+  showDataPreview(name, selectedData);
+  document.getElementById('generate-btn').disabled=false;
+}
+
+function showDataPreview(name, d){
+  const crisis = globalData.crisis_scores?.find(s=>s.country===name);
+  const funding = globalData.funding_gaps?.find(f=>f.name.toLowerCase().includes(name.toLowerCase()));
+  const l = d.latest||{};
+
+  const rows = [
+    ['Total displaced', fmt(l.total)],
+    ['Refugees', fmt(l.refugees)],
+    ['IDPs', fmt(l.idps)],
+    ['Asylum seekers', fmt(l.asylum_seekers)],
+    ['Crisis score', crisis?`${crisis.score}/10 · ${crisis.label}`:'—'],
+    ['Funding', funding?`${funding.pct}% of appeal met`:'No tracked appeal'],
+    ['Trend data', d.trend?.length?`${d.trend.length} years`:'—'],
+    ['Story context', storiesData?.[name]?'Available':'—'],
+  ];
+
+  document.getElementById('data-preview').innerHTML = rows.map(([k,v])=>
+    `<div class="data-row"><span class="data-key">${k}</span><span class="data-val">${v}</span></div>`
+  ).join('');
+  document.getElementById('data-preview-section').style.display='block';
+}
+
+// ── Build prompt ─────────────────────────────────────────────
+function buildPrompt(country, data, crisis, funding, story, sections, audience, reportDate){
+  const l = data.latest||{};
+  const trend = data.trend||[];
+  const hosts = data.top_hosts||[];
+  const origins = data.top_origins_hosted||[];
+
+  // Trend change calculation
+  let trendNote = '';
+  if(trend.length>=2){
+    const first=trend[0].total, last=trend[trend.length-1].total;
+    const pct=Math.round((last-first)/first*100);
+    trendNote=`Displacement has ${pct>0?'increased':'decreased'} by ${Math.abs(pct)}% since ${trend[0].year}.`;
+  }
+
+  const audienceInstructions = {
+    general: 'Write for a general audience with no specialist knowledge. Explain acronyms, avoid jargon, and focus on human impact.',
+    ngo: 'Write for NGO or charity staff. Use standard humanitarian terminology (IDP, UNHCR, OCHA, FTS). Focus on operational context and funding gaps. Be precise and professional.',
+    field: 'Write for field aid workers. Be direct and practical. Prioritise needs, access constraints, and operational challenges. Use concise bullet points for key concerns.',
+    donor: 'Write for a donor or funder. Emphasise scale of need, funding gaps, and impact of contributions. Use clear financial figures. Connect funding to outcomes.',
+    researcher: 'Write for an academic or policy researcher. Be precise with data sourcing. Note methodological limitations. Use formal register and cite data points clearly.',
+    journalist: 'Write for a journalist. Lead with the most newsworthy figure. Use vivid, clear language. Avoid jargon. Include a compelling opening that captures the human scale of the crisis.',
+  }[audience]||'Write for a professional humanitarian audience.';
+
+  const sectionList = sections.join(', ');
+
+  const dataBlock = `
+COUNTRY: ${country}
+REPORT DATE: ${reportDate}
+TYPE: ${data.is_origin&data.is_host?'Origin and Host Country':data.is_origin?'Origin Country':'Host Country'}
+
+DISPLACEMENT FIGURES (latest available):
+- Total displaced: ${fmt(l.total)}
+- Refugees abroad: ${fmt(l.refugees)}
+- Internally displaced (IDPs): ${fmt(l.idps)}
+- Asylum seekers: ${fmt(l.asylum_seekers)}
+${trendNote}
+
+TREND DATA:
+${trend.map(t=>`${t.year}: ${fmt(t.total)} total (refugees: ${fmt(t.refugees)}, IDPs: ${fmt(t.idps)})`).join('\n')}
+
+${hosts.length?`TOP HOST COUNTRIES:\n${hosts.map(h=>`${h.country}: ${fmt(h.hosted)}`).join('\n')}`:''}
+${origins.length?`REFUGEES HOSTED BY ${country.toUpperCase()}:\n${origins.map(o=>`${o.country}: ${fmt(o.count)}`).join('\n')}`:''}
+
+${crisis?`CRISIS SEVERITY INDEX: ${crisis.score}/10 — ${crisis.label}`:'CRISIS SEVERITY: No score available'}
+
+${funding?`HUMANITARIAN FUNDING (OCHA FTS):
+- Appeal name: ${funding.name}
+- Requested: ${fmtUSD(funding.requested)}
+- Funded: ${fmtUSD(funding.funded)} (${funding.pct}%)
+- Gap: ${fmtUSD(funding.gap)}`:'HUMANITARIAN FUNDING: No major OCHA appeal tracked for this country'}
+
+${story?`BACKGROUND AND CONTEXT:
+${story.summary}
+KEY CAUSES: ${story.causes?.join(', ')}
+KEY TIMELINE EVENTS:
+${story.timeline?.map(e=>`${e.year}: ${e.event}`).join('\n')}`:''}
+`;
+
+  return `You are a senior humanitarian analyst producing an official Situation Report (SitRep) for Refuji Watch, an open-source displacement intelligence platform.
+
+AUDIENCE: ${audienceInstructions}
+
+SECTIONS TO INCLUDE: ${sectionList}
+
+Using ONLY the data provided below, write a professional humanitarian Situation Report. Do not invent figures or events not present in the data. Where data is limited, note the gap honestly.
+
+Format the report with clear section headings using ALL CAPS (e.g. EXECUTIVE SUMMARY, SITUATION OVERVIEW). Use paragraphs, not excessive bullet points, except where bullets genuinely aid clarity. Write with authority and precision. The report should be 400–700 words depending on sections selected.
+
+End with a one-line SOURCES note listing: UNHCR Refugee Data Finder, OCHA Financial Tracking Service, ReliefWeb, Refuji Watch Crisis Severity Index.
+
+DATA:
+${dataBlock}`;
+}
+
+// ── Generate ─────────────────────────────────────────────────
+async function generateSitRep(){
+  if(!selectedCountry||!selectedData) return;
+
+  const btn = document.getElementById('generate-btn');
+  btn.disabled=true;
+  btn.classList.add('loading');
+  btn.querySelector('.btn-text').textContent='Generating...';
+
+  const crisis = globalData.crisis_scores?.find(s=>s.country===selectedCountry);
+  const funding = globalData.funding_gaps?.find(f=>f.name.toLowerCase().includes(selectedCountry.toLowerCase()));
+  const story = storiesData?.[selectedCountry]||null;
+  const audience = document.getElementById('audience-select').value;
+  const reportDate = document.getElementById('report-date').value || today();
+
+  const sections = [];
+  if(document.getElementById('sec-exec').checked) sections.push('Executive Summary');
+  if(document.getElementById('sec-situation').checked) sections.push('Situation Overview');
+  if(document.getElementById('sec-displaced').checked) sections.push('Displacement Figures');
+  if(document.getElementById('sec-funding').checked) sections.push('Humanitarian Funding');
+  if(document.getElementById('sec-needs').checked) sections.push('Key Needs and Concerns');
+  if(document.getElementById('sec-context').checked) sections.push('Background and Causes');
+  if(document.getElementById('sec-response').checked) sections.push('Response and Operations');
+  if(document.getElementById('sec-recommend').checked) sections.push('Recommendations');
+
+  const prompt = buildPrompt(selectedCountry, selectedData, crisis, funding, story, sections, audience, reportDate);
+
+  // Show streaming skeleton
+  renderReportShell(selectedCountry, crisis, reportDate, audience);
+  const bodyEl = document.getElementById('sitrep-stream-body');
+
+  try{
+    if(!SITREP_API) throw new Error('No generation backend configured.');
+
+    const response = await fetch(SITREP_API, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({prompt})
+    });
+
+    if(!response.ok){
+      const err = await response.json();
+      throw new Error(err.error||`API error ${response.status}`);
+    }
+
+    const result = await response.json();
+    const fullText = result.content || '';
+    bodyEl.innerHTML = '<span class="cursor"></span>';
+
+    // Simulate progressive rendering for UX
+    let displayed = '';
+    const words = fullText.split(' ');
+    bodyEl.innerHTML = '<span class="cursor"></span>';
+
+    for(let i=0; i<words.length; i++){
+      displayed += (i===0?'':' ') + words[i];
+      if(i % 8 === 0){
+        bodyEl.innerHTML = formatSitRepText(displayed)+'<span class="cursor"></span>';
+        await new Promise(r=>setTimeout(r,30));
+      }
+
+      if(true){ // placeholder to maintain structure
+        const delta = '';
+        if(delta){
+          bodyEl.innerHTML = formatSitRepText(displayed)+'<span class="cursor"></span>';
+            // Auto-scroll
+            document.getElementById('report-content').scrollTop=document.getElementById('report-content').scrollHeight;
+          }
+        }catch(e){}
+      }
+    }
+
+    // Final render without cursor
+    bodyEl.innerHTML = formatSitRepText(fullText);
+    lastReportText = fullText;
+
+    // Show actions
+    document.getElementById('copy-btn').style.display='inline-block';
+    document.getElementById('print-btn').style.display='inline-block';
+    document.getElementById('new-btn').style.display='inline-block';
+    document.getElementById('toolbar-title').textContent=`${selectedCountry} SitRep · ${fmtDate(reportDate)}`;
+
+  }catch(err){
+    bodyEl.innerHTML=`<div style="color:var(--red);font-family:var(--sans);font-size:13px;padding:.5rem 0">
+      <strong>Generation failed</strong><br>
+      <span style="color:var(--muted);font-size:12px">${err.message}</span><br><br>
+      <span style="color:var(--muted);font-size:11px">SitRep generation needs a backend that can call an LLM API. Set <code>SITREP_API</code> in this page to your endpoint &mdash; it should accept <code>{prompt}</code> and return <code>{content}</code>.</span>
+    </div>`;
+  }
+
+  btn.disabled=false;
+  btn.classList.remove('loading');
+  btn.querySelector('.btn-text').textContent='Generate SitRep';
+}
+
+// ── Render shell ─────────────────────────────────────────────
+function renderReportShell(country, crisis, reportDate, audience){
+  const l = selectedData.latest||{};
+  const funding = globalData.funding_gaps?.find(f=>f.name.toLowerCase().includes(country.toLowerCase()));
+  const audienceLabels={general:'General',ngo:'NGO / Charity',field:'Field Operations',donor:'Donor Briefing',researcher:'Research / Policy',journalist:'Media'};
+
+  const crisisClass = crisis?`sc-${crisis.label.toLowerCase()}`:'sc-moderate';
+  const crisisText = crisis?`Crisis Severity: ${crisis.score}/10 — ${crisis.label}`:'Severity: Not scored';
+
+  const figures = [
+    {label:'Total displaced',val:fmt(l.total),sub:'latest data'},
+    {label:'Refugees',val:fmt(l.refugees),sub:'across borders'},
+    {label:'IDPs',val:fmt(l.idps),sub:'within country'},
+    {label:'Asylum seekers',val:fmt(l.asylum_seekers),sub:'status pending'},
+  ].filter(f=>f.val!=='—');
+
+  document.getElementById('report-content').innerHTML=`
+    <div class="sitrep" id="sitrep-root">
+      <div class="sitrep-header">
+        <div class="sitrep-classification">Humanitarian Situation Report · Refuji Watch</div>
+        <div class="sitrep-org">Generated for: ${audienceLabels[audience]||'General'}</div>
+        <div class="sitrep-title">${country}: Displacement Situation</div>
+        <div class="sitrep-meta">
+          <span class="sitrep-meta-item"><span class="sitrep-meta-label">Date:</span>${fmtDate(reportDate)}</span>
+          <span class="sitrep-meta-item"><span class="sitrep-meta-label">Source:</span>UNHCR · OCHA FTS · ReliefWeb</span>
+          <span class="sitrep-meta-item"><span class="sitrep-meta-label">Generated by:</span>Claude · Refuji Watch</span>
+        </div>
+      </div>
+
+      ${crisis?`<div class="sitrep-crisis ${crisisClass}">${crisisText}</div>`:''}
+
+      <div class="sitrep-figures">
+        ${figures.map(f=>`<div class="sitrep-figure">
+          <div class="sitrep-figure-label">${f.label}</div>
+          <div class="sitrep-figure-val">${f.val}</div>
+          <div class="sitrep-figure-sub">${f.sub}</div>
+        </div>`).join('')}
+        ${funding?`<div class="sitrep-figure">
+          <div class="sitrep-figure-label">Funding received</div>
+          <div class="sitrep-figure-val">${funding.pct}%</div>
+          <div class="sitrep-figure-sub">of ${fmtUSD(funding.requested)} appeal</div>
+        </div>`:''}
+      </div>
+
+      ${funding?`<div class="fund-bar-wrap">
+        <div class="fund-bar-meta">
+          <span style="font-family:var(--sans);font-size:10px;color:var(--muted)">${funding.name}</span>
+          <span style="font-family:var(--mono);font-size:10px;color:var(--muted)">${fmtUSD(funding.funded)} of ${fmtUSD(funding.requested)}</span>
+        </div>
+        <div class="fund-bar-track"><div class="fund-bar-fill" style="width:${funding.pct}%"></div></div>
+      </div>`:''}
+
+      <div class="sitrep-section">
+        <div class="sitrep-section-title">Report</div>
+        <div class="sitrep-body" id="sitrep-stream-body">
+          <span class="cursor"></span>
+        </div>
+      </div>
+
+      <div class="sitrep-sources">
+        Sources: UNHCR Refugee Data Finder · OCHA Financial Tracking Service · ReliefWeb · Refuji Watch Crisis Severity Index
+      </div>
+    </div>`;
+}
+
+// ── Format streamed text ──────────────────────────────────────
+function formatSitRepText(text){
+  // Convert ALL CAPS section headers to styled headings
+  let html = text
+    .replace(/^([A-Z][A-Z\s&\/]+[A-Z])$/gm, '<h3 style="font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border-bottom:1px solid var(--border);padding-bottom:.3rem;margin:1rem 0 .6rem">$1</h3>')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/^- (.+)$/gm, '<li>$1</li>')
+    .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')
+    .replace(/^SOURCES?:(.*)$/gim,'');
+
+  if(!html.startsWith('<h3') & !html.startsWith('<p>')){
+    html='<p>'+html;
+  }
+  if(!html.endsWith('</p>') & !html.endsWith('</h3>') & !html.endsWith('</ul>')){
+    html+='</p>';
+  }
+  return html;
+}
+
+// ── Actions ──────────────────────────────────────────────────
+function copyReport(){
+  const text = document.getElementById('sitrep-root')?.innerText||'';
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=document.getElementById('copy-btn');
+    btn.textContent='Copied!';
+    setTimeout(()=>btn.textContent='Copy text',1500);
+  });
+}
+
+function printReport(){
+  window.print();
+}
+
+function resetReport(){
+  document.getElementById('report-content').innerHTML=`<div class="report-empty">
+    <div class="report-empty-icon">📋</div>
+    <strong>No report generated yet</strong>
+    <p>Select a country on the left and click Generate SitRep.</p>
+  </div>`;
+  document.getElementById('copy-btn').style.display='none';
+  document.getElementById('print-btn').style.display='none';
+  document.getElementById('new-btn').style.display='none';
+  document.getElementById('toolbar-title').textContent='Situation Report';
+  lastReportText='';
+}
+
+// ── Scroll ───────────────────────────────────────────────────
+window.addEventListener('scroll',()=>{
+  document.getElementById('header').classList.toggle('scrolled',scrollY>10);
+},{passive:true});
+
+init();
+</script>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="nav-overlay" id="nav-overlay" onclick="closeDrawer()"></div>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nav-drawer-header">
+    <a class="nav-drawer-logo" href="index.html">Refuji <span>Watch</span></a>
+    <button class="nav-drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="nav-drawer-links">
+    <a href="index.html">Dashboard</a>
+    <a href="countries.html">Countries</a>
+    <a href="regions.html">Regions</a>
+    <a href="compare.html">Compare</a>
+    <a href="funding.html">Funding</a>
+    <a href="help.html">How to Help</a>
+    <a href="about.html">About</a>
+    <a href="sitrep.html" class="active">SitRep</a>
+  </div>
+  <div class="nav-drawer-footer">Data: UNHCR · OCHA FTS · ReliefWeb</div>
+</div>
+
+<script>
+(function(){
+  function openDrawer(){
+    document.getElementById('nav-drawer').classList.add('open');
+    document.getElementById('nav-overlay').classList.add('open');
+    var btn=document.getElementById('hamburger-btn');
+    if(btn)btn.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  window.closeDrawer=function(){
+    document.getElementById('nav-drawer').classList.remove('open');
+    document.getElementById('nav-overlay').classList.remove('open');
+    var btn=document.getElementById('hamburger-btn');
+    if(btn)btn.classList.remove('open');
+    document.body.style.overflow='';
+  };
+  var btn=document.getElementById('hamburger-btn');
+  if(btn)btn.addEventListener('click',function(){
+    if(document.getElementById('nav-drawer').classList.contains('open'))closeDrawer();
+    else openDrawer();
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDrawer();});
+})();
+</script>
+</body>
+</html>

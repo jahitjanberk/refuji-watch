@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Regional Overview — Refuji Watch</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0d;--surface:#141414;--surface2:#1c1c1c;--border:#222;
+  --accent:#2dd4bf;--red:#ef4444;--amber:#f59e0b;--blue:#60a5fa;
+  --purple:#a78bfa;--green:#4ade80;--orange:#fb923c;
+  --text:#f0ede6;--muted:#666;--muted2:#3a3a3a;
+  --mono:'DM Mono',monospace;
+  --sans:'DM Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13px;line-height:1.6;min-height:100vh}
+
+/* ── HEADER ── */
+.header{padding:.9rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;background:rgba(20,20,20,.95);position:sticky;top:0;z-index:200;backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);transition:background .4s,backdrop-filter .4s;flex-wrap:wrap}
+.header.scrolled{background:rgba(20,20,20,.5);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom-color:rgba(255,255,255,.06)}
+.logo{font-family:var(--sans);font-size:1.4rem;font-weight:900;letter-spacing:-.02em;text-decoration:none;color:var(--text)}
+.logo span{color:var(--accent)}
+.nav{display:flex;gap:.7rem;font-family:var(--sans);font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap}
+.nav a{color:inherit;text-decoration:none;transition:color .15s}
+.nav a:hover,.nav a.active{color:var(--accent)}
+.back-link{font-family:var(--sans);font-size:11px;font-weight:600;color:var(--muted);text-decoration:none;transition:color .15s}
+.back-link:hover{color:var(--accent)}
+@media(max-width:700px){.nav{display:none}}
+
+/* ── PAGE HERO ── */
+.page-hero{padding:2rem 1.5rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.page-eyebrow{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.page-title{font-family:var(--sans);font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;line-height:1.1}
+.page-title span{color:var(--accent)}
+.page-intro{font-size:12px;color:var(--muted);margin-top:.4rem;max-width:560px;line-height:1.7}
+
+/* ── GLOBAL STATS STRIP ── */
+.global-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-bottom:1px solid var(--border)}
+.gs-cell{background:var(--surface);padding:1rem 1.4rem}
+.gs-label{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
+.gs-val{font-family:var(--mono);font-size:1.4rem;font-weight:500;color:var(--accent);line-height:1}
+.gs-sub{font-size:10px;color:var(--muted2);margin-top:.2rem}
+@media(max-width:600px){.global-strip{grid-template-columns:1fr 1fr}}
+
+/* ── REGION NAV TABS ── */
+.region-tabs{background:var(--surface);border-bottom:1px solid var(--border);display:flex;overflow-x:auto;scrollbar-width:none;position:sticky;top:61px;z-index:100}
+.region-tabs::-webkit-scrollbar{display:none}
+.rtab{font-family:var(--sans);font-size:11px;font-weight:600;padding:.65rem 1.2rem;border:none;background:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .15s;display:flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--muted)}
+.rtab:hover{color:var(--text)}
+.rtab.active{border-bottom-color:var(--accent);color:var(--accent)}
+.rtab-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* ── REGION SECTIONS ── */
+.region-section{border-bottom:2px solid var(--border);scroll-margin-top:110px}
+.region-header{padding:1.5rem 1.5rem 1.2rem;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:start}
+.region-title-wrap{display:flex;align-items:center;gap:.8rem}
+.region-colour{width:4px;border-radius:2px;flex-shrink:0;align-self:stretch;min-height:2.5rem}
+.region-name{font-family:var(--sans);font-size:1.3rem;font-weight:900;line-height:1}
+.region-desc{font-size:12px;color:var(--muted);margin-top:.35rem;line-height:1.7;max-width:520px}
+.region-stats-mini{display:flex;flex-direction:column;gap:.3rem;text-align:right;flex-shrink:0}
+.rsm-val{font-family:var(--mono);font-size:1.1rem;font-weight:500;line-height:1}
+.rsm-label{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.1rem}
+
+/* ── REGION BODY GRID ── */
+.region-body{display:grid;grid-template-columns:1fr 280px;gap:1px;background:var(--border)}
+@media(max-width:900px){
+  .region-body{grid-template-columns:1fr}
+  .region-side{border-left:none;border-top:1px solid var(--border)}
+  [style*="grid-template-columns"]{grid-template-columns:1fr!important}
+}
+@media(max-width:700px){
+  .global-strip{grid-template-columns:1fr 1fr}
+  .region-header{grid-template-columns:1fr}
+  .region-stats-mini{text-align:left}
+  .country-cards{padding:.8rem}
+  .region-map{height:200px}
+  .sparklines{grid-template-columns:1fr 1fr}
+  [style*="grid-template-columns"]{grid-template-columns:1fr!important}
+}
+@media(max-width:480px){
+  .global-strip{grid-template-columns:1fr}
+  .sparklines{grid-template-columns:1fr}
+  .region-name{font-size:1.1rem}
+}
+
+/* ── REGIONAL MAP ── */
+.region-map-wrap{background:var(--surface)}
+.region-map{height:260px;width:100%;background:var(--bg)}
+
+/* ── COUNTRY CARDS ── */
+.country-cards{padding:1rem 1.4rem;display:flex;flex-direction:column;gap:.6rem}
+.country-card{border:1px solid var(--border);padding:.7rem .9rem;display:grid;grid-template-columns:1fr auto;gap:.6rem;align-items:center;text-decoration:none;color:var(--text);transition:all .15s;background:var(--surface2)}
+.country-card:hover{border-color:var(--accent);background:rgba(45,212,191,.03)}
+.cc-name{font-family:var(--sans);font-size:12px;font-weight:700;margin-bottom:.15rem;transition:color .15s}
+.country-card:hover .cc-name{color:var(--accent)}
+.cc-type{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.cc-val{font-family:var(--mono);font-size:12px;font-weight:500;text-align:right}
+.cc-val-label{font-family:var(--sans);font-size:9px;color:var(--muted);text-align:right;margin-top:.1rem}
+.cc-badge{display:inline-block;font-family:var(--sans);font-size:8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:1px 6px;border-radius:2px;margin-top:.2rem}
+.badge-critical{background:rgba(239,68,68,.15);color:#ef4444}
+.badge-severe{background:rgba(251,146,60,.15);color:#fb923c}
+.badge-high{background:rgba(250,204,21,.15);color:#facc15}
+.badge-moderate{background:rgba(45,212,191,.15);color:#2dd4bf}
+.badge-low{background:rgba(74,222,128,.15);color:#4ade80}
+.badge-host{background:rgba(96,165,250,.1);color:var(--blue)}
+
+/* ── SIDE PANEL ── */
+.region-side{background:var(--surface);border-left:1px solid var(--border);display:flex;flex-direction:column}
+@media(max-width:900px){.region-side{border-left:none;border-top:1px solid var(--border)}}
+.side-block{padding:1rem 1.2rem;border-bottom:1px solid var(--border)}
+.side-block:last-child{border-bottom:none}
+.side-title{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.7rem}
+
+/* funding bar */
+.fund-row{margin-bottom:.7rem}
+.fund-row:last-child{margin-bottom:0}
+.fund-meta{display:flex;justify-content:space-between;font-size:11px;margin-bottom:.25rem}
+.fund-name{color:var(--text);font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:55%}
+.fund-pct{font-family:var(--mono);font-size:10px}
+.fund-track{height:3px;background:rgba(239,68,68,.12);border-radius:2px;overflow:hidden}
+.fund-fill{height:100%;background:var(--accent);border-radius:2px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.pct-low{color:var(--red)}
+.pct-mid{color:var(--amber)}
+.pct-high{color:var(--accent)}
+
+/* crisis list */
+.crisis-row{display:grid;grid-template-columns:1fr 50px auto;align-items:center;gap:.5rem;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:11px;text-decoration:none;color:var(--text);transition:color .15s}
+.crisis-row:last-child{border-bottom:none}
+.crisis-row:hover{color:var(--accent)}
+.cbar-wrap{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.cbar{height:100%;border-radius:2px}
+.cbar-critical{background:#ef4444}.cbar-severe{background:#fb923c}
+.cbar-high{background:#facc15}.cbar-moderate{background:#2dd4bf}
+
+/* action links */
+.action-link{display:flex;justify-content:space-between;align-items:center;padding:.45rem 0;border-bottom:1px solid var(--border);font-size:11px;text-decoration:none;color:var(--muted);transition:color .15s}
+.action-link:last-child{border-bottom:none}
+.action-link:hover{color:var(--accent)}
+.action-link span:last-child{font-size:10px;color:var(--accent)}
+
+/* ── TREND SPARKLINE ── */
+.sparklines{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;padding:.8rem 1.2rem;border-top:1px solid var(--border);overflow:hidden}
+.spark-item{display:flex;flex-direction:column;gap:.2rem}
+.spark-name{font-family:var(--sans);font-size:10px;font-weight:600;color:var(--muted)}
+.spark-svg{height:30px;width:100%;overflow:hidden;display:block}
+
+/* ── NO DATA ── */
+.no-data{padding:1rem 1.2rem;font-size:11px;color:var(--muted);font-style:italic}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:.8rem 1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.4rem;font-size:10px;color:var(--muted);letter-spacing:.06em;font-family:var(--sans)}
+footer a{color:var(--accent);text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+
+
+/* ── MOBILE SAFETY ── */
+html,body{overflow-x:hidden}
+.chart-wrap{overflow:hidden}
+svg.trend{overflow:hidden}
+img,video,iframe{max-width:100%}
+
+
+/* ── MOBILE HAMBURGER MENU ── */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;border:1px solid var(--border);background:none;cursor:pointer;padding:8px;flex-shrink:0;transition:border-color .2s}
+.hamburger:hover{border-color:var(--accent)}
+.hamburger span{display:block;height:1.5px;background:var(--text);border-radius:1px;transition:all .25s}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+.nav-drawer{
+  position:fixed;top:0;right:0;bottom:0;width:280px;max-width:85vw;
+  background:var(--surface);border-left:1px solid var(--border);
+  z-index:500;display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+}
+.nav-drawer.open{transform:translateX(0)}
+.nav-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);
+  z-index:499;opacity:0;pointer-events:none;
+  transition:opacity .3s;
+}
+.nav-overlay.open{opacity:1;pointer-events:all}
+
+.nav-drawer-header{
+  padding:1rem 1.2rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.nav-drawer-logo{font-family:var(--sans);font-size:1.1rem;font-weight:900;color:var(--text);text-decoration:none}
+.nav-drawer-logo span{color:var(--accent)}
+.nav-drawer-close{
+  width:32px;height:32px;border:1px solid var(--border);background:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:16px;transition:all .15s;flex-shrink:0;
+}
+.nav-drawer-close:hover{border-color:var(--accent);color:var(--accent)}
+
+.nav-drawer-links{
+  flex:1;padding:1rem 0;display:flex;flex-direction:column;
+}
+.nav-drawer-links a{
+  font-family:var(--sans);font-size:13px;font-weight:600;
+  color:var(--muted);text-decoration:none;
+  padding:.75rem 1.4rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .15s;
+}
+.nav-drawer-links a:last-child{border-bottom:none}
+.nav-drawer-links a:hover,.nav-drawer-links a.active{color:var(--accent);background:rgba(45,212,191,.04)}
+.nav-drawer-links a::after{content:'→';font-size:12px;color:var(--muted2)}
+.nav-drawer-links a:hover::after,.nav-drawer-links a.active::after{color:var(--accent)}
+
+.nav-drawer-footer{
+  padding:1rem 1.4rem;border-top:1px solid var(--border);
+  font-family:var(--sans);font-size:10px;color:var(--muted2);
+  flex-shrink:0;
+}
+
+@media(max-width:700px){
+  .nav{display:none!important}
+  .hamburger{display:flex}
+}
+
+</style>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7128f2b8b7014426a65f4112bfabfd2a"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+
+<div class="header" id="header">
+  <a class="logo" href="index.html">Refuji <span>Watch</span></a>
+  <button class="hamburger" id="hamburger-btn" aria-label="Open menu"><span></span><span></span><span></span></button>
+  <nav class="nav">
+    <a href="index.html">Dashboard</a>
+    <a href="countries.html">Countries</a>
+    <a href="regions.html" class="active">Regions</a>
+    <a href="compare.html">Compare</a><a href="funding.html">Funding</a>
+    <a href="help.html">How to Help</a>
+    <a href="about.html">About</a>
+    <a href="sitrep.html">SitRep</a>
+  </nav>
+  <a class="back-link" href="index.html">← Dashboard</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div>
+    <div class="page-eyebrow">Geographic overview</div>
+    <div class="page-title">Displacement by <span>region</span></div>
+    <div class="page-intro">Aggregated displacement data grouped by region — for researchers, aid organisations, and journalists who need a geographic picture rather than individual country profiles.</div>
+  </div>
+</div>
+
+<!-- GLOBAL STATS -->
+<div class="global-strip">
+  <div class="gs-cell">
+    <div class="gs-label">Total displaced</div>
+    <div class="gs-val" id="g-total">—</div>
+    <div class="gs-sub">worldwide</div>
+  </div>
+  <div class="gs-cell">
+    <div class="gs-label">Regions covered</div>
+    <div class="gs-val">6</div>
+    <div class="gs-sub">geographic regions</div>
+  </div>
+  <div class="gs-cell">
+    <div class="gs-label">Countries tracked</div>
+    <div class="gs-val" id="g-countries">—</div>
+    <div class="gs-sub">in dataset</div>
+  </div>
+  <div class="gs-cell">
+    <div class="gs-label">Last updated</div>
+    <div class="gs-val" id="g-date" style="font-size:1rem">—</div>
+    <div class="gs-sub">UNHCR data</div>
+  </div>
+</div>
+
+<!-- REGION TABS -->
+<div class="region-tabs" id="region-tabs">
+  <a class="rtab active" href="#horn-of-africa"><span class="rtab-dot" style="background:#ef4444"></span>Horn of Africa</a>
+  <a class="rtab" href="#middle-east"><span class="rtab-dot" style="background:#fb923c"></span>Middle East &amp; N. Africa</a>
+  <a class="rtab" href="#south-southeast-asia"><span class="rtab-dot" style="background:#facc15"></span>South &amp; SE Asia</a>
+  <a class="rtab" href="#sub-saharan-africa"><span class="rtab-dot" style="background:#a78bfa"></span>Sub-Saharan Africa</a>
+  <a class="rtab" href="#europe-central-asia"><span class="rtab-dot" style="background:#60a5fa"></span>Europe &amp; Central Asia</a>
+  <a class="rtab" href="#latin-america"><span class="rtab-dot" style="background:#4ade80"></span>Latin America &amp; Caribbean</a>
+</div>
+
+<!-- REGIONS CONTAINER -->
+<div id="regions-container">
+  <div style="padding:3rem;text-align:center;color:var(--muted);font-family:var(--sans)">Loading regional data...</div>
+</div>
+
+<footer>
+  <span>Sources: <a href="https://www.unhcr.org/refugee-statistics" target="_blank">UNHCR</a> · <a href="https://fts.unocha.org" target="_blank">OCHA FTS</a></span>
+  <span id="footer-date">—</span>
+  <span>Built with love by <a href="https://github.com/jahitjanberk" target="_blank">jahit</a></span>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/basemap.js"></script>
+<script>
+// ── Region definitions ───────────────────────────────────────
+const REGIONS = [
+  {
+    id: 'horn-of-africa',
+    name: 'Horn of Africa',
+    colour: '#ef4444',
+    desc: 'One of the world\'s most complex humanitarian landscapes — multiple overlapping crises driven by conflict, climate shocks, and chronic underfunding. Home to some of the longest-running displacement situations globally.',
+    countries: ['Sudan','South Sudan','Ethiopia','Somalia','Kenya','Uganda'],
+    mapCenter: [5, 38],
+    mapZoom: 4,
+  },
+  {
+    id: 'middle-east',
+    name: 'Middle East & North Africa',
+    colour: '#fb923c',
+    desc: 'The epicentre of global displacement. Syria, Yemen, Gaza, and Iraq between them account for over 20 million displaced people. Protracted conflicts, active wars, and a regional refugee hosting crisis define this region.',
+    countries: ['Syria','Gaza','Palestine','Yemen','Iraq','Jordan','Lebanon','Iran','Turkey'],
+    mapCenter: [30, 43],
+    mapZoom: 4,
+  },
+  {
+    id: 'south-southeast-asia',
+    name: 'South & Southeast Asia',
+    colour: '#facc15',
+    desc: 'Afghanistan remains the world\'s third-largest displacement situation. Myanmar\'s 2021 coup added millions of newly displaced to a decades-long Rohingya crisis. Pakistan and Bangladesh absorb refugees while managing their own vulnerabilities.',
+    countries: ['Afghanistan','Pakistan','Bangladesh','Myanmar'],
+    mapCenter: [22, 88],
+    mapZoom: 4,
+  },
+  {
+    id: 'sub-saharan-africa',
+    name: 'Sub-Saharan Africa',
+    colour: '#a78bfa',
+    desc: 'Home to some of the world\'s most chronically underreported crises. DR Congo has the largest internally displaced population in Africa. Militia violence, resource conflicts, and weak state institutions drive displacement across the region.',
+    countries: ['DR Congo','Central African Republic','Nigeria'],
+    mapCenter: [4, 18],
+    mapZoom: 4,
+  },
+  {
+    id: 'europe-central-asia',
+    name: 'Europe & Central Asia',
+    colour: '#60a5fa',
+    desc: 'Ukraine\'s crisis triggered the fastest displacement in Europe since World War II. Germany has become one of the world\'s largest refugee-hosting nations. Russia hosts the largest number of Ukrainian displaced people.',
+    countries: ['Ukraine','Russia','Germany'],
+    mapCenter: [52, 30],
+    mapZoom: 4,
+  },
+  {
+    id: 'latin-america',
+    name: 'Latin America & Caribbean',
+    colour: '#4ade80',
+    desc: 'Venezuela\'s economic collapse has produced the largest displacement crisis in the Western Hemisphere — 7.7 million people. Colombia both generates and hosts millions of displaced. Haiti\'s gang violence crisis is rapidly worsening.',
+    countries: ['Colombia','Venezuela','Haiti'],
+    mapCenter: [6, -70],
+    mapZoom: 4,
+  },
+];
+
+const COORDS = {
+  'Sudan':[12.9,30.2],'South Sudan':[6.9,31.3],'Ethiopia':[9.1,40.5],
+  'Somalia':[5.1,46.2],'Kenya':[-1.3,36.8],'Uganda':[1.4,32.3],
+  'Syria':[34.8,38.9],'Gaza':[31.4,34.4],'Palestine':[31.9,35.2],
+  'Yemen':[15.5,48.5],'Iraq':[33.2,43.7],'Jordan':[31.9,36.1],
+  'Lebanon':[33.9,35.5],'Iran':[32.4,53.7],'Turkey':[38.9,35.2],
+  'Afghanistan':[33.9,67.7],'Pakistan':[30.4,69.3],'Bangladesh':[23.7,90.4],
+  'Myanmar':[17.1,96.8],'DR Congo':[-4.0,21.7],'Central African Republic':[6.6,20.9],
+  'Nigeria':[9.1,8.7],'Ukraine':[48.4,31.2],'Russia':[61.5,105.3],
+  'Germany':[51.2,10.4],'Colombia':[4.6,-74.1],'Venezuela':[6.4,-66.6],
+  'Haiti':[18.9,-72.3],
+};
+
+// ── Helpers ──────────────────────────────────────────────────
+function fmt(n){if(!n||n===0)return'—';if(n>=1e6)return(n/1e6).toFixed(1)+'M';if(n>=1e3)return(n/1e3).toFixed(0)+'K';return n.toLocaleString()}
+function fmtUSD(n){if(!n||n===0)return'—';if(n>=1e9)return'$'+(n/1e9).toFixed(1)+'B';if(n>=1e6)return'$'+(n/1e6).toFixed(0)+'M';return'$'+n.toLocaleString()}
+function countryURL(name){return'country.html?country='+encodeURIComponent(name)}
+function sitrepURL(name){return'sitrep.html?country='+encodeURIComponent(name)}
+function crisisClass(label){
+  if(!label)return'';
+  return{'critical':'badge-critical','severe':'badge-severe','high':'badge-high','moderate':'badge-moderate','low':'badge-low'}[label.toLowerCase()]||'';
+}
+function cbarClass(label){
+  if(!label)return'cbar-moderate';
+  return{'critical':'cbar-critical','severe':'cbar-severe','high':'cbar-high','moderate':'cbar-moderate','low':'cbar-low'}[label.toLowerCase()]||'cbar-moderate';
+}
+
+// ── Sparkline SVG ────────────────────────────────────────────
+function sparkline(trend, colour){
+  if(!trend||trend.length<2)return'';
+  const vals = trend.map(t=>t.total||0);
+  const mn=Math.min(...vals), mx=Math.max(...vals), range=mx-mn||1;
+  const W=100, H=28, pad=2;
+  const xs = vals.map((_,i)=>pad+i*(W-pad*2)/(vals.length-1));
+  const ys = vals.map(v=>H-pad-(v-mn)/range*(H-pad*2));
+  const pts = xs.map((x,i)=>`${x},${ys[i]}`).join(' ');
+  return`<svg class="spark-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+    <polyline points="${pts}" fill="none" stroke="${colour}" stroke-width="1.5" stroke-dasharray="300" stroke-dashoffset="300" style="animation:draw .8s ease .3s forwards"/>
+  </svg>`;
+}
+
+// ── Build region HTML ────────────────────────────────────────
+function buildRegion(region, data, crisisMap, fundingMap){
+  const cd = data.country_details;
+  const countries = region.countries.filter(c=>cd[c]);
+
+  // Aggregate stats
+  let totalDisp=0, totalRef=0, totalIdp=0;
+  countries.forEach(name=>{
+    const l = cd[name]?.latest||{};
+    totalDisp += l.total||0;
+    totalRef  += l.refugees||0;
+    totalIdp  += l.idps||0;
+  });
+
+  // Crisis scores for this region
+  const regionCrisis = countries
+    .filter(c=>crisisMap[c])
+    .map(c=>({name:c,...crisisMap[c]}))
+    .sort((a,b)=>b.score-a.score);
+
+  // Funding for this region
+  const regionFunding = region.countries
+    .map(c=>fundingMap[c])
+    .filter(Boolean)
+    .sort((a,b)=>a.pct-b.pct);
+
+  // Country cards — sort by total displaced desc
+  const sortedCountries = [...countries].sort((a,b)=>{
+    const ta=(cd[a]?.latest?.total||0), tb=(cd[b]?.latest?.total||0);
+    return tb-ta;
+  });
+
+  // Map markers
+  const mapId = `map-${region.id}`;
+
+  // Sparklines for top 4 countries by total
+  const sparkCountries = sortedCountries.slice(0,4);
+
+  return`
+<div class="region-section" id="${region.id}">
+  <div class="region-header">
+    <div>
+      <div class="region-title-wrap">
+        <div class="region-colour" style="background:${region.colour}"></div>
+        <div>
+          <div class="region-name">${region.name}</div>
+          <div class="region-desc">${region.desc}</div>
+        </div>
+      </div>
+    </div>
+    <div class="region-stats-mini">
+      <div class="rsm-val" style="color:${region.colour}">${fmt(totalDisp)}</div>
+      <div class="rsm-label">total displaced</div>
+    </div>
+  </div>
+
+  <!-- Aggregate stats strip -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-bottom:1px solid var(--border)">
+    <div style="background:var(--surface2);padding:.7rem 1.2rem">
+      <div class="gs-label">Refugees abroad</div>
+      <div style="font-family:var(--mono);font-size:1.1rem;color:${region.colour};line-height:1">${fmt(totalRef)}</div>
+    </div>
+    <div style="background:var(--surface2);padding:.7rem 1.2rem">
+      <div class="gs-label">Internally displaced</div>
+      <div style="font-family:var(--mono);font-size:1.1rem;color:${region.colour};line-height:1">${fmt(totalIdp)}</div>
+    </div>
+    <div style="background:var(--surface2);padding:.7rem 1.2rem">
+      <div class="gs-label">Countries tracked</div>
+      <div style="font-family:var(--mono);font-size:1.1rem;color:${region.colour};line-height:1">${countries.length}</div>
+    </div>
+  </div>
+
+  <div class="region-body">
+
+    <!-- Left: map + country cards -->
+    <div>
+      <div class="region-map-wrap">
+        <div class="region-map" id="${mapId}"></div>
+      </div>
+
+      <!-- Trend sparklines -->
+      ${sparkCountries.length>0?`
+      <div class="sparklines" style="border-bottom:1px solid var(--border)">
+        ${sparkCountries.map(name=>{
+          const trend = cd[name]?.trend||[];
+          return`<div class="spark-item">
+            <div class="spark-name">${name}</div>
+            ${sparkline(trend, region.colour)}
+          </div>`;
+        }).join('')}
+      </div>`:''}
+
+      <!-- Country cards -->
+      <div class="country-cards">
+        ${sortedCountries.map(name=>{
+          const l = cd[name]?.latest||{};
+          const d = cd[name]||{};
+          const cr = crisisMap[name];
+          const isHost = d.is_host && !d.is_origin;
+          const typeLabel = d.is_origin&&d.is_host?'Origin & Host':d.is_origin?'Origin':'Host';
+          return`<a class="country-card" href="${countryURL(name)}">
+            <div>
+              <div class="cc-name">${name}</div>
+              <div class="cc-type">${typeLabel}</div>
+              ${cr?`<span class="cc-badge ${crisisClass(cr.label)}">${cr.label}</span>`:isHost?`<span class="cc-badge badge-host">Host country</span>`:''}
+            </div>
+            <div>
+              <div class="cc-val" style="color:${region.colour}">${fmt(l.total)}</div>
+              <div class="cc-val-label">displaced</div>
+            </div>
+          </a>`;
+        }).join('')}
+      </div>
+    </div>
+
+    <!-- Right: side panel -->
+    <div class="region-side">
+
+      ${regionCrisis.length?`
+      <div class="side-block">
+        <div class="side-title">Crisis severity</div>
+        ${regionCrisis.map(c=>`
+          <a class="crisis-row" href="${countryURL(c.name)}">
+            <span>${c.name}</span>
+            <div class="cbar-wrap"><div class="cbar ${cbarClass(c.label)}" style="width:${(c.score/10*100).toFixed(0)}%"></div></div>
+            <span class="cc-badge ${crisisClass(c.label)}" style="font-size:8px">${c.label}</span>
+          </a>`).join('')}
+      </div>`:''}
+
+      ${regionFunding.length?`
+      <div class="side-block">
+        <div class="side-title">Humanitarian funding</div>
+        ${regionFunding.map(f=>{
+          const cls=f.pct<40?'pct-low':f.pct<70?'pct-mid':'pct-high';
+          return`<div class="fund-row">
+            <div class="fund-meta">
+              <span class="fund-name">${f.name}</span>
+              <span class="fund-pct ${cls}">${f.pct}%</span>
+            </div>
+            <div class="fund-track"><div class="fund-fill" data-w="${f.pct}"></div></div>
+          </div>`;
+        }).join('')}
+      </div>`:''}
+
+      <div class="side-block">
+        <div class="side-title">Quick actions</div>
+        ${sortedCountries.slice(0,3).map(name=>`
+          <a class="action-link" href="${countryURL(name)}">
+            <span>${name} profile</span><span>→</span>
+          </a>`).join('')}
+        <a class="action-link" href="${sitrepURL(sortedCountries[0]||region.countries[0])}">
+          <span>Generate SitRep</span><span>→</span>
+        </a>
+        <a class="action-link" href="help.html">
+          <span>How to help</span><span>→</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>`;
+}
+
+// ── Init maps ────────────────────────────────────────────────
+const _maps = {};
+function initRegionMap(region, data, crisisMap){
+  const mapId = `map-${region.id}`;
+  const el = document.getElementById(mapId);
+  if(!el||_maps[mapId]) return;
+
+  const map = L.map(mapId,{
+    center:region.mapCenter, zoom:region.mapZoom,
+    attributionControl:false, zoomControl:false, maxZoom:8
+  });
+  addBasemap(map);
+  _maps[mapId] = map;
+
+  const cd = data.country_details;
+  const countries = region.countries.filter(c=>cd[c]&&COORDS[c]);
+  if(!countries.length) return;
+
+  const maxV = Math.max(...countries.map(c=>cd[c]?.latest?.total||0), 1);
+
+  countries.forEach(name=>{
+    const coords = COORDS[name];
+    const total = cd[name]?.latest?.total||0;
+    const cr = crisisMap[name];
+    if(!coords) return;
+
+    const r = 6 + (total/maxV)*22;
+    const colour = region.colour;
+    const circle = L.circleMarker(coords,{
+      radius:r, fillColor:colour, color:colour,
+      weight:1, opacity:.8, fillOpacity:.25
+    }).addTo(map);
+
+    circle.bindPopup(`
+      <div style="font-family:'DM Sans',sans-serif;font-size:12px">
+        <div style="font-size:14px;font-weight:700;color:${colour};margin-bottom:.3rem">${name}</div>
+        <div style="color:#888;margin-bottom:.2rem">Displaced: ${fmt(total)}</div>
+        ${cr?`<div style="color:#888">Severity: ${cr.label} (${cr.score}/10)</div>`:''}
+        <a href="${countryURL(name)}" style="display:block;margin-top:.4rem;font-size:10px;color:${colour};text-transform:uppercase;letter-spacing:.07em;font-weight:700;text-decoration:none">View profile →</a>
+      </div>`);
+    circle.on('mouseover',function(){this.setStyle({fillOpacity:.55,weight:2});this.openPopup()});
+    circle.on('mouseout',function(){this.setStyle({fillOpacity:.25,weight:1})});
+    circle.on('click',()=>window.location.href=countryURL(name));
+  });
+}
+
+// ── Active tab tracking ──────────────────────────────────────
+function updateActiveTab(){
+  const sections = document.querySelectorAll('.region-section');
+  const tabs = document.querySelectorAll('.rtab');
+  let current = '';
+  sections.forEach(s=>{
+    const rect = s.getBoundingClientRect();
+    if(rect.top <= 130) current = s.id;
+  });
+  tabs.forEach(t=>{
+    t.classList.toggle('active', t.getAttribute('href')==='#'+current);
+  });
+}
+
+// ── Main ─────────────────────────────────────────────────────
+async function init(){
+  try{
+    const res = await fetch('/sample.json');
+    const data = await res.json();
+
+    // Global stats
+    document.getElementById('g-total').textContent = fmt(data.total_displaced);
+    document.getElementById('g-countries').textContent = Object.keys(data.country_details).length;
+    document.getElementById('g-date').textContent = data.last_updated;
+    document.getElementById('footer-date').textContent = 'Last updated: '+data.last_updated;
+
+    // Build lookup maps
+    const crisisMap = {};
+    (data.crisis_scores||[]).forEach(s=>crisisMap[s.country]=s);
+
+    const fundingMap = {};
+    (data.funding_gaps||[]).forEach(f=>{
+      // Match funding entries to countries
+      Object.keys(data.country_details).forEach(country=>{
+        if(f.name.toLowerCase().includes(country.toLowerCase())){
+          fundingMap[country] = f;
+        }
+      });
+    });
+
+    // Render all regions
+    const container = document.getElementById('regions-container');
+    container.innerHTML = REGIONS.map(r=>buildRegion(r,data,crisisMap,fundingMap)).join('');
+
+    // Animate funding bars
+    requestAnimationFrame(()=>{
+      document.querySelectorAll('.fund-fill[data-w]').forEach(b=>{
+        b.style.width = b.dataset.w+'%';
+      });
+    });
+
+    // Init all maps with slight delay to ensure DOM is ready
+    REGIONS.forEach((r,i)=>{
+      setTimeout(()=>initRegionMap(r,data,crisisMap), i*120);
+    });
+
+    // Scroll spy for tabs
+    window.addEventListener('scroll', updateActiveTab, {passive:true});
+    updateActiveTab();
+
+  }catch(e){
+    console.error(e);
+    document.getElementById('regions-container').innerHTML=`
+      <div style="padding:3rem;text-align:center;color:var(--muted);font-family:var(--sans)">
+        Could not load data — run via a local server (python3 -m http.server 8000).
+      </div>`;
+  }
+}
+
+// Header scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('header').classList.toggle('scrolled',scrollY>10);
+},{passive:true});
+
+// Smooth scroll for tab clicks
+document.querySelectorAll('.rtab').forEach(tab=>{
+  tab.addEventListener('click',e=>{
+    e.preventDefault();
+    const target = document.querySelector(tab.getAttribute('href'));
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+// Inject sparkline keyframe
+const style = document.createElement('style');
+style.textContent = '@keyframes draw{to{stroke-dashoffset:0}}';
+document.head.appendChild(style);
+
+init();
+</script>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="nav-overlay" id="nav-overlay" onclick="closeDrawer()"></div>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nav-drawer-header">
+    <a class="nav-drawer-logo" href="index.html">Refuji <span>Watch</span></a>
+    <button class="nav-drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="nav-drawer-links">
+    <a href="index.html">Dashboard</a>
+    <a href="countries.html">Countries</a>
+    <a href="regions.html" class="active">Regions</a>
+    <a href="compare.html">Compare</a>
+    <a href="funding.html">Funding</a>
+    <a href="help.html">How to Help</a>
+    <a href="about.html">About</a>
+    <a href="sitrep.html">SitRep</a>
+  </div>
+  <div class="nav-drawer-footer">Data: UNHCR · OCHA FTS · ReliefWeb</div>
+</div>
+
+<script>
+(function(){
+  function openDrawer(){
+    document.getElementById('nav-drawer').classList.add('open');
+    document.getElementById('nav-overlay').classList.add('open');
+    var btn=document.getElementById('hamburger-btn');
+    if(btn)btn.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  window.closeDrawer=function(){
+    document.getElementById('nav-drawer').classList.remove('open');
+    document.getElementById('nav-overlay').classList.remove('open');
+    var btn=document.getElementById('hamburger-btn');
+    if(btn)btn.classList.remove('open');
+    document.body.style.overflow='';
+  };
+  var btn=document.getElementById('hamburger-btn');
+  if(btn)btn.addEventListener('click',function(){
+    if(document.getElementById('nav-drawer').classList.contains('open'))closeDrawer();
+    else openDrawer();
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDrawer();});
+})();
+</script>
+</body>
+</html>

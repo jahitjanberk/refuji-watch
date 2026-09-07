@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Refuji Watch — Compare Countries</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0d;--surface:#141414;--surface2:#1c1c1c;--border:#222;
+  --accent:#2dd4bf;--red:#ef4444;--amber:#f59e0b;--blue:#60a5fa;
+  --text:#f0ede6;--muted:#666;--muted2:#3a3a3a;
+  --serif:var(--sans);
+  --mono:'DM Mono',monospace;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --col-a:#2dd4bf;--col-b:#60a5fa;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13px;line-height:1.6;min-height:100vh}
+
+/* ── HEADER ── */
+.header{
+  padding:.9rem 1.5rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  background:rgba(20,20,20,.95);position:sticky;top:0;z-index:200;
+  backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);
+  transition:background .4s,backdrop-filter .4s;flex-wrap:wrap
+}
+.header.scrolled{background:rgba(20,20,20,.5);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom-color:rgba(255,255,255,.06)}
+.logo{font-family:var(--sans);font-size:1.4rem;font-weight:900;letter-spacing:-.02em;text-decoration:none;color:var(--text)}
+.logo span{color:var(--accent)}
+.back-link{font-family:var(--sans);font-size:11px;font-weight:600;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:.4rem;transition:color .15s}
+.back-link:hover{color:var(--accent)}
+.live-badge{display:flex;align-items:center;gap:.4rem;font-family:var(--sans);font-size:10px;font-weight:600;color:var(--muted)}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--red);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+
+/* ── PAGE HERO ── */
+.page-hero{padding:1.4rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.page-hero-title{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.country-pair{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.pair-name{font-family:var(--sans);font-size:clamp(1.4rem,3vw,2rem);font-weight:900;line-height:1}
+.pair-vs{font-family:var(--sans);font-size:12px;font-weight:600;color:var(--muted);padding:0 .2rem}
+.pair-name-a{color:var(--col-a)}
+.pair-name-b{color:var(--col-b)}
+.share-btn{font-family:var(--sans);font-size:10px;font-weight:700;color:var(--muted);border:1px solid var(--border);background:none;padding:.35rem .8rem;cursor:pointer;transition:all .2s;letter-spacing:.06em}
+.share-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── PICKER ── */
+.picker-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:.8rem 1.5rem;display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:center}
+.picker-wrap{position:relative}
+.picker-label{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.35rem}
+.picker-label-a{color:var(--col-a)}
+.picker-label-b{color:var(--col-b)}
+.picker-input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:12px;padding:.4rem .8rem;outline:none;transition:border-color .2s}
+.picker-input-a:focus{border-color:var(--col-a)}
+.picker-input-b:focus{border-color:var(--col-b)}
+.picker-results{position:absolute;top:100%;left:0;right:0;background:var(--surface2);border:1px solid var(--border);z-index:100;display:none;max-height:180px;overflow-y:auto}
+.picker-result{padding:.4rem .8rem;font-size:12px;cursor:pointer;display:flex;justify-content:space-between;border-bottom:1px solid var(--border);transition:background .1s;color:var(--text);text-decoration:none}
+.picker-result:last-child{border-bottom:none}
+.picker-result:hover{background:var(--border)}
+.picker-result span:last-child{color:var(--muted);font-size:10px}
+.vs-badge{font-family:var(--sans);font-size:11px;font-weight:700;color:var(--muted);text-align:center}
+
+/* ── COMPARISON TABLE ── */
+.cmp-table{border-bottom:1px solid var(--border)}
+.cmp-row{display:grid;grid-template-columns:160px 1fr 1fr;gap:1px;background:var(--border)}
+.cmp-row-label{background:var(--surface2);padding:.9rem 1.2rem;display:flex;align-items:center}
+.cmp-row-label span{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.cmp-cell{background:var(--surface);padding:.9rem 1.2rem}
+.cmp-header-row{display:grid;grid-template-columns:160px 1fr 1fr;gap:1px;background:var(--border);border-bottom:1px solid var(--border)}
+.cmp-header-cell{background:var(--surface2);padding:1rem 1.2rem}
+.cmp-header-cell.a{background:rgba(45,212,191,.04);border-bottom:2px solid var(--col-a)}
+.cmp-header-cell.b{background:rgba(96,165,250,.04);border-bottom:2px solid var(--col-b)}
+.ch-name{font-family:var(--sans);font-size:1.4rem;font-weight:900;line-height:1;margin-bottom:.3rem}
+.ch-name-a{color:var(--col-a)}
+.ch-name-b{color:var(--col-b)}
+.ch-badge{display:inline-block;font-family:var(--sans);font-size:8px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:2px}
+.badge-origin{background:rgba(45,212,191,.12);color:var(--accent)}
+.badge-host{background:rgba(96,165,250,.12);color:var(--blue)}
+
+/* ── METRIC DISPLAY ── */
+.metric-num{font-family:var(--mono);font-size:1.3rem;font-weight:900;line-height:1}
+.metric-num-a{color:var(--col-a)}
+.metric-num-b{color:var(--col-b)}
+.metric-sub{font-size:10px;color:var(--muted);margin-top:.2rem;font-family:var(--mono)}
+.prop-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin-top:.5rem}
+.prop-fill{height:100%;border-radius:2px;width:0;transition:width 1s cubic-bezier(.4,0,.2,1)}
+.prop-fill-a{background:var(--col-a)}
+.prop-fill-b{background:var(--col-b)}
+.winner-tag{font-family:var(--sans);font-size:8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:2px;margin-top:.4rem;display:inline-block}
+.winner-a{background:rgba(45,212,191,.12);color:var(--col-a)}
+.winner-b{background:rgba(96,165,250,.12);color:var(--col-b)}
+.winner-tie{background:rgba(255,255,255,.06);color:var(--muted)}
+
+/* ── MINI TREND CHART ── */
+.mini-svg{width:100%;height:44px;display:block;margin-top:.4rem}
+
+/* ── CRISIS BADGE ── */
+.crisis-badge{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:2px;display:inline-block}
+.badge-critical{background:rgba(239,68,68,.15);color:#ef4444}
+.badge-severe{background:rgba(251,146,60,.15);color:#fb923c}
+.badge-high{background:rgba(250,204,21,.15);color:#facc15}
+.badge-moderate{background:rgba(45,212,191,.15);color:#2dd4bf}
+.badge-low{background:rgba(74,222,128,.15);color:#4ade80}
+.badge-unknown{background:rgba(255,255,255,.06);color:var(--muted)}
+
+/* ── TOP HOSTS ── */
+.host-row{display:flex;justify-content:space-between;font-size:11px;padding:.25rem 0;border-bottom:1px solid var(--border)}
+.host-row:last-child{border-bottom:none}
+.host-country{color:var(--text);text-decoration:none;transition:color .15s}
+.host-country:hover{color:var(--accent)}
+.host-val{color:var(--muted);font-family:var(--mono);font-size:10px}
+
+/* ── SUMMARY PANEL ── */
+.summary{background:var(--surface);border-top:1px solid var(--border);padding:1.4rem 1.5rem}
+.summary-title{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.9rem}
+.summary-points{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.2rem}
+.summary-point{display:flex;gap:.7rem;align-items:flex-start;font-size:12px;color:var(--muted);line-height:1.6}
+.summary-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:.4rem}
+.dot-a{background:var(--col-a)}
+.dot-b{background:var(--col-b)}
+.dot-n{background:var(--muted2)}
+.summary-actions{display:flex;gap:.6rem;flex-wrap:wrap;padding-top:1rem;border-top:1px solid var(--border)}
+.action-btn{font-family:var(--sans);font-size:10px;font-weight:700;padding:.35rem .9rem;text-decoration:none;cursor:pointer;border:1px solid;transition:all .2s;background:none;letter-spacing:.04em}
+.action-btn-a{color:var(--col-a);border-color:rgba(45,212,191,.3)}
+.action-btn-a:hover{background:rgba(45,212,191,.08)}
+.action-btn-b{color:var(--col-b);border-color:rgba(96,165,250,.3)}
+.action-btn-b:hover{background:rgba(96,165,250,.08)}
+.action-btn-n{color:var(--muted);border-color:var(--border)}
+.action-btn-n:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── EMPTY / ERROR ── */
+.state-msg{padding:3rem 1.5rem;text-align:center;color:var(--muted);font-family:var(--sans);font-size:14px}
+.state-msg strong{color:var(--text);display:block;font-size:18px;margin-bottom:.5rem}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:.8rem 1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.4rem;font-size:10px;color:var(--muted);letter-spacing:.06em;font-family:var(--sans)}
+footer a{color:var(--accent);text-decoration:none}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .cmp-row,.cmp-header-row{grid-template-columns:1fr}
+  .cmp-row-label{display:none}
+  .cmp-header-cell{border-bottom-width:2px}
+  .picker-bar{grid-template-columns:1fr;gap:.6rem}
+  .vs-badge{display:none}
+  .page-hero{flex-direction:column;align-items:flex-start;gap:.6rem}
+  [style*="grid-template-columns"]{grid-template-columns:1fr!important}
+  .summary-actions{flex-direction:column}
+}
+@media(max-width:480px){
+  .cmp-header-cell{padding:.8rem}
+  .cmp-cell{padding:.7rem .9rem}
+  .metric-num{font-size:1.1rem}
+}
+@media(max-width:480px){
+  .header{padding:.7rem 1rem}
+  .summary-actions{flex-direction:column}
+  .action-btn{text-align:center}
+}
+
+
+
+/* ── MOBILE SAFETY ── */
+html,body{overflow-x:hidden}
+.chart-wrap{overflow:hidden}
+svg.trend{overflow:hidden}
+img,video,iframe{max-width:100%}
+
+
+/* ── MOBILE HAMBURGER MENU ── */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;border:1px solid var(--border);background:none;cursor:pointer;padding:8px;flex-shrink:0;transition:border-color .2s}
+.hamburger:hover{border-color:var(--accent)}
+.hamburger span{display:block;height:1.5px;background:var(--text);border-radius:1px;transition:all .25s}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+.nav-drawer{
+  position:fixed;top:0;right:0;bottom:0;width:280px;max-width:85vw;
+  background:var(--surface);border-left:1px solid var(--border);
+  z-index:500;display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+}
+.nav-drawer.open{transform:translateX(0)}
+.nav-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);
+  z-index:499;opacity:0;pointer-events:none;
+  transition:opacity .3s;
+}
+.nav-overlay.open{opacity:1;pointer-events:all}
+
+.nav-drawer-header{
+  padding:1rem 1.2rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.nav-drawer-logo{font-family:var(--sans);font-size:1.1rem;font-weight:900;color:var(--text);text-decoration:none}
+.nav-drawer-logo span{color:var(--accent)}
+.nav-drawer-close{
+  width:32px;height:32px;border:1px solid var(--border);background:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:16px;transition:all .15s;flex-shrink:0;
+}
+.nav-drawer-close:hover{border-color:var(--accent);color:var(--accent)}
+
+.nav-drawer-links{
+  flex:1;padding:1rem 0;display:flex;flex-direction:column;
+}
+.nav-drawer-links a{
+  font-family:var(--sans);font-size:13px;font-weight:600;
+  color:var(--muted);text-decoration:none;
+  padding:.75rem 1.4rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .15s;
+}
+.nav-drawer-links a:last-child{border-bottom:none}
+.nav-drawer-links a:hover,.nav-drawer-links a.active{color:var(--accent);background:rgba(45,212,191,.04)}
+.nav-drawer-links a::after{content:'→';font-size:12px;color:var(--muted2)}
+.nav-drawer-links a:hover::after,.nav-drawer-links a.active::after{color:var(--accent)}
+
+.nav-drawer-footer{
+  padding:1rem 1.4rem;border-top:1px solid var(--border);
+  font-family:var(--sans);font-size:10px;color:var(--muted2);
+  flex-shrink:0;
+}
+
+@media(max-width:700px){
+  .nav{display:none!important}
+  .hamburger{display:flex}
+}
+
+</style>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7128f2b8b7014426a65f4112bfabfd2a"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+
+<div class="header" id="header">
+  <a class="logo" href="index.html">Refuji <span>Watch</span></a>
+  <button class="hamburger" id="hamburger-btn" aria-label="Open menu"><span></span><span></span><span></span></button>
+  <nav class="nav" style="display:flex;gap:1.2rem;font-family:var(--sans);font-size:12px;font-weight:600;color:var(--muted)">
+    <a href="index.html" style="color:inherit;text-decoration:none">Dashboard</a>
+    <a href="countries.html" style="color:inherit;text-decoration:none">Countries</a>
+    <a href="regions.html" style="color:inherit;text-decoration:none">Regions</a>
+    <a href="compare.html" style="color:var(--accent);text-decoration:none">Compare</a>
+    <a href="funding.html" style="color:inherit;text-decoration:none">Funding</a>
+    <a href="help.html" style="color:inherit;text-decoration:none">How to Help</a>
+    <a href="about.html" style="color:inherit;text-decoration:none">About</a>
+    <a href="sitrep.html" style="color:inherit;text-decoration:none">SitRep</a>
+  </nav>
+  <a class="back-link" href="index.html">← Dashboard</a>
+  <div class="live-badge"><div class="live-dot"></div><span>UNHCR · Dec 2024</span></div>
+</div>
+
+<div class="page-hero">
+  <div>
+    <div class="page-hero-title">Country comparison</div>
+    <div class="country-pair" id="pair-display">
+      <span class="pair-name pair-name-a" id="pair-a-name">—</span>
+      <span class="pair-vs">vs</span>
+      <span class="pair-name pair-name-b" id="pair-b-name">—</span>
+    </div>
+  </div>
+  <button class="share-btn" onclick="copyShareLink()">↗ Copy share link</button>
+</div>
+
+<div class="picker-bar">
+  <div class="picker-wrap">
+    <div class="picker-label picker-label-a">Country A</div>
+    <input class="picker-input picker-input-a" id="picker-a" type="text" placeholder="Search country..." autocomplete="off"/>
+    <div class="picker-results" id="results-a"></div>
+  </div>
+  <div class="vs-badge">vs</div>
+  <div class="picker-wrap">
+    <div class="picker-label picker-label-b">Country B</div>
+    <input class="picker-input picker-input-b" id="picker-b" type="text" placeholder="Search country..." autocomplete="off"/>
+    <div class="picker-results" id="results-b"></div>
+  </div>
+</div>
+
+<div id="comparison-output"></div>
+
+<footer>
+  <span>Sources: <a href="https://www.unhcr.org/refugee-statistics" target="_blank">UNHCR</a> · <a href="https://fts.unocha.org" target="_blank">OCHA FTS</a></span>
+  <span id="footer-date">—</span>
+  <span>Built with love by <a href="https://github.com/jahitjanberk" target="_blank">jahit</a></span>
+</footer>
+
+<script>
+// ── Helpers ─────────────────────────────────────────────────
+function getParams(){
+  const p=new URLSearchParams(location.search);
+  return{a:decodeURIComponent(p.get('a')||''),b:decodeURIComponent(p.get('b')||'')};
+}
+function setParams(a,b){
+  const url=new URL(location.href);
+  url.searchParams.set('a',a);url.searchParams.set('b',b);
+  history.replaceState({},'',url);
+}
+function fmt(n){
+  if(!n||n===0)return'—';
+  if(n>=1e9)return(n/1e9).toFixed(1)+'B';
+  if(n>=1e6)return(n/1e6).toFixed(1)+'M';
+  if(n>=1e3)return(n/1e3).toFixed(0)+'K';
+  return n.toLocaleString();
+}
+function fmtUSD(n){
+  if(!n||n===0)return'—';
+  if(n>=1e9)return'$'+(n/1e9).toFixed(1)+'B';
+  if(n>=1e6)return'$'+(n/1e6).toFixed(0)+'M';
+  return'$'+n.toLocaleString();
+}
+function pct(a,b){
+  if(!b||b===0)return null;
+  return Math.round(((a-b)/b)*100);
+}
+function winnerTag(a,b,higherIsBetter=false){
+  if(!a&!b)return'';
+  if(!a)return`<span class="winner-tag winner-b">B higher</span>`;
+  if(!b)return`<span class="winner-tag winner-a">A higher</span>`;
+  const diff=pct(a,b);
+  if(Math.abs(diff)<=2)return`<span class="winner-tag winner-tie">Similar</span>`;
+  if(higherIsBetter){
+    return diff>0
+      ?`<span class="winner-tag winner-a">A higher by ${Math.abs(diff)}%</span>`
+      :`<span class="winner-tag winner-b">B higher by ${Math.abs(diff)}%</span>`;
+  }
+  return diff>0
+    ?`<span class="winner-tag winner-a">A higher by ${Math.abs(diff)}%</span>`
+    :`<span class="winner-tag winner-b">B higher by ${Math.abs(diff)}%</span>`;
+}
+function propBars(va,vb,classA,classB){
+  const mx=Math.max(va||0,vb||0);
+  if(mx===0)return['0%','0%'];
+  return[((va||0)/mx*100).toFixed(1)+'%',((vb||0)/mx*100).toFixed(1)+'%'];
+}
+function crisisBadge(label){
+  if(!label)return`<span class="crisis-badge badge-unknown">No data</span>`;
+  const cls={'critical':'badge-critical','severe':'badge-severe','high':'badge-high','moderate':'badge-moderate','low':'badge-low'}[label.toLowerCase()]||'badge-unknown';
+  return`<span class="crisis-badge ${cls}">${label}</span>`;
+}
+function countryURL(name){return'country.html?country='+encodeURIComponent(name)}
+function compareURL(a,b){return'compare.html?a='+encodeURIComponent(a)+'&b='+encodeURIComponent(b)}
+
+// ── Mini SVG trend chart ─────────────────────────────────────
+function miniChart(trend,color){
+  if(!trend||trend.length<2)return`<div style="height:44px;display:flex;align-items:center;font-size:10px;color:var(--muted)">No trend data</div>`;
+  const vals=trend.map(t=>t.total||0);
+  const mn=Math.min(...vals),mx=Math.max(...vals);
+  const range=mx-mn||1;
+  const W=200,H=44,pad=4;
+  const xs=vals.map((_,i)=>pad+i*(W-pad*2)/(vals.length-1));
+  const ys=vals.map(v=>H-pad-(v-mn)/range*(H-pad*2));
+  const pts=xs.map((x,i)=>`${x},${ys[i]}`).join(' ');
+  const anim=`stroke-dasharray="600" stroke-dashoffset="600" style="animation:draw .9s ease .2s forwards"`;
+  return`<svg class="mini-svg" style="overflow:hidden" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+    <style>@keyframes draw{to{stroke-dashoffset:0}}</style>
+    <polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5" ${anim}/>
+    ${xs.map((x,i)=>`<circle cx="${x}" cy="${ys[i]}" r="2" fill="${color}" opacity=".8"/>`).join('')}
+  </svg>`;
+}
+
+// ── Render comparison ────────────────────────────────────────
+function renderComparison(nameA,nameB,da,db,globalData){
+  // Update header + URL
+  setParams(nameA,nameB);
+  document.getElementById('pair-a-name').textContent=nameA;
+  document.getElementById('pair-b-name').textContent=nameB;
+  document.getElementById('picker-a').value=nameA;
+  document.getElementById('picker-b').value=nameB;
+  document.title=`${nameA} vs ${nameB} — Refuji Watch`;
+
+  const la=da.latest||{};const lb=db.latest||{};
+  const crisisA=da.crisis||null;const crisisB=db.crisis||null;
+
+  // Funding match from global
+  const fundA=globalData.funding_gaps?.find(f=>f.name.toLowerCase().includes(nameA.toLowerCase()));
+  const fundB=globalData.funding_gaps?.find(f=>f.name.toLowerCase().includes(nameB.toLowerCase()));
+
+  // Prop bars
+  const [barTotA,barTotB]=propBars(la.total,lb.total);
+  const [barRefA,barRefB]=propBars(la.refugees,lb.refugees);
+  const [barIdpA,barIdpB]=propBars(la.idps,lb.idps);
+  const [barAsyA,barAsyB]=propBars(la.asylum_seekers,lb.asylum_seekers);
+  const [barFundA,barFundB]=propBars(fundA?.pct,fundB?.pct);
+  const [barCrA,barCrB]=propBars(crisisA?.score,crisisB?.score);
+
+  // Summary bullets
+  const bullets=[];
+  const totA=la.total||0,totB=lb.total||0;
+  if(totA&&totB){
+    const higher=totA>totB?nameA:nameB;
+    const lower=totA>totB?nameB:nameA;
+    const diff=Math.abs(pct(totA,totB));
+    bullets.push({dot:totA>totB?'dot-a':'dot-b',text:`${higher} has ${diff}% more total displaced people than ${lower} — ${fmt(Math.max(totA,totB))} vs ${fmt(Math.min(totA,totB))}.`});
+  }
+  if(fundA&&fundB){
+    const betterFund=fundA.pct>fundB.pct?nameA:nameB;
+    const worseFund=fundA.pct>fundB.pct?nameB:nameA;
+    bullets.push({dot:fundA.pct>fundB.pct?'dot-a':'dot-b',text:`${betterFund} receives better humanitarian funding (${Math.max(fundA.pct,fundB.pct)}% of appeal met) vs ${worseFund} (${Math.min(fundA.pct,fundB.pct)}%). Both face significant shortfalls.`});
+  }else if(fundA||fundB){
+    const named=fundA?nameA:nameB;const pctVal=(fundA||fundB).pct;
+    bullets.push({dot:'dot-n',text:`Only ${named} appears in OCHA's major funding appeals at ${pctVal}% funded. The other country may not have a tracked appeal.`});
+  }
+  if(crisisA&&crisisB){
+    const moreS=crisisA.score>crisisB.score?nameA:nameB;
+    const lessS=crisisA.score>crisisB.score?nameB:nameA;
+    const sA=crisisA.score,sB=crisisB.score;
+    bullets.push({dot:sA>sB?'dot-a':'dot-b',text:`${moreS} scores ${Math.max(sA,sB)}/10 on the Crisis Severity Index (${(sA>sB?crisisA:crisisB).label}), compared to ${Math.min(sA,sB)}/10 for ${lessS} (${(sA>sB?crisisB:crisisA).label}).`});
+  }
+  if((la.idps||0)>0||(lb.idps||0)>0){
+    const bigIdp=(la.idps||0)>(lb.idps||0)?nameA:nameB;
+    bullets.push({dot:(la.idps||0)>(lb.idps||0)?'dot-a':'dot-b',text:`${bigIdp} has a significantly larger internally displaced population, suggesting more people are trapped within national borders and unable to seek asylum abroad.`});
+  }
+  if(bullets.length===0)bullets.push({dot:'dot-n',text:'Both countries have displacement data. Use the metrics above to explore the differences.'});
+
+  const hostsA=da.top_hosts?.slice(0,3)||[];
+  const hostsB=db.top_hosts?.slice(0,3)||[];
+  const origA=da.top_origins_hosted?.slice(0,3)||[];
+  const origB=db.top_origins_hosted?.slice(0,3)||[];
+
+  const typeA=da.is_origin&&da.is_host?'Origin & Host':da.is_origin?'Origin country':'Host country';
+  const typeB=db.is_origin&&db.is_host?'Origin & Host':db.is_origin?'Origin country':'Host country';
+  const badgeClassA=da.is_host&!da.is_origin?'badge-host':'badge-origin';
+  const badgeClassB=db.is_host&!db.is_origin?'badge-host':'badge-origin';
+
+  const html=`
+  <div class="cmp-table">
+    <!-- Country headers -->
+    <div class="cmp-header-row">
+      <div class="cmp-header-cell" style="background:var(--surface2);display:flex;align-items:center">
+        <span style="font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">Metric</span>
+      </div>
+      <div class="cmp-header-cell a">
+        <div class="ch-name ch-name-a">${nameA}</div>
+        <span class="ch-badge ${badgeClassA}">${typeA}</span>
+      </div>
+      <div class="cmp-header-cell b">
+        <div class="ch-name ch-name-b">${nameB}</div>
+        <span class="ch-badge ${badgeClassB}">${typeB}</span>
+      </div>
+    </div>
+
+    <!-- Total displaced -->
+    <div class="cmp-row">
+      <div class="cmp-row-label"><span>Total displaced</span></div>
+      <div class="cmp-cell">
+        <div class="metric-num metric-num-a">${fmt(la.total)}</div>
+        <div class="metric-sub">refugees + IDPs + asylum seekers</div>
+        <div class="prop-bar"><div class="prop-fill prop-fill-a" data-w="${barTotA}"></div></div>
+      </div>
+      <div class="cmp-cell">
+        <div class="metric-num metric-num-b">${fmt(lb.total)}</div>
+        <div class="metric-sub">refugees + IDPs + asylum seekers</div>
+        <div class="prop-bar"><div class="prop-fill prop-fill-b" data-w="${barTotB}"></div></div>
+        ${winnerTag(la.total,lb.total)}
+      </div>
+    </div>
+
+    <!-- Refugees -->
+    <div class="cmp-row">
+      <div class="cmp-row-label"><span>Refugees abroad</span></div>
+      <div class="cmp-cell">
+        <div class="metric-num metric-num-a">${fmt(la.refugees)}</div>
+        <div class="metric-sub">fled across borders</div>
+        <div class="prop-bar"><div class="prop-fill prop-fill-a" data-w="${barRefA}"></div></div>
+      </div>
+      <div class="cmp-cell">
+        <div class="metric-num metric-num-b">${fmt(lb.refugees)}</div>
+        <div class="metric-sub">fled across borders</div>
+        <div class="prop-bar"><div class="prop-fill prop-fill-b" data-w="${barRefB}"></div></div>
+        ${winnerTag(la.refugees,lb.refugees)}
+      </div>
+    </div>
+
+    <!-- IDPs -->
+    <div class="cmp-row">
+      <div class="cmp-row-label"><span>Internally displaced</span></div>
+      <div class="cmp-cell">
+        <div class="metric-num metric-num-a">${fmt(la.idps)}</div>
+        <div class="metric-sub">within own country</div>
+        <div class="prop-bar"><div class="prop-fill prop-fill-a" data-w="${barIdpA}"></div></div>
+      </div>
+      <div class="cmp-cell">
+        <div class="metric-num metric-num-b">${fmt(lb.idps)}</div>
+        <div class="metric-sub">within own country</div>
+        <div class="prop-bar"><div class="prop-fill prop-fill-b" data-w="${barIdpB}"></div></div>
+        ${winnerTag(la.idps,lb.idps)}
+      </div>
+    </div>
+
+    <!-- Asylum seekers -->
+    <div class="cmp-row">
+      <div class="cmp-row-label"><span>Asylum seekers</span></div>
+      <div class="cmp-cell">
+        <div class="metric-num metric-num-a" style="font-size:1rem">${fmt(la.asylum_seekers)}</div>
+        <div class="metric-sub">status pending</div>
+        <div class="prop-bar"><div class="prop-fill prop-fill-a" data-w="${barAsyA}"></div></div>
+      </div>
+      <div class="cmp-cell">
+        <div class="metric-num metric-num-b" style="font-size:1rem">${fmt(lb.asylum_seekers)}</div>
+        <div class="metric-sub">status pending</div>
+        <div class="prop-bar"><div class="prop-fill prop-fill-b" data-w="${barAsyB}"></div></div>
+        ${winnerTag(la.asylum_seekers,lb.asylum_seekers)}
+      </div>
+    </div>
+
+    <!-- Crisis severity -->
+    <div class="cmp-row">
+      <div class="cmp-row-label"><span>Crisis severity</span></div>
+      <div class="cmp-cell">
+        ${crisisBadge(crisisA?.label)}
+        <div class="metric-sub" style="margin-top:.3rem">${crisisA?crisisA.score+' / 10':'No score'}</div>
+        <div class="prop-bar"><div class="prop-fill prop-fill-a" data-w="${barCrA}"></div></div>
+      </div>
+      <div class="cmp-cell">
+        ${crisisBadge(crisisB?.label)}
+        <div class="metric-sub" style="margin-top:.3rem">${crisisB?crisisB.score+' / 10':'No score'}</div>
+        <div class="prop-bar"><div class="prop-fill prop-fill-b" data-w="${barCrB}"></div></div>
+        ${crisisA&crisisB?winnerTag(crisisA.score,crisisB.score):''}
+      </div>
+    </div>
+
+    <!-- Funding -->
+    <div class="cmp-row">
+      <div class="cmp-row-label"><span>Humanitarian funding</span></div>
+      <div class="cmp-cell">
+        ${fundA?`<div class="metric-num metric-num-a" style="font-size:1rem">${fundA.pct}% funded</div>
+        <div class="metric-sub">${fmtUSD(fundA.funded)} received · ${fmtUSD(fundA.gap)} gap</div>
+        <div class="prop-bar" style="background:rgba(239,68,68,.12)"><div class="prop-fill prop-fill-a" data-w="${barFundA}"></div></div>`
+        :`<div class="metric-sub" style="color:var(--muted)">No OCHA appeal tracked</div>`}
+      </div>
+      <div class="cmp-cell">
+        ${fundB?`<div class="metric-num metric-num-b" style="font-size:1rem">${fundB.pct}% funded</div>
+        <div class="metric-sub">${fmtUSD(fundB.funded)} received · ${fmtUSD(fundB.gap)} gap</div>
+        <div class="prop-bar" style="background:rgba(239,68,68,.12)"><div class="prop-fill prop-fill-b" data-w="${barFundB}"></div></div>`
+        :`<div class="metric-sub" style="color:var(--muted)">No OCHA appeal tracked</div>`}
+        ${fundA&fundB?winnerTag(fundA.pct,fundB.pct,true)+'':''}
+      </div>
+    </div>
+
+    <!-- Displacement trend -->
+    <div class="cmp-row">
+      <div class="cmp-row-label"><span>Trend 2018–2024</span></div>
+      <div class="cmp-cell">
+        ${miniChart(da.trend,'#2dd4bf')}
+        <div style="font-size:9px;color:var(--muted);font-family:var(--mono);margin-top:.2rem">${da.trend?.length?da.trend[0].year+' → '+da.trend[da.trend.length-1].year:'No data'}</div>
+      </div>
+      <div class="cmp-cell">
+        ${miniChart(db.trend,'#60a5fa')}
+        <div style="font-size:9px;color:var(--muted);font-family:var(--mono);margin-top:.2rem">${db.trend?.length?db.trend[0].year+' → '+db.trend[db.trend.length-1].year:'No data'}</div>
+      </div>
+    </div>
+
+    <!-- Where refugees go -->
+    ${(hostsA.length||hostsB.length)?`
+    <div class="cmp-row">
+      <div class="cmp-row-label"><span>Where refugees go</span></div>
+      <div class="cmp-cell">
+        ${hostsA.length?hostsA.map(h=>`<div class="host-row"><a class="host-country" href="${countryURL(h.country)}">${h.country}</a><span class="host-val">${fmt(h.hosted)}</span></div>`).join(''):'<span style="font-size:10px;color:var(--muted)">No data</span>'}
+      </div>
+      <div class="cmp-cell">
+        ${hostsB.length?hostsB.map(h=>`<div class="host-row"><a class="host-country" href="${countryURL(h.country)}">${h.country}</a><span class="host-val">${fmt(h.hosted)}</span></div>`).join(''):'<span style="font-size:10px;color:var(--muted)">No data</span>'}
+      </div>
+    </div>`:''}
+
+    <!-- Who they host -->
+    ${(origA.length||origB.length)?`
+    <div class="cmp-row">
+      <div class="cmp-row-label"><span>Refugees hosted</span></div>
+      <div class="cmp-cell">
+        ${origA.length?origA.map(o=>`<div class="host-row"><a class="host-country" href="${countryURL(o.country)}">${o.country}</a><span class="host-val">${fmt(o.count)}</span></div>`).join(''):'<span style="font-size:10px;color:var(--muted)">Not a host country</span>'}
+      </div>
+      <div class="cmp-cell">
+        ${origB.length?origB.map(o=>`<div class="host-row"><a class="host-country" href="${countryURL(o.country)}">${o.country}</a><span class="host-val">${fmt(o.count)}</span></div>`).join(''):'<span style="font-size:10px;color:var(--muted)">Not a host country</span>'}
+      </div>
+    </div>`:''}
+
+  </div>
+
+  <!-- Summary -->
+  <div class="summary">
+    <div class="summary-title">Key differences at a glance</div>
+    <div class="summary-points">
+      ${bullets.map(b=>`<div class="summary-point"><div class="summary-dot ${b.dot}"></div><span>${b.text}</span></div>`).join('')}
+    </div>
+    <div class="summary-actions">
+      <a class="action-btn action-btn-a" href="${countryURL(nameA)}">View ${nameA} profile →</a>
+      <a class="action-btn action-btn-b" href="${countryURL(nameB)}">View ${nameB} profile →</a>
+      <a class="action-btn action-btn-n" href="index.html">← Back to dashboard</a>
+      <button class="action-btn action-btn-n" style="margin-left:auto" onclick="copyShareLink()">↗ Share this comparison</button>
+    </div>
+  </div>`;
+
+  document.getElementById('comparison-output').innerHTML=html;
+
+  // Animate bars
+  requestAnimationFrame(()=>{
+    document.querySelectorAll('.prop-fill[data-w]').forEach(b=>{
+      b.style.width=b.dataset.w;
+    });
+  });
+}
+
+// ── Copy share link ──────────────────────────────────────────
+function copyShareLink(){
+  navigator.clipboard.writeText(location.href).then(()=>{
+    const btn=event.target;
+    const orig=btn.textContent;
+    btn.textContent='Copied!';
+    setTimeout(()=>btn.textContent=orig,1500);
+  });
+}
+
+// ── Country search pickers ───────────────────────────────────
+let allCountries=[];
+let globalData=null;
+let selectedA='',selectedB='';
+
+function initPicker(inputId,resultsId,slot){
+  const input=document.getElementById(inputId);
+  const results=document.getElementById(resultsId);
+  input.addEventListener('input',()=>{
+    const q=input.value.trim().toLowerCase();
+    if(q.length<1){results.style.display='none';return}
+    const matches=allCountries.filter(c=>c.name.toLowerCase().includes(q)).slice(0,8);
+    results.innerHTML=matches.length===0
+      ?'<div style="padding:.4rem .8rem;color:var(--muted);font-size:11px">No countries found</div>'
+      :matches.map(c=>`<div class="picker-result" data-name="${c.name}">
+          <span>${c.name}</span>
+          <span>${c.total>0?fmt(c.total)+' displaced':c.is_host?'Host country':''}</span>
+        </div>`).join('');
+    results.style.display='block';
+    results.querySelectorAll('.picker-result').forEach(r=>{
+      r.addEventListener('click',()=>{
+        const name=r.dataset.name;
+        input.value=name;
+        results.style.display='none';
+        if(slot==='a')selectedA=name;
+        else selectedB=name;
+        if(selectedA&&selectedB){
+          const da=globalData.country_details[selectedA];
+          const db=globalData.country_details[selectedB];
+          if(da&&db)renderComparison(selectedA,selectedB,da,db,globalData);
+        }
+      });
+    });
+  });
+  document.addEventListener('click',e=>{
+    if(!e.target.closest('#'+inputId)&!e.target.closest('#'+resultsId))
+      results.style.display='none';
+  });
+}
+
+// ── Header scroll effect ─────────────────────────────────────
+window.addEventListener('scroll',()=>{
+  document.getElementById('header').classList.toggle('scrolled',scrollY>10);
+},{passive:true});
+
+// ── Init ─────────────────────────────────────────────────────
+async function init(){
+  try{
+    const res=await fetch('/sample.json');
+    globalData=await res.json();
+
+    document.getElementById('footer-date').textContent='Last updated: '+globalData.last_updated;
+
+    allCountries=Object.entries(globalData.country_details)
+      .map(([name,d])=>({name,total:d.latest?.total||0,is_host:d.is_host,is_origin:d.is_origin}))
+      .sort((a,b)=>b.total-a.total);
+
+    initPicker('picker-a','results-a','a');
+    initPicker('picker-b','results-b','b');
+
+    // Load from URL params
+    const{a,b}=getParams();
+    if(a&&b){
+      const da=globalData.country_details[a];
+      const db=globalData.country_details[b];
+      if(da&&db){
+        selectedA=a;selectedB=b;
+        renderComparison(a,b,da,db,globalData);
+      } else {
+        document.getElementById('comparison-output').innerHTML=`
+          <div class="state-msg"><strong>Country not found</strong>
+          One or both countries in the URL aren't in the dataset. Use the search above to pick two countries.</div>`;
+        if(a)document.getElementById('picker-a').value=a;
+        if(b)document.getElementById('picker-b').value=b;
+      }
+    } else {
+      // Default prompt state
+      document.getElementById('comparison-output').innerHTML=`
+        <div class="state-msg"><strong>Pick two countries to compare</strong>
+        Use the search fields above to select any two countries from the dataset.</div>`;
+      // If only one param provided, pre-fill it
+      if(a){selectedA=a;document.getElementById('picker-a').value=a;}
+      if(b){selectedB=b;document.getElementById('picker-b').value=b;}
+    }
+
+  }catch(e){
+    console.error(e);
+    document.getElementById('comparison-output').innerHTML=`
+      <div class="state-msg"><strong>Could not load data</strong>
+      Run the page through a local server (python3 -m http.server 8000) and make sure sample.json is present.</div>`;
+  }
+}
+
+init();
+</script>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="nav-overlay" id="nav-overlay" onclick="closeDrawer()"></div>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nav-drawer-header">
+    <a class="nav-drawer-logo" href="index.html">Refuji <span>Watch</span></a>
+    <button class="nav-drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="nav-drawer-links">
+    <a href="index.html">Dashboard</a>
+    <a href="countries.html">Countries</a>
+    <a href="regions.html">Regions</a>
+    <a href="compare.html" class="active">Compare</a>
+    <a href="funding.html">Funding</a>
+    <a href="help.html">How to Help</a>
+    <a href="about.html">About</a>
+    <a href="sitrep.html">SitRep</a>
+  </div>
+  <div class="nav-drawer-footer">Data: UNHCR · OCHA FTS · ReliefWeb</div>
+</div>
+
+<script>
+(function(){
+  function openDrawer(){
+    document.getElementById('nav-drawer').classList.add('open');
+    document.getElementById('nav-overlay').classList.add('open');
+    var btn=document.getElementById('hamburger-btn');
+    if(btn)btn.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  window.closeDrawer=function(){
+    document.getElementById('nav-drawer').classList.remove('open');
+    document.getElementById('nav-overlay').classList.remove('open');
+    var btn=document.getElementById('hamburger-btn');
+    if(btn)btn.classList.remove('open');
+    document.body.style.overflow='';
+  };
+  var btn=document.getElementById('hamburger-btn');
+  if(btn)btn.addEventListener('click',function(){
+    if(document.getElementById('nav-drawer').classList.contains('open'))closeDrawer();
+    else openDrawer();
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDrawer();});
+})();
+</script>
+</body>
+</html>

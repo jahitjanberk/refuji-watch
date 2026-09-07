@@ -1,0 +1,156 @@
+{
+  "Syria": {
+    "summary": "Syria's displacement crisis began in 2011 when peaceful protests against President Bashar al-Assad's government were met with violent crackdowns, igniting a civil war that would become one of the most devastating of the 21st century. More than 13 years later, it remains the world's largest protracted displacement situation.",
+    "causes": ["Armed conflict and civil war", "Government crackdowns and airstrikes", "Rise of ISIS and extremist groups", "Economic collapse and hyperinflation", "Destruction of civilian infrastructure"],
+    "timeline": [
+      {"year": "2011", "event": "Arab Spring protests erupt; government responds with force, sparking civil war"},
+      {"year": "2013", "event": "Displacement crosses 2 million as fighting intensifies across major cities"},
+      {"year": "2015", "event": "Mass Mediterranean crossings; European refugee crisis peaks"},
+      {"year": "2019", "event": "Idlib offensive displaces 900,000 in three months — fastest displacement since WWII"},
+      {"year": "2023", "event": "February earthquake kills 50,000+ and displaces hundreds of thousands more"}
+    ]
+  },
+  "Ukraine": {
+    "summary": "Russia's full-scale invasion of Ukraine on 24 February 2022 triggered the fastest displacement crisis in Europe since World War II. Within weeks, millions had fled westward. Though some have returned, millions remain displaced inside Ukraine or abroad — many uncertain if they can ever go home.",
+    "causes": ["Russian full-scale military invasion", "Aerial bombardment of cities and infrastructure", "Occupation of eastern and southern territories", "Destruction of civilian homes and energy systems", "Ongoing frontline conflict with no ceasefire"],
+    "timeline": [
+      {"year": "2014", "event": "Russia annexes Crimea; conflict begins in Donbas — early displacement begins"},
+      {"year": "Feb 2022", "event": "Full-scale invasion launches; 10 million displaced within first month"},
+      {"year": "Mar 2022", "event": "4 million cross into Europe — fastest refugee exodus since WWII"},
+      {"year": "2023", "event": "Frontlines stabilise; some returns begin but millions remain displaced"},
+      {"year": "2024", "event": "Continued attacks on energy infrastructure drive further internal displacement"}
+    ]
+  },
+  "Afghanistan": {
+    "summary": "Afghanistan has been in near-continuous conflict for over four decades — from Soviet invasion to civil war, US-led occupation, and Taliban rule. The 2021 Taliban takeover triggered a new wave of displacement, particularly affecting women, journalists, and those who worked with foreign forces or governments.",
+    "causes": ["Taliban takeover and persecution of minorities", "Four decades of continuous armed conflict", "Severe drought and climate-driven food insecurity", "Economic collapse following international sanctions", "Suppression of women's rights and civil society"],
+    "timeline": [
+      {"year": "1979", "event": "Soviet invasion begins decades of displacement that never fully ended"},
+      {"year": "2001", "event": "US-led invasion displaces millions; refugee crisis intensifies"},
+      {"year": "2015", "event": "Taliban resurgence drives new displacement waves across the country"},
+      {"year": "Aug 2021", "event": "Taliban seize Kabul; chaotic evacuation and mass displacement begins"},
+      {"year": "2022", "event": "Humanitarian crisis deepens — 20 million face acute food insecurity"}
+    ]
+  },
+  "South Sudan": {
+    "summary": "South Sudan became the world's newest country in 2011, but independence quickly gave way to ethnic conflict and civil war. Despite a fragile peace agreement signed in 2018, localised violence continues. South Sudan simultaneously hosts refugees from neighbouring countries while producing millions of its own.",
+    "causes": ["Civil war between government and opposition forces", "Ethnic and political violence between communities", "Collapse of basic services and infrastructure", "Climate shocks — floods and drought", "Chronic underfunding of humanitarian response"],
+    "timeline": [
+      {"year": "2011", "event": "South Sudan declares independence from Sudan"},
+      {"year": "2013", "event": "Civil war erupts between President Kiir and former VP Machar"},
+      {"year": "2016", "event": "Peace deal collapses; fighting resumes — 4 million displaced"},
+      {"year": "2018", "event": "Revitalised peace agreement signed; fighting reduces but continues"},
+      {"year": "2024", "event": "Renewed conflict in some states; displacement remains at crisis levels"}
+    ]
+  },
+  "Myanmar": {
+    "summary": "Myanmar's displacement crisis has two overlapping dimensions: the long-running persecution of the Rohingya Muslim minority — described by the UN as a genocide — and the mass displacement triggered by the 2021 military coup, which plunged the country into civil war.",
+    "causes": ["2021 military coup and ongoing civil conflict", "Decades of Rohingya persecution and statelessness", "Military airstrikes on civilian populations", "Ethnic armed group conflicts across border regions", "Economic collapse following coup"],
+    "timeline": [
+      {"year": "2017", "event": "Military 'clearance operations' force 750,000 Rohingya into Bangladesh in weeks"},
+      {"year": "Feb 2021", "event": "Military coup deposes elected government; protests met with lethal force"},
+      {"year": "2021", "event": "Civil war spreads across multiple regions; 600,000 newly displaced"},
+      {"year": "2023", "event": "Opposition forces gain ground; fighting intensifies in Shan and Chin states"},
+      {"year": "2024", "event": "Over 2 million internally displaced — worst figures since 2021 coup"}
+    ]
+  },
+  "Sudan": {
+    "summary": "Sudan's crisis exploded in April 2023 when war broke out between the Sudanese Armed Forces and the Rapid Support Forces paramilitary group. What began as a power struggle became one of the world's worst humanitarian disasters — with mass atrocities, famine, and a displacement surge that overtook Syria as the world's largest active crisis.",
+    "causes": ["War between SAF and RSF paramilitary forces", "Systematic targeting of civilians and aid workers", "Collapse of healthcare and food systems", "Historical ethnic tensions in Darfur region", "Regional spillover affecting Chad, Egypt and South Sudan"],
+    "timeline": [
+      {"year": "2003", "event": "Darfur conflict begins — hundreds of thousands killed, millions displaced"},
+      {"year": "2019", "event": "President Omar al-Bashir ousted after 30 years; transition government formed"},
+      {"year": "Apr 2023", "event": "War erupts between SAF and RSF; Khartoum reduced to battleground"},
+      {"year": "2023", "event": "7 million displaced in six months — fastest displacement surge ever recorded"},
+      {"year": "2024", "event": "Famine declared in parts of Sudan; aid access severely restricted"}
+    ]
+  },
+  "DR Congo": {
+    "summary": "The Democratic Republic of Congo has the largest internally displaced population in Africa and one of the world's most chronic and underreported crises. Decades of militia violence, competition for mineral resources, and state fragility have kept millions perpetually displaced across a country the size of Western Europe.",
+    "causes": ["Dozens of armed militia groups operating across eastern DRC", "Competition for valuable mineral resources", "Weak state institutions and security forces", "Regional interference from neighbouring countries", "Chronic underfunding — one of the least-reported crises globally"],
+    "timeline": [
+      {"year": "1994", "event": "Rwandan genocide spills across border; decades of instability follow"},
+      {"year": "1998", "event": "Second Congo War — deadliest conflict since WWII — displaces millions"},
+      {"year": "2012", "event": "M23 rebel group seizes Goma; mass displacement in North Kivu"},
+      {"year": "2022", "event": "M23 resurgence backed by Rwanda; 800,000 displaced in months"},
+      {"year": "2024", "event": "6.9 million IDPs — Africa's largest internal displacement crisis"}
+    ]
+  },
+  "Somalia": {
+    "summary": "Somalia has endured over three decades of state collapse, clan conflict, and Al-Shabaab insurgency. Climate shocks — increasingly severe droughts and floods — compound the crisis, making Somalia one of the clearest examples of how conflict and climate change interact to drive displacement.",
+    "causes": ["Al-Shabaab militant insurgency", "Clan-based armed conflict", "Severe drought and climate-driven famine", "State fragility and governance collapse", "Cyclical flooding displacing coastal communities"],
+    "timeline": [
+      {"year": "1991", "event": "Government collapses; clan warfare erupts — state has not fully recovered since"},
+      {"year": "2011", "event": "Famine kills 260,000; mass displacement to Kenya and Ethiopia"},
+      {"year": "2017", "event": "Drought and famine conditions return; 6 million face starvation"},
+      {"year": "2022", "event": "Fifth consecutive failed rainy season — worst drought in 40 years"},
+      {"year": "2024", "event": "3.8 million IDPs; Al-Shabaab controls significant rural territory"}
+    ]
+  },
+  "Yemen": {
+    "summary": "Yemen's civil war began in 2015 when a Saudi-led coalition intervened against Houthi forces who had seized the capital. Nearly a decade later, the war has created what the UN calls the world's worst humanitarian crisis — with millions facing famine, disease outbreaks, and a health system in total collapse.",
+    "causes": ["Civil war between government forces and Houthi movement", "Saudi-led coalition airstrikes on civilian infrastructure", "Blockade of Hodeidah port restricting food imports", "Total collapse of public sector and health services", "Pre-existing poverty and food insecurity"],
+    "timeline": [
+      {"year": "2014", "event": "Houthi forces seize Sanaa; president flees to Saudi Arabia"},
+      {"year": "2015", "event": "Saudi-led coalition begins airstrikes; war officially begins"},
+      {"year": "2018", "event": "Hodeidah offensive threatens 70% of Yemen's food imports"},
+      {"year": "2022", "event": "Truce holds for months — longest pause in fighting since 2015"},
+      {"year": "2024", "event": "4.5 million IDPs; 17 million facing acute food insecurity"}
+    ]
+  },
+  "Ethiopia": {
+    "summary": "Ethiopia's displacement crisis stems from multiple overlapping emergencies — the Tigray War (2020–2022), one of Africa's deadliest recent conflicts, alongside ongoing intercommunal violence in Oromia and Amhara regions, and recurring climate shocks. Peace was signed in 2022 but violence and displacement continue.",
+    "causes": ["Tigray War between federal government and TPLF (2020–2022)", "Intercommunal violence in Oromia and Amhara", "Severe drought across the Horn of Africa", "Political and ethnic tensions across regions", "Slow delivery of post-conflict reconstruction"],
+    "timeline": [
+      {"year": "2020", "event": "Federal government launches military offensive in Tigray region"},
+      {"year": "2021", "event": "Tigray conflict expands into Afar and Amhara; 2 million displaced"},
+      {"year": "Nov 2022", "event": "Cessation of hostilities agreement signed in Pretoria"},
+      {"year": "2023", "event": "Peace process advances but Amhara conflict intensifies"},
+      {"year": "2024", "event": "3.5 million IDPs across multiple active conflict zones"}
+    ]
+  },
+  "Venezuela": {
+    "summary": "Venezuela's crisis is the largest displacement situation in Latin American history and one of the largest globally — driven not by war but by economic collapse, political repression, and the systematic dismantling of public institutions under successive governments. Over 7.7 million have left, mostly on foot.",
+    "causes": ["Economic collapse and hyperinflation destroying livelihoods", "Political repression under Maduro government", "Collapse of healthcare, education and basic services", "Food and medicine shortages", "Violence from armed criminal groups (colectivos)"],
+    "timeline": [
+      {"year": "2015", "event": "Oil price crash triggers economic collapse; emigration begins accelerating"},
+      {"year": "2018", "event": "Hyperinflation exceeds 1,000,000%; mass exodus begins in earnest"},
+      {"year": "2019", "event": "Disputed election; US and EU sanctions intensify economic pressure"},
+      {"year": "2021", "event": "Venezuela surpasses Syria as largest displacement in the Americas"},
+      {"year": "2024", "event": "7.7 million displaced — mostly in Colombia, Peru, Ecuador, Chile, Brazil"}
+    ]
+  },
+  "Palestine": {
+    "summary": "Palestinians represent one of the world's oldest and largest protracted refugee situations. The 1948 Arab-Israeli War displaced over 700,000 Palestinians — an event Palestinians call the Nakba (catastrophe). Their descendants now number nearly 6 million registered refugees. The 2023 Gaza war triggered the most acute displacement since 1948.",
+    "causes": ["1948 Nakba and subsequent Arab-Israeli conflicts", "Israeli occupation of West Bank and Gaza", "2023 Gaza war displacing nearly entire population", "Blockade of Gaza restricting movement and aid", "Statelessness — no recognised Palestinian state"],
+    "timeline": [
+      {"year": "1948", "event": "Nakba — 700,000+ Palestinians displaced during Arab-Israeli War"},
+      {"year": "1967", "event": "Six-Day War; Israel occupies West Bank, Gaza, Sinai and Golan Heights"},
+      {"year": "2007", "event": "Gaza blockade begins after Hamas takes control of the territory"},
+      {"year": "Oct 2023", "event": "Hamas attack; Israel launches military campaign — 1.9 million displaced in Gaza"},
+      {"year": "2024", "event": "Nearly entire Gaza population displaced; humanitarian access severely restricted"}
+    ]
+  },
+  "Haiti": {
+    "summary": "Haiti's crisis is a compounding of disasters — political collapse following the 2021 presidential assassination, gang control of large swaths of Port-au-Prince, the 2010 earthquake's unresolved legacy, and chronic poverty. Gang violence now drives more displacement than natural disasters.",
+    "causes": ["Gang violence controlling up to 80% of Port-au-Prince", "Assassination of President Moïse in 2021", "Collapse of state authority and police capacity", "Recurrent natural disasters (earthquakes, hurricanes)", "Extreme poverty and lack of economic alternatives"],
+    "timeline": [
+      {"year": "2010", "event": "Earthquake kills 200,000+ and displaces 1.5 million; recovery remains incomplete"},
+      {"year": "2016", "event": "Hurricane Matthew devastates southern Haiti; 175,000 displaced"},
+      {"year": "Jul 2021", "event": "President Jovenel Moïse assassinated; political vacuum deepens gang power"},
+      {"year": "2023", "event": "Gang coalition seizes major infrastructure; 200,000 flee Port-au-Prince"},
+      {"year": "2024", "event": "310,000 IDPs; Kenya-led international security mission begins deployment"}
+    ]
+  },
+  "Colombia": {
+    "summary": "Colombia hosts one of Latin America's largest internally displaced populations — a legacy of five decades of FARC guerrilla conflict, paramilitary violence, and now the continued activity of dissident groups and drug cartels. Colombia also hosts the most Venezuelan refugees and migrants of any country.",
+    "causes": ["Decades of FARC and paramilitary conflict", "Dissident FARC groups rejecting 2016 peace deal", "Drug cartel territorial violence in rural areas", "Hosting 2.9 million Venezuelan refugees", "Land disputes and forced displacement of Afro-Colombian and indigenous communities"],
+    "timeline": [
+      {"year": "1964", "event": "FARC guerrilla movement founded; begins rural conflict"},
+      {"year": "2000s", "event": "Peak of conflict — millions displaced by FARC and paramilitary violence"},
+      {"year": "2016", "event": "Historic FARC peace deal signed; displacement begins to fall"},
+      {"year": "2018", "event": "Venezuelan crisis accelerates; Colombia becomes largest host country"},
+      {"year": "2024", "event": "4.9 million IDPs; dissident groups filling FARC's former territories"}
+    ]
+  }
+}

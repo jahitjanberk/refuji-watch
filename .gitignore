@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Terraform (infrastructure removed — kept so stray state is never committed)
+*.tfstate
+*.tfstate.*
+.terraform/
+*.tfvars

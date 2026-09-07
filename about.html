@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About — Refuji Watch</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0d;--surface:#141414;--surface2:#1c1c1c;--border:#222;
+  --accent:#2dd4bf;--red:#ef4444;--amber:#f59e0b;--blue:#60a5fa;
+  --text:#f0ede6;--muted:#666;--muted2:#3a3a3a;
+  --serif:var(--sans);
+  --mono:'DM Mono',monospace;
+  --sans:'DM Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13px;line-height:1.6;min-height:100vh}
+.header{padding:.9rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;background:rgba(20,20,20,.95);position:sticky;top:0;z-index:200;backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);transition:background .4s,backdrop-filter .4s;flex-wrap:wrap}
+.header.scrolled{background:rgba(20,20,20,.5);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom-color:rgba(255,255,255,.06)}
+.logo{font-family:var(--sans);font-size:1.4rem;font-weight:900;letter-spacing:-.02em;text-decoration:none;color:var(--text)}
+.logo span{color:var(--accent)}
+.nav{display:flex;gap:.7rem;font-family:var(--sans);font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap}
+.nav a{color:inherit;text-decoration:none;transition:color .15s}
+.nav a:hover,.nav a.active{color:var(--accent)}
+.back-link{font-family:var(--sans);font-size:11px;font-weight:600;color:var(--muted);text-decoration:none;transition:color .15s}
+.back-link:hover{color:var(--accent)}
+
+/* HERO */
+.page-hero{padding:2.5rem 1.5rem 2rem;border-bottom:1px solid var(--border);max-width:760px}
+.page-eyebrow{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem}
+.page-title{font-family:var(--sans);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.1;margin-bottom:.8rem}
+.page-title span{color:var(--accent)}
+.page-intro{font-size:14px;color:var(--muted);line-height:1.8;max-width:620px}
+
+/* LAYOUT */
+.content{display:grid;grid-template-columns:2fr 1fr;gap:1px;background:var(--border);border-bottom:1px solid var(--border)}
+.main-col{background:var(--surface)}
+.side-col{background:var(--surface)}
+@media(max-width:700px){
+  .content{grid-template-columns:1fr}
+  [style*="grid-template-columns"]{grid-template-columns:1fr!important}
+  .page-hero{padding:1.4rem 1rem}
+}
+@media(max-width:480px){
+  .section{padding:1.2rem 1rem}
+  .source-row{grid-template-columns:1fr}
+  .builder-card{flex-direction:column}
+}
+
+/* SECTIONS */
+.section{padding:1.8rem 1.5rem;border-bottom:1px solid var(--border)}
+.section:last-child{border-bottom:none}
+.section-title{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
+.prose{font-size:13px;color:var(--muted);line-height:1.8}
+.prose p{margin-bottom:.9rem}
+.prose p:last-child{margin-bottom:0}
+.prose strong{color:var(--text);font-family:var(--sans);font-weight:600}
+.prose a{color:var(--accent);text-decoration:none}
+.prose a:hover{text-decoration:underline}
+
+/* DATA SOURCES TABLE */
+.source-row{display:grid;grid-template-columns:1fr 2fr;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--border);font-size:12px}
+.source-row:last-child{border-bottom:none}
+.source-name{font-family:var(--sans);font-weight:600;color:var(--text)}
+.source-name a{color:var(--accent);text-decoration:none}
+.source-name a:hover{text-decoration:underline}
+.source-desc{color:var(--muted);line-height:1.6}
+
+/* SCORE METHODOLOGY */
+.score-factor{display:flex;gap:.8rem;align-items:flex-start;padding:.7rem 0;border-bottom:1px solid var(--border)}
+.score-factor:last-child{border-bottom:none}
+.score-weight{font-family:var(--mono);font-size:11px;color:var(--accent);flex-shrink:0;width:3rem;padding-top:.1rem}
+.score-detail{font-size:12px;color:var(--muted);line-height:1.6}
+.score-detail strong{color:var(--text);font-family:var(--sans);font-weight:600;display:block;margin-bottom:.2rem}
+
+
+
+/* LIMITATIONS */
+.limit-item{display:flex;gap:.7rem;padding:.6rem 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--muted);line-height:1.6}
+.limit-item:last-child{border-bottom:none}
+.limit-icon{color:var(--amber);flex-shrink:0;padding-top:.1rem}
+
+/* SIDE CARDS */
+.side-card{padding:1.2rem 1.2rem;border-bottom:1px solid var(--border)}
+.side-card:last-child{border-bottom:none}
+.side-card-title{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.7rem}
+.stat-highlight{font-family:var(--mono);font-size:1.6rem;font-weight:900;color:var(--accent);line-height:1}
+.stat-highlight-sub{font-size:11px;color:var(--muted);margin-top:.2rem}
+
+/* BUILDER */
+.builder-card{display:flex;gap:.8rem;align-items:flex-start}
+.builder-avatar{width:40px;height:40px;border-radius:50%;background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.3);display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:13px;font-weight:700;color:var(--accent);flex-shrink:0}
+.builder-name{font-family:var(--sans);font-size:13px;font-weight:700;color:var(--text)}
+.builder-bio{font-size:11px;color:var(--muted);line-height:1.6;margin-top:.3rem}
+.builder-links{display:flex;gap:.6rem;margin-top:.6rem;flex-wrap:wrap}
+.builder-link{font-family:var(--sans);font-size:10px;font-weight:600;color:var(--accent);text-decoration:none;border:1px solid rgba(45,212,191,.3);padding:2px 8px;transition:all .15s}
+.builder-link:hover{background:rgba(45,212,191,.08)}
+
+/* BADGE */
+.badge-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}
+.badge{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:2px}
+.badge-open{background:rgba(45,212,191,.12);color:var(--accent)}
+.badge-free{background:rgba(96,165,250,.12);color:var(--blue)}
+.badge-live{background:rgba(239,68,68,.12);color:var(--red)}
+
+footer{border-top:1px solid var(--border);padding:.8rem 1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.4rem;font-size:10px;color:var(--muted);letter-spacing:.06em;font-family:var(--sans)}
+footer a{color:var(--accent);text-decoration:none}
+
+
+
+/* ── MOBILE SAFETY ── */
+html,body{overflow-x:hidden}
+.chart-wrap{overflow:hidden}
+svg.trend{overflow:hidden}
+img,video,iframe{max-width:100%}
+
+
+/* ── MOBILE HAMBURGER MENU ── */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;border:1px solid var(--border);background:none;cursor:pointer;padding:8px;flex-shrink:0;transition:border-color .2s}
+.hamburger:hover{border-color:var(--accent)}
+.hamburger span{display:block;height:1.5px;background:var(--text);border-radius:1px;transition:all .25s}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+.nav-drawer{
+  position:fixed;top:0;right:0;bottom:0;width:280px;max-width:85vw;
+  background:var(--surface);border-left:1px solid var(--border);
+  z-index:500;display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+}
+.nav-drawer.open{transform:translateX(0)}
+.nav-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);
+  z-index:499;opacity:0;pointer-events:none;
+  transition:opacity .3s;
+}
+.nav-overlay.open{opacity:1;pointer-events:all}
+
+.nav-drawer-header{
+  padding:1rem 1.2rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.nav-drawer-logo{font-family:var(--sans);font-size:1.1rem;font-weight:900;color:var(--text);text-decoration:none}
+.nav-drawer-logo span{color:var(--accent)}
+.nav-drawer-close{
+  width:32px;height:32px;border:1px solid var(--border);background:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:16px;transition:all .15s;flex-shrink:0;
+}
+.nav-drawer-close:hover{border-color:var(--accent);color:var(--accent)}
+
+.nav-drawer-links{
+  flex:1;padding:1rem 0;display:flex;flex-direction:column;
+}
+.nav-drawer-links a{
+  font-family:var(--sans);font-size:13px;font-weight:600;
+  color:var(--muted);text-decoration:none;
+  padding:.75rem 1.4rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .15s;
+}
+.nav-drawer-links a:last-child{border-bottom:none}
+.nav-drawer-links a:hover,.nav-drawer-links a.active{color:var(--accent);background:rgba(45,212,191,.04)}
+.nav-drawer-links a::after{content:'→';font-size:12px;color:var(--muted2)}
+.nav-drawer-links a:hover::after,.nav-drawer-links a.active::after{color:var(--accent)}
+
+.nav-drawer-footer{
+  padding:1rem 1.4rem;border-top:1px solid var(--border);
+  font-family:var(--sans);font-size:10px;color:var(--muted2);
+  flex-shrink:0;
+}
+
+@media(max-width:700px){
+  .nav{display:none!important}
+  .hamburger{display:flex}
+}
+
+</style>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7128f2b8b7014426a65f4112bfabfd2a"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+
+<div class="header" id="header">
+  <a class="logo" href="index.html">Refuji <span>Watch</span></a>
+  <button class="hamburger" id="hamburger-btn" aria-label="Open menu"><span></span><span></span><span></span></button>
+  <nav class="nav">
+    <a href="index.html">Dashboard</a>
+    <a href="countries.html">Countries</a><a href="regions.html">Regions</a>
+    <a href="compare.html">Compare</a><a href="funding.html">Funding</a>
+    <a href="help.html">How to Help</a>
+    <a href="about.html" class="active">About</a>
+  </nav>
+  <a class="back-link" href="index.html">← Dashboard</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-eyebrow">About this project</div>
+  <div class="page-title">Built to make <span>displacement data</span> accessible to everyone.</div>
+  <div class="page-intro">Refuji Watch is an open-source humanitarian dashboard that transforms dense UN spreadsheets into clear, interactive visualisations — for journalists, NGOs, researchers, students, and the public.</div>
+</div>
+
+<div class="content">
+  <div class="main-col">
+
+    <!-- Why -->
+    <div class="section">
+      <div class="section-title">Why this exists</div>
+      <div class="prose">
+        <p>The UN Refugee Agency (UNHCR) publishes <strong>some of the most important data in the world</strong> — tracking how many people have fled their homes, which countries are hosting them, and how the numbers have changed year by year. It's free, public, and comprehensive.</p>
+        <p>But the tools to explore it are built for policy insiders, not the public. The interfaces are slow, the files are dense, and the numbers are impossible to understand without context.</p>
+        <p>Refuji Watch was built to fix that. <strong>A clean, fast, public interface</strong> to one of the most consequential datasets in the world — one that a journalist, student, or donor can open and immediately understand.</p>
+      </div>
+    </div>
+
+    <!-- Data sources -->
+    <div class="section">
+      <div class="section-title">Data sources</div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://www.unhcr.org/refugee-statistics" target="_blank">UNHCR Refugee Data Finder</a></div>
+        <div class="source-desc">Primary source for all displacement figures — refugees, asylum seekers, and IDPs across 202 countries. Updated annually. Free API, no key required.</div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://fts.unocha.org" target="_blank">OCHA Financial Tracking Service</a></div>
+        <div class="source-desc">Humanitarian funding appeals and actual contributions. Used for the funding gap tracker. Updated continuously as pledges are made.</div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://reliefweb.int" target="_blank">ReliefWeb API</a></div>
+        <div class="source-desc">Live humanitarian news feed. Reports are fetched directly from ReliefWeb's v2 API, filtered by country or displacement theme.</div>
+      </div>
+      <div class="source-row">
+        <div class="source-name"><a href="https://webtv.un.org" target="_blank">UN Web TV</a></div>
+        <div class="source-desc">Live and on-demand UN broadcast coverage — Security Council, General Assembly, Human Rights Council, and press briefings.</div>
+      </div>
+    </div>
+
+    <!-- Crisis score methodology -->
+    <div class="section">
+      <div class="section-title">How crisis scores are calculated</div>
+      <div class="prose"><p style="margin-bottom:1rem">The <strong>Crisis Severity Index</strong> is a composite score from 1–10 assigned to origin countries based on four weighted factors. Scores are reviewed periodically against UNHCR and ACLED data.</p></div>
+      <div class="score-factor">
+        <div class="score-weight">40%</div>
+        <div class="score-detail"><strong>Scale of displacement</strong>Total displaced as a proportion of the country's population. A country with 50% of its population displaced scores higher than one with 5%.</div>
+      </div>
+      <div class="score-factor">
+        <div class="score-weight">25%</div>
+        <div class="score-detail"><strong>Trend direction</strong>Whether displacement is actively growing, stable, or declining. A country where numbers doubled in two years scores higher than one that has plateaued.</div>
+      </div>
+      <div class="score-factor">
+        <div class="score-weight">20%</div>
+        <div class="score-detail"><strong>Humanitarian funding gap</strong>The percentage of the OCHA appeal that remains unfunded. Critically underfunded crises (below 40%) receive a higher severity contribution.</div>
+      </div>
+      <div class="score-factor">
+        <div class="score-weight">15%</div>
+        <div class="score-detail"><strong>Duration of crisis</strong>How long the displacement situation has been active. Protracted crises that show no signs of resolution score higher than acute but potentially short-term events.</div>
+      </div>
+      <div class="prose" style="margin-top:1rem"><p><strong>Score labels:</strong> 9.0–10.0 = Critical · 7.0–8.9 = Severe · 5.0–6.9 = High · 3.0–4.9 = Moderate · 1.0–2.9 = Low</p></div>
+    </div>
+
+    <!-- Known limitations -->
+    <div class="section">
+      <div class="section-title">Known limitations</div>
+      <div class="limit-item"><div class="limit-icon">⚠</div><div><strong style="color:var(--text);font-family:var(--sans);font-weight:600">UNHCR data is annual, not real-time.</strong> The population figures reflect the most recent published dataset. Acute crises (like a sudden outbreak of conflict) will not be reflected until UNHCR's next data release.</div></div>
+      <div class="limit-item"><div class="limit-icon">⚠</div><div><strong style="color:var(--text);font-family:var(--sans);font-weight:600">Origin-host pairs are partially hardcoded.</strong> The UNHCR API returns aggregated totals — breakdown by origin-host country pair requires supplementary data sources for approximately 60 host countries.</div></div>
+      <div class="limit-item"><div class="limit-icon">⚠</div><div><strong style="color:var(--text);font-family:var(--sans);font-weight:600">Crisis scores are estimates.</strong> The Severity Index is a best-effort composite. It should be read as a relative ranking, not a precise measurement. Ground-truth severity may differ from the score.</div></div>
+      <div class="limit-item"><div class="limit-icon">⚠</div><div><strong style="color:var(--text);font-family:var(--sans);font-weight:600">Coverage is not universal.</strong> The dashboard currently covers 28 countries in depth. Countries not in UNHCR's major displacement datasets may not appear in search results.</div></div>
+    </div>
+    </div>
+  </div>
+
+  <div class="side-col">
+
+    <!-- Key stats -->
+    <div class="side-card">
+      <div class="side-card-title">Dataset coverage</div>
+      <div style="display:flex;flex-direction:column;gap:.9rem">
+        <div><div class="stat-highlight">202</div><div class="stat-highlight-sub">countries tracked</div></div>
+        <div><div class="stat-highlight">28</div><div class="stat-highlight-sub">detailed country profiles</div></div>
+        <div><div class="stat-highlight">7 yrs</div><div class="stat-highlight-sub">of trend data (2018–2024)</div></div>
+        <div><div class="stat-highlight">4</div><div class="stat-highlight-sub">live data sources</div></div>
+      </div>
+    </div>
+
+    <!-- Open source -->
+    <div class="side-card">
+      <div class="side-card-title">Open source</div>
+      <div class="prose"><p>Refuji Watch is fully open source under the MIT licence. You're free to use, share, and adapt it with attribution.</p></div>
+      <div class="badge-row">
+        <span class="badge badge-open">MIT Licence</span>
+        <span class="badge badge-free">Free APIs</span>
+        <span class="badge badge-live">No ads</span>
+      </div>
+      <a href="https://github.com/jahitjanberk/refuji-watch" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;margin-top:.9rem;font-family:var(--sans);font-size:11px;font-weight:700;color:var(--accent);text-decoration:none;border:1px solid rgba(45,212,191,.3);padding:.35rem .8rem;transition:all .15s">View on GitHub ↗</a>
+    </div>
+
+    <!-- Builder -->
+    <div class="side-card">
+      <div class="side-card-title">Built by</div>
+      <div class="builder-card">
+        <div class="builder-avatar">JS</div>
+        <div>
+          <div class="builder-name">jahit</div>
+          <div class="builder-bio">Cloud developer learning AWS and full-stack web development through real humanitarian projects. Refuji Watch is a first major cloud project built to make UN data accessible.</div>
+          <div class="builder-links">
+            <a class="builder-link" href="https://github.com/jahitjanberk" target="_blank">GitHub ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="side-card">
+      <div class="side-card-title">Get in touch</div>
+      <div class="prose"><p>Working in humanitarian data, journalism, or an NGO? Have a suggestion, found a data issue, or want to contribute?</p></div>
+      <a href="https://github.com/jahitjanberk/refuji-watch/issues" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;margin-top:.8rem;font-family:var(--sans);font-size:11px;font-weight:700;color:var(--accent);text-decoration:none;border:1px solid rgba(45,212,191,.3);padding:.35rem .8rem;transition:all .15s">Open a GitHub issue ↗</a>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <span>Sources: <a href="https://www.unhcr.org/refugee-statistics" target="_blank">UNHCR</a> · <a href="https://fts.unocha.org" target="_blank">OCHA FTS</a> · <a href="https://reliefweb.int" target="_blank">ReliefWeb</a></span>
+  <span>Built with love by <a href="https://github.com/jahitjanberk" target="_blank">jahit</a></span>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  document.getElementById('header').classList.toggle('scrolled',scrollY>10);
+},{passive:true});
+</script>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="nav-overlay" id="nav-overlay" onclick="closeDrawer()"></div>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nav-drawer-header">
+    <a class="nav-drawer-logo" href="index.html">Refuji <span>Watch</span></a>
+    <button class="nav-drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="nav-drawer-links">
+    <a href="index.html">Dashboard</a>
+    <a href="countries.html">Countries</a>
+    <a href="regions.html">Regions</a>
+    <a href="compare.html">Compare</a>
+    <a href="funding.html">Funding</a>
+    <a href="help.html">How to Help</a>
+    <a href="about.html" class="active">About</a>
+    <a href="sitrep.html">SitRep</a>
+  </div>
+  <div class="nav-drawer-footer">Data: UNHCR · OCHA FTS · ReliefWeb</div>
+</div>
+
+<script>
+(function(){
+  function openDrawer(){
+    document.getElementById('nav-drawer').classList.add('open');
+    document.getElementById('nav-overlay').classList.add('open');
+    var btn=document.getElementById('hamburger-btn');
+    if(btn)btn.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  window.closeDrawer=function(){
+    document.getElementById('nav-drawer').classList.remove('open');
+    document.getElementById('nav-overlay').classList.remove('open');
+    var btn=document.getElementById('hamburger-btn');
+    if(btn)btn.classList.remove('open');
+    document.body.style.overflow='';
+  };
+  var btn=document.getElementById('hamburger-btn');
+  if(btn)btn.addEventListener('click',function(){
+    if(document.getElementById('nav-drawer').classList.contains('open'))closeDrawer();
+    else openDrawer();
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDrawer();});
+})();
+</script>
+</body>
+</html>
